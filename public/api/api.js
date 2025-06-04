@@ -150,5 +150,5 @@ async function deleteProductById(productId) {
 
   console.log(`🗑️ deleteProductById: produk terhapus, total sekarang = ${filtered.length}`);
   const updateResult = await updateAllProducts(filtered, sha);
-  return updateResult;    
+  return updateResult;
 }
