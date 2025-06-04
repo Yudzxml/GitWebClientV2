@@ -1,54 +1,159 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>YUDZXML STORE 77</title>
-<link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<header class="navbar">
-  <div class="logo">YUDZXML <span>STORE 77</span></div>
-  <div class="search-bar">
-    <input type="search" placeholder="Cari produk..." id="search-input" />
-    <button id="search-btn">🔍</button>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YUDZXML STORE 77</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <aside id="sidebar">
+      <button id="sidebarClose" class="sidebar-close">×</button>
+      <div id="loginSection" class="sidebar-section hidden">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+          <label for="adminEmail">Email</label>
+          <input
+            type="email"
+            id="adminEmail"
+            required
+            placeholder="Your Email"
+          />
+          <label for="adminPassword">Password</label>
+          <input
+            type="password"
+            id="adminPassword"
+            required
+            placeholder="Your Password"
+          />
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+
+      <!-- Admin Panel -->
+      <div id="adminPanel" class="sidebar-section hidden">
+        <h2>Admin Panel</h2>
+        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+        <hr />
+        <form id="productForm">
+          <h3 id="productFormTitle">Tambah Produk Baru</h3>
+          <label for="prodImage">URL Gambar</label>
+          <input
+            type="url"
+            id="prodImage"
+            required
+            placeholder="https://..."
+          />
+          <label for="prodName">Nama Produk</label>
+          <input
+            type="text"
+            id="prodName"
+            required
+            placeholder="Nama Produk"
+          />
+          <label for="prodDesc">Deskripsi</label>
+          <textarea
+            id="prodDesc"
+            required
+            placeholder="Deskripsi singkat"
+          ></textarea>
+          <div id="packagesWrapper">
+            <label>Paket:</label>
+            <div class="package-item">
+              <input
+                type="text"
+                class="pkg-name"
+                placeholder="Nama Paket (contoh: Paket 1)"
+                required
+              />
+              <input
+                type="number"
+                class="pkg-price"
+                placeholder="Harga (Rp)"
+                required
+                min="0"
+              />
+              <button type="button" class="remove-package">✕</button>
+            </div>
+          </div>
+          <button type="button" id="addPackageBtn" class="btn btn-tertiary">
+            + Tambah Paket
+          </button>
+          <input type="hidden" id="editingProductId" value="" />
+          <button type="submit" class="btn btn-primary" id="saveProductBtn">
+            Simpan Produk
+          </button>
+        </form>
+        <hr />
+        <h3>Daftar Produk</h3>
+        <ul id="adminProductList" class="admin-product-list"></ul>
+      </div>
+
+      <!-- Keranjang Belanja -->
+      <div id="cartSection" class="sidebar-section hidden">
+        <h2>Keranjang Belanja</h2>
+        <ul id="cartItems" class="cart-items"></ul>
+        <hr />
+        <div class="cart-total">
+          <span>Total:</span>
+          <span id="cartTotalPrice">Rp 0</span>
+        </div>
+        <button id="checkoutBtn" class="btn btn-success">
+          Checkout via WhatsApp
+        </button>
+      </div>
+    </aside>
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">YUDZXML STORE 77</h1>
+        </div>
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-right">
+<button
+  id="darkModeToggle"
+  class="dark-toggle"
+  title="Toggle Dark Mode"
+>
+  <div class="toggle-track">
+    <span class="icon-sun">☀️</span>
+    <span class="icon-moon">🌙</span>
   </div>
-  <div class="icons">
-    <a href="admin.html" class="login-admin-btn" title="Login Admin">🔐</a>
-    <button id="toggle-dark" title="Toggle Dark Mode">🌙</button>
-    <button class="cart-btn" title="Keranjang">🛒<span id="cart-count">0</span></button>
-  </div>
-</header>
+</button>
+          <button id="openCartBtn" class="icon-btn" title="Keranjang">
+            🛒 <span id="cartCount">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
 
-<main>
-  <section id="product-grid" class="product-grid">
-    <p>Loading produk...</p>
-  </section>
+    <!-- Daftar Produk -->
+    <main class="container">
+      <div id="productsGrid" class="products-grid"></div>
+    </main>
 
-  <!-- Tambahan: Cara penggunaan kontak admin -->
-  <section id="contact-admin" style="margin-top: 2em; padding: 1em; background: #fffae6; border: 1px solid #ffc107; border-radius: 8px;">
-    <h2>Cara Menghubungi Admin</h2>
-    <p>Kalau kamu butuh bantuan, tanya produk, atau ada masalah, langsung hubungi admin via WhatsApp:</p>
-    <p><strong>📱 WhatsApp Admin:</strong> <a href="https://wa.me/6283872031397" target="_blank" rel="noopener noreferrer">+6283872031397</a></p>
-    <p>Ketika chat, sertakan info produk dan pertanyaan kamu supaya admin bisa bantu cepat!</p>
-    <small style="color: #555;">*Admin biasanya respon dalam beberapa jam kerja.</small>
-  </section>
-</main>
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
 
-<div id="cart-modal" class="modal hidden">
-  <div class="modal-content">
-    <button id="close-cart" class="close-btn">×</button>
-    <h2>Keranjang Belanja</h2>
-    <div id="cart-items"></div>
-    <div id="cart-total" style="margin-top: 1em; font-weight: bold;"></div>
-    <button id="checkout-btn" style="margin-top: 1em;">Checkout via WhatsApp</button>
-  </div>
-</div>
-
-<footer>
-  <small>© 2025 YUDZXML STORE 77</small>
-</footer>
-
-<script src="script.js"></script>
-</body>
+    <script src="api.js"></script>
+    <script src="main.js"></script>
+    <script src="admin.js"></script>
+  </body>
 </html>
