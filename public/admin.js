@@ -14,19 +14,25 @@ const packagesWrapper       = document.getElementById('packagesWrapper');
 
 // Kredensial admin (hardcode)
 const ADMIN_EMAIL    = 'yudzxml@gmail.com';
-const ADMIN_PASSWORD = 'Yudzxml1122';
+const ADMIN_PASSWORD = '@Yudzxml1122';
 
 // ===========================
-// 0. Inisialisasi: Pastikan form paket punya satu baris default
+// 0. Inisialisasi
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   console.log('%c[Admin] DOMContentLoaded: inisialisasi admin panel', 'color: teal; font-weight: bold;');
+
   // Tambahkan satu baris paket default agar form tidak kosong
   resetProductForm(false);
+
+  // Buka sidebar di section admin (login atau panel tergantung status)
+  console.log('[Admin] Memanggil openSidebar("admin") pada load');
+  openSidebar('admin'); // pastikan fungsi openSidebar() dari main.js sudah ter‐load
 
   // Cek status login
   const isLoggedIn = sessionStorage.getItem('isAdminLoggedIn') === 'true';
   console.log(`[Admin] Status login awal: ${isLoggedIn}`);
+
   if (isLoggedIn) {
     showAdminPanel();
   } else {
@@ -62,7 +68,7 @@ loginForm.addEventListener('submit', (e) => {
 
   if (email === ADMIN_EMAIL && pass === ADMIN_PASSWORD) {
     sessionStorage.setItem('isAdminLoggedIn', 'true');
-    console.log('[Admin] loginForm: kredensial benar, simpan status login dan tampilkan admin panel');
+    console.log('[Admin] loginForm: kredensial benar, set session dan tampilkan admin panel');
     alert('Login berhasil!');
     showAdminPanel();
   } else {
@@ -110,7 +116,6 @@ productForm.addEventListener('submit', async (e) => {
   const imageUrl    = document.getElementById('prodImage').value.trim();
   const name        = document.getElementById('prodName').value.trim();
   const description = document.getElementById('prodDesc').value.trim();
-
   console.log(`[Admin] Data form - imageUrl: "${imageUrl}", name: "${name}", description: "${description}"`);
 
   // Ambil semua paket
@@ -119,7 +124,7 @@ productForm.addEventListener('submit', async (e) => {
   const pkgPrices = Array.from(document.querySelectorAll('.pkg-price'))
     .map((el) => parseInt(el.value.trim(), 10));
 
-  // Beri peringatan kalau ada nama paket tanpa harga atau sebaliknya
+  // Validasi paket
   if (pkgNames.some((pn) => pn === '') || pkgPrices.some((pp) => isNaN(pp))) {
     console.warn('[Admin] productForm: ada paket dengan nama kosong atau harga invalid');
     alert('Pastikan semua nama dan harga paket terisi dengan benar.');
@@ -174,7 +179,8 @@ productForm.addEventListener('submit', async (e) => {
 });
 
 // Reset form ke kondisi awal (setelah submit)
-// Parameter `clearPackages` default true; jika false, kita ingin tambahkan satu paket default tanpa clear semua
+// Parameter `clearPackages` default true; 
+// Jika false, maka kita hanya tambahkan satu baris paket default tanpa meng‐clear seluruh wrapper.
 function resetProductForm(clearPackages = true) {
   console.log('[Admin] resetProductForm: reset form produk');
   editingProductIdInput.value = '';
@@ -292,8 +298,8 @@ async function fillFormForEdit(productId) {
   editingProductIdInput.value = prod.id;
   // Isi field
   document.getElementById('prodImage').value = prod.imageUrl;
-  document.getElementById('prodName').value = prod.name;
-  document.getElementById('prodDesc').value = prod.description;
+  document.getElementById('prodName').value  = prod.name;
+  document.getElementById('prodDesc').value  = prod.description;
   // Hapus paket lama
   packagesWrapper.innerHTML = '';
   // Tambah input paket sesuai data
