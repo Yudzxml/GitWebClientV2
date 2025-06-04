@@ -32,6 +32,8 @@ body.dark-mode {
   box-sizing: border-box;
   user-select: none;
   transition: background 0.3s, color 0.3s;
+  /* Tambah margin bawah supaya gak nempel ke bawah layar */
+  margin-bottom: 2rem;
 }
 body.dark-mode #admin-section {
   background: #1e1e1e;
@@ -75,64 +77,98 @@ h1 {
 
 /* ===== Form Styling ===== */
 form#product-form {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  background: #fff;
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.12),
+    0 0 0 1px #ddd;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-  gap: 1.8rem 2.5rem;
-  margin-bottom: 3rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.8rem 2.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Biar gak terlalu lebar di desktop */
+  width: 100%;
+  box-sizing: border-box;
 }
 form#product-form h2 {
   grid-column: 1 / -1;
-  font-size: 1.7rem;
-  font-weight: 700;
+  margin-bottom: 2rem;
   color: #ee4d2d;
-  border-bottom: 3px solid #ee4d2d;
-  padding-bottom: 0.3rem;
-  margin-bottom: 1.2rem;
-  letter-spacing: 0.06em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+}
+form#product-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: #444;
+  user-select: none;
+  color: #ee4d2d;
 }
 form#product-form input[type="text"],
 form#product-form input[type="number"],
 form#product-form textarea {
-  padding: 0.8rem 1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
   border-radius: 12px;
   border: 2px solid #ddd;
-  font-size: 1.05rem;
-  transition: border-color 0.25s ease;
+  font-size: 1.1rem;
   font-family: inherit;
   box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
 }
 form#product-form input[type="text"]:focus,
 form#product-form input[type="number"]:focus,
 form#product-form textarea:focus {
   border-color: #ee4d2d;
   outline: none;
-  box-shadow: 0 0 8px rgba(238,77,45,0.6);
+  box-shadow: 0 0 12px rgba(238,77,45,0.75);
 }
+
+/* Textarea full width */
 form#product-form textarea {
+  min-height: 110px;
   grid-column: 1 / -1;
-  min-height: 90px;
-  resize: vertical;
 }
-form#product-form button {
+
+/* Make full-width inputs span two columns */
+.form-group.full-width {
   grid-column: 1 / -1;
+}
+
+/* Button container spans two columns and aligns right */
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Submit button styling */
+form#product-form button {
   background: linear-gradient(135deg, #ee4d2d 0%, #d63e1f 100%);
-  color: #fff;
-  font-weight: 800;
-  font-size: 1.2rem;
+  color: white;
+  font-weight: 900;
+  font-size: 1.25rem;
+  padding: 0.85rem 3rem;
   border: none;
-  padding: 0.9rem 0;
   border-radius: 50px;
   cursor: pointer;
   box-shadow:
-    0 5px 12px rgba(238,77,45,0.7);
-  letter-spacing: 0.05em;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+    0 6px 18px rgba(238,77,45,0.85);
   user-select: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+
 form#product-form button:hover {
   background: linear-gradient(135deg, #d63e1f 0%, #b2311d 100%);
   box-shadow:
-    0 7px 18px rgba(178,49,29,0.85);
+    0 8px 22px rgba(178,49,29,1);
 }
 
 /* ===== Table Styling ===== */
@@ -216,7 +252,7 @@ body.dark-mode tbody td img {
 }
 
 /* ===== Login Form ===== */
-#login-section {
+#login-container {
   background: #fff;
   padding: 2.2rem 3rem;
   border-radius: 16px;
@@ -226,9 +262,10 @@ body.dark-mode tbody td img {
   width: 100%;
   box-sizing: border-box;
   user-select: none;
+  margin: 2rem auto;
 }
 
-#login-section h2 {
+#login-container h2 {
   margin-bottom: 1.6rem;
   font-size: 1.8rem;
   color: #ee4d2d;
@@ -278,4 +315,60 @@ body.dark-mode tbody td img {
   background: #c63e1a;
   box-shadow:
     0 7px 18px rgba(198,62,26,0.85);
+}
+
+/* Responsive: for mobile make form single column */
+@media (max-width: 520px) {
+  form#product-form {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+  .form-actions {
+    justify-content: center;
+  }
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .form-group {
+    flex-basis: 100%;
+  }
+  /* Table responsive */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tbody tr {
+    margin-bottom: 1.5rem;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  tbody td {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  tbody td::before {
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #ee4d2d;
+    content: attr(data-label);
+  }
+  tbody td img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
 }
