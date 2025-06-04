@@ -144,11 +144,10 @@ function renderProductGrid(productsArray) {
     const card = document.createElement('div');
     card.className = 'product-card';
 
-    const img = document.createElement('img');
-    img.src = prod.imageUrl;
-    img.alt = prod.name;
-    img.className = 'product-image';
-    card.appendChild(img);
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'product-image-bg';
+    imgWrapper.style.backgroundImage = `url('${prod.imageUrl}')`;
+    card.appendChild(imgWrapper);
 
     const bodyDiv = document.createElement('div');
     bodyDiv.className = 'product-body';
