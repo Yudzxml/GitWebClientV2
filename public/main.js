@@ -117,7 +117,7 @@ async function loadAndRenderProducts() {
 
 async function fetchAllProducts() {
   console.log('↗️ fetchAllProducts: GET /api/products');
-  const res = await fetch('/api/products', {
+  const res = await fetch('https://raw.githubusercontent.com/Yudzxml/WebClientV1/refs/heads/main/products.json', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
@@ -144,10 +144,18 @@ function renderProductGrid(productsArray) {
     const card = document.createElement('div');
     card.className = 'product-card';
 
+    // ===== MODIF IKUTAN =====
+    // Buat wrapper untuk <img>
     const imgWrapper = document.createElement('div');
-    imgWrapper.className = 'product-image-bg';
-    imgWrapper.style.backgroundImage = `url('${prod.imageUrl}')`;
+    imgWrapper.className = 'product-image-wrapper';
+    // Buat elemen <img> di dalamnya
+    const imgEl = document.createElement('img');
+    imgEl.src = prod.imageUrl;
+    imgEl.alt = prod.name;
+    imgEl.className = 'product-image';
+    imgWrapper.appendChild(imgEl);
     card.appendChild(imgWrapper);
+    // ===== END MODIFIKASI =====
 
     const bodyDiv = document.createElement('div');
     bodyDiv.className = 'product-body';
@@ -395,14 +403,8 @@ const ADMIN_PASSWORD = '@Yudzxml1122';
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   console.log('%c[Admin] DOMContentLoaded: inisialisasi admin panel', 'color: teal; font-weight: bold;');
-
-  // Tambahkan satu baris paket default agar form tidak kosong
   resetProductForm(false);
-
-// Buka sidebar di section admin (login atau panel tergantung status)
  console.log('[Admin] Memanggil openSidebar("admin") pada load');
-
-  // Cek status login
   const isLoggedIn = sessionStorage.getItem('isAdminLoggedIn') === 'true';
   console.log(`[Admin] Status login awal: ${isLoggedIn}`);
 

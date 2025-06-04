@@ -71,7 +71,7 @@ p {
   line-height: 1.5;
 }
 
-/* .btn dan varian-nya … (sama seperti sebelumnya) */
+/* .btn dan varian-nya … */
 .btn {
   display: inline-block;
   padding: 0.6rem 1rem;
@@ -82,7 +82,28 @@ p {
   transition: background-color 0.2s ease;
   border: 1px solid transparent;
 }
-/* … .btn-primary, .btn-secondary, dst. tetap tidak berubah … */
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  border-color: var(--color-btn-primary);
+}
+.btn-primary:hover {
+  background-color: var(--color-btn-primary-hover);
+  border-color: var(--color-btn-primary-hover);
+}
+.btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: #fff;
+  border-color: var(--color-btn-secondary);
+}
+.btn-secondary:hover {
+  background-color: var(--color-btn-secondary);
+}
+.btn-success {
+  background-color: var(--color-btn-success);
+  color: #fff;
+  border-color: var(--color-btn-success);
+}
 
 /* ===================================
    FORM-STYLING (TAMBAH / EDIT / HAPUS)
@@ -341,17 +362,31 @@ main.container {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Gambar sebagai background, bukan <img>:
-   kartu selalu 150px tinggi, tapi isi gambar akan disesuaikan proporsinya */
-.product-image-bg {
+/* ===================================
+   GANTI BACKGROUND-IMAGE DENGAN <img> 
+   — DI DESKTOP PAKAI object-fit: cover
+=================================== */
+.product-image-wrapper {
   width: 100%;
-  height: 150px;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  /* Contoh tinggi tetap agar semua kartu sejajar */
+  height: 200px;
+  overflow: hidden;
   background-color: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-image-wrapper img.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* COVER supaya tidak ada celah kosong */
+  object-position: center;
+  display: block;
 }
 
+/* ===================================
+   BODY PRODUK
+=================================== */
 .product-body {
   padding: 0.75rem;
   flex: 1;
@@ -485,7 +520,7 @@ body.dark-mode .btn-danger {
   width: 50px;      /* lebar tombol */
   height: 26px;     /* tinggi tombol */
   overflow: hidden;
-  background-color: ; /* warna cerah untuk mode terang (misalnya kuning keemasan) */
+  background-color: ; /* warna cerah untuk mode terang */
   border: none;
   border-radius: 13px; /* setengah tinggi untuk jadi pill */
   cursor: pointer;
@@ -526,14 +561,6 @@ body.dark-mode .dark-toggle {
   .header-center input {
     max-width: 300px;
   }
-  .product-image-bg {
-    width: 100%;
-    height: 140px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--color-bg);
-  }
   .sidebar-close {
     top: 8px;
     right: 10px;
@@ -550,7 +577,7 @@ body.dark-mode .dark-toggle {
     justify-content: center;
   }
   .sidebar-toggle {
-    margin-right: 0;
+    margin-right: 20rem;
     margin-bottom: 0.5rem;
   }
   .logo {
@@ -583,14 +610,6 @@ body.dark-mode .dark-toggle {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 0.8rem;
     margin: 0.8rem 0 1.5rem;
-  }
-  .product-image-bg {
-    width: 100%;
-    height: 120px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--color-bg);
   }
   .product-title {
     font-size: 0.95rem;
@@ -654,14 +673,6 @@ body.dark-mode .dark-toggle {
     grid-template-columns: 1fr;
     gap: 0.6rem;
     margin: 0.5rem 0 1rem;
-  }
-  .product-image-bg {
-    width: 100%;
-    height: 100px;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--color-bg);
   }
   .product-title {
     font-size: 0.9rem;
