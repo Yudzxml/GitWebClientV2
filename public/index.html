@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>YUDZXML STORE 77</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">YUDZXML <span>STORE 77</span></div>
+  <div class="search-bar">
+    <input type="search" placeholder="Cari produk..." id="search-input" />
+    <button id="search-btn">🔍</button>
+  </div>
+  <div class="icons">
+    <a href="admin.html" class="login-admin-btn" title="Login Admin">🔐</a>
+    <button id="toggle-dark" title="Toggle Dark Mode">🌙</button>
+    <button class="cart-btn" title="Keranjang">🛒<span id="cart-count">0</span></button>
+  </div>
+</header>
 
+<main>
+  <section id="product-grid" class="product-grid">
+    <p>Loading produk...</p>
+  </section>
+
+  <!-- Tambahan: Cara penggunaan kontak admin -->
+  <section id="contact-admin" style="margin-top: 2em; padding: 1em; background: #fffae6; border: 1px solid #ffc107; border-radius: 8px;">
+    <h2>Cara Menghubungi Admin</h2>
+    <p>Kalau kamu butuh bantuan, tanya produk, atau ada masalah, langsung hubungi admin via WhatsApp:</p>
+    <p><strong>📱 WhatsApp Admin:</strong> <a href="https://wa.me/6283872031397" target="_blank" rel="noopener noreferrer">+6283872031397</a></p>
+    <p>Ketika chat, sertakan info produk dan pertanyaan kamu supaya admin bisa bantu cepat!</p>
+    <small style="color: #555;">*Admin biasanya respon dalam beberapa jam kerja.</small>
+  </section>
+</main>
+
+<div id="cart-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="close-cart" class="close-btn">×</button>
+    <h2>Keranjang Belanja</h2>
+    <div id="cart-items"></div>
+    <div id="cart-total" style="margin-top: 1em; font-weight: bold;"></div>
+    <button id="checkout-btn" style="margin-top: 1em;">Checkout via WhatsApp</button>
+  </div>
+</div>
+
+<footer>
+  <small>© 2025 YUDZXML STORE 77</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

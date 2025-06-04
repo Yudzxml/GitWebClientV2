@@ -1,0 +1,346 @@
+/* Reset & basic */
+* {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark-mode {
+  background: #121212;
+  color: #eee;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ee4d2d; /* warna khas Shopee */
+  color: white;
+  padding: 0.75rem 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.4rem;
+  user-select: none;
+}
+.logo span {
+  font-weight: 400;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-left: 4px;
+}
+
+.search-bar {
+  flex: 1;
+  margin: 0 1rem;
+  display: flex;
+}
+.search-bar input {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border-radius: 3px 0 0 3px;
+  border: none;
+  font-size: 1rem;
+}
+.search-bar button {
+  background: #d63e1f;
+  border: none;
+  color: white;
+  padding: 0 1rem;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background 0.2s;
+}
+.search-bar button:hover {
+  background: #c5391b;
+}
+
+.icons button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  margin-left: 1rem;
+}
+.icons button:hover {
+  opacity: 0.8;
+}
+
+.cart-btn #cart-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background: #ffed00;
+  color: #ee4d2d;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0 5px;
+  border-radius: 12px;
+  user-select: none;
+}
+
+main {
+  flex: 1;
+  padding: 1rem 1rem 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+.dark-mode .product-card {
+  background: #1e1e1e;
+  color: #eee;
+  box-shadow: 0 2px 8px rgb(255 255 255 / 0.1);
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  object-fit: cover;
+  height: 180px;
+}
+
+.product-info {
+  padding: 0.75rem 1rem 1rem 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-info h3 {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  height: 2.6em; /* 2 baris */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-info .price {
+  font-weight: 700;
+  color: #ee4d2d;
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.rating {
+  color: #f7b500;
+  margin-bottom: 0.8rem;
+}
+
+.buy-btn {
+  background: #ee4d2d;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+
+.buy-btn:hover {
+  background: #d63e1f;
+}
+
+footer {
+  background: #ee4d2d;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  user-select: none;
+}
+.login-admin-btn {
+  font-size: 1.4rem;
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+.login-admin-btn:hover {
+  opacity: 0.8;
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.6rem;
+  height: 3.6em; /* kira-kira 2 baris */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.8em;
+  user-select: none;
+}
+.dark-mode .product-desc {
+  color: #bbb;
+}
+/* Modal backdrop */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Tampilkan modal */
+.modal:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal box */
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(255, 102, 0, 0.4);
+  padding: 25px 30px;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: #ff6600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #cc5200;
+}
+
+/* Judul modal */
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #ff6600;
+  text-align: center;
+}
+
+/* Container item keranjang */
+#cart-items {
+  max-height: 280px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+/* Item keranjang */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff5eb;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(255, 102, 0, 0.15);
+  font-weight: 600;
+  color: #b34700;
+}
+
+/* Tombol hapus */
+.cart-item button {
+  background: #ff3300;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cart-item button:hover {
+  background: #cc2900;
+}
+
+/* Total harga */
+#cart-total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ff6600;
+  text-align: right;
+  margin-bottom: 20px;
+  border-top: 2px solid #ff6600;
+  padding-top: 12px;
+}
+
+/* Tombol checkout */
+#checkout-btn {
+  width: 100%;
+  background: #ff6600;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 12px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(255, 102, 0, 0.5);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#checkout-btn:hover {
+  background: #cc5200;
+  box-shadow: 0 8px 18px rgba(204, 82, 0, 0.7);
+}
+/* Responsive */
+@media (max-width: 600px) {
+  .search-bar {
+    display: none;
+  }
+}
