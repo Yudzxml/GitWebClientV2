@@ -117,7 +117,7 @@ async function loadAndRenderProducts() {
 
 async function fetchAllProducts() {
   console.log('↗️ fetchAllProducts: GET /api/products');
-  const res = await fetch('https://raw.githubusercontent.com/Yudzxml/WebClientV1/refs/heads/main/products.json', {
+  const res = await fetch('/api/products', {
     method: 'GET',
     headers: {
       'Accept': 'application/json',
