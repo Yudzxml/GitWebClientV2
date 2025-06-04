@@ -19,18 +19,18 @@ const adminProductList      = document.getElementById('adminProductList');
 const editingProductIdInput = document.getElementById('editingProductId');
 const addPackageBtn         = document.getElementById('addPackageBtn');
 const packagesWrapper       = document.getElementById('packagesWrapper');
-const productsGrid     = document.getElementById('productsGrid');
-const searchInput      = document.getElementById('searchInput');
-const darkModeToggle   = document.getElementById('darkModeToggle');
-const openCartBtn      = document.getElementById('openCartBtn');
-const sidebar          = document.getElementById('sidebar');
-const sidebarToggleBtn = document.getElementById('sidebarToggle');
-const sidebarCloseBtn  = document.getElementById('sidebarClose');
-const cartSection  = document.getElementById('cartSection');
-const cartCountSpan      = document.getElementById('cartCount');
-const cartItemsUl        = document.getElementById('cartItems');
-const cartTotalPriceSpan = document.getElementById('cartTotalPrice');
-const checkoutBtn        = document.getElementById('checkoutBtn');
+const productsGrid          = document.getElementById('productsGrid');
+const searchInput           = document.getElementById('searchInput');
+const darkModeToggle        = document.getElementById('darkModeToggle');
+const openCartBtn           = document.getElementById('openCartBtn');
+const sidebar               = document.getElementById('sidebar');
+const sidebarToggleBtn      = document.getElementById('sidebarToggle');
+const sidebarCloseBtn       = document.getElementById('sidebarClose');
+const cartSection           = document.getElementById('cartSection');
+const cartCountSpan         = document.getElementById('cartCount');
+const cartItemsUl           = document.getElementById('cartItems');
+const cartTotalPriceSpan    = document.getElementById('cartTotalPrice');
+const checkoutBtn           = document.getElementById('checkoutBtn');
 
 // ===========================
 // INITIALIZATION
@@ -100,7 +100,7 @@ function toggleDarkMode() {
 }
 
 // ===========================
-// FETCH & RENDER PRODUK
+// FETCH & RENDER PRODUK (CALL API NEXT.JS)
 // ===========================
 async function loadAndRenderProducts() {
   try {
@@ -113,6 +113,21 @@ async function loadAndRenderProducts() {
     console.error('❌ loadAndRenderProducts: Gagal fetch produk:', err);
   }
   renderProductGrid(allProducts);
+}
+
+async function fetchAllProducts() {
+  console.log('↗️ fetchAllProducts: GET /api/products');
+  const res = await fetch('/api/products', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`Gagal fetch produk: ${res.status} ${res.statusText}`);
+  }
+  const data = await res.json();
+  return { products: data };
 }
 
 function renderProductGrid(productsArray) {
@@ -366,7 +381,7 @@ function formatRupiah(number) {
   const result = number
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-   console.log(`🪙 formatRupiah: input=${number}, output=${result}`);
+  console.log(`🪙 formatRupiah: input=${number}, output=${result}`);
   return result;
 }
 
@@ -377,7 +392,7 @@ const ADMIN_EMAIL    = 'yudzxml@gmail.com';
 const ADMIN_PASSWORD = '@Yudzxml1122';
 
 // ===========================
-// 0. Inisialisasi
+// 0. Inisialisasi ADMIN
 // ===========================
 document.addEventListener('DOMContentLoaded', () => {
   console.log('%c[Admin] DOMContentLoaded: inisialisasi admin panel', 'color: teal; font-weight: bold;');
@@ -385,9 +400,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tambahkan satu baris paket default agar form tidak kosong
   resetProductForm(false);
 
-  // Buka sidebar di section admin (login atau panel tergantung status)
-  console.log('[Admin] Memanggil openSidebar("admin") pada load');
-  openSidebar('admin'); // pastikan fungsi openSidebar() dari main.js sudah ter‐load
+// Buka sidebar di section admin (login atau panel tergantung status)
+ console.log('[Admin] Memanggil openSidebar("admin") pada load');
 
   // Cek status login
   const isLoggedIn = sessionStorage.getItem('isAdminLoggedIn') === 'true';
@@ -399,19 +413,15 @@ document.addEventListener('DOMContentLoaded', () => {
     showLoginForm();
   }
 });
-
 // ===========================
 // 1. LOGIN / LOGOUT
 // ===========================
-
-// Tampilkan Login Form, sembunyikan Admin Panel
 function showLoginForm() {
   console.log('[Admin] showLoginForm: menampilkan form login, sembunyikan admin panel');
   loginSection.classList.remove('hidden');
   adminPanel.classList.add('hidden');
 }
 
-// Tampilkan Admin Panel, sembunyikan Login Form
 function showAdminPanel() {
   console.log('[Admin] showAdminPanel: menampilkan admin panel, sembunyikan form login');
   loginSection.classList.add('hidden');
@@ -517,12 +527,12 @@ productForm.addEventListener('submit', async (e) => {
 
   try {
     if (editingId) {
-      // EDIT MODE
-      await editProductById(editingId, { id: editingId, ...productData });
+      // EDIT MODE (PUT)
+      await editProductById(editingId, productData);
       console.log('[Admin] productForm: editProductById berhasil');
       alert('Produk berhasil diupdate!');
     } else {
-      // ADD MODE
+      // ADD MODE (POST)
       await addProduct(productData);
       console.log('[Admin] productForm: addProduct berhasil');
       alert('Produk berhasil ditambahkan!');
@@ -535,6 +545,7 @@ productForm.addEventListener('submit', async (e) => {
   refreshAdminProductList();
   loadAndRenderProducts();
 });
+
 function resetProductForm(clearPackages = true) {
   console.log('[Admin] resetProductForm: reset form produk');
   editingProductIdInput.value = '';
@@ -558,14 +569,69 @@ function resetProductForm(clearPackages = true) {
   });
 }
 
+// ===========================
+// Fungsi CRUD via API
+// ===========================
+async function addProduct(newProductObj) {
+  console.log('[Admin] addProduct: POST /api/products', newProductObj);
+  const res = await fetch('/api/products', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newProductObj),
+  });
+  if (!res.ok) {
+    throw new Error(`Gagal tambah produk: ${res.status} ${res.statusText}`);
+  }
+  const result = await res.json();
+  console.log('[Admin] addProduct: response commit sha =', result.commit);
+  return result;
+}
+
+async function editProductById(productId, updatedFields) {
+  console.log(`[Admin] editProductById: PUT /api/products id=${productId}`, updatedFields);
+  const payload = { id: productId, ...updatedFields };
+  const res = await fetch('/api/products', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`Gagal update produk: ${res.status} ${res.statusText}`);
+  }
+  const result = await res.json();
+  console.log('[Admin] editProductById: response commit sha =', result.commit);
+  return result;
+}
+
+async function deleteProductById(productId) {
+  console.log(`[Admin] deleteProductById: DELETE /api/products id=${productId}`);
+  const res = await fetch('/api/products', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: productId }),
+  });
+  if (!res.ok) {
+    throw new Error(`Gagal hapus produk: ${res.status} ${res.statusText}`);
+  }
+  const result = await res.json();
+  console.log('[Admin] deleteProductById: response commit sha =', result.commit);
+  return result;
+}
+
 // Refresh daftar produk di admin (dengan tombol Edit & Hapus)
 async function refreshAdminProductList() {
   console.log('[Admin] refreshAdminProductList: memuat ulang daftar produk admin');
   adminProductList.innerHTML = '';
   let productsData;
   try {
-    const result = await fetchAllProducts();
-    productsData = result.products;
+    const { products } = await fetchAllProducts();
+    productsData = products;
     console.log('[Admin] refreshAdminProductList: fetchAllProducts berhasil, jumlah produk =', productsData.length);
   } catch (err) {
     console.error('[Admin] refreshAdminProductList: Gagal fetchAllProducts:', err);
@@ -628,8 +694,8 @@ async function fillFormForEdit(productId) {
   console.log(`[Admin] fillFormForEdit: mengambil data untuk ID="${productId}"`);
   let productsData;
   try {
-    const result = await fetchAllProducts();
-    productsData = result.products;
+    const { products } = await fetchAllProducts();
+    productsData = products;
     console.log('[Admin] fillFormForEdit: fetchAllProducts berhasil');
   } catch (err) {
     console.error('[Admin] fillFormForEdit: Gagal fetchAllProducts:', err);

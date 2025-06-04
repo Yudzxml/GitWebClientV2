@@ -10,10 +10,13 @@
   --color-btn-primary-hover: #e64a19;
   --color-btn-secondary: #777;
   --color-btn-success: #388e3c;
+  --color-btn-danger: #e53935;
   --color-border: #ddd;
   --color-card-border: #eee;
   --color-footer-bg: #fff;
   --color-footer-text: #999;
+  --color-input-bg: #fff;
+  --color-input-border: #ccc;
   --color-dark-bg: #1e1e1e;
   --color-dark-text: #ddd;
   --color-dark-header-start: #333;
@@ -24,6 +27,7 @@
   --color-dark-input-border: #555;
 }
 
+/* Reset */
 *,
 *::before,
 *::after {
@@ -68,6 +72,7 @@ p {
   line-height: 1.5;
 }
 
+/* Dasar .btn sudah ada, tambahkan .btn-danger */
 .btn {
   display: inline-block;
   padding: 0.6rem 1rem;
@@ -84,7 +89,6 @@ p {
   color: #fff;
   border-color: var(--color-btn-primary);
 }
-
 .btn-primary:hover {
   background-color: var(--color-btn-primary-hover);
   border-color: var(--color-btn-primary-hover);
@@ -95,7 +99,6 @@ p {
   color: #fff;
   border-color: var(--color-btn-secondary);
 }
-
 .btn-secondary:hover {
   background-color: var(--color-btn-secondary);
 }
@@ -105,11 +108,120 @@ p {
   color: #fff;
   border-color: var(--color-btn-success);
 }
+.btn-success:hover {
+  background-color: #2e7d32; /* sedikit gelap saat hover */
+}
+
+.btn-danger {
+  background-color: var(--color-btn-danger);
+  color: #fff;
+  border-color: var(--color-btn-danger);
+}
+.btn-danger:hover {
+  background-color: #d32f2f;
+}
+
+/* ===================================
+   FORM-STYLING (TAMBAH / EDIT / HAPUS)
+=================================== */
+/* Wrapper untuk setiap form */
+.form-container {
+  background-color: #fff;
+  padding: 1.5rem;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+}
+
+/* Setiap baris form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+/* Label form */
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: var(--color-text);
+}
+
+/* Input, Select, Textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-btn-primary);
+  box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.2);
+}
+
+/* Textarea khusus */
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Wrapper untuk tombol aksi pada form (Simpan, Batal, Hapus) */
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* Tombol tambah paket di dalam form produk (jika ada) */
+#addPackageBtn {
+  margin-bottom: 1rem;
+  background: none;
+  border: 1px dashed #ccc;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+#addPackageBtn:hover {
+  border-color: var(--color-btn-primary);
+  color: var(--color-btn-primary);
+}
+
+.package-item {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.package-item input {
+  flex: 1;
+}
+.remove-package {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.remove-package:hover {
+  color: #c62828;
+}
 
 /* ===================================
    SIDEBAR
 =================================== */
-/* Default tersembunyi sepenuhnya di kiri */
 #sidebar {
   position: fixed;
   top: 0;
@@ -124,13 +236,9 @@ p {
   z-index: 1000;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
-
-/* Saat dibuka, tampil seutuhnya */
 #sidebar.open {
   transform: translateX(0);
 }
-
-/* Tombol tutup (“×”) */
 .sidebar-close {
   position: absolute;
   top: 10px;
@@ -141,82 +249,35 @@ p {
   cursor: pointer;
   color: var(--color-text);
 }
-
-/* Section dalam sidebar */
 .sidebar-section {
   padding: 2.5rem 1rem 1rem 1rem;
 }
-
 .sidebar-section.hidden {
   display: none;
 }
 
-/* Input form dan select */
-#loginForm input,
-#productForm input,
-#productForm textarea,
-.package-item input,
-.package-select select,
-.header-center input {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0.3rem 0 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-#productForm textarea {
-  resize: vertical;
-}
-
-#addPackageBtn {
-  margin-bottom: 1rem;
-  background: none;
-  border: 1px dashed #ccc;
-  color: var(--color-text);
-  cursor: pointer;
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-}
-
-.package-item {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.package-item input {
-  flex: 1;
-}
-
-.remove-package {
-  background: transparent;
-  border: none;
-  color: #e74c3c;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-/* Admin product list */
+/* ===================================
+   ADMIN PRODUCT LIST
+=================================== */
 .admin-product-list {
   list-style: none;
   max-height: 300px;
   overflow-y: auto;
   padding: 0;
 }
-
 .admin-product-list li {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--color-card-border);
 }
-
 .admin-product-list .admin-actions button {
   margin-left: 0.3rem;
 }
 
-/* Cart section */
+/* ===================================
+   CART SECTION
+=================================== */
 .cart-items {
   list-style: none;
   max-height: 300px;
@@ -224,14 +285,12 @@ p {
   padding: 0;
   margin-bottom: 1rem;
 }
-
 .cart-items li {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--color-card-border);
 }
-
 .cart-total {
   display: flex;
   justify-content: space-between;
@@ -250,13 +309,11 @@ p {
   top: 0;
   z-index: 900;
 }
-
 .site-header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .sidebar-toggle {
   background: transparent;
   border: none;
@@ -265,18 +322,15 @@ p {
   margin-right: 1rem;
   cursor: pointer;
 }
-
 .logo {
   font-size: 1.5rem;
   font-weight: 600;
 }
-
 .header-center {
   flex: 1 1 300px;
   display: flex;
   justify-content: center;
 }
-
 .header-center input {
   width: 100%;
   max-width: 400px;
@@ -285,12 +339,10 @@ p {
   border-radius: 30px;
   outline: none;
 }
-
 .header-right {
   display: flex;
   align-items: center;
 }
-
 .icon-btn {
   background: transparent;
   border: none;
@@ -300,7 +352,6 @@ p {
   cursor: pointer;
   position: relative;
 }
-
 #cartCount {
   position: absolute;
   top: -5px;
@@ -323,14 +374,12 @@ main.container {
   padding-top: 1rem;
   padding-bottom: 3rem;
 }
-
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
   margin: 1rem 0 2rem;
 }
-
 .product-card {
   background-color: #fff;
   border: 1px solid var(--color-card-border);
@@ -340,43 +389,36 @@ main.container {
   flex-direction: column;
   transition: box-shadow 0.2s ease;
 }
-
 .product-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 .product-image {
   width: 100%;
   height: 150px;
   object-fit: cover;
   background-color: var(--color-bg);
 }
-
 .product-body {
   padding: 0.75rem;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
-
 .product-title {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 0.3rem;
   color: var(--color-text);
 }
-
 .product-desc {
   font-size: 0.85rem;
   color: #555;
   margin-bottom: 0.5rem;
   flex: 1;
 }
-
 .package-select {
   margin-bottom: 0.5rem;
 }
-
 .package-select select {
   width: 100%;
   padding: 0.4rem;
@@ -384,19 +426,16 @@ main.container {
   border-radius: 4px;
   outline: none;
 }
-
 .product-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .product-price {
   font-size: 1.1rem;
   font-weight: 700;
   color: #e53935;
 }
-
 .product-actions button {
   background-color: var(--color-btn-primary);
   border: none;
@@ -407,7 +446,6 @@ main.container {
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-
 .product-actions button:hover {
   background-color: var(--color-btn-primary-hover);
 }
@@ -424,7 +462,6 @@ main.container {
   bottom: 0;
   width: 100%;
 }
-
 .site-footer p {
   color: var(--color-footer-text);
   font-size: 0.9rem;
@@ -437,21 +474,17 @@ body.dark-mode {
   background-color: var(--color-dark-bg);
   color: var(--color-dark-text);
 }
-
 body.dark-mode .site-header {
   background: linear-gradient(90deg, var(--color-dark-header-start), var(--color-dark-header-end));
 }
-
 body.dark-mode .product-card {
   background-color: var(--color-dark-card-bg);
   border: 1px solid var(--color-dark-card-border);
 }
-
 body.dark-mode .product-title,
 body.dark-mode .product-desc {
   color: var(--color-dark-text);
 }
-
 body.dark-mode .header-center input,
 body.dark-mode input,
 body.dark-mode textarea,
@@ -460,35 +493,36 @@ body.dark-mode select {
   color: var(--color-dark-text);
   border: 1px solid var(--color-dark-input-border);
 }
-
 body.dark-mode .site-footer {
   background-color: var(--color-dark-card-bg);
   border-top: 1px solid var(--color-dark-card-border);
 }
-
 body.dark-mode .btn {
   background-color: var(--color-dark-card-bg);
   color: var(--color-dark-text);
   border: 1px solid var(--color-dark-input-border);
 }
-
 body.dark-mode .btn-primary {
   background-color: #5e35b1;
   color: #fff;
   border-color: #5e35b1;
 }
-
 body.dark-mode .btn-secondary {
   background-color: #777;
   color: #fff;
   border-color: #777;
 }
-
 body.dark-mode .btn-success {
   background-color: #388e3c;
   color: #fff;
   border-color: #388e3c;
 }
+body.dark-mode .btn-danger {
+  background-color: #c62828;
+  color: #fff;
+  border-color: #c62828;
+}
+
 /* ===================================
    DARK MODE SLIDER ICON
 =================================== */
@@ -506,14 +540,11 @@ body.dark-mode .btn-success {
   padding: 0;
   transition: background-color 0.3s ease;
 }
-
 .dark-toggle .toggle-track {
   display: flex;
   width: 100px; /* dua kali lebar .dark-toggle */
   transition: transform 0.3s ease;
 }
-
-/* Masing-masing ikon menempati setengah track */
 .dark-toggle .icon-sun,
 .dark-toggle .icon-moon {
   width: 50px;
@@ -524,21 +555,16 @@ body.dark-mode .btn-success {
   font-size: 1rem;
   user-select: none;
 }
-
-/* Saat body.dark-mode, geser track ke kiri 50px supaya ikon 🌙 yang kelihatan */
 body.dark-mode .dark-toggle .toggle-track {
   transform: translateX(-50px);
 }
-
-/* Ubah background tombol saat aktif dark-mode */
 body.dark-mode .dark-toggle {
   background-color: #37474f; /* misalnya biru gelap untuk mode malam */
 }
-
-/* Optional: beri sedikit bayangan supaya tombolnya “floating” */
 .dark-toggle {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
 /* ===================================
    RESPONSIVE ADJUSTMENTS
 =================================== */
@@ -553,6 +579,10 @@ body.dark-mode .dark-toggle {
     top: 8px;
     right: 10px;
     font-size: 1.1rem;
+  }
+  /* Form responsiveness: ubah padding form */
+  .form-container {
+    padding: 1.25rem;
   }
 }
 
@@ -615,6 +645,23 @@ body.dark-mode .dark-toggle {
   .site-footer p {
     font-size: 0.8rem;
   }
+  /* Form responsiveness: font dan padding */
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .form-actions .btn {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -662,17 +709,22 @@ body.dark-mode .dark-toggle {
     padding: 0.35rem 0.5rem;
     font-size: 0.75rem;
   }
-  #loginForm input,
-  #productForm input,
-  #productForm textarea,
-  .package-item input,
-  .package-select select {
-    padding: 0.4rem;
-    font-size: 0.9rem;
+  /* Form: padding dan ukuran font */
+  .form-container {
+    padding: 1rem;
   }
-  #addPackageBtn {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.9rem;
+  .form-group label {
+    font-size: 0.85rem;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  .form-actions .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem;
   }
   .site-footer p {
     font-size: 0.75rem;
