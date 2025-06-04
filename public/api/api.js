@@ -1,154 +1,126 @@
-// ===========================
-// CONFIGURASI GITHUB
-// ===========================
+// api/products.js
+
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 if (!GITHUB_TOKEN) {
-  console.warn(
-    '⚠️  GitHub Token tidak ditemukan di process.env.GITHUB_TOKEN. ' +
-    'Pastikan Anda sudah set environment variable-nya sebelum menjalankan aplikasi.'
-  );
+  console.warn('⚠️ GitHub Token tidak ditemukan di environment variables!');
 }
+
 const REPO_OWNER = 'Yudzxml';
 const REPO_NAME = 'WebClientV1';
-const BRANCH     = 'main';
-const FILE_PATH  = 'products.json';
+const BRANCH = 'main';
+const FILE_PATH = 'products.json';
 
 const githubHeaders = {
   Authorization: `token ${GITHUB_TOKEN}`,
   Accept: 'application/vnd.github.v3+json',
 };
 
-// ===========================
-//  GET SHA JSON 
-// ===========================
+// atob dan btoa versi Node.js (Vercel juga support Buffer)
+const atob = (str) => Buffer.from(str, 'base64').toString('utf8');
+const btoa = (str) => Buffer.from(str, 'utf8').toString('base64');
+
 async function getFileMetadata() {
   const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}?ref=${BRANCH}`;
-  console.log(`📡 getFileMetadata: GET ${url}`);
-  
-  const response = await fetch(url, { headers: githubHeaders });
-  if (!response.ok) {
-    throw new Error(`Gagal mendapatkan metadata: ${response.status} ${response.statusText}`);
-  }
-
-  const meta = await response.json();
-  console.log('📡 getFileMetadata: metadata diperoleh, SHA =', meta.sha);
-  return meta; // { sha, content (base64), ... }
+  const res = await fetch(url, { headers: githubHeaders });
+  if (!res.ok) throw new Error(`Gagal mendapatkan metadata: ${res.status} ${res.statusText}`);
+  return await res.json();
 }
-// ===========================
-// 1. GET ALL PRODUK
-// ===========================
+
 async function fetchAllProducts() {
-  try {
-    console.log('▶️ fetchAllProducts: mulai mengambil file products.json');
-    const meta = await getFileMetadata();
-    const contentBase64 = meta.content;
-    const decoded = atob(contentBase64);
-    const products = JSON.parse(decoded);
-    console.log('▶️ fetchAllProducts: data produk parsed, jumlah =', products.length);
-    return { products, sha: meta.sha };
-  } catch (error) {
-    console.error('❌ fetchAllProducts: Error saat fetch:', error);
-    return { products: [], sha: null };
-  }
+  const meta = await getFileMetadata();
+  const decoded = atob(meta.content);
+  const products = JSON.parse(decoded);
+  return { products, sha: meta.sha };
 }
-// ===========================
-// 2. UPDATE PRODUK
-// ===========================
+
 async function updateAllProducts(newProductsArray, currentSha) {
-  try {
-    console.log('▶️ updateAllProducts: mulai meng-update products.json');
-    const prettyJson   = JSON.stringify(newProductsArray, null, 2);
-    const newContent   = btoa(prettyJson);
-    const url          = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
-    const body         = {
-      message: 'Update products.json via API',
-      content: newContent,
-      sha: currentSha,
-      branch: BRANCH,
-    };
+  const prettyJson = JSON.stringify(newProductsArray, null, 2);
+  const newContent = btoa(prettyJson);
 
-    console.log(`📡 updateAllProducts: PUT ${url} (SHA saat ini: ${currentSha})`);
-    const response = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        ...githubHeaders,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
+  const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+  const body = {
+    message: 'Update products.json via API',
+    content: newContent,
+    sha: currentSha,
+    branch: BRANCH,
+  };
 
-    if (!response.ok) {
-      throw new Error(`Gagal update file: ${response.status} ${response.statusText}`);
-    }
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      ...githubHeaders,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
 
-    const result = await response.json();
-    console.log('✅ updateAllProducts: sukses, commit baru:', result.commit.sha);
-    return result;
-  } catch (error) {
-    console.error('❌ updateAllProducts: Error saat update:', error);
-    throw error;
-  }
+  if (!res.ok) throw new Error(`Gagal update file: ${res.status} ${res.statusText}`);
+  return await res.json();
 }
-// ===========================
-// 3. TAMBAH PRODUK
-// ===========================
+
 async function addProduct(newProductObj) {
-  console.log('➕ addProduct: akan menambah produk baru:', newProductObj);
   const { products, sha } = await fetchAllProducts();
-
-  if (sha === null) {
-    throw new Error('Tidak bisa addProduct karena SHA file tidak diperoleh.');
-  }
-
+  if (!sha) throw new Error('SHA file tidak diperoleh.');
   newProductObj.id = Date.now().toString();
   products.push(newProductObj);
-  console.log(`➕ addProduct: produk ditambahkan ke array, total sekarang = ${products.length}`);
-
-  const updateResult = await updateAllProducts(products, sha);
-  return updateResult;
+  return await updateAllProducts(products, sha);
 }
 
-// ===========================
-// 4. EDIT PRODUK
-// ===========================
 async function editProductById(productId, updatedProductObj) {
-  console.log(`✏️ editProductById: mengedit produk ID = ${productId}`);
   const { products, sha } = await fetchAllProducts();
-
-  if (sha === null) {
-    throw new Error('Tidak bisa editProduct karena SHA file tidak diperoleh.');
-  }
-
+  if (!sha) throw new Error('SHA file tidak diperoleh.');
   const idx = products.findIndex((p) => p.id === productId);
-  if (idx === -1) {
-    throw new Error('Produk tidak ditemukan untuk di-edit.');
-  }
-
-  updatedProductObj.id = productId; // Pastikan ID tetap sama
+  if (idx === -1) throw new Error('Produk tidak ditemukan.');
+  updatedProductObj.id = productId;
   products[idx] = updatedProductObj;
-  console.log(`✏️ editProductById: produk di-index ${idx} di-update =>`, updatedProductObj);
-
-  const updateResult = await updateAllProducts(products, sha);
-  return updateResult;
+  return await updateAllProducts(products, sha);
 }
 
-// ===========================
-// 5. HAPUS PRODUK
-// ===========================
 async function deleteProductById(productId) {
-  console.log(`🗑️ deleteProductById: menghapus produk ID = ${productId}`);
   const { products, sha } = await fetchAllProducts();
-
-  if (sha === null) {
-    throw new Error('Tidak bisa deleteProduct karena SHA file tidak diperoleh.');
-  }
-
+  if (!sha) throw new Error('SHA file tidak diperoleh.');
   const filtered = products.filter((p) => p.id !== productId);
-  if (filtered.length === products.length) {
-    throw new Error('Produk untuk dihapus tidak ditemukan.');
-  }
-
-  console.log(`🗑️ deleteProductById: produk terhapus, total sekarang = ${filtered.length}`);
-  const updateResult = await updateAllProducts(filtered, sha);
-  return updateResult;
+  if (filtered.length === products.length) throw new Error('Produk untuk dihapus tidak ditemukan.');
+  return await updateAllProducts(filtered, sha);
 }
+
+module.exports = async function handler(req, res) {
+  try {
+    switch (req.method) {
+      case 'GET': {
+        const { products } = await fetchAllProducts();
+        return res.status(200).json(products);
+      }
+      case 'POST': {
+        const newProduct = req.body;
+        if (!newProduct || typeof newProduct !== 'object') {
+          return res.status(400).json({ error: 'Data produk tidak valid.' });
+        }
+        const result = await addProduct(newProduct);
+        return res.status(201).json({ message: 'Produk ditambahkan', commit: result.commit.sha });
+      }
+      case 'PUT': {
+        const { id, ...updatedProduct } = req.body;
+        if (!id || !updatedProduct) {
+          return res.status(400).json({ error: 'ID produk dan data update wajib diisi.' });
+        }
+        const result = await editProductById(id, updatedProduct);
+        return res.status(200).json({ message: 'Produk diupdate', commit: result.commit.sha });
+      }
+      case 'DELETE': {
+        const { id } = req.body;
+        if (!id) {
+          return res.status(400).json({ error: 'ID produk wajib diisi untuk delete.' });
+        }
+        const result = await deleteProductById(id);
+        return res.status(200).json({ message: 'Produk dihapus', commit: result.commit.sha });
+      }
+      default:
+        res.setHeader('Allow', ['GET', 'POST', 'PUT', 'DELETE']);
+        return res.status(405).json({ error: `Method ${req.method} tidak diizinkan` });
+    }
+  } catch (error) {
+    console.error('API error:', error);
+    return res.status(500).json({ error: error.message || 'Internal server error' });
+  }
+};
