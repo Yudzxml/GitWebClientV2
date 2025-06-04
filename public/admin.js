@@ -21,10 +21,14 @@ const GITHUB_TOKEN = 'YOUR_GITHUB_TOKEN_HERE'; // Ganti token GitHub kamu
 // Cek session login
 function checkLogin() {
   const loggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
+  console.log('[checkLogin] Status login:', loggedIn);
   document.getElementById('login-container').style.display = loggedIn ? 'none' : 'block';
   adminSection.style.display = loggedIn ? 'block' : 'none';
 
-  if (loggedIn) loadProducts();
+  if (loggedIn) {
+    console.log('[checkLogin] Memuat produk...');
+    loadProducts();
+  }
 }
 
 // Login handler
@@ -32,17 +36,21 @@ loginForm.addEventListener('submit', e => {
   e.preventDefault();
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
+  console.log('[Login] Email:', email);
 
   if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
     sessionStorage.setItem('adminLoggedIn', 'true');
+    console.log('[Login] Berhasil login sebagai admin');
     checkLogin();
   } else {
+    console.warn('[Login] Gagal login: email atau password salah');
     alert('Email atau password salah!');
   }
 });
 
 // Logout
 logoutBtn.addEventListener('click', () => {
+  console.log('[Logout] Logout admin');
   sessionStorage.removeItem('adminLoggedIn');
   location.reload();
 });
@@ -50,31 +58,43 @@ logoutBtn.addEventListener('click', () => {
 // Ambil SHA file JSON dari GitHub
 async function fetchFileSHA() {
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}?ref=${GITHUB_BRANCH}`;
+  console.log('[fetchFileSHA] URL:', url);
+
   const res = await fetch(url, {
     headers: {
       Authorization: `token ${GITHUB_TOKEN}`,
       Accept: 'application/vnd.github.v3+json',
     }
   });
-  if (!res.ok) throw new Error('Gagal ambil file SHA');
+
+  if (!res.ok) {
+    console.error('[fetchFileSHA] Gagal fetch SHA');
+    throw new Error('Gagal ambil file SHA');
+  }
+
   const data = await res.json();
+  console.log('[fetchFileSHA] SHA:', data.sha);
   return data.sha;
 }
 
 // Load produk dari GitHub
 async function loadProducts() {
   try {
+    console.log('[loadProducts] Mengambil produk dari GitHub...');
     const res = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${GITHUB_FILE_PATH}`);
     if (!res.ok) throw new Error('Gagal load produk');
     products = await res.json();
+    console.log('[loadProducts] Produk berhasil dimuat:', products);
     renderTable();
   } catch (e) {
+    console.error('[loadProducts] Error:', e);
     alert('Error load produk: ' + e.message);
   }
 }
 
 // Tampilkan tabel produk
 function renderTable() {
+  console.log('[renderTable] Menampilkan produk...');
   productsTableBody.innerHTML = '';
   products.forEach((p, i) => {
     const tr = document.createElement('tr');
@@ -95,18 +115,19 @@ function renderTable() {
 // Submit form produk (tambah/edit)
 productForm.addEventListener('submit', async e => {
   e.preventDefault();
-
   const name = document.getElementById('prod-name').value.trim();
   const price = parseInt(document.getElementById('prod-price').value);
   const image = document.getElementById('prod-image').value.trim();
   const description = document.getElementById('prod-desc').value.trim();
 
   if (!name || !description || !price || !image) {
+    console.warn('[productForm] Validasi gagal');
     alert('Semua field wajib diisi!');
     return;
   }
 
   const newProduct = { name, price, image, description };
+  console.log(`[productForm] ${editingProductId !== null ? 'Edit' : 'Tambah'} produk:`, newProduct);
 
   if (editingProductId !== null) {
     products[editingProductId] = newProduct;
@@ -120,6 +141,7 @@ productForm.addEventListener('submit', async e => {
     resetForm();
     renderTable();
   } catch (err) {
+    console.error('[productForm] Gagal simpan:', err);
     alert('Gagal menyimpan produk: ' + err.message);
   }
 });
@@ -128,6 +150,7 @@ productForm.addEventListener('submit', async e => {
 window.editProduct = function(index) {
   const p = products[index];
   editingProductId = index;
+  console.log('[editProduct] Edit produk index', index, p);
 
   document.getElementById('prod-name').value = p.name;
   document.getElementById('prod-price').value = p.price;
@@ -137,32 +160,40 @@ window.editProduct = function(index) {
 
 // Hapus produk
 window.deleteProduct = async function(index) {
-  if (!confirm('Yakin ingin menghapus produk ini?')) return;
+  const produk = products[index];
+  if (!confirm(`Yakin ingin menghapus produk: ${produk.name}?`)) return;
+
+  console.log('[deleteProduct] Menghapus produk index', index, produk);
   products.splice(index, 1);
+
   try {
     await saveProductsToGitHub(products);
     alert('Produk berhasil dihapus');
     renderTable();
   } catch (err) {
+    console.error('[deleteProduct] Gagal hapus:', err);
     alert('Gagal menghapus produk: ' + err.message);
   }
 };
 
 // Reset form
 function resetForm() {
+  console.log('[resetForm] Reset form');
   editingProductId = null;
   productForm.reset();
 }
 
 // Simpan ke GitHub
 async function saveProductsToGitHub(updatedProducts) {
+  console.log('[saveProductsToGitHub] Menyimpan ke GitHub...');
   const sha = await fetchFileSHA();
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
 
   const content = btoa(JSON.stringify(updatedProducts, null, 2)); // base64
+  const message = editingProductId !== null ? 'Update produk' : 'Tambah produk';
 
   const body = {
-    message: editingProductId !== null ? 'Update produk' : 'Tambah produk',
+    message,
     content,
     sha,
     branch: GITHUB_BRANCH
@@ -180,11 +211,15 @@ async function saveProductsToGitHub(updatedProducts) {
 
   if (!res.ok) {
     const errData = await res.json();
+    console.error('[saveProductsToGitHub] Gagal update:', errData);
     throw new Error(errData.message || 'Gagal update GitHub');
   }
 
-  return await res.json();
+  const result = await res.json();
+  console.log('[saveProductsToGitHub] Sukses update:', result);
+  return result;
 }
 
 // Init
+console.log('[init] Mengecek status login...');
 checkLogin();

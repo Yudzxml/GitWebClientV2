@@ -3,6 +3,7 @@ const body = document.body;
 
 toggleBtn.addEventListener('click', () => {
   body.classList.toggle('dark-mode');
+  console.log('Toggled dark mode:', body.classList.contains('dark-mode'));
 });
 
 const productGrid = document.getElementById('product-grid');
@@ -20,21 +21,26 @@ function renderStars(rating) {
 
 // Keranjang belanja disimpan di localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+console.log('Keranjang di-load dari localStorage:', cart);
 
-// Update jumlah item di keranjang (tampilan di elemen #cart-count)
+// Update jumlah item di keranjang
 function updateCartCount() {
   const count = cart.reduce((acc, item) => acc + item.qty, 0);
   const cartCountElem = document.getElementById('cart-count');
   if (cartCountElem) cartCountElem.textContent = count;
+  console.log('Jumlah item di keranjang:', count);
 }
 
 // Fungsi tambah ke keranjang
 function addToCart(product) {
+  console.log('Menambahkan produk ke keranjang:', product);
   const index = cart.findIndex(item => item.id === product.id);
   if (index > -1) {
     cart[index].qty += 1;
+    console.log('Produk sudah ada, menambah qty:', cart[index]);
   } else {
     cart.push({...product, qty: 1});
+    console.log('Produk baru ditambahkan ke keranjang');
   }
   localStorage.setItem('cart', JSON.stringify(cart));
   updateCartCount();
@@ -42,6 +48,7 @@ function addToCart(product) {
 }
 
 function renderProducts(products) {
+  console.log('Render produk:', products);
   if (products.length === 0) {
     productGrid.innerHTML = '<p>Produk tidak ditemukan.</p>';
     return;
@@ -67,12 +74,15 @@ function renderProducts(products) {
     productGrid.appendChild(card);
   });
 
-  // Pasang event listener tombol tambah ke keranjang
   document.querySelectorAll('.add-cart-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = btn.getAttribute('data-id');
       const product = products.find(p => p.id == id);
-      if (product) addToCart(product);
+      if (product) {
+        addToCart(product);
+      } else {
+        console.warn('Produk tidak ditemukan untuk ID:', id);
+      }
     });
   });
 }
@@ -80,19 +90,23 @@ function renderProducts(products) {
 function buyWhatsApp(name, price) {
   const waNumber = '6283872031397';
   const message = `Halo, saya ingin membeli produk *${decodeURIComponent(name)}* dengan harga Rp ${price.toLocaleString()}.`;
-  window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+  console.log('Checkout satu produk via WhatsApp:', url);
+  window.open(url, '_blank');
 }
 
 async function loadProducts() {
+  console.log('Memuat produk dari GitHub...');
   try {
     const res = await fetch('https://raw.githubusercontent.com/Yudzxml/WebClientV1/main/products.json');
     if (!res.ok) throw new Error('Gagal load produk');
     productsData = await res.json();
+    console.log('Produk berhasil dimuat:', productsData);
     renderProducts(productsData);
-    updateCartCount(); // pastikan count langsung update
+    updateCartCount();
   } catch (e) {
     productGrid.innerHTML = '<p>Error load produk.</p>';
-    console.error(e);
+    console.error('Gagal load produk:', e);
   }
 }
 
@@ -103,6 +117,7 @@ const searchBtn = document.getElementById('search-btn');
 
 function filterProducts() {
   const query = searchInput.value.toLowerCase();
+  console.log('Mencari produk dengan keyword:', query);
   const filtered = productsData.filter(p => p.name.toLowerCase().includes(query));
   renderProducts(filtered);
 }
@@ -119,7 +134,6 @@ const closeCartBtn = document.getElementById('close-cart');
 const cartBtn = document.querySelector('.cart-btn');
 const checkoutBtn = document.getElementById('checkout-btn');
 
-// Fungsi render isi keranjang di modal
 function renderCartModal() {
   cartItemsContainer.innerHTML = '';
   
@@ -139,15 +153,17 @@ function renderCartModal() {
     `;
     cartItemsContainer.appendChild(div);
   });
-  
+
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
   cartTotalElem.textContent = `Total: Rp${total.toLocaleString()}`;
+  console.log('Isi keranjang saat ini:', cart);
+  console.log('Total keranjang:', total);
 
-  // Event hapus produk dari keranjang
   cartItemsContainer.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => {
       const index = parseInt(btn.getAttribute('data-index'));
-      cart.splice(index, 1);
+      const removedItem = cart.splice(index, 1);
+      console.log('Item dihapus dari keranjang:', removedItem);
       localStorage.setItem('cart', JSON.stringify(cart));
       updateCartCount();
       renderCartModal();
@@ -155,28 +171,28 @@ function renderCartModal() {
   });
 }
 
-// Buka modal saat klik tombol keranjang
 cartBtn.addEventListener('click', () => {
+  console.log('Modal keranjang dibuka');
   renderCartModal();
   cartModal.classList.remove('hidden');
 });
 
-// Tutup modal saat klik tombol close
 closeCartBtn.addEventListener('click', () => {
+  console.log('Modal keranjang ditutup via tombol');
   cartModal.classList.add('hidden');
 });
 
-// Tutup modal saat klik di luar konten modal
 cartModal.addEventListener('click', (e) => {
   if (e.target === cartModal) {
+    console.log('Modal keranjang ditutup dengan klik luar modal');
     cartModal.classList.add('hidden');
   }
 });
 
-// Checkout via WhatsApp saat tombol checkout ditekan
 checkoutBtn.addEventListener('click', () => {
   if (cart.length === 0) {
     alert('Keranjangmu kosong! Tambahkan produk dulu ya 😅');
+    console.warn('Checkout dibatalkan: keranjang kosong');
     return;
   }
 
@@ -191,5 +207,6 @@ checkoutBtn.addEventListener('click', () => {
   message += `\nTotal harga: Rp${total.toLocaleString()}\n\nTerima kasih!`;
 
   const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+  console.log('Checkout semua item via WhatsApp:', waURL);
   window.open(waURL, '_blank');
 });
