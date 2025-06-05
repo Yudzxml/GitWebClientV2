@@ -1,8 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Testimoni – YUDZXML STORE 77</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
 /* ===================================
-   VARIABLES & RESET
+VARIABLES & RESET
 =================================== */
 :root {
-  /* Light mode colors */
   --color-bg: #f5f5f5;
   --color-text: #333;
   --color-header-start: #ff5722;
@@ -34,7 +44,6 @@
   --color-dark-input-border: #555;
 
   /* Override sidebar variables in dark mode context */
-  /* These will be applied when .dark-mode is on <body> */
   --color-sidebar-bg-dark: var(--color-dark-card-bg);
   --color-sidebar-border-dark: var(--color-dark-card-border);
 }
@@ -62,7 +71,7 @@ body {
 }
 
 /* ===========================
-   CONTAINER
+CONTAINER
 =========================== */
 .container {
   max-width: 1200px;
@@ -73,7 +82,7 @@ body {
 }
 
 /* ===================================
-   TYPOGRAPHY & BUTTONS
+TYPOGRAPHY & BUTTONS
 =================================== */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
@@ -127,100 +136,7 @@ p {
 }
 
 /* ===================================
-   FORM-STYLING (umum)
-=================================== */
-.form-container {
-  background-color: #fff;
-  padding: 1.5rem;
-  border: 1px solid var(--color-card-border);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
-  color: var(--color-text);
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  background-color: var(--color-input-bg);
-  color: var(--color-text);
-  padding: 0.6rem 0.8rem;
-  font-size: 0.9rem;
-  border: 1px solid var(--color-input-border);
-  border-radius: 4px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  outline: none;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  border-color: var(--color-btn-primary);
-  box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.2);
-}
-
-.form-group textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.form-actions {
-  display: flex;
-  gap: 0.75rem;
-  justify-content: flex-end;
-  margin-top: 1.25rem;
-}
-
-#addPackageBtn {
-  margin-bottom: 1rem;
-  background: none;
-  border: 1px dashed #ccc;
-  color: var(--color-text);
-  cursor: pointer;
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-#addPackageBtn:hover {
-  border-color: var(--color-btn-primary);
-  color: var(--color-btn-primary);
-}
-
-.package-item {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.package-item input {
-  flex: 1;
-}
-
-.remove-package {
-  background: transparent;
-  border: none;
-  color: #e74c3c;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-.remove-package:hover {
-  color: #c62828;
-}
-
-/* ===================================
-   SIDEBAR
+SIDEBAR
 =================================== */
 #sidebar {
   position: fixed;
@@ -255,7 +171,6 @@ p {
   padding: 2rem 1rem;
 }
 
-/* Tombol navigasi di sidebar */
 .sidebar-btn {
   display: block;
   width: 100%;
@@ -275,14 +190,10 @@ p {
 }
 
 /* ===================================
-   HEADER
+HEADER
 =================================== */
 .site-header {
-  background: linear-gradient(
-    90deg,
-    var(--color-header-start),
-    var(--color-header-end)
-  );
+  background: linear-gradient(90deg, var(--color-header-start), var(--color-header-end));
   color: #fff;
   padding: 0.75rem 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -333,121 +244,14 @@ p {
   cursor: pointer;
   position: relative;
 }
-#cartCount {
-  position: absolute;
-  top: -5px;
-  right: -10px;
-  background: #e53935;
-  color: #fff;
-  width: 18px;
-  height: 18px;
-  font-size: 0.8rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* ===================================
-   MAIN & PRODUCT GRID
+MAIN & TESTIMONI GRID
 =================================== */
 main.container {
   padding-top: 1rem;
   padding-bottom: 3rem;
 }
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0 2rem;
-}
-.product-card {
-  background-color: #fff;
-  border: 1px solid var(--color-card-border);
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: box-shadow 0.2s ease;
-}
-.product-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* GANTI BACKGROUND-IMAGE DENGAN <img> */
-.product-image-wrapper {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  background-color: var(--color-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.product-image-wrapper img.product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-/* BODY PRODUK */
-.product-body {
-  padding: 0.75rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.product-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: var(--color-text);
-}
-.product-desc {
-  font-size: 0.85rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-  flex: 1;
-}
-.package-select {
-  margin-bottom: 0.5rem;
-}
-.package-select select {
-  width: 100%;
-  padding: 0.4rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  outline: none;
-}
-.product-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.product-price {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #e53935;
-}
-.product-actions button {
-  background-color: var(--color-btn-primary);
-  border: none;
-  color: #fff;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-.product-actions button:hover {
-  background-color: var(--color-btn-primary-hover);
-}
-
-/* ===================================
-   TESTIMONI (Penambahan dan Penataan)
-=================================== */
 .testimoni-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -501,12 +305,6 @@ main.container {
   color: var(--color-text);
   line-height: 1.3;
 }
-.card-testimoni .content .review-text {
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.4;
-}
 .card-testimoni .content .info-row {
   display: flex;
   justify-content: space-between;
@@ -539,7 +337,7 @@ main.container {
 }
 
 /* ===================================
-   MODAL / OVERLAY ZOOM GAMBAR
+MODAL / OVERLAY ZOOM GAMBAR
 =================================== */
 #imgModal {
   display: none;
@@ -553,7 +351,6 @@ main.container {
   justify-content: center;
   align-items: center;
 }
-
 #imgModal img {
   max-width: 90%;
   max-height: 90%;
@@ -562,7 +359,7 @@ main.container {
 }
 
 /* ===========================
-   FOOTER
+FOOTER
 =================================== */
 .site-footer {
   background-color: var(--color-footer-bg);
@@ -579,7 +376,7 @@ main.container {
 }
 
 /* ===================================
-   DARK MODE
+DARK MODE
 =================================== */
 body.dark-mode {
   background-color: var(--color-dark-bg);
@@ -597,12 +394,15 @@ body.dark-mode .site-header {
     var(--color-dark-header-end)
   );
 }
-body.dark-mode .product-card {
+body.dark-mode .card-testimoni {
   background-color: var(--color-dark-card-bg);
   border: 1px solid var(--color-dark-card-border);
 }
-body.dark-mode .product-title,
-body.dark-mode .product-desc {
+body.dark-mode .card-testimoni .content h3,
+body.dark-mode .card-testimoni .content p,
+body.dark-mode .card-testimoni .content .info-row .harga,
+body.dark-mode .card-testimoni .content .info-row .tanggal,
+body.dark-mode .card-testimoni .content .customer {
   color: var(--color-dark-text);
 }
 body.dark-mode .header-center input,
@@ -644,14 +444,14 @@ body.dark-mode .btn-danger {
 }
 
 /* ===================================
-   DARK MODE SLIDER ICON
+DARK MODE SLIDER ICON
 =================================== */
 .dark-toggle {
   position: relative;
   width: 50px;
   height: 26px;
   overflow: hidden;
-  background-color: ;
+  background-color: transparent;
   border: none;
   border-radius: 13px;
   cursor: pointer;
@@ -684,7 +484,7 @@ body.dark-mode .dark-toggle {
 }
 
 /* ===================================
-   RESPONSIVE ADJUSTMENTS
+RESPONSIVE ADJUSTMENTS
 =================================== */
 @media (max-width: 1024px) {
   .header-center input {
@@ -694,9 +494,6 @@ body.dark-mode .dark-toggle {
     top: 8px;
     right: 10px;
     font-size: 1.1rem;
-  }
-  .form-container {
-    padding: 1.25rem;
   }
 }
 
@@ -735,42 +532,8 @@ body.dark-mode .dark-toggle {
     right: 10px;
     font-size: 3rem;
   }
-  .products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 0.8rem;
-    margin: 0.8rem 0 1.5rem;
-  }
-  .product-title {
-    font-size: 0.95rem;
-  }
-  .product-desc {
-    font-size: 0.8rem;
-  }
-  .product-price {
-    font-size: 1rem;
-  }
-  .product-actions button {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
-  }
   .site-footer p {
     font-size: 0.8rem;
-  }
-  .form-group label {
-    font-size: 0.9rem;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.5rem 0.7rem;
-    font-size: 0.85rem;
-  }
-  .form-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .form-actions .btn {
-    width: 100%;
   }
 }
 
@@ -798,40 +561,6 @@ body.dark-mode .dark-toggle {
     right: 8px;
     font-size: 1rem;
   }
-  .products-grid {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-    margin: 0.5rem 0 1rem;
-  }
-  .product-title {
-    font-size: 0.9rem;
-  }
-  .product-desc {
-    font-size: 0.75rem;
-  }
-  .product-price {
-    font-size: 0.95rem;
-  }
-  .product-actions button {
-    padding: 0.35rem 0.5rem;
-    font-size: 0.75rem;
-  }
-  .form-container {
-    padding: 1rem;
-  }
-  .form-group label {
-    font-size: 0.85rem;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 0.4rem 0.6rem;
-    font-size: 0.8rem;
-  }
-  .form-actions .btn {
-    font-size: 0.85rem;
-    padding: 0.5rem;
-  }
   .site-footer p {
     font-size: 0.75rem;
   }
@@ -850,3 +579,206 @@ body.dark-mode .dark-toggle {
     font-size: 0.9rem;
   }
 }
+    </style>
+  </head>
+
+  <body>
+    <aside id="sidebar">
+      <button id="sidebarClose" class="sidebar-close">×</button>
+      <div class="sidebar-section">
+        <button id="goAdminTestiBtn" class="btn btn-primary sidebar-btn">
+          Admin Testimoni
+        </button>
+      </div>
+    </aside>
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle" type="button">
+          ☰
+        </button>
+
+        <div class="header-left">
+          <h1 class="logo">オ YUDZXML TESTIMONI</h1>
+        </div>
+
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+            type="button"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+          <a href="index.html" class="icon-btn" title="Home">🏠</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div
+        class="container"
+        style="flex-direction: column; align-items: stretch;"
+      >
+        <h2
+          style="
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.75rem;
+            color: var(--color-text);
+          "
+        >
+        </h2>
+        <div id="testimoniContainer" class="testimoni-container"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container" style="text-align: center;">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
+
+    <div id="imgModal">
+      <img id="modalImg" src="" alt="Enlarged Image" />
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TESTIMONI_JSON_URL =
+    "https://raw.githubusercontent.com/Yudzxml/WebClientV1/refs/heads/main/testimonials.json";
+
+  const container = document.getElementById("testimoniContainer");
+  const imgModal = document.getElementById("imgModal");
+  const modalImg = document.getElementById("modalImg");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarToggle = document.getElementById("sidebarToggle");
+  const sidebarClose = document.getElementById("sidebarClose");
+  const goAdminTestiBtn = document.getElementById("goAdminTestiBtn");
+  const darkModeToggle = document.getElementById("darkModeToggle");
+  const searchInput = document.getElementById("searchInput");
+
+  // 1) FETCH & RENDER TESTIMONI
+  fetch(TESTIMONI_JSON_URL)
+    .then((res) => {
+      if (!res.ok) throw new Error("Gagal memuat JSON testimoni");
+      return res.json();
+    })
+    .then((data) => {
+      data.forEach((item) => {
+        // Buat elemen kartu
+        const card = document.createElement("div");
+        card.classList.add("card-testimoni");
+
+        // Gambar
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = `${item.customer} - ${item.barang}`;
+        img.style.cursor = "zoom-in";
+
+        // Ketika gambar di‐klik → tampilkan modal overlay
+        img.addEventListener("click", () => {
+          modalImg.src = item.image;
+          imgModal.style.display = "flex";
+        });
+
+        // Kontainer konten teks
+        const content = document.createElement("div");
+        content.classList.add("content");
+
+        // Judul (nama produk yang dibeli)
+        const h3 = document.createElement("h3");
+        h3.textContent = item.barang;
+
+        // Baris harga dan tanggal
+        const infoRow = document.createElement("div");
+        infoRow.classList.add("info-row");
+
+        const pHarga = document.createElement("span");
+        pHarga.classList.add("harga");
+        pHarga.textContent = `Rp ${item.harga}`;
+
+        const pTanggal = document.createElement("span");
+        pTanggal.classList.add("tanggal");
+        pTanggal.textContent = item.date;
+
+        infoRow.appendChild(pHarga);
+        infoRow.appendChild(pTanggal);
+
+        // Nama customer
+        const pCust = document.createElement("p");
+        pCust.classList.add("customer");
+        pCust.textContent = item.customer;
+        content.appendChild(h3);
+        content.appendChild(infoRow);
+        content.appendChild(pCust);
+        card.appendChild(img);
+        card.appendChild(content);
+        container.appendChild(card);
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      container.innerHTML =
+        "<p style='color: red; text-align: center; width: 100%;'>Gagal memuat testimoni. Silakan coba lagi nanti.</p>";
+    });
+
+  // 2) TUTUP MODAL GAMBAR
+  imgModal.addEventListener("click", () => {
+    imgModal.style.display = "none";
+    modalImg.src = "";
+  });
+
+  // 3) SIDEBAR
+  sidebarToggle.addEventListener("click", () => {
+    sidebar.classList.add("open");
+  });
+  sidebarClose.addEventListener("click", () => {
+    sidebar.classList.remove("open");
+  });
+
+  // 4) TOMBOL "ADMIN TESTIMONI" 
+  goAdminTestiBtn.addEventListener("click", () => {
+    window.location.href = "loginTesti.html";
+  });
+
+  // 5) DARK MODE TOGGLE
+  const body = document.body;
+  const savedMode = localStorage.getItem("darkModeEnabled");
+  if (savedMode === "true") {
+    body.classList.add("dark-mode");
+  }
+
+  darkModeToggle.addEventListener("click", () => {
+    body.classList.toggle("dark-mode");
+    const isDark = body.classList.contains("dark-mode");
+    localStorage.setItem("darkModeEnabled", isDark);
+  });
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    const cards = document.querySelectorAll(".card-testimoni");
+    cards.forEach((card) => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = "flex";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+</script>
+  </body>
+</html>

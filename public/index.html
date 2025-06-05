@@ -11,141 +11,18 @@
     />
   </head>
   <body>
+    <!-- SIDEBAR -->
     <aside id="sidebar">
       <button id="sidebarClose" class="sidebar-close">×</button>
-
-      <!-- Admin Login -->
-      <div id="loginSection" class="sidebar-section hidden">
-        <h2>Admin Login</h2>
-        <div class="form-container">
-          <form id="loginForm">
-            <div class="form-group">
-              <label for="adminEmail">Email</label>
-              <input
-                type="email"
-                id="adminEmail"
-                required
-                placeholder="Your Email"
-              />
-            </div>
-            <div class="form-group">
-              <label for="adminPassword">Password</label>
-              <input
-                type="password"
-                id="adminPassword"
-                required
-                placeholder="Your Password"
-              />
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Admin Panel -->
-      <div id="adminPanel" class="sidebar-section hidden">
-        <h2>Admin Panel</h2>
-        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
-        <hr />
-
-        <!-- Form Tambah / Edit Produk -->
-        <div class="form-container">
-          <h3 id="productFormTitle">Tambah Produk Baru</h3>
-          <form id="productForm">
-            <div class="form-group">
-              <label for="prodImage">URL Gambar</label>
-              <input
-                type="url"
-                id="prodImage"
-                required
-                placeholder="https://..."
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="prodName">Nama Produk</label>
-              <input
-                type="text"
-                id="prodName"
-                required
-                placeholder="Nama Produk"
-              />
-            </div>
-
-            <div class="form-group">
-              <label for="prodDesc">Deskripsi</label>
-              <textarea
-                id="prodDesc"
-                required
-                placeholder="Deskripsi singkat"
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label>Paket:</label>
-              <div id="packagesWrapper">
-                <div class="package-item">
-                  <input
-                    type="text"
-                    class="pkg-name"
-                    placeholder="Nama Paket (contoh: Paket 1)"
-                    required
-                  />
-                  <input
-                    type="number"
-                    class="pkg-price"
-                    placeholder="Harga (Rp)"
-                    required
-                    min="0"
-                  />
-                  <button type="button" class="remove-package">✕</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-actions">
-              <button
-                type="button"
-                id="addPackageBtn"
-                class="btn btn-secondary"
-              >
-                + Tambah Paket
-              </button>
-            </div>
-
-            <input type="hidden" id="editingProductId" value="" />
-
-            <div class="form-actions">
-              <button
-                type="submit"
-                class="btn btn-primary"
-                id="saveProductBtn"
-              >
-                Simpan Produk
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <hr />
-
-        <h3>Daftar Produk</h3>
-        <ul id="adminProductList" class="admin-product-list"></ul>
-      </div>
-
-      <!-- Keranjang Belanja -->
-      <div id="cartSection" class="sidebar-section hidden">
-        <h2>Keranjang Belanja</h2>
-        <ul id="cartItems" class="cart-items"></ul>
-        <hr />
-        <div class="cart-total">
-          <span>Total:</span>
-          <span id="cartTotalPrice">Rp 0</span>
-        </div>
-        <button id="checkoutBtn" class="btn btn-success">
-          Checkout via WhatsApp
+      <div class="sidebar-section">
+        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
+          Admin Login
+        </button>
+        <button id="goCartBtn" class="btn btn-primary sidebar-btn">
+          Cek Keranjang
+        </button>
+        <button id="goTestiBtn" class="btn btn-primary sidebar-btn">
+          Testimoni
         </button>
       </div>
     </aside>
@@ -183,7 +60,7 @@
       </div>
     </header>
 
-    <!-- Daftar Produk -->
+    <!-- DAFTAR PRODUK -->
     <main class="container">
       <div id="productsGrid" class="products-grid"></div>
     </main>
@@ -193,7 +70,6 @@
         <p>© 2025 YUDZXML Allright Reserved</p>
       </div>
     </footer>
-
     <script src="main.js"></script>
   </body>
 </html>

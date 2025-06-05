@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang – YUDZXML STORE</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===================================
+         VARIABLES & RESET
+      =================================== */
+      :root {
+        --color-bg: #f5f5f5;
+        --color-text: #333;
+        --color-header-start: #ff5722;
+        --color-header-end: #ff8a50;
+        --color-btn-primary: #ff5722;
+        --color-btn-primary-hover: #e64a19;
+        --color-btn-secondary: #777;
+        --color-btn-secondary-hover: #555;
+        --color-btn-success: #388e3c;
+        --color-btn-success-hover: #2e7d32;
+        --color-btn-danger: #e53935;
+        --color-btn-danger-hover: #c62828;
+        --color-border: #ddd;
+        --color-card-bg: #fff;
+        --color-card-border: #eee;
+        --color-footer-bg: #fff;
+        --color-footer-text: #999;
+        --color-input-bg: #fff;
+        --color-input-border: #ccc;
+
+        /* Dark mode vars (jika dibutuhkan) */
+        --color-dark-bg: #1e1e1e;
+        --color-dark-text: #ddd;
+        --color-dark-header-start: #333;
+        --color-dark-header-end: #555;
+        --color-dark-card-bg: #2a2a2a;
+        --color-dark-card-border: #444;
+        --color-dark-footer-bg: #2a2a2a;
+        --color-dark-footer-text: #aaa;
+      }
+
+      /* Reset dasar */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ===================================
+         CONTAINER
+      =================================== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        width: 100%;
+      }
+
+      /* ===================================
+         TYPOGRAPHY & BUTTONS
+      =================================== */
+      h1,
+      h2 {
+        font-weight: 600;
+        line-height: 1.2;
+        color: var(--color-text);
+      }
+
+      h2 {
+        margin: 2rem 0 1rem;
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.6rem 1rem;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+        border: 1px solid transparent;
+        text-decoration: none;
+      }
+
+      .btn-secondary {
+        background-color: var(--color-btn-secondary);
+        color: #fff;
+        border-color: var(--color-btn-secondary);
+      }
+      .btn-secondary:hover {
+        background-color: var(--color-btn-secondary-hover);
+        border-color: var(--color-btn-secondary-hover);
+      }
+
+      .btn-success {
+        background-color: var(--color-btn-success);
+        color: #fff;
+        border-color: var(--color-btn-success);
+      }
+      .btn-success:hover {
+        background-color: var(--color-btn-success-hover);
+        border-color: var(--color-btn-success-hover);
+      }
+
+      .btn-danger {
+        background-color: var(--color-btn-danger);
+        color: #fff;
+        border-color: var(--color-btn-danger);
+      }
+      .btn-danger:hover {
+        background-color: var(--color-btn-danger-hover);
+        border-color: var(--color-btn-danger-hover);
+      }
+
+      /* ===================================
+         HEADER
+      =================================== */
+      .site-header {
+        background: linear-gradient(90deg, var(--color-header-start), var(--color-header-end));
+        color: #fff;
+        padding: 0.75rem 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 900;
+      }
+      .site-header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-header .logo {
+        font-size: 1.5rem;
+      }
+
+      /* ===================================
+         MAIN CONTENT (KERANJANG)
+      =================================== */
+      main.container {
+        padding: 2rem 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      main.container h2 {
+        width: 100%;
+        text-align: left;
+      }
+
+      /* ===================================
+         DAFTAR ITEM KERANJANG
+      =================================== */
+      .cart-items {
+        list-style: none;
+        width: 100%;
+        background-color: var(--color-card-bg);
+        border: 1px solid var(--color-card-border);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+      }
+
+      .cart-items li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-border);
+        font-size: 0.95rem;
+        color: var(--color-text);
+      }
+
+      .cart-items li:last-child {
+        border-bottom: none;
+      }
+
+      .cart-items li span.item-info {
+        flex: 1;
+        margin-right: 1rem;
+      }
+
+      .cart-items li button.remove-item {
+        background: none;
+        border: none;
+        color: var(--color-btn-danger);
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      .cart-items li button.remove-item:hover {
+        color: var(--color-btn-danger-hover);
+      }
+
+      /* ===================================
+         TOTAL KERANJANG
+      =================================== */
+      .cart-total {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        background-color: var(--color-card-bg);
+        border: 1px solid var(--color-card-border);
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--color-text);
+        margin-bottom: 1.5rem;
+      }
+
+      .cart-total span:first-child {
+        color: #555;
+      }
+
+      /* ===================================
+         FOOTER
+      =================================== */
+      .site-footer {
+        background-color: var(--color-footer-bg);
+        border-top: 1px solid var(--color-border);
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+      }
+      .site-footer p {
+        color: var(--color-footer-text);
+        font-size: 0.9rem;
+      }
+
+      /* ===================================
+         RESPONSIVE ADJUSTMENTS
+      =================================== */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .site-header .container {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .site-header .logo {
+          margin-bottom: 0.5rem;
+          font-size: 1.3rem;
+        }
+        .cart-items li {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .cart-items li span.item-info {
+          margin-bottom: 0.5rem;
+        }
+        .cart-total {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h2 {
+          font-size: 1.25rem;
+        }
+        .cart-items li {
+          padding: 0.75rem;
+          font-size: 0.9rem;
+        }
+        .cart-total {
+          padding: 0.75rem 1rem;
+          font-size: 1rem;
+        }
+        .btn {
+          padding: 0.5rem 0.8rem;
+          font-size: 0.85rem;
+        }
+        .site-footer p {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <h1 class="logo">Keranjang Belanja</h1>
+        <button onclick="window.location.href='index.html'" class="btn btn-secondary">
+          ← Kembali ke Toko
+        </button>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Isi Keranjang Anda</h2>
+      <ul id="cartItemsList" class="cart-items"></ul>
+
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalPriceCart">Rp 0</span>
+      </div>
+
+      <button id="checkoutBtnCart" class="btn btn-success">
+        Checkout via WhatsApp
+      </button>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
+
+    <script>
+      function _0x3025(){const _0x4878d8=['add','quantity','#555','parse','classList','button','Total:\x20Rp\x20','Hapus\x20item','getItem','forEach','packageName','2NsSYGf','1895860EKDJnU','1rem','reduce','?text=','toString','41876EkwdsI','Keranjang\x20kosong.','3094189NTrijj','https://wa.me/','cartTotalPriceCart','1331829HDszQF','splice','textContent','Halo,\x20saya\x20ingin\x20memesan:%0A','getElementById','2160882EZPyQL','length','1117805AuLvNx','284999doSJNv','8vOvvXL','6283872031397','click','span','yudzxml1122','item-info',')\x20×','appendChild','addEventListener','8NOBiKU','%0A','createElement','DOMContentLoaded','cartItemsList','Keranjang\x20kosong!','price','_blank','padding','9WZTEfp','Rp\x20','innerHTML','remove-item','checkoutBtnCart','\x20=\x20Rp\x20'];_0x3025=function(){return _0x4878d8;};return _0x3025();}const _0x41a4d4=_0x5ed2;(function(_0x464a9a,_0x47a21){const _0x35d8dc=_0x5ed2,_0x65bf47=_0x464a9a();while(!![]){try{const _0x474edb=-parseInt(_0x35d8dc(0x13c))/0x1*(-parseInt(_0x35d8dc(0x10b))/0x2)+parseInt(_0x35d8dc(0x110))/0x3+parseInt(_0x35d8dc(0x119))/0x4*(-parseInt(_0x35d8dc(0x117))/0x5)+-parseInt(_0x35d8dc(0x115))/0x6+-parseInt(_0x35d8dc(0x10d))/0x7*(-parseInt(_0x35d8dc(0x122))/0x8)+-parseInt(_0x35d8dc(0x12b))/0x9*(-parseInt(_0x35d8dc(0x13d))/0xa)+-parseInt(_0x35d8dc(0x118))/0xb;if(_0x474edb===_0x47a21)break;else _0x65bf47['push'](_0x65bf47['shift']());}catch(_0x55b3db){_0x65bf47['push'](_0x65bf47['shift']());}}}(_0x3025,0x4565e));const CART_STORAGE_KEY=_0x41a4d4(0x11d),whatsappNumber=_0x41a4d4(0x11a);function loadCartFromStorage(){const _0x1042b0=_0x41a4d4,_0x1044c2=localStorage[_0x1042b0(0x139)](CART_STORAGE_KEY);return _0x1044c2?JSON[_0x1042b0(0x134)](_0x1044c2):[];}function saveCartToStorage(_0x281e88){localStorage['setItem'](CART_STORAGE_KEY,JSON['stringify'](_0x281e88));}function _0x5ed2(_0x561bcc,_0x179034){const _0x30253a=_0x3025();return _0x5ed2=function(_0x5ed2e3,_0x533fc5){_0x5ed2e3=_0x5ed2e3-0x10a;let _0x4a6fe3=_0x30253a[_0x5ed2e3];return _0x4a6fe3;},_0x5ed2(_0x561bcc,_0x179034);}function formatRupiah(_0x534055){const _0x27e712=_0x41a4d4;return _0x534055[_0x27e712(0x10a)]()['replace'](/\B(?=(\d{3})+(?!\d))/g,'.');}document['addEventListener'](_0x41a4d4(0x125),()=>{const _0xf63ad2=_0x41a4d4;let _0x385802=loadCartFromStorage();const _0x1c39d0=document[_0xf63ad2(0x114)](_0xf63ad2(0x126)),_0x115a3f=document[_0xf63ad2(0x114)](_0xf63ad2(0x10f)),_0x11b5d6=document[_0xf63ad2(0x114)](_0xf63ad2(0x12f));function _0x467794(){const _0x39b721=_0xf63ad2;_0x1c39d0[_0x39b721(0x12d)]='';let _0x1791a0=0x0;if(!_0x385802[_0x39b721(0x116)]){const _0x11a85c=document[_0x39b721(0x124)]('li');_0x11a85c[_0x39b721(0x112)]=_0x39b721(0x10c),_0x11a85c['style'][_0x39b721(0x12a)]=_0x39b721(0x13e),_0x11a85c['style']['color']=_0x39b721(0x133),_0x1c39d0['appendChild'](_0x11a85c);}else _0x385802[_0x39b721(0x13a)]((_0x462ac8,_0x45bbcd)=>{const _0x17e808=_0x39b721;_0x1791a0+=_0x462ac8['price']*_0x462ac8[_0x17e808(0x132)];const _0x2e40ef=document[_0x17e808(0x124)]('li'),_0x2c4b73=document[_0x17e808(0x124)](_0x17e808(0x11c));_0x2c4b73[_0x17e808(0x135)][_0x17e808(0x131)](_0x17e808(0x11e)),_0x2c4b73[_0x17e808(0x112)]=_0x462ac8['name']+'\x20('+_0x462ac8['packageName']+_0x17e808(0x11f)+_0x462ac8[_0x17e808(0x132)];const _0x87bd33=document[_0x17e808(0x124)]('span');_0x87bd33[_0x17e808(0x112)]=_0x17e808(0x12c)+formatRupiah(_0x462ac8[_0x17e808(0x128)]*_0x462ac8[_0x17e808(0x132)]);const _0x4f2759=document[_0x17e808(0x124)](_0x17e808(0x136));_0x4f2759['classList'][_0x17e808(0x131)](_0x17e808(0x12e)),_0x4f2759[_0x17e808(0x12d)]='✕',_0x4f2759['title']=_0x17e808(0x138),_0x4f2759[_0x17e808(0x121)](_0x17e808(0x11b),()=>{const _0x48da46=_0x17e808;_0x385802[_0x48da46(0x111)](_0x45bbcd,0x1),saveCartToStorage(_0x385802),_0x467794();}),_0x2e40ef[_0x17e808(0x120)](_0x2c4b73),_0x2e40ef[_0x17e808(0x120)](_0x87bd33),_0x2e40ef[_0x17e808(0x120)](_0x4f2759),_0x1c39d0[_0x17e808(0x120)](_0x2e40ef);});_0x115a3f['textContent']='Rp\x20'+formatRupiah(_0x1791a0);}_0x467794(),_0x11b5d6[_0xf63ad2(0x121)]('click',()=>{const _0x196f3c=_0xf63ad2;if(!_0x385802['length']){alert(_0x196f3c(0x127));return;}let _0x40ff9a=_0x196f3c(0x113);_0x385802[_0x196f3c(0x13a)](_0x8f52fc=>{const _0x3a010f=_0x196f3c;_0x40ff9a+='-\x20'+_0x8f52fc['name']+'\x20('+_0x8f52fc[_0x3a010f(0x13b)]+_0x3a010f(0x11f)+_0x8f52fc[_0x3a010f(0x132)]+_0x3a010f(0x130)+formatRupiah(_0x8f52fc['price']*_0x8f52fc[_0x3a010f(0x132)])+_0x3a010f(0x123);}),_0x40ff9a+=_0x196f3c(0x137)+formatRupiah(_0x385802[_0x196f3c(0x13f)]((_0x51bda8,_0x837d3b)=>_0x51bda8+_0x837d3b[_0x196f3c(0x128)]*_0x837d3b['quantity'],0x0));const _0x49084c=_0x196f3c(0x10e)+whatsappNumber+_0x196f3c(0x140)+_0x40ff9a;window['open'](_0x49084c,_0x196f3c(0x129));});});
+    </script>
+  </body>
+</html>

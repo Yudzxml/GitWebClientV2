@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Admin – YUDZXML STORE</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --color-bg: #f5f5f5;
+      --color-text: #333;
+      --color-btn-primary: #ff5722;
+      --color-btn-primary-hover: #e64a19;
+      --color-input-bg: #fff;
+      --color-input-border: #ccc;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .login-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+    .login-container h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.5rem;
+      color: var(--color-text);
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--color-input-border);
+      border-radius: 4px;
+      background-color: var(--color-input-bg);
+      color: var(--color-text);
+      transition: border-color 0.2s ease;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: var(--color-btn-primary);
+      box-shadow: 0 0 0 2px rgba(255,87,34,0.2);
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: var(--color-btn-primary);
+      color: #fff;
+      transition: background-color 0.2s ease;
+    }
+    .btn:hover {
+      background-color: var(--color-btn-primary-hover);
+    }
+    .error-msg {
+      color: #e53935;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login Admin</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Masukkan username..."
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Masukkan password..."
+          required
+        />
+      </div>
+      <div class="error-msg" id="errorMsg">
+        Username atau password salah!
+      </div>
+      <button type="submit" class="btn">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const _0x22febb=_0x2515;function _0x2515(_0x104038,_0x2ceb1c){const _0x260590=_0x2605();return _0x2515=function(_0x251570,_0x490dcc){_0x251570=_0x251570-0x77;let _0x2438f4=_0x260590[_0x251570];return _0x2438f4;},_0x2515(_0x104038,_0x2ceb1c);}function _0x2605(){const _0x314372=['loginForm','password','@Yudzxml1122','66XRKjyl','4948587NRAJxH','getElementById','setItem','49ovlBRp','14109000CkmHfx','152TEyncd','1234OEitYO','true','addEventListener','108903NoIIDQ','675416fMJQGR','trim','2967755UqUauX','6571218nCOziF','style','href','yudzxml@gmail.com','value','isAdminLoggedIn','submit'];_0x2605=function(){return _0x314372;};return _0x2605();}(function(_0x3fa8df,_0x2362bb){const _0xf6d11=_0x2515,_0x9d7610=_0x3fa8df();while(!![]){try{const _0x22ddb4=parseInt(_0xf6d11(0x77))/0x1*(parseInt(_0xf6d11(0x88))/0x2)+-parseInt(_0xf6d11(0x7a))/0x3*(parseInt(_0xf6d11(0x8e))/0x4)+parseInt(_0xf6d11(0x7d))/0x5+-parseInt(_0xf6d11(0x7e))/0x6+-parseInt(_0xf6d11(0x8c))/0x7*(-parseInt(_0xf6d11(0x7b))/0x8)+parseInt(_0xf6d11(0x89))/0x9+parseInt(_0xf6d11(0x8d))/0xa;if(_0x22ddb4===_0x2362bb)break;else _0x9d7610['push'](_0x9d7610['shift']());}catch(_0x385919){_0x9d7610['push'](_0x9d7610['shift']());}}}(_0x2605,0xadac4));const ADMIN_USERNAME=_0x22febb(0x81),ADMIN_PASSWORD=_0x22febb(0x87),loginForm=document[_0x22febb(0x8a)](_0x22febb(0x85)),errorMsg=document['getElementById']('errorMsg');loginForm[_0x22febb(0x79)](_0x22febb(0x84),function(_0xcd5552){const _0x3ffac4=_0x22febb;_0xcd5552['preventDefault']();const _0x150463=document['getElementById']('username')[_0x3ffac4(0x82)][_0x3ffac4(0x7c)](),_0x3bfeed=document['getElementById'](_0x3ffac4(0x86))[_0x3ffac4(0x82)][_0x3ffac4(0x7c)]();_0x150463===ADMIN_USERNAME&&_0x3bfeed===ADMIN_PASSWORD?(localStorage[_0x3ffac4(0x8b)](_0x3ffac4(0x83),_0x3ffac4(0x78)),window['location'][_0x3ffac4(0x80)]='admin.html'):errorMsg[_0x3ffac4(0x7f)]['display']='block';});
+  </script>
+</body>
+</html>

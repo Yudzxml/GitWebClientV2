@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YUDZXML STORE 77</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    /* ===================================
+VARIABLES & RESET
+=================================== */
+:root {
+  /* Light mode colors */
+  --color-bg: #f5f5f5;
+  --color-text: #333;
+  --color-input-bg: #fff;
+  --color-input-border: #ccc;
+  --color-btn-primary: #ff5722;
+  --color-btn-primary-hover: #e64a19;
+  --color-border: #ddd;
+  --color-card-border: #eee;
+  --color-footer-bg: #fff;
+  --color-footer-text: #999;
+}
+
+/* Reset dasar */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===================================
+HEADER HALAMAN
+=================================== */
+h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--color-btn-primary);
+  letter-spacing: 1px;
+}
+
+/* ===================================
+FORM-TAMBAH TESTIMONI
+=================================== */
+.form-container {
+  background-color: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto 2rem auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input[type="file"] {
+  padding: 0.5rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  background-color: var(--color-input-bg);
+  cursor: pointer;
+}
+
+.form-container input[type="text"],
+.form-container input[type="file"] {
+  font-size: 0.95rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-container input[type="text"]:focus {
+  border-color: var(--color-btn-primary);
+  box-shadow: 0 0 0 2px rgba(255,87,34,0.2);
+}
+
+.form-container button {
+  appearance: none;
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.form-container button:hover:not(:disabled) {
+  background-color: var(--color-btn-primary-hover);
+}
+
+/* ===================================
+DAFTAR TESTIMONI
+=================================== */
+#testimonialList {
+  max-width: 800px;
+  width: 90%;
+  margin: 0 auto 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.testimonial {
+  background-color: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.testimonial:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.testimonial-summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-card-border);
+}
+
+.testimonial-summary span {
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.testimonial-summary .underline {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.testimonial-details {
+  display: none;
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background-color: var(--color-input-bg);
+}
+
+.testimonial.open .testimonial-details {
+  display: block;
+}
+
+.testimonial-details img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: cover;
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.testimonial-details .actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.testimonial-details .actions button {
+  appearance: none;
+  background-color: var(--color-btn-secondary);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.testimonial-details .actions button:hover {
+  background-color: #555;
+}
+
+/* ===================================
+INFORMASI DI BAGIAN BAWAH
+=================================== */
+.info-bottom {
+  background-color: var(--color-footer-bg);
+  padding: 1rem 0;
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  margin-top: auto;
+}
+
+.info-bottom p {
+  font-size: 0.9rem;
+  color: var(--color-footer-text);
+  margin: 0.25rem 0;
+}
+
+/* ===================================
+RESPONSIVE ADJUSTMENTS
+=================================== */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 1.25rem;
+  }
+  #testimonialList {
+    width: 100%;
+  }
+  .testimonial-summary,
+  .testimonial-details {
+    padding: 0.5rem 0.75rem;
+  }
+  .testimonial-details img {
+    max-height: 180px;
+  }
+  .testimonial-details .actions button {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <h1>YUDZXML STORE</h1>
+
+  <div class="form-container">
+    <input type="file" id="imageFile" accept="image/png, image/jpeg" />
+    <input type="text" id="barang" placeholder="Nama Barang" autocomplete="off" />
+    <input type="text" id="harga" placeholder="Harga Barang" autocomplete="off" />
+    <input type="text" id="date" placeholder="Tanggal (contoh: 18-05-2025)" autocomplete="off" />
+    <input type="text" id="customer" placeholder="Nama Customer" autocomplete="off" />
+    <button id="submitBtn" onclick="submitTestimoni()">Simpan Testimoni</button>
+  </div>
+
+  <div id="testimonialList"></div>
+
+  <div class="info-bottom">
+    <p>YUDZXML STORE 77</p>
+    <p>© 2025 YUDZXML</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    (function(_0xce2daf,_0x1906a7){const _0x4572e1=_0x2e73,_0x3492cd=_0xce2daf();while(!![]){try{const _0x430690=-parseInt(_0x4572e1(0x19d))/0x1+parseInt(_0x4572e1(0x19a))/0x2*(parseInt(_0x4572e1(0x191))/0x3)+parseInt(_0x4572e1(0x184))/0x4+parseInt(_0x4572e1(0x15d))/0x5+parseInt(_0x4572e1(0x16a))/0x6*(parseInt(_0x4572e1(0x168))/0x7)+parseInt(_0x4572e1(0x15f))/0x8*(-parseInt(_0x4572e1(0x18a))/0x9)+-parseInt(_0x4572e1(0x1a0))/0xa;if(_0x430690===_0x1906a7)break;else _0x3492cd['push'](_0x3492cd['shift']());}catch(_0x45eafd){_0x3492cd['push'](_0x3492cd['shift']());}}}(_0x13ac,0x45a2a));function _0x13ac(){const _0x493cf7=['Mohon\x20pilih\x20file\x20gambar\x20testimoni.','tagName','trim','button','length','https://testimoniyudzxml.vercel.app/api/github','url','innerText','\x0a\x20\x20<div\x20class=\x22testimonial-summary\x22>\x0a\x20\x20\x20\x20<span>CUSTTOMER:\x20<span\x20class=\x22underline\x22>','splice','stopPropagation','Yakin\x20ingin\x20menghapus\x20testimoni\x20ini?','Edit\x20hanya\x20bisa\x20mengubah\x20Nama\x20Customer,\x20Tanggal,\x20Nama\x20Barang,\x20dan\x20Harga.\x0aUntuk\x20mengubah\x20gambar,\x20silakan\x20hapus\x20dan\x20tambah\x20ulang.','barang','Gagal\x20mendapatkan\x20URL\x20gambar','name','files',')\x22>HAPUS</button>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20</div>\x0a','toggle','disabled','Simpan\x20Testimoni','addEventListener','image/png','includes','661612uwIpIW','harga','value','push','imageFile','then','9xJdgpi','forEach','testimonialList','POST','</span><br>\x0a\x20\x20\x20\x20<strong>HARGA:</strong>\x20<span\x20class=\x22underline\x22>','stringify','<p\x20style=\x22text-align:center;\x20color:#0ff9;\x22>Belum\x20ada\x20testimoni.</p>','921YtIZcA','Semua\x20field\x20wajib\x20diisi.','date','data','https://api-upload-cyan.vercel.app/api/upload','innerHTML','open','error','</span></span>\x0a\x20\x20\x20\x20<span>TANGGAL:\x20<span\x20class=\x22underline\x22>','2424mggtjz','type','appendChild','454822aYyxZT','post','application/octet-stream','5018150bDskEK','className','image/jpeg','application/json','Menyimpan...','Hanya\x20file\x20JPG\x20atau\x20PNG\x20yang\x20diperbolehkan.','2475680BKPyMw','arrayBuffer','2611704AmUvFh','customer','Gagal\x20load\x20data:','submitBtn','target','Perbarui\x20Testimoni','classList','createElement','getElementById','49jAWKYU','json','459174SPTKEn','testimonial'];_0x13ac=function(){return _0x493cf7;};return _0x13ac();}let testimonials=[],editIndex=null;function render(){const _0x38d02d=_0x2e73,_0x5c4837=document['getElementById'](_0x38d02d(0x18c));_0x5c4837[_0x38d02d(0x196)]='';if(testimonials[_0x38d02d(0x170)]===0x0){_0x5c4837['innerHTML']=_0x38d02d(0x190);return;}testimonials[_0x38d02d(0x18b)]((_0x305987,_0x491729)=>{const _0x13228f=_0x38d02d,_0x23934a=document[_0x13228f(0x166)]('div');_0x23934a[_0x13228f(0x1a1)]=_0x13228f(0x16b),_0x23934a[_0x13228f(0x196)]=_0x13228f(0x174)+_0x305987[_0x13228f(0x160)]+_0x13228f(0x199)+_0x305987[_0x13228f(0x193)]+'</span></span>\x0a\x20\x20</div>\x0a\x20\x20<div\x20class=\x22testimonial-details\x22>\x0a\x20\x20\x20\x20<strong>BARANG:</strong>\x20<span\x20class=\x22underline\x22>'+_0x305987[_0x13228f(0x179)]+_0x13228f(0x18e)+_0x305987[_0x13228f(0x185)]+'</span><br>\x0a\x20\x20\x20\x20<img\x20src=\x22'+_0x305987['image']+'\x22\x20alt=\x22Gambar\x20Testimoni\x22\x20/>\x0a\x20\x20\x20\x20<div\x20class=\x22actions\x22>\x0a\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22editTestimoni(event,\x20'+_0x491729+')\x22>EDIT</button>\x0a\x20\x20\x20\x20\x20\x20<button\x20onclick=\x22hapusTestimoni(event,\x20'+_0x491729+_0x13228f(0x17d),_0x23934a[_0x13228f(0x181)]('click',_0x4e542c=>{const _0x54e5f3=_0x13228f;if(_0x4e542c[_0x54e5f3(0x163)][_0x54e5f3(0x16d)]['toLowerCase']()===_0x54e5f3(0x16f))return;_0x23934a[_0x54e5f3(0x165)][_0x54e5f3(0x17e)](_0x54e5f3(0x197));}),_0x5c4837[_0x13228f(0x19c)](_0x23934a);});}function clearForm(){const _0x4cf0b3=_0x2e73;document[_0x4cf0b3(0x167)](_0x4cf0b3(0x188))['value']='',document[_0x4cf0b3(0x167)](_0x4cf0b3(0x179))[_0x4cf0b3(0x186)]='',document['getElementById'](_0x4cf0b3(0x185))[_0x4cf0b3(0x186)]='',document['getElementById'](_0x4cf0b3(0x193))[_0x4cf0b3(0x186)]='',document[_0x4cf0b3(0x167)](_0x4cf0b3(0x160))[_0x4cf0b3(0x186)]='',document[_0x4cf0b3(0x167)](_0x4cf0b3(0x162))[_0x4cf0b3(0x173)]=_0x4cf0b3(0x180),document[_0x4cf0b3(0x167)]('submitBtn')['disabled']=![],document[_0x4cf0b3(0x167)](_0x4cf0b3(0x188))[_0x4cf0b3(0x17f)]=![],editIndex=null;}async function submitTestimoni(){const _0x174ee5=_0x2e73,_0x208bb1=document['getElementById'](_0x174ee5(0x162));_0x208bb1[_0x174ee5(0x17f)]=!![],_0x208bb1[_0x174ee5(0x173)]=_0x174ee5(0x15b);const _0x26cd05=document[_0x174ee5(0x167)]('imageFile'),_0x40a7a3=document[_0x174ee5(0x167)](_0x174ee5(0x179))[_0x174ee5(0x186)][_0x174ee5(0x16e)](),_0x18d497=document[_0x174ee5(0x167)](_0x174ee5(0x185))[_0x174ee5(0x186)][_0x174ee5(0x16e)](),_0x4c8ea6=document['getElementById'](_0x174ee5(0x193))[_0x174ee5(0x186)]['trim'](),_0x58bd30=document[_0x174ee5(0x167)]('customer')[_0x174ee5(0x186)][_0x174ee5(0x16e)]();if(!_0x40a7a3||!_0x18d497||!_0x4c8ea6||!_0x58bd30){alert(_0x174ee5(0x192)),_0x208bb1[_0x174ee5(0x17f)]=![],_0x208bb1['innerText']='Simpan\x20Testimoni';return;}try{let _0x715426='';if(editIndex===null){if(_0x26cd05[_0x174ee5(0x17c)][_0x174ee5(0x170)]===0x0){alert(_0x174ee5(0x16c)),_0x208bb1[_0x174ee5(0x17f)]=![],_0x208bb1[_0x174ee5(0x173)]=_0x174ee5(0x180);return;}const _0xb8c023=_0x26cd05[_0x174ee5(0x17c)][0x0];if(![_0x174ee5(0x1a2),_0x174ee5(0x182)][_0x174ee5(0x183)](_0xb8c023[_0x174ee5(0x19b)])){alert(_0x174ee5(0x15c)),_0x208bb1['disabled']=![],_0x208bb1[_0x174ee5(0x173)]=_0x174ee5(0x180);return;}const _0x17b209=await _0xb8c023[_0x174ee5(0x15e)](),_0x57fd23=new Uint8Array(_0x17b209),_0x561a52=await axios[_0x174ee5(0x19e)](_0x174ee5(0x195),_0x57fd23,{'headers':{'Content-Type':_0xb8c023[_0x174ee5(0x19b)]||_0x174ee5(0x19f),'x-filename':_0xb8c023[_0x174ee5(0x17b)]}});_0x715426=_0x561a52[_0x174ee5(0x194)]?.[_0x174ee5(0x194)]?.[_0x174ee5(0x172)];if(!_0x715426)throw new Error(_0x174ee5(0x17a));testimonials[_0x174ee5(0x187)]({'image':_0x715426,'barang':_0x40a7a3,'harga':_0x18d497,'date':_0x4c8ea6,'customer':_0x58bd30});}else testimonials[editIndex]={...testimonials[editIndex],'barang':_0x40a7a3,'harga':_0x18d497,'date':_0x4c8ea6,'customer':_0x58bd30};await fetch(_0x174ee5(0x171),{'method':_0x174ee5(0x18d),'headers':{'Content-Type':_0x174ee5(0x15a)},'body':JSON[_0x174ee5(0x18f)](testimonials)}),clearForm(),loadTestimonials();}catch(_0x21ecec){console[_0x174ee5(0x198)](_0x21ecec),alert('Terjadi\x20kesalahan\x20saat\x20menyimpan\x20testimoni.'),_0x208bb1[_0x174ee5(0x17f)]=![],_0x208bb1[_0x174ee5(0x173)]=_0x174ee5(0x180);}}function editTestimoni(_0x2b6702,_0x5b6668){const _0x40d4bb=_0x2e73;_0x2b6702[_0x40d4bb(0x176)]();const _0x296cc8=testimonials[_0x5b6668];clearForm(),alert(_0x40d4bb(0x178)),document[_0x40d4bb(0x167)](_0x40d4bb(0x179))[_0x40d4bb(0x186)]=_0x296cc8[_0x40d4bb(0x179)],document[_0x40d4bb(0x167)](_0x40d4bb(0x185))[_0x40d4bb(0x186)]=_0x296cc8[_0x40d4bb(0x185)],document['getElementById'](_0x40d4bb(0x193))[_0x40d4bb(0x186)]=_0x296cc8[_0x40d4bb(0x193)],document['getElementById'](_0x40d4bb(0x160))[_0x40d4bb(0x186)]=_0x296cc8['customer'],document[_0x40d4bb(0x167)]('imageFile')['disabled']=!![],editIndex=_0x5b6668,document['getElementById'](_0x40d4bb(0x162))[_0x40d4bb(0x173)]=_0x40d4bb(0x164);}function hapusTestimoni(_0x4023e1,_0x44cc01){const _0x46dd2a=_0x2e73;_0x4023e1[_0x46dd2a(0x176)](),confirm(_0x46dd2a(0x177))&&(testimonials[_0x46dd2a(0x175)](_0x44cc01,0x1),fetch('https://testimoniyudzxml.vercel.app/api/github',{'method':_0x46dd2a(0x18d),'headers':{'Content-Type':_0x46dd2a(0x15a)},'body':JSON[_0x46dd2a(0x18f)](testimonials)})[_0x46dd2a(0x189)](()=>{loadTestimonials(),clearForm();}));}function _0x2e73(_0x279ac6,_0x40d9a5){const _0x13ac92=_0x13ac();return _0x2e73=function(_0x2e7339,_0xffce0f){_0x2e7339=_0x2e7339-0x15a;let _0x21aa91=_0x13ac92[_0x2e7339];return _0x21aa91;},_0x2e73(_0x279ac6,_0x40d9a5);}function loadTestimonials(){const _0x4b6df4=_0x2e73;fetch(_0x4b6df4(0x171))[_0x4b6df4(0x189)](_0x2712d3=>_0x2712d3[_0x4b6df4(0x169)]())[_0x4b6df4(0x189)](_0x5b8a40=>{testimonials=Array['isArray'](_0x5b8a40)?_0x5b8a40:[],render();})['catch'](_0x14b4ee=>{const _0x35b3ad=_0x4b6df4;console['error'](_0x35b3ad(0x161),_0x14b4ee),testimonials=[],render();});}loadTestimonials();
+  </script>
+</body>
+</html>
