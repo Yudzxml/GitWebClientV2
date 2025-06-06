@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YUDZXML STORE 77 - Testimoni</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Styling untuk input rating bintang */
+      .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-start;
+        font-size: 100rem;
+        margin-bottom: 0.5rem;
+        margin-left: -7rem;
+        margin-right: 15rem;
+      }
+      .rating-input input {
+        display: none;
+      }
+      .rating-input label {
+        cursor: pointer;
+        color: #ccc;
+        transition: color 0.2s;
+      }
+      .rating-input label:hover,
+      .rating-input label:hover ~ label,
+      .rating-input input:checked ~ label {
+        color: gold;
+      }
+
+      /* Styling tampilan rating ketika menampilkan komentar */
+      .star-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .star-rating .star {
+        font-size: 1.25rem;
+        color: gold;
+        margin-right: 2px;
+      }
+      .star-rating .star.empty {
+        color: #ccc;
+      }
+
+      /* Perbaikan tampilan kartu komentar agar lebih menarik */
+      .card-testimoni {
+        background: var(--card-bg, #fff);
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .card-testimoni:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .card-testimoni .content {
+        font-family: 'Poppins', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <button id="sidebarClose" class="sidebar-close">×</button>
+      <div class="sidebar-section">
+        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
+          Admin Login
+        </button>
+        <button id="goCartBtn" class="btn btn-primary sidebar-btn">
+          Cek Keranjang
+        </button>
+        <button id="goTestiBtn" class="btn btn-primary sidebar-btn">
+          Testimoni
+        </button>
+        <button id="goPromoBtn" class="btn btn-primary sidebar-btn">
+          Promo Produk
+        </button>
+      </div>
+    </aside>
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">オ YUDZXML STORE</h1>
+        </div>
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+          <button id="openCartBtn" class="icon-btn" title="Keranjang">
+            🏠</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main
+      class="container"
+      style="flex-direction: column; align-items: stretch; padding-top: 2rem;"
+    >
+      <h2>Daftar Komentar</h2>
+
+      <div
+        id="commentsList"
+        class="form-container"
+        style="max-height: 400px; overflow-y: auto;"
+      >
+        <p id="loadingText">Memuat komentar…</p>
+      </div>
+
+      <div class="form-container" style="margin-top: 2rem;">
+        <h3>Tambah Komentar Anda</h3>
+        <form id="commentForm">
+          <div class="form-group">
+            <label for="username">Nama Anda:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Masukkan nama Anda"
+              required
+            />
+          </div>
+
+          <!-- Input rating bintang 1–5 -->
+          <div class="form-group">
+            <label>Rating:</label>
+            <div class="rating-input">
+              <input type="radio" id="star5" name="rating" value="5" required />
+              <label for="star5" title="5 bintang">★</label>
+              <input type="radio" id="star4" name="rating" value="4" />
+              <label for="star4" title="4 bintang">★</label>
+              <input type="radio" id="star3" name="rating" value="3" />
+              <label for="star3" title="3 bintang">★</label>
+              <input type="radio" id="star2" name="rating" value="2" />
+              <label for="star2" title="2 bintang">★</label>
+              <input type="radio" id="star1" name="rating" value="1" />
+              <label for="star1" title="1 bintang">★</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="commentText">Komentar:</label>
+            <textarea
+              id="commentText"
+              name="commentText"
+              placeholder="Tulis komentar Anda di sini…"
+              required
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Kirim Komentar</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const sidebarToggle = document.getElementById("sidebarToggle");
+      const sidebarClose = document.getElementById("sidebarClose");
+      sidebarToggle.addEventListener("click", () => {
+        sidebar.classList.add("open");
+      });
+      sidebarClose.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+      });
+
+      // Navigasi tombol sidebar
+      document.getElementById("goAdminBtn").addEventListener("click", () => {
+        window.location.href = "/login.html"; 
+      });
+      document.getElementById("goCartBtn").addEventListener("click", () => {
+        window.location.href = "/cart.html"; 
+      });
+      document.getElementById("goTestiBtn").addEventListener("click", () => {
+        sidebar.classList.remove("open");
+      });
+      document.getElementById("goPromoBtn").addEventListener("click", () => {
+        window.location.href = "/promo.html"; 
+      });
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      darkModeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+      });
+       
+      openCartBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+      // Komentar & rating script
+      const BASE_API_URL = "/api";
+      const COMMENTS_ENDPOINT = `${BASE_API_URL}/comments`;
+
+      function createCommentElement({ username, text, rating, created_at }) {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("card-testimoni");
+        wrapper.style.marginBottom = "1rem";
+
+        const content = document.createElement("div");
+        content.classList.add("content");
+        content.style.padding = "1rem";
+
+        // Baris informasi nama dan tanggal
+        const infoRow = document.createElement("div");
+        infoRow.classList.add("info-row");
+        infoRow.style.display = "flex";
+        infoRow.style.justifyContent = "space-between";
+        infoRow.style.marginBottom = "0.5rem";
+
+        const nameEl = document.createElement("h4");
+        nameEl.textContent = username;
+        nameEl.style.color = "var(--color-text)";
+        nameEl.style.margin = "0";
+
+        const dateEl = document.createElement("span");
+        dateEl.textContent = new Date(created_at).toLocaleString("id-ID", {
+          dateStyle: "medium",
+          timeStyle: "short",
+        });
+        dateEl.style.fontStyle = "italic";
+        dateEl.style.color = "#777";
+
+        infoRow.appendChild(nameEl);
+        infoRow.appendChild(dateEl);
+
+        // Baris rating bintang
+        const ratingRow = document.createElement("div");
+        ratingRow.classList.add("star-rating");
+        for (let i = 1; i <= 5; i++) {
+          const starEl = document.createElement("span");
+          starEl.classList.add("star");
+          if (i <= rating) {
+            starEl.textContent = "★";
+          } else {
+            starEl.textContent = "☆";
+            starEl.classList.add("empty");
+          }
+          ratingRow.appendChild(starEl);
+        }
+
+        // Teks komentar
+        const textEl = document.createElement("p");
+        textEl.textContent = text;
+        textEl.style.marginTop = "0.5rem";
+        textEl.style.color = "#555";
+
+        content.appendChild(infoRow);
+        content.appendChild(ratingRow);
+        content.appendChild(textEl);
+        wrapper.appendChild(content);
+
+        return wrapper;
+      }
+
+      async function fetchComments() {
+        const listContainer = document.getElementById("commentsList");
+        const loadingText = document.getElementById("loadingText");
+        loadingText.textContent = "Memuat komentar…";
+
+        try {
+          const response = await fetch(COMMENTS_ENDPOINT);
+          if (!response.ok) {
+            throw new Error(
+              `Error saat memuat komentar: ${response.statusText}`
+            );
+          }
+          const comments = await response.json();
+          listContainer.innerHTML = "";
+
+          if (comments.length === 0) {
+            listContainer.innerHTML = "<p>Belum ada komentar.</p>";
+            return;
+          }
+          // Urutkan menurut tanggal terbaru
+          comments.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+          comments.forEach((c) => {
+            const el = createCommentElement(c);
+            listContainer.appendChild(el);
+          });
+        } catch (err) {
+          listContainer.innerHTML = `<p style="color: red;">${err.message}</p>`;
+        }
+      }
+
+      async function postComment(event) {
+        event.preventDefault();
+
+        const usernameInput = document.getElementById("username");
+        const commentInput = document.getElementById("commentText");
+        const ratingInputs = document.getElementsByName("rating");
+        const submitBtn = event.target.querySelector("button[type=submit]");
+
+        const username = usernameInput.value.trim();
+        const text = commentInput.value.trim();
+        let rating = null;
+        for (const inp of ratingInputs) {
+          if (inp.checked) {
+            rating = Number(inp.value);
+            break;
+          }
+        }
+
+        if (!username || !text || rating === null) {
+          alert("Nama, rating, dan komentar harus diisi.");
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Mengirim…";
+
+        const payload = {
+          username: username,
+          text: text,
+          rating: rating,
+        };
+
+        try {
+          const response = await fetch(COMMENTS_ENDPOINT, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+          if (!response.ok) {
+            throw new Error(
+              `Gagal mengirim komentar: ${response.statusText}`
+            );
+          }
+          usernameInput.value = "";
+          commentInput.value = "";
+          // Reset rating
+          for (const inp of ratingInputs) {
+            inp.checked = false;
+          }
+          await fetchComments();
+        } catch (err) {
+          alert(err.message);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Kirim Komentar";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchComments();
+        const form = document.getElementById("commentForm");
+        form.addEventListener("submit", postComment);
+      });
+    </script>
+  </body>
+</html>

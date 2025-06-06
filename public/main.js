@@ -1,1 +1,275 @@
-function _0x3e20(){const _0x5ad82e=['🌓\x20loadDarkModePref:\x20body.dark-mode\x20ditambahkan','productsGrid','log','\x20produk','price','product-title','2946BrVNxx','input','getElementById','product-desc','\x22\x20berhasil\x20ditambahkan\x20ke\x20keranjang.','target',',\x20output=','sidebarToggle','promo.html','json','\x20\x20•\x20Menambahkan\x20kartu\x20produk:\x20','length','src','div','body','➕\x20Tombol\x20“Tambah\x20ke\x20Keranjang”\x20untuk\x20','cart.html','sidebarClose','description','\x20—\x20Rp\x20','/api/products','🔄\x20Produk\x20','searchInput','addEventListener','location','quantity','value','replace','findIndex','status','textContent','split','span','remove','stringify','includes','statusText','openCartBtn','72936UrobXN','error','1676481eLnkZH','<p\x20style=\x22grid-column:\x201\x20/\x20-1;\x20text-align:center;\x22>Belum\x20ada\x20produk.</p>','🔎\x20handleSearch:\x20ditemukan\x20','selectedIndex','4eaAmAS','imageUrl','trim','Gagal\x20fetch\x20produk:\x20','🛒\x20saveCartToStorage:\x20cart\x20disimpan\x20ke\x20storage','🔎\x20handleSearch:\x20keyword\x20=\x20\x22','cartCount','darkModeToggle','%c⚙️\x20DOMContentLoaded:\x20Inisialisasi\x20mulai','contains','appendChild','color:\x20green;\x20font-weight:\x20bold;','href','product-body','🛒\x20loadCartFromStorage:\x20cart\x20di-load\x20dari\x20storage','innerHTML','product-footer','filter','🛒\x20addToCart:\x20item\x20sudah\x20ada,\x20quantity\x20diincrement\x20(sekarang\x20','login.html','Tambah\x20ke\x20Keranjang','darkMode','▶️\x20loadAndRenderProducts:\x20produk\x20diterima','🖼️\x20renderProductGrid:\x20tidak\x20ada\x20produk,\x20tampilkan\x20pesan\x20“Belum\x20ada\x20produk.”','Rp\x20','goCartBtn','open','createElement','535eIdsMY','🧮\x20renderCartCount:\x20total\x20quantity\x20=\x20','color:\x20teal;\x20font-weight:\x20bold;','product-card','click','package-select','forEach','product-actions','goAdminBtn','getItem','766248jWJqNI','name','🌓\x20toggleDarkMode:\x20mode\x20gelap\x20sekarang\x20=\x20','🛒\x20addToCart:\x20mencoba\x20menambah\x20ke\x20keranjang','155475KiSuKN','56CIhCMJ','className','text','10575170CfCROq',',\x20harga:\x20','reduce','button','dark-mode','img','%c✅\x20Inisialisasi\x20selesai','add','DOMContentLoaded','setItem','\x20—\x20','classList','parse','🛒\x20loadCartFromStorage:\x20tidak\x20ada\x20data\x20cart\x20di\x20storage','change','packageName','▶️\x20loadAndRenderProducts\x20dipanggil','250794rOUlNZ','toString','product-image-wrapper','toLowerCase','alt','6283872031397'];_0x3e20=function(){return _0x5ad82e;};return _0x3e20();}const _0x48d58c=_0x5032;(function(_0x50752a,_0xdfee9b){const _0x32aa03=_0x5032,_0x525f9d=_0x50752a();while(!![]){try{const _0x21893f=-parseInt(_0x32aa03(0x1a0))/0x1*(parseInt(_0x32aa03(0x1ed))/0x2)+-parseInt(_0x32aa03(0x1e9))/0x3+-parseInt(_0x32aa03(0x1e7))/0x4+-parseInt(_0x32aa03(0x209))/0x5*(-parseInt(_0x32aa03(0x1c1))/0x6)+-parseInt(_0x32aa03(0x213))/0x7+-parseInt(_0x32aa03(0x1a1))/0x8*(-parseInt(_0x32aa03(0x1b5))/0x9)+parseInt(_0x32aa03(0x1a4))/0xa;if(_0x21893f===_0xdfee9b)break;else _0x525f9d['push'](_0x525f9d['shift']());}catch(_0x4d6e28){_0x525f9d['push'](_0x525f9d['shift']());}}}(_0x3e20,0x4b1b9));let allProducts=[],cart=[];const CART_STORAGE_KEY='yudzxml1122',whatsappNumber=_0x48d58c(0x1ba),sidebarToggle=document[_0x48d58c(0x1c3)](_0x48d58c(0x1c8)),sidebar=document[_0x48d58c(0x1c3)]('sidebar'),sidebarClose=document[_0x48d58c(0x1c3)](_0x48d58c(0x1d2)),goAdminBtn=document[_0x48d58c(0x1c3)](_0x48d58c(0x211)),goCartBtn=document[_0x48d58c(0x1c3)](_0x48d58c(0x206)),searchInput=document['getElementById'](_0x48d58c(0x1d7)),darkModeToggle=document[_0x48d58c(0x1c3)](_0x48d58c(0x1f4)),openCartBtn=document['getElementById'](_0x48d58c(0x1e6)),productsGrid=document['getElementById'](_0x48d58c(0x1bc)),cartCountSpan=document['getElementById'](_0x48d58c(0x1f3));document[_0x48d58c(0x1d8)](_0x48d58c(0x1ac),()=>{const _0x3572b6=_0x48d58c;console[_0x3572b6(0x1bd)](_0x3572b6(0x1f5),_0x3572b6(0x20b)),sidebarToggle['addEventListener'](_0x3572b6(0x20d),()=>{const _0x3dcc67=_0x3572b6;sidebar[_0x3dcc67(0x1af)][_0x3dcc67(0x1ab)](_0x3dcc67(0x207));}),sidebarClose[_0x3572b6(0x1d8)]('click',()=>{const _0x2d5a8d=_0x3572b6;sidebar[_0x2d5a8d(0x1af)][_0x2d5a8d(0x1e2)](_0x2d5a8d(0x207));}),goAdminBtn['addEventListener'](_0x3572b6(0x20d),()=>{const _0x1983d6=_0x3572b6;window[_0x1983d6(0x1d9)]['href']=_0x1983d6(0x200);}),goCartBtn[_0x3572b6(0x1d8)]('click',()=>{const _0x42d843=_0x3572b6;window[_0x42d843(0x1d9)][_0x42d843(0x1f9)]=_0x42d843(0x1d1);}),goTestiBtn['addEventListener'](_0x3572b6(0x20d),()=>{const _0x27a5df=_0x3572b6;window['location'][_0x27a5df(0x1f9)]='testimoni.html';}),goPromoBtn[_0x3572b6(0x1d8)](_0x3572b6(0x20d),()=>{const _0xdf629c=_0x3572b6;window[_0xdf629c(0x1d9)][_0xdf629c(0x1f9)]=_0xdf629c(0x1c9);}),loadDarkModePref(),darkModeToggle[_0x3572b6(0x1d8)]('click',toggleDarkMode),loadAndRenderProducts(),searchInput['addEventListener'](_0x3572b6(0x1c2),handleSearch),loadCartFromStorage(),renderCartCount(),openCartBtn['addEventListener'](_0x3572b6(0x20d),()=>{const _0xe29c77=_0x3572b6;window['location'][_0xe29c77(0x1f9)]=_0xe29c77(0x1d1);}),console[_0x3572b6(0x1bd)](_0x3572b6(0x1aa),_0x3572b6(0x1f8));});function loadDarkModePref(){const _0x3d3137=_0x48d58c,_0x1b062f=localStorage[_0x3d3137(0x212)]('darkMode')==='true';console[_0x3d3137(0x1bd)]('🌓\x20loadDarkModePref:\x20mode\x20gelap\x20sebelumnya\x20=\x20'+_0x1b062f),_0x1b062f&&(document[_0x3d3137(0x1cf)][_0x3d3137(0x1af)][_0x3d3137(0x1ab)](_0x3d3137(0x1a8)),console['log'](_0x3d3137(0x1bb)));}function toggleDarkMode(){const _0x134e13=_0x48d58c;document['body']['classList']['toggle'](_0x134e13(0x1a8));const _0x5cea4b=document[_0x134e13(0x1cf)][_0x134e13(0x1af)][_0x134e13(0x1f6)](_0x134e13(0x1a8));localStorage[_0x134e13(0x1ad)](_0x134e13(0x202),_0x5cea4b),console['log'](_0x134e13(0x19e)+_0x5cea4b);}async function loadAndRenderProducts(){const _0x27c75c=_0x48d58c;try{console[_0x27c75c(0x1bd)](_0x27c75c(0x1b4));const {products:_0x2adb7a}=await fetchAllProducts();console[_0x27c75c(0x1bd)](_0x27c75c(0x203),_0x2adb7a),allProducts=_0x2adb7a||[];}catch(_0x58c91f){allProducts=[],console[_0x27c75c(0x1e8)]('❌\x20loadAndRenderProducts:\x20Gagal\x20fetch\x20produk:',_0x58c91f);}renderProductGrid(allProducts);}async function fetchAllProducts(){const _0x101d7d=_0x48d58c;console[_0x101d7d(0x1bd)]('↗️\x20fetchAllProducts:\x20GET\x20/api/products');const _0x28392b=await fetch(_0x101d7d(0x1d5),{'method':'GET','headers':{'Accept':'application/json'}});if(!_0x28392b['ok'])throw new Error(_0x101d7d(0x1f0)+_0x28392b[_0x101d7d(0x1de)]+'\x20'+_0x28392b[_0x101d7d(0x1e5)]);const _0x24c8c0=await _0x28392b[_0x101d7d(0x1ca)]();return{'products':_0x24c8c0};}function renderProductGrid(_0x36b489){const _0x60eff2=_0x48d58c;console[_0x60eff2(0x1bd)]('🖼️\x20renderProductGrid:\x20akan\x20render\x20'+_0x36b489[_0x60eff2(0x1cc)]+'\x20produk'),productsGrid['innerHTML']='';if(!_0x36b489[_0x60eff2(0x1cc)]){console['log'](_0x60eff2(0x204)),productsGrid[_0x60eff2(0x1fc)]=_0x60eff2(0x1ea);return;}_0x36b489[_0x60eff2(0x20f)](_0x43910d=>{const _0x3a57b9=_0x60eff2;console['log'](_0x3a57b9(0x1cb)+_0x43910d[_0x3a57b9(0x214)]+'\x20(ID:\x20'+_0x43910d['id']+')');const _0x22b485=document['createElement'](_0x3a57b9(0x1ce));_0x22b485['className']=_0x3a57b9(0x20c);const _0x423a2b=document[_0x3a57b9(0x208)]('div');_0x423a2b[_0x3a57b9(0x1a2)]=_0x3a57b9(0x1b7);const _0x21eadd=document[_0x3a57b9(0x208)](_0x3a57b9(0x1a9));_0x21eadd[_0x3a57b9(0x1cd)]=_0x43910d[_0x3a57b9(0x1ee)],_0x21eadd[_0x3a57b9(0x1b9)]=_0x43910d['name'],_0x21eadd[_0x3a57b9(0x1a2)]='product-image',_0x423a2b[_0x3a57b9(0x1f7)](_0x21eadd),_0x22b485[_0x3a57b9(0x1f7)](_0x423a2b);const _0x550e4c=document[_0x3a57b9(0x208)](_0x3a57b9(0x1ce));_0x550e4c[_0x3a57b9(0x1a2)]=_0x3a57b9(0x1fa);const _0x58229d=document[_0x3a57b9(0x208)]('h3');_0x58229d[_0x3a57b9(0x1a2)]=_0x3a57b9(0x1c0),_0x58229d[_0x3a57b9(0x1df)]=_0x43910d[_0x3a57b9(0x214)],_0x550e4c[_0x3a57b9(0x1f7)](_0x58229d);const _0x4aa3f2=document[_0x3a57b9(0x208)]('p');_0x4aa3f2[_0x3a57b9(0x1a2)]=_0x3a57b9(0x1c4),_0x4aa3f2[_0x3a57b9(0x1df)]=_0x43910d[_0x3a57b9(0x1d3)],_0x550e4c[_0x3a57b9(0x1f7)](_0x4aa3f2);const _0x45cfc2=document[_0x3a57b9(0x208)](_0x3a57b9(0x1ce));_0x45cfc2[_0x3a57b9(0x1a2)]=_0x3a57b9(0x20e);const _0x2016f6=document['createElement']('select');_0x43910d['packages'][_0x3a57b9(0x20f)](_0x5a2efb=>{const _0x5bda83=_0x3a57b9,_0x20e883=document[_0x5bda83(0x208)]('option');_0x20e883['value']=_0x5a2efb[_0x5bda83(0x1bf)],_0x20e883[_0x5bda83(0x1df)]=_0x5a2efb[_0x5bda83(0x214)]+_0x5bda83(0x1d4)+formatRupiah(_0x5a2efb[_0x5bda83(0x1bf)]),_0x2016f6['appendChild'](_0x20e883);}),_0x45cfc2[_0x3a57b9(0x1f7)](_0x2016f6),_0x550e4c['appendChild'](_0x45cfc2);const _0x5a6fd6=document['createElement'](_0x3a57b9(0x1ce));_0x5a6fd6[_0x3a57b9(0x1a2)]=_0x3a57b9(0x1fd);const _0x31e352=document[_0x3a57b9(0x208)](_0x3a57b9(0x1e1)),_0x56fc51=_0x43910d['packages'][0x0]?.[_0x3a57b9(0x1bf)]||0x0;_0x31e352[_0x3a57b9(0x1a2)]='product-price',_0x31e352['textContent']=_0x3a57b9(0x205)+formatRupiah(_0x56fc51),_0x5a6fd6[_0x3a57b9(0x1f7)](_0x31e352);const _0x8e36b2=document['createElement'](_0x3a57b9(0x1ce));_0x8e36b2['className']=_0x3a57b9(0x210);const _0xf56f9f=document[_0x3a57b9(0x208)](_0x3a57b9(0x1a7));_0xf56f9f[_0x3a57b9(0x1df)]=_0x3a57b9(0x201),_0x8e36b2['appendChild'](_0xf56f9f),_0x5a6fd6[_0x3a57b9(0x1f7)](_0x8e36b2),_0x550e4c[_0x3a57b9(0x1f7)](_0x5a6fd6),_0x22b485['appendChild'](_0x550e4c),productsGrid[_0x3a57b9(0x1f7)](_0x22b485),_0x2016f6[_0x3a57b9(0x1d8)](_0x3a57b9(0x1b2),_0x4c417d=>{const _0xa48dd3=_0x3a57b9;_0x31e352['textContent']=_0xa48dd3(0x205)+formatRupiah(_0x4c417d[_0xa48dd3(0x1c6)][_0xa48dd3(0x1db)]),console[_0xa48dd3(0x1bd)](_0xa48dd3(0x1d6)+_0x43910d[_0xa48dd3(0x214)]+':\x20paket\x20diubah\x20ke\x20harga\x20Rp\x20'+_0x4c417d[_0xa48dd3(0x1c6)][_0xa48dd3(0x1db)]);}),_0xf56f9f[_0x3a57b9(0x1d8)]('click',()=>{const _0x1b5c7d=_0x3a57b9,_0x217488=_0x2016f6['options'][_0x2016f6[_0x1b5c7d(0x1ec)]][_0x1b5c7d(0x1a3)][_0x1b5c7d(0x1e0)](_0x1b5c7d(0x1ae))[0x0],_0x2f1800=parseInt(_0x2016f6[_0x1b5c7d(0x1db)],0xa);console['log'](_0x1b5c7d(0x1d0)+_0x43910d['name']+'\x20(paket:\x20'+_0x217488+_0x1b5c7d(0x1a5)+_0x2f1800+')'),addToCart({'id':_0x43910d['id'],'name':_0x43910d[_0x1b5c7d(0x214)],'imageUrl':_0x43910d[_0x1b5c7d(0x1ee)],'packageName':_0x217488,'price':_0x2f1800,'quantity':0x1});});});}function handleSearch(_0x45f70d){const _0x5ec14e=_0x48d58c,_0x5d2907=_0x45f70d['target']['value'][_0x5ec14e(0x1ef)]()[_0x5ec14e(0x1b8)]();console[_0x5ec14e(0x1bd)](_0x5ec14e(0x1f2)+_0x5d2907+'\x22');const _0x2f3d0e=allProducts[_0x5ec14e(0x1fe)](_0xfad029=>_0xfad029[_0x5ec14e(0x214)]['toLowerCase']()['includes'](_0x5d2907)||_0xfad029['description'][_0x5ec14e(0x1b8)]()[_0x5ec14e(0x1e4)](_0x5d2907));console[_0x5ec14e(0x1bd)](_0x5ec14e(0x1eb)+_0x2f3d0e['length']+_0x5ec14e(0x1be)),renderProductGrid(_0x2f3d0e);}function loadCartFromStorage(){const _0x5c0734=_0x48d58c,_0x3c8412=localStorage[_0x5c0734(0x212)](CART_STORAGE_KEY);_0x3c8412?(cart=JSON[_0x5c0734(0x1b0)](_0x3c8412),console['log'](_0x5c0734(0x1fb),cart)):console[_0x5c0734(0x1bd)](_0x5c0734(0x1b1));}function _0x5032(_0x436e32,_0x140502){const _0x3e2086=_0x3e20();return _0x5032=function(_0x503274,_0x3fc7e3){_0x503274=_0x503274-0x19e;let _0x167f25=_0x3e2086[_0x503274];return _0x167f25;},_0x5032(_0x436e32,_0x140502);}function saveCartToStorage(){const _0x1b20c7=_0x48d58c;localStorage[_0x1b20c7(0x1ad)](CART_STORAGE_KEY,JSON[_0x1b20c7(0x1e3)](cart)),console['log'](_0x1b20c7(0x1f1),cart);}function renderCartCount(){const _0x29ad35=_0x48d58c,_0x1f9c3d=cart[_0x29ad35(0x1a6)]((_0x12c182,_0xfced23)=>_0x12c182+_0xfced23[_0x29ad35(0x1da)],0x0);console[_0x29ad35(0x1bd)](_0x29ad35(0x20a)+_0x1f9c3d),cartCountSpan[_0x29ad35(0x1df)]=_0x1f9c3d;}function addToCart(_0x2e5d35){const _0x14e262=_0x48d58c;console[_0x14e262(0x1bd)](_0x14e262(0x19f),_0x2e5d35);const _0x410258=cart[_0x14e262(0x1dd)](_0x3aab35=>_0x3aab35['id']===_0x2e5d35['id']&&_0x3aab35[_0x14e262(0x1b3)]===_0x2e5d35[_0x14e262(0x1b3)]);_0x410258>-0x1?(cart[_0x410258][_0x14e262(0x1da)]+=0x1,console[_0x14e262(0x1bd)](_0x14e262(0x1ff)+cart[_0x410258][_0x14e262(0x1da)]+')')):(cart['push'](_0x2e5d35),console[_0x14e262(0x1bd)]('🛒\x20addToCart:\x20item\x20baru\x20ditambahkan\x20ke\x20keranjang')),saveCartToStorage(),renderCartCount(),alert('\x22'+_0x2e5d35[_0x14e262(0x214)]+_0x14e262(0x1c5));}function formatRupiah(_0x3a45cd){const _0x3ca8bb=_0x48d58c,_0x109e9e=_0x3a45cd[_0x3ca8bb(0x1b6)]()[_0x3ca8bb(0x1dc)](/\B(?=(\d{3})+(?!\d))/g,'.');return console[_0x3ca8bb(0x1bd)]('🪙\x20formatRupiah:\x20input='+_0x3a45cd+_0x3ca8bb(0x1c7)+_0x109e9e),_0x109e9e;}
+// ===========================
+// GLOBAL STATE
+// ===========================
+let allProducts = [];
+let cart = []; // untuk menampilkan jumlah, walaupun halaman cart.html terpisah
+const CART_STORAGE_KEY = 'yudzxml1122';
+const whatsappNumber = '6283872031397';
+
+// ===========================
+// ELEMENT REFERENCES
+// ===========================
+const sidebarToggle    = document.getElementById('sidebarToggle');
+const sidebar          = document.getElementById('sidebar');
+const sidebarClose     = document.getElementById('sidebarClose');
+const goAdminBtn       = document.getElementById('goAdminBtn');
+const goCartBtn        = document.getElementById('goCartBtn');
+const searchInput      = document.getElementById('searchInput');
+const darkModeToggle   = document.getElementById('darkModeToggle');
+const openCartBtn      = document.getElementById('openCartBtn');
+const productsGrid     = document.getElementById('productsGrid');
+const cartCountSpan    = document.getElementById('cartCount');
+
+// ===========================
+// INITIALIZATION
+// ===========================
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('%c⚙️ DOMContentLoaded: Inisialisasi mulai', 'color: teal; font-weight: bold;');
+
+  // Sidebar toggle
+  sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.add('open');
+  });
+  sidebarClose.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+  });
+
+  // Navigasi ke halaman admin atau cart
+  goAdminBtn.addEventListener('click', () => {
+    window.location.href = 'login.html';
+  });
+  goCartBtn.addEventListener('click', () => {
+    window.location.href = 'cart.html';
+  });
+  goTestiBtn.addEventListener('click', () => {
+    window.location.href = 'testimoni.html';
+  });
+ goPromoBtn.addEventListener('click', () => {
+    window.location.href = 'promo.html';
+  });
+  goCommentBtn.addEventListener('click', () => {
+    window.location.href = 'komentar.html';
+  });
+
+  // Dark Mode
+  loadDarkModePref();
+  darkModeToggle.addEventListener('click', toggleDarkMode);
+  loadAndRenderProducts();
+  searchInput.addEventListener('input', handleSearch);
+  loadCartFromStorage();
+  renderCartCount();
+  openCartBtn.addEventListener('click', () => {
+    window.location.href = 'cart.html';
+  });
+
+  console.log('%c✅ Inisialisasi selesai', 'color: green; font-weight: bold;');
+});
+
+// ===========================
+// DARK MODE
+// ===========================
+function loadDarkModePref() {
+  const isDark = localStorage.getItem('darkMode') === 'true';
+  console.log(`🌓 loadDarkModePref: mode gelap sebelumnya = ${isDark}`);
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+    console.log('🌓 loadDarkModePref: body.dark-mode ditambahkan');
+  }
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  const isDarkNow = document.body.classList.contains('dark-mode');
+  localStorage.setItem('darkMode', isDarkNow);
+  console.log(`🌓 toggleDarkMode: mode gelap sekarang = ${isDarkNow}`);
+}
+
+// ===========================
+// FETCH & RENDER PRODUK
+// ===========================
+async function loadAndRenderProducts() {
+  try {
+    console.log('▶️ loadAndRenderProducts dipanggil');
+    const { products } = await fetchAllProducts();
+    console.log('▶️ loadAndRenderProducts: produk diterima', products);
+    allProducts = products || [];
+  } catch (err) {
+    allProducts = [];
+    console.error('❌ loadAndRenderProducts: Gagal fetch produk:', err);
+  }
+  renderProductGrid(allProducts);
+}
+
+async function fetchAllProducts() {
+  console.log('↗️ fetchAllProducts: GET /api/products');
+  const res = await fetch('/api/products', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+    },
+  });
+  if (!res.ok) {
+    throw new Error(`Gagal fetch produk: ${res.status} ${res.statusText}`);
+  }
+  const data = await res.json();
+  return { products: data };
+}
+
+function renderProductGrid(productsArray) {
+  console.log(`🖼️ renderProductGrid: akan render ${productsArray.length} produk`);
+  productsGrid.innerHTML = '';
+  if (!productsArray.length) {
+    console.log('🖼️ renderProductGrid: tidak ada produk, tampilkan pesan “Belum ada produk.”');
+    productsGrid.innerHTML =
+      '<p style="grid-column: 1 / -1; text-align:center;">Belum ada produk.</p>';
+    return;
+  }
+
+  productsArray.forEach((prod) => {
+    console.log(`  • Menambahkan kartu produk: ${prod.name} (ID: ${prod.id})`);
+    const card = document.createElement('div');
+    card.className = 'product-card';
+
+    // ===== MODIFIKASI GAMBAR =====
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'product-image-wrapper';
+    const imgEl = document.createElement('img');
+    imgEl.src = prod.imageUrl;
+    imgEl.alt = prod.name;
+    imgEl.className = 'product-image';
+    imgWrapper.appendChild(imgEl);
+    card.appendChild(imgWrapper);
+    // ===== END MODIFIKASI =====
+
+    const bodyDiv = document.createElement('div');
+    bodyDiv.className = 'product-body';
+
+    const title = document.createElement('h3');
+    title.className = 'product-title';
+    title.textContent = prod.name;
+    bodyDiv.appendChild(title);
+
+    const desc = document.createElement('p');
+    desc.className = 'product-desc';
+    desc.textContent = prod.description;
+    bodyDiv.appendChild(desc);
+
+    const selectWrapper = document.createElement('div');
+    selectWrapper.className = 'package-select';
+    const select = document.createElement('select');
+    prod.packages.forEach((pkg) => {
+      const opt = document.createElement('option');
+      opt.value = pkg.price;
+      opt.textContent = `${pkg.name} — Rp ${formatRupiah(pkg.price)}`;
+      select.appendChild(opt);
+    });
+    selectWrapper.appendChild(select);
+    bodyDiv.appendChild(selectWrapper);
+
+    const footerDiv = document.createElement('div');
+    footerDiv.className = 'product-footer';
+
+    const priceSpan = document.createElement('span');
+    const selectedPrice = prod.packages[0]?.price || 0;
+    priceSpan.className = 'product-price';
+    priceSpan.textContent = `Rp ${formatRupiah(selectedPrice)}`;
+    footerDiv.appendChild(priceSpan);
+
+    const actionDiv = document.createElement('div');
+    actionDiv.className = 'product-actions';
+    const addToCartBtn = document.createElement('button');
+    addToCartBtn.textContent = 'Tambah ke Keranjang';
+    actionDiv.appendChild(addToCartBtn);
+    footerDiv.appendChild(actionDiv);
+
+    bodyDiv.appendChild(footerDiv);
+    card.appendChild(bodyDiv);
+    productsGrid.appendChild(card);
+
+    select.addEventListener('change', (e) => {
+      priceSpan.textContent = `Rp ${formatRupiah(e.target.value)}`;
+      console.log(`🔄 Produk ${prod.name}: paket diubah ke harga Rp ${e.target.value}`);
+    });
+
+    addToCartBtn.addEventListener('click', () => {
+      const pkgName = select.options[select.selectedIndex].text.split(' — ')[0];
+      const priceVal = parseInt(select.value, 10);
+      console.log(`➕ Tombol “Tambah ke Keranjang” untuk ${prod.name} (paket: ${pkgName}, harga: ${priceVal})`);
+      addToCart({
+        id: prod.id,
+        name: prod.name,
+        imageUrl: prod.imageUrl,
+        packageName: pkgName,
+        price: priceVal,
+        quantity: 1,
+      });
+    });
+  });
+}
+
+// ===========================
+// SEARCH PRODUK
+// ===========================
+function handleSearch(e) {
+  const term = e.target.value.trim().toLowerCase();
+  console.log(`🔎 handleSearch: keyword = "${term}"`);
+  const filtered = allProducts.filter(
+    (p) =>
+      p.name.toLowerCase().includes(term) ||
+      p.description.toLowerCase().includes(term)
+  );
+  console.log(`🔎 handleSearch: ditemukan ${filtered.length} produk`);
+  renderProductGrid(filtered);
+}
+
+// ===========================
+// KERANJANG (untuk cartCount saja)
+// ===========================
+function loadCartFromStorage() {
+  const stored = localStorage.getItem(CART_STORAGE_KEY);
+  if (stored) {
+    cart = JSON.parse(stored);
+    console.log('🛒 loadCartFromStorage: cart di-load dari storage', cart);
+  } else {
+    console.log('🛒 loadCartFromStorage: tidak ada data cart di storage');
+  }
+}
+
+function saveCartToStorage() {
+  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  console.log('🛒 saveCartToStorage: cart disimpan ke storage', cart);
+}
+
+function renderCartCount() {
+  const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+  console.log(`🧮 renderCartCount: total quantity = ${totalQty}`);
+  cartCountSpan.textContent = totalQty;
+}
+
+function addToCart(item) {
+  console.log(`🛒 addToCart: mencoba menambah ke keranjang`, item);
+  const idx = cart.findIndex(
+    (c) => c.id === item.id && c.packageName === item.packageName
+  );
+  if (idx > -1) {
+    cart[idx].quantity += 1;
+    console.log(`🛒 addToCart: item sudah ada, quantity diincrement (sekarang ${cart[idx].quantity})`);
+  } else {
+    cart.push(item);
+    console.log(`🛒 addToCart: item baru ditambahkan ke keranjang`);
+  }
+  saveCartToStorage();
+  renderCartCount();
+  alert(`"${item.name}" berhasil ditambahkan ke keranjang.`);
+}
+
+// ===========================
+// FORMAT RUPIAH
+// ===========================
+function formatRupiah(number) {
+  const result = number
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  console.log(`🪙 formatRupiah: input=${number}, output=${result}`);
+  return result;
+}
