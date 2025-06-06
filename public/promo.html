@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>PROMO BY YUDZXML</title>
+  <style>
+    /* ========== STYLING HALAMAN PROMO ========== */
+
+    /* Section Promo */
+    .promo-section {
+      background-color: var(--color-input-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .promo-section h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .promo-section p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Daftar Promo */
+    #promo-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    /* Setiap Item Promo */
+    .promo-item {
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-card-border);
+      border-radius: 8px;
+      padding: 1rem;
+      transition: box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .promo-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Judul dan Deskripsi Promo */
+    .promo-item h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .promo-item p {
+      margin-bottom: 0.5rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    /* Harga Promo */
+    .promo-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--color-btn-danger);
+    }
+
+    .promo-price span {
+      text-decoration: line-through;
+      font-weight: 400;
+      color: #999;
+      margin-right: 0.5rem;
+    }
+
+    /* Validitas Promo */
+    .promo-validity {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #777;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Tombol WhatsApp */
+    .wa-button {
+      display: inline-block;
+      text-decoration: none;
+      background-color: #ff5722;
+      color: #fff;
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .wa-button:hover {
+      background-color: #1da851;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      #promo-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+   <aside id="sidebar">
+      <button id="sidebarClose" class="sidebar-close">×</button>
+      <div class="sidebar-section">
+        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
+          Admin Promo
+        </button>
+      </div>
+    </aside>
+    
+  <header class="site-header">
+    <div class="container">
+      <button id="sidebarToggle" class="sidebar-toggle" type="button">
+        ☰
+      </button>
+
+      <div class="header-left">
+        <h1 class="logo">オ INFORMATION</h1>
+      </div>
+
+      <div class="header-center">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari produk..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="header-right">
+        <button
+          id="darkModeToggle"
+          class="dark-toggle"
+          title="Toggle Dark Mode"
+          type="button"
+        >
+          <div class="toggle-track">
+            <span class="icon-sun">☀️</span>
+            <span class="icon-moon">🌙</span>
+          </div>
+        </button>
+        <a href="index.html" class="icon-btn" title="Home">🏠</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <section class="promo-section" style="width: 100%; margin-top: 1rem;">
+      <h2>PROMO HARI INI</h2>
+      <p style="margin-bottom: 1rem; color: #555;">
+        Berikut daftar promo yang sedang berlaku:
+      </p>
+
+      <!-- Container untuk daftar promo -->
+      <div id="promo-list"></div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Yudzxml. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    const _0x169998=_0x4ae6;(function(_0x124f1e,_0x524bd7){const _0x563872=_0x4ae6,_0x166ddb=_0x124f1e();while(!![]){try{const _0x1eb35f=-parseInt(_0x563872(0x8e))/0x1+parseInt(_0x563872(0x7f))/0x2*(parseInt(_0x563872(0x97))/0x3)+parseInt(_0x563872(0x95))/0x4*(-parseInt(_0x563872(0x8b))/0x5)+parseInt(_0x563872(0xab))/0x6*(-parseInt(_0x563872(0xa5))/0x7)+-parseInt(_0x563872(0x8f))/0x8*(parseInt(_0x563872(0xa1))/0x9)+-parseInt(_0x563872(0x73))/0xa+parseInt(_0x563872(0xaf))/0xb;if(_0x1eb35f===_0x524bd7)break;else _0x166ddb['push'](_0x166ddb['shift']());}catch(_0x3337af){_0x166ddb['push'](_0x166ddb['shift']());}}}(_0x29d1,0xed172));const apiUrl=_0x169998(0x96),sidebarToggleBtn=document['getElementById']('sidebarToggle'),darkModeToggleBtn=document[_0x169998(0x84)]('darkModeToggle'),searchInput=document[_0x169998(0x84)](_0x169998(0xaa)),promoListContainer=document[_0x169998(0x84)](_0x169998(0xac)),bodyEl=document[_0x169998(0xa2)],sidebarEl=document[_0x169998(0x84)](_0x169998(0x7d)),goAdminBtn=document['getElementById'](_0x169998(0x75));let allPromos=[];async function fetchPromos(){const _0x4154d5=_0x169998;try{promoListContainer[_0x4154d5(0x8c)]=_0x4154d5(0xb1);const _0x56f3ae=await fetch(apiUrl);if(!_0x56f3ae['ok'])throw new Error(_0x4154d5(0x86));const _0x2c34d0=await _0x56f3ae[_0x4154d5(0x89)](),_0x352384=_0x2c34d0[_0x4154d5(0x9c)],_0x2e89dd=atob(_0x352384),_0x5e3697=JSON[_0x4154d5(0x7c)](_0x2e89dd);allPromos=_0x5e3697,renderPromos(_0x5e3697);}catch(_0x24837d){console[_0x4154d5(0xb5)](_0x24837d),promoListContainer[_0x4154d5(0x8c)]='<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20promo.</p>';}}function formattedDate(_0x5276ef){const _0x547ed7=_0x169998,_0x40e7d4=new Date(_0x5276ef),_0x189fe6={'day':_0x547ed7(0x91),'month':_0x547ed7(0xa3),'year':_0x547ed7(0x91)};return _0x40e7d4['toLocaleDateString'](_0x547ed7(0xb6),_0x189fe6);}function renderPromos(_0x477197){const _0x4ac541=_0x169998;promoListContainer[_0x4ac541(0x8c)]='';const _0x43eaa7=new Date();_0x477197[_0x4ac541(0x77)](_0x843cb8=>{const _0x1fb27b=_0x4ac541,_0x1284f1=new Date(_0x843cb8[_0x1fb27b(0x87)]),_0x522392=_0x1284f1<_0x43eaa7,_0x4fc82d=document[_0x1fb27b(0xa6)](_0x1fb27b(0x90));_0x4fc82d[_0x1fb27b(0x8d)]=_0x1fb27b(0xb4),_0x522392&&(_0x4fc82d[_0x1fb27b(0x98)][_0x1fb27b(0x80)]='0.6'),_0x4fc82d[_0x1fb27b(0x8c)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22promo-name\x22>'+_0x843cb8[_0x1fb27b(0xa9)]+_0x1fb27b(0x94)+_0x843cb8[_0x1fb27b(0xb3)]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-price\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Rp\x20'+_0x843cb8[_0x1fb27b(0x83)]['toLocaleString']('id-ID')+_0x1fb27b(0x81)+_0x843cb8[_0x1fb27b(0xa8)][_0x1fb27b(0xb2)](_0x1fb27b(0xb6))+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-validity\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(_0x522392?_0x1fb27b(0x76):_0x1fb27b(0xb0)+formattedDate(_0x843cb8[_0x1fb27b(0x87)]))+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(_0x522392?'':'<a\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20href=\x22https://wa.me/'+_0x843cb8[_0x1fb27b(0x99)]+'?text='+encodeURIComponent(_0x1fb27b(0xad)+_0x843cb8[_0x1fb27b(0xa9)]+_0x1fb27b(0x85)+_0x843cb8[_0x1fb27b(0xa8)][_0x1fb27b(0xb2)](_0x1fb27b(0xb6)))+_0x1fb27b(0x9a))+_0x1fb27b(0x88),promoListContainer[_0x1fb27b(0xae)](_0x4fc82d);});}function filterPromos(_0x5c767d){const _0x5f14fe=_0x169998,_0x37f361=_0x5c767d[_0x5f14fe(0x78)]()[_0x5f14fe(0x9d)]();if(!_0x37f361){renderPromos(allPromos);return;}const _0x2d5664=allPromos[_0x5f14fe(0x93)](_0x2ebc56=>{const _0x5fae7f=_0x5f14fe,_0x3dc109=_0x2ebc56[_0x5fae7f(0xa9)][_0x5fae7f(0x9d)](),_0x875afe=_0x2ebc56[_0x5fae7f(0xb3)]['toLowerCase'](),_0x1c703b=_0x2ebc56[_0x5fae7f(0x83)]['toString'](),_0x3f7075=_0x2ebc56['harga_promo'][_0x5fae7f(0x70)](),_0x57e897=_0x2ebc56[_0x5fae7f(0x87)][_0x5fae7f(0x9d)]();return _0x3dc109[_0x5fae7f(0xa4)](_0x37f361)||_0x875afe[_0x5fae7f(0xa4)](_0x37f361)||_0x1c703b[_0x5fae7f(0xa4)](_0x37f361)||_0x3f7075[_0x5fae7f(0xa4)](_0x37f361)||_0x57e897[_0x5fae7f(0xa4)](_0x37f361);});renderPromos(_0x2d5664);}function applyInitialDarkMode(){const _0x8acdb2=_0x169998,_0x14c440=localStorage[_0x8acdb2(0x71)](_0x8acdb2(0x7b));_0x14c440===_0x8acdb2(0x7a)&&bodyEl['classList']['add'](_0x8acdb2(0xa0));}function toggleDarkMode(){const _0x3e417d=_0x169998;bodyEl[_0x3e417d(0x7e)]['contains'](_0x3e417d(0xa0))?(bodyEl[_0x3e417d(0x7e)][_0x3e417d(0xa7)]('dark-mode'),localStorage[_0x3e417d(0x9f)](_0x3e417d(0x7b),'disabled')):(bodyEl[_0x3e417d(0x7e)][_0x3e417d(0x74)]('dark-mode'),localStorage[_0x3e417d(0x9f)](_0x3e417d(0x7b),_0x3e417d(0x7a)));}function toggleSidebar(){const _0x225469=_0x169998;if(!sidebarEl)return;sidebarEl[_0x225469(0x7e)]['toggle'](_0x225469(0x9e));}document[_0x169998(0x8a)](_0x169998(0x79),()=>{fetchPromos(),applyInitialDarkMode();});function _0x4ae6(_0xc10463,_0x1464d4){const _0x29d10c=_0x29d1();return _0x4ae6=function(_0x4ae60b,_0x370d7f){_0x4ae60b=_0x4ae60b-0x70;let _0x456085=_0x29d10c[_0x4ae60b];return _0x456085;},_0x4ae6(_0xc10463,_0x1464d4);}function _0x29d1(){const _0x3d0fa2=['long','includes','77LalOXB','createElement','remove','harga_promo','nama','searchInput','197910bDXUor','promo-list','Halo\x20Admin,\x20saya\x20ingin\x20order\x20produk\x20diskon:\x20','appendChild','69537490pIWJnC','Berlaku\x20hingga:\x20','<p>Loading\x20promo...</p>','toLocaleString','deskripsi','promo-item','error','id-ID','toString','getItem','location','19010900NYOEAZ','add','goAdminBtn','<span\x20style=\x22color:red;\x22>Promo\x20telah\x20berakhir</span>','forEach','trim','DOMContentLoaded','enabled','darkMode','parse','sidebar','classList','488SmYRjC','opacity','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Rp\x20','input','harga_awal','getElementById','\x0aHarga:\x20','Gagal\x20mengambil\x20data\x20promo\x20dari\x20GitHub\x20API','berlaku_sampai','\x0a\x20\x20\x20\x20\x20\x20\x20\x20','json','addEventListener','70765VMUmBi','innerHTML','className','1624498YKMZmf','39944RSTPRi','div','numeric','target','filter','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-desc\x22>','296MTatds','https://api.github.com/repos/Yudzxml/WebClientV1/contents/promo.json','9573ocrUXi','style','wa_nomor','\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22wa-button\x22\x20target=\x22_blank\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20ORDER\x20SEKARANG\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</a>','click','content','toLowerCase','open','setItem','dark-mode','2151Tgwhow','body'];_0x29d1=function(){return _0x3d0fa2;};return _0x29d1();}searchInput&&searchInput['addEventListener'](_0x169998(0x82),_0x41e17e=>{const _0x12f859=_0x169998;filterPromos(_0x41e17e[_0x12f859(0x92)]['value']);});darkModeToggleBtn&&darkModeToggleBtn['addEventListener']('click',()=>{toggleDarkMode();});sidebarToggle[_0x169998(0x8a)]('click',()=>{const _0x1e1231=_0x169998;sidebar['classList']['add'](_0x1e1231(0x9e));}),sidebarClose['addEventListener']('click',()=>{const _0x3712c5=_0x169998;sidebar[_0x3712c5(0x7e)][_0x3712c5(0xa7)](_0x3712c5(0x9e));}),goAdminBtn[_0x169998(0x8a)](_0x169998(0x9b),()=>{const _0x32b299=_0x169998;window[_0x32b299(0x72)]['href']='loginPromo.html';});
+  </script>
+</body>
+</html>

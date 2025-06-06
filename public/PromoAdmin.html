@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Promo</title>
+  <style>
+    /* ===================================
+   VARIABLES & RESET
+=================================== */
+:root {
+  /* Light mode colors */
+  --color-bg: #f5f5f5;
+  --color-text: #333;
+  --color-header-start: #ff5722;
+  --color-header-end: #ff8a50;
+  --color-btn-primary: #ff5722;
+  --color-btn-primary-hover: #e64a19;
+  --color-btn-secondary: #777;
+  --color-btn-success: #388e3c;
+  --color-btn-danger: #e53935;
+  --color-border: #ddd;
+  --color-card-border: #eee;
+  --color-footer-bg: #fff;
+  --color-footer-text: #999;
+  --color-input-bg: #fff;
+  --color-input-border: #ccc;
+
+  /* Sidebar (light) */
+  --color-sidebar-bg: #ffffff;
+  --color-sidebar-border: var(--color-border);
+
+  /* Dark mode colors */
+  --color-dark-bg: #1e1e1e;
+  --color-dark-text: #ddd;
+  --color-dark-header-start: #333;
+  --color-dark-header-end: #555;
+  --color-dark-card-bg: #2a2a2a;
+  --color-dark-card-border: #444;
+  --color-dark-input-bg: #333;
+  --color-dark-input-border: #555;
+
+  /* Override sidebar variables in dark mode */
+  --color-sidebar-bg-dark: var(--color-dark-card-bg);
+  --color-sidebar-border-dark: var(--color-dark-card-border);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ===================================
+   TYPOGRAPHY & BUTTONS
+=================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Button base */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  border-color: var(--color-btn-primary);
+}
+.btn-primary:hover {
+  background-color: var(--color-btn-primary-hover);
+  border-color: var(--color-btn-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: #fff;
+  border-color: var(--color-btn-secondary);
+}
+.btn-secondary:hover {
+  background-color: var(--color-btn-secondary);
+}
+
+.btn-success {
+  background-color: var(--color-btn-success);
+  color: #fff;
+  border-color: var(--color-btn-success);
+}
+.btn-danger {
+  background-color: var(--color-btn-danger);
+  color: #fff;
+  border-color: var(--color-btn-danger);
+}
+
+/* ===================================
+   FORM-STYLING
+=================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: var(--color-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--color-input-border);
+  border-radius: 4px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--color-btn-primary);
+  box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+/* ===================================
+   SIDEBAR
+=================================== */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-sidebar-border);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+#sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.sidebar-section {
+  padding: 2rem 1rem;
+}
+
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-align: left;
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar-btn:hover {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+}
+
+/* ===================================
+   HEADER
+=================================== */
+.site-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start),
+    var(--color-header-end)
+  );
+  color: #fff;
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.header-center {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+}
+.header-center input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  font-size: 0.9rem;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+/* ===================================
+   MAIN & PROMO SECTION
+=================================== */
+main.container {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+.promo-section {
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.promo-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+.promo-section p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Daftar Card Promo/Admin */
+#promo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-body {
+  padding: 0.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.product-desc {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  flex: 1;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-btn-danger);
+  margin-bottom: 0.5rem;
+}
+
+.promo-validity {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #777;
+  margin-bottom: 0.75rem;
+}
+
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+/* Tombol di dalam card admin */
+.btn-whatsapp {
+  background-color: #25D366;
+  color: #fff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.btn-whatsapp:hover {
+  background-color: #1DA851;
+}
+
+.btn-edit {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn-edit:hover {
+  background-color: var(--color-btn-primary-hover);
+}
+
+.btn-delete {
+  background-color: var(--color-btn-danger);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn-delete:hover {
+  background-color: #c62828;
+}
+
+/* ===================================
+   MODAL / OVERLAY TAMBAH & EDIT
+=================================== */
+#promo-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+#promo-modal .modal-content {
+  background-color: var(--color-input-bg);
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+#promo-modal h3 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+#promo-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+#promo-modal .form-group {
+  margin-bottom: 1rem;
+}
+
+#promo-modal .form-actions {
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+.site-footer {
+  background-color: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 1rem 0;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.site-footer p {
+  color: var(--color-footer-text);
+  font-size: 0.9rem;
+}
+
+/* ===================================
+   DARK MODE
+=================================== */
+body.dark-mode {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+
+  /* Override sidebar variables */
+  --color-sidebar-bg: var(--color-sidebar-bg-dark);
+  --color-sidebar-border: var(--color-sidebar-border-dark);
+}
+
+body.dark-mode .site-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-dark-header-start),
+    var(--color-dark-header-end)
+  );
+}
+body.dark-mode .product-card {
+  background-color: var(--color-dark-card-bg);
+  border: 1px solid var(--color-dark-card-border);
+}
+body.dark-mode .product-title,
+body.dark-mode .product-desc,
+body.dark-mode .promo-validity {
+  color: var(--color-dark-text);
+}
+body.dark-mode .header-center input,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: var(--color-dark-input-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+}
+body.dark-mode .site-footer {
+  background-color: var(--color-dark-card-bg);
+  border-top: 1px solid var(--color-dark-card-border);
+}
+body.dark-mode .btn {
+  background-color: var(--color-dark-card-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+}
+body.dark-mode .btn-primary {
+  background-color: #5e35b1;
+  color: #fff;
+  border-color: #5e35b1;
+}
+body.dark-mode .btn-secondary {
+  background-color: #777;
+  color: #fff;
+  border-color: #777;
+}
+body.dark-mode .btn-success {
+  background-color: #388e3c;
+  color: #fff;
+  border-color: #388e3c;
+}
+body.dark-mode .btn-danger {
+  background-color: #c62828;
+  color: #fff;
+  border-color: #c62828;
+}
+
+/* Dark mode sidebar toggle track */
+.dark-toggle {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  overflow: hidden;
+  background-color: ;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.dark-toggle .toggle-track {
+  display: flex;
+  width: 100px;
+  transition: transform 0.3s ease;
+}
+.dark-toggle .icon-sun,
+.dark-toggle .icon-moon {
+  width: 50px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  user-select: none;
+}
+body.dark-mode .dark-toggle .toggle-track {
+  transform: translateX(-50px);
+}
+body.dark-mode .dark-toggle {
+  background-color: #37474f;
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+=================================== */
+@media (max-width: 1024px) {
+  .header-center input {
+    max-width: 300px;
+  }
+  .sidebar-close {
+    top: 8px;
+    right: 10px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar-toggle {
+    margin-right: 20rem;
+    margin-bottom: 0.5rem;
+  }
+  .logo {
+    font-size: 1.3rem;
+    text-align: center;
+    flex: 1 1 100%;
+    margin-bottom: 0.5rem;
+  }
+  .header-center {
+    flex: 1 1 100%;
+    margin-bottom: 0.5rem;
+  }
+  .header-right {
+    order: 3;
+    justify-content: center;
+  }
+  #sidebar {
+    width: 240px;
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  .product-title {
+    font-size: 1.1rem;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+  }
+  .product-price {
+    font-size: 1rem;
+  }
+  .product-actions .btn-whatsapp,
+  .product-actions .btn-edit,
+  .product-actions .btn-delete {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  #promo-modal .modal-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+  .header-center input {
+    max-width: 100%;
+    padding: 0.4rem 0.8rem;
+  }
+  .icon-btn {
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+  }
+  #sidebar {
+    width: 200px;
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-close {
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
+  }
+  #promo-container {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .product-title {
+    font-size: 1rem;
+  }
+  .product-desc {
+    font-size: 0.8rem;
+  }
+  .product-price {
+    font-size: 0.95rem;
+  }
+  .product-actions .btn-whatsapp,
+  .product-actions .btn-edit,
+  .product-actions .btn-delete {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  #promo-modal .modal-content {
+    padding: 1rem;
+  }
+  .site-footer p {
+    font-size: 0.75rem;
+  }
+}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header-left">
+          <h1 class="logo">オ ADMIN PROMO</h1>
+        </div>
+
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+            type="button"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+          <a href="index.html" class="icon-btn" title="Home">🏠</a>
+        </div>
+      </div>
+    </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <section class="promo-section" style="width: 100%; margin-top: 1rem;">
+      <h2>Kelola Promo</h2>
+      <p style="margin-bottom: 1rem; color: #555;">
+        Tambah, edit, atau hapus promo langsung di sini.
+      </p>
+
+      <button id="btn-add" class="btn btn-primary" style="margin-bottom: 1rem;">
+        Tambah Promo Baru
+      </button>
+
+      <div id="promo-container">
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Tambah/Edit Promo -->
+  <div id="promo-modal">
+    <div class="modal-content">
+      <h3 id="modal-title">Tambah Promo</h3>
+      <form id="promo-form">
+        <div class="form-group">
+          <label for="input-nama">Nama Produk</label>
+          <input type="text" id="input-nama" required />
+        </div>
+        <div class="form-group">
+          <label for="input-deskripsi">Deskripsi</label>
+          <textarea id="input-deskripsi" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="input-harga-awal">Harga Normal (Rp)</label>
+          <input type="number" id="input-harga-awal" required />
+        </div>
+        <div class="form-group">
+          <label for="input-harga-promo">Harga Promo (Rp)</label>
+          <input type="number" id="input-harga-promo" required />
+        </div>
+        <div class="form-group">
+          <label for="input-berlaku-sampai">Berlaku Sampai</label>
+          <input type="date" id="input-berlaku-sampai" required />
+        </div>
+        <div class="form-group">
+          <label for="input-wa-nomor">Nomor WhatsApp (contoh: 6281234567890)</label>
+          <input type="text" id="input-wa-nomor" required />
+        </div>
+        <div class="form-actions">
+          <button type="button" id="btn-cancel" class="btn btn-secondary">
+            Batal
+          </button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>&copy; 2025 AdminPromo. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function _0xb855(_0x3cbc84,_0x1eb6e3){const _0x19b14c=_0x19b1();return _0xb855=function(_0xb8552b,_0x14acc3){_0xb8552b=_0xb8552b-0xbc;let _0x573d88=_0x19b14c[_0xb8552b];return _0x573d88;},_0xb855(_0x3cbc84,_0x1eb6e3);}const _0x18a76b=_0xb855;(function(_0x5cca98,_0x2c887e){const _0x42a337=_0xb855,_0x26099c=_0x5cca98();while(!![]){try{const _0x2ca651=parseInt(_0x42a337(0xc3))/0x1*(parseInt(_0x42a337(0xf3))/0x2)+-parseInt(_0x42a337(0x119))/0x3+-parseInt(_0x42a337(0xfe))/0x4*(-parseInt(_0x42a337(0xcf))/0x5)+parseInt(_0x42a337(0xd0))/0x6+-parseInt(_0x42a337(0x111))/0x7*(-parseInt(_0x42a337(0xde))/0x8)+-parseInt(_0x42a337(0xc4))/0x9*(-parseInt(_0x42a337(0xf8))/0xa)+-parseInt(_0x42a337(0xe5))/0xb;if(_0x2ca651===_0x2c887e)break;else _0x26099c['push'](_0x26099c['shift']());}catch(_0x2af49f){_0x26099c['push'](_0x26099c['shift']());}}}(_0x19b1,0x28934));const repoOwner=_0x18a76b(0x112),repoName='WebClientV1',branch='main',filePath=_0x18a76b(0x115),GITHUB_TOKEN=process[_0x18a76b(0x10d)][_0x18a76b(0xf1)]||'',apiFileUrl='https://api.github.com/repos/'+repoOwner+'/'+repoName+_0x18a76b(0x109)+filePath;let promos=[],fileSha='';const sidebarToggleBtn=document['getElementById'](_0x18a76b(0xca)),darkModeToggleBtn=document[_0x18a76b(0xd8)]('darkModeToggle'),searchInput=document[_0x18a76b(0xd8)]('searchInput'),promoContainer=document[_0x18a76b(0xd8)](_0x18a76b(0xbe)),bodyEl=document[_0x18a76b(0xf6)],sidebarEl=document['getElementById'](_0x18a76b(0xe2)),modal=document[_0x18a76b(0xd8)]('promo-modal'),form=document['getElementById'](_0x18a76b(0x116)),titleModal=document[_0x18a76b(0xd8)](_0x18a76b(0xc5)),btnCancel=document[_0x18a76b(0xd8)](_0x18a76b(0xc7)),btnAdd=document[_0x18a76b(0xd8)](_0x18a76b(0xe3));function _0x19b1(){const _0x279984=['input-nama','Order\x20via\x20WhatsApp','toggle','content','getElementById','Berlaku\x20hingga:\x20','Gagal\x20mengambil\x20data\x20promo','flex','product-price','nama','3224UfXqZu','?text=','stringify','https://wa.me/','sidebar','btn-add','div','7352477vhiMxK','error','berlaku_sampai','sha','Edit','input-berlaku-sampai','getItem','addEventListener','filter','input-deskripsi','contains','_blank','GITHUB_TOKEN','harga_promo','2QEuSMM','Tambah\x20Promo','dark-mode','body','token\x20','35400ueWePC','</span>\x20Rp\x20','Edit\x20Promo','input-harga-promo','enabled','input-harga-awal','4012MntJet','PUT','appendChild','includes','forEach','toLocaleString','className','<p>Tidak\x20ada\x20promo\x20yang\x20cocok.</p>','reset','trim','preventDefault','/contents/','button','harga_awal','none','env','deskripsi','add','reduce','3437WwYPgC','Yudzxml','display','textContent','promo.json','promo-form','innerHTML','json','480456WfEKST','style','application/json','edit','href','wa_nomor','Halo,\x20saya\x20ingin\x20order\x20','product-body','target','setItem','toLowerCase','input-wa-nomor','map','promo-validity','btn-whatsapp','promo-container','<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20data\x20promo.</p>','id-ID','value','createElement','229667tIcsgx','414gpUJbR','modal-title','disabled','btn-cancel','click','onclick','sidebarToggle','?ref=','Hapus','message','product-desc','1635xYoIhn','458364yagBzH','classList','<span>Rp\x20','darkMode'];_0x19b1=function(){return _0x279984;};return _0x19b1();}let modalMode='add',editIndex=null;async function fetchFileSha(){const _0x2f2c5e=_0x18a76b,_0x9354d1=await fetch(apiFileUrl+_0x2f2c5e(0xcb)+branch,{'headers':{'Accept':'application/vnd.github.v3+json'}});if(!_0x9354d1['ok'])throw new Error('Gagal\x20mengambil\x20SHA\x20file');const _0xd53e1a=await _0x9354d1[_0x2f2c5e(0x118)]();fileSha=_0xd53e1a[_0x2f2c5e(0xe8)];}async function fetchPromosFromGitHub(){const _0x20a7d6=_0x18a76b;try{await fetchFileSha();const _0x35bee0='https://raw.githubusercontent.com/'+repoOwner+'/'+repoName+'/'+branch+'/'+filePath,_0xf56ec9=await fetch(_0x35bee0);if(!_0xf56ec9['ok'])throw new Error(_0x20a7d6(0xda));promos=await _0xf56ec9[_0x20a7d6(0x118)](),renderPromos();}catch(_0x19b536){console[_0x20a7d6(0xe6)](_0x19b536),promoContainer[_0x20a7d6(0x117)]=_0x20a7d6(0xbf);}}function renderPromos(_0x216d00=''){const _0x2c44c1=_0x18a76b;promoContainer['innerHTML']='';const _0x55e003=promos[_0x2c44c1(0xed)](_0x5ce60e=>_0x5ce60e['nama'][_0x2c44c1(0x123)]()[_0x2c44c1(0x101)](_0x216d00[_0x2c44c1(0x123)]()));if(_0x55e003['length']===0x0){promoContainer['innerHTML']=_0x2c44c1(0x105);return;}_0x55e003[_0x2c44c1(0x102)]((_0x146c31,_0x4fa342)=>{const _0x3ea82d=_0x2c44c1,_0x99fdcd=document[_0x3ea82d(0xc2)](_0x3ea82d(0xe4));_0x99fdcd[_0x3ea82d(0x104)]='product-card';const _0x22b0f3=document[_0x3ea82d(0xc2)]('div');_0x22b0f3['className']=_0x3ea82d(0x120);const _0x400e64=document[_0x3ea82d(0xc2)]('h3');_0x400e64[_0x3ea82d(0x104)]='product-title',_0x400e64[_0x3ea82d(0x114)]=_0x146c31[_0x3ea82d(0xdd)],_0x22b0f3['appendChild'](_0x400e64);const _0xdbf8ce=document[_0x3ea82d(0xc2)]('p');_0xdbf8ce['className']=_0x3ea82d(0xce),_0xdbf8ce[_0x3ea82d(0x114)]=_0x146c31[_0x3ea82d(0x10e)],_0x22b0f3[_0x3ea82d(0x100)](_0xdbf8ce);const _0x1c4756=document[_0x3ea82d(0xc2)]('p');_0x1c4756['className']=_0x3ea82d(0xdc),_0x1c4756[_0x3ea82d(0x117)]=_0x3ea82d(0xd2)+_0x146c31[_0x3ea82d(0x10b)][_0x3ea82d(0x103)](_0x3ea82d(0xc0))+_0x3ea82d(0xf9)+_0x146c31[_0x3ea82d(0xf2)]['toLocaleString'](_0x3ea82d(0xc0)),_0x22b0f3[_0x3ea82d(0x100)](_0x1c4756);const _0x53494b=document[_0x3ea82d(0xc2)]('p');_0x53494b[_0x3ea82d(0x104)]=_0x3ea82d(0xbc),_0x53494b[_0x3ea82d(0x114)]=_0x3ea82d(0xd9)+_0x146c31[_0x3ea82d(0xe7)],_0x22b0f3['appendChild'](_0x53494b);const _0x803095=document[_0x3ea82d(0xc2)]('div');_0x803095[_0x3ea82d(0x104)]='product-actions';const _0x3001b0=document[_0x3ea82d(0xc2)]('a');_0x3001b0[_0x3ea82d(0x104)]=_0x3ea82d(0xbd),_0x3001b0[_0x3ea82d(0x11d)]=_0x3ea82d(0xe1)+_0x146c31[_0x3ea82d(0x11e)]+_0x3ea82d(0xdf)+encodeURIComponent(_0x3ea82d(0x11f)+_0x146c31[_0x3ea82d(0xdd)]),_0x3001b0['target']=_0x3ea82d(0xf0),_0x3001b0[_0x3ea82d(0x114)]=_0x3ea82d(0xd5),_0x803095[_0x3ea82d(0x100)](_0x3001b0);const _0x315c80=document['createElement'](_0x3ea82d(0x10a));_0x315c80[_0x3ea82d(0x104)]='btn-edit',_0x315c80[_0x3ea82d(0x114)]=_0x3ea82d(0xe9),_0x315c80['onclick']=()=>openModal(_0x3ea82d(0x11c),_0x4fa342),_0x803095['appendChild'](_0x315c80);const _0x5002fd=document[_0x3ea82d(0xc2)](_0x3ea82d(0x10a));_0x5002fd['className']='btn-delete',_0x5002fd[_0x3ea82d(0x114)]=_0x3ea82d(0xcc),_0x5002fd[_0x3ea82d(0xc9)]=()=>deletePromo(_0x4fa342),_0x803095['appendChild'](_0x5002fd),_0x22b0f3[_0x3ea82d(0x100)](_0x803095),_0x99fdcd[_0x3ea82d(0x100)](_0x22b0f3),promoContainer[_0x3ea82d(0x100)](_0x99fdcd);});}async function savePromosToGitHub(_0x4217eb){const _0xde2567=_0x18a76b,_0x17ecc8=btoa(JSON[_0xde2567(0xe0)](_0x4217eb,null,0x2)),_0x4b163f={'message':'Update\x20promos.json','content':_0x17ecc8,'sha':fileSha,'branch':branch},_0x13e9b8=await fetch(apiFileUrl,{'method':_0xde2567(0xff),'headers':{'Content-Type':_0xde2567(0x11b),'Authorization':_0xde2567(0xf7)+GITHUB_TOKEN,'Accept':'application/vnd.github.v3+json'},'body':JSON['stringify'](_0x4b163f)});if(!_0x13e9b8['ok']){const _0x3bae23=await _0x13e9b8[_0xde2567(0x118)]();throw new Error('Gagal\x20menyimpan\x20promo:\x20'+_0x3bae23[_0xde2567(0xcd)]);}const _0x28dc2a=await _0x13e9b8[_0xde2567(0x118)]();fileSha=_0x28dc2a[_0xde2567(0xd7)][_0xde2567(0xe8)],promos=_0x4217eb,renderPromos(searchInput[_0xde2567(0xc1)]);}function openModal(_0x27fd60,_0x38c8e4=null){const _0x351d21=_0x18a76b;modalMode=_0x27fd60,editIndex=_0x38c8e4,form[_0x351d21(0x106)]();if(_0x27fd60===_0x351d21(0x10f))titleModal[_0x351d21(0x114)]=_0x351d21(0xf4);else{titleModal[_0x351d21(0x114)]=_0x351d21(0xfa);const _0x446aac=promos[_0x38c8e4];document[_0x351d21(0xd8)](_0x351d21(0xd4))[_0x351d21(0xc1)]=_0x446aac['nama'],document[_0x351d21(0xd8)]('input-deskripsi')['value']=_0x446aac[_0x351d21(0x10e)],document['getElementById']('input-harga-awal')['value']=_0x446aac[_0x351d21(0x10b)],document[_0x351d21(0xd8)]('input-harga-promo')[_0x351d21(0xc1)]=_0x446aac['harga_promo'],document['getElementById'](_0x351d21(0xea))[_0x351d21(0xc1)]=_0x446aac[_0x351d21(0xe7)],document[_0x351d21(0xd8)](_0x351d21(0x124))[_0x351d21(0xc1)]=_0x446aac[_0x351d21(0x11e)];}modal[_0x351d21(0x11a)][_0x351d21(0x113)]=_0x351d21(0xdb);}function closeModal(){const _0x5ad16e=_0x18a76b;modal[_0x5ad16e(0x11a)][_0x5ad16e(0x113)]=_0x5ad16e(0x10c),editIndex=null;}async function addPromo(_0x9a9f53){const _0x2fecdd=_0x18a76b,_0x4c54e7=promos[_0x2fecdd(0x110)]((_0x3e94fe,_0x54c851)=>_0x54c851['id']>_0x3e94fe?_0x54c851['id']:_0x3e94fe,0x0),_0x448157={'id':_0x4c54e7+0x1,'nama':_0x9a9f53[_0x2fecdd(0xdd)],'deskripsi':_0x9a9f53[_0x2fecdd(0x10e)],'harga_awal':Number(_0x9a9f53[_0x2fecdd(0x10b)]),'harga_promo':Number(_0x9a9f53[_0x2fecdd(0xf2)]),'berlaku_sampai':_0x9a9f53[_0x2fecdd(0xe7)],'wa_nomor':_0x9a9f53['wa_nomor']},_0x5c102e=[_0x448157,...promos];await savePromosToGitHub(_0x5c102e);}async function editPromo(_0x107f1b){const _0x1fb508=_0x18a76b,_0x253ae6=promos[_0x1fb508(0x125)]((_0x3ea22b,_0x58f00f)=>{const _0x2bf388=_0x1fb508;if(_0x58f00f===editIndex)return{'id':_0x3ea22b['id'],'nama':_0x107f1b[_0x2bf388(0xdd)],'deskripsi':_0x107f1b['deskripsi'],'harga_awal':Number(_0x107f1b[_0x2bf388(0x10b)]),'harga_promo':Number(_0x107f1b[_0x2bf388(0xf2)]),'berlaku_sampai':_0x107f1b['berlaku_sampai'],'wa_nomor':_0x107f1b[_0x2bf388(0x11e)]};return _0x3ea22b;});await savePromosToGitHub(_0x253ae6);}async function deletePromo(_0x330392){const _0x22de71=_0x18a76b;if(!confirm('Yakin\x20ingin\x20menghapus\x20promo\x20ini?'))return;const _0x2eae1d=promos[_0x22de71(0xed)]((_0x596b5f,_0x3d4aaa)=>_0x3d4aaa!==_0x330392);await savePromosToGitHub(_0x2eae1d);}form['addEventListener']('submit',async _0x247859=>{const _0x4754a8=_0x18a76b;_0x247859[_0x4754a8(0x108)]();const _0x3476ce={'nama':document[_0x4754a8(0xd8)](_0x4754a8(0xd4))[_0x4754a8(0xc1)]['trim'](),'deskripsi':document[_0x4754a8(0xd8)](_0x4754a8(0xee))[_0x4754a8(0xc1)][_0x4754a8(0x107)](),'harga_awal':document[_0x4754a8(0xd8)](_0x4754a8(0xfd))[_0x4754a8(0xc1)]['trim'](),'harga_promo':document[_0x4754a8(0xd8)](_0x4754a8(0xfb))['value'][_0x4754a8(0x107)](),'berlaku_sampai':document[_0x4754a8(0xd8)](_0x4754a8(0xea))[_0x4754a8(0xc1)],'wa_nomor':document[_0x4754a8(0xd8)](_0x4754a8(0x124))[_0x4754a8(0xc1)][_0x4754a8(0x107)]()};try{modalMode===_0x4754a8(0x10f)?await addPromo(_0x3476ce):await editPromo(_0x3476ce);}catch(_0x5e6620){alert(_0x5e6620[_0x4754a8(0xcd)]),console[_0x4754a8(0xe6)](_0x5e6620);}closeModal();}),btnCancel[_0x18a76b(0xec)](_0x18a76b(0xc8),()=>{closeModal();}),btnAdd[_0x18a76b(0xec)](_0x18a76b(0xc8),()=>{openModal('add');}),window['addEventListener'](_0x18a76b(0xc8),_0x4ff432=>{const _0x174603=_0x18a76b;if(_0x4ff432[_0x174603(0x121)]===modal)closeModal();});function filterPromos(_0x2a7929){renderPromos(_0x2a7929);}searchInput[_0x18a76b(0xec)]('input',_0x2936ab=>{const _0x202587=_0x18a76b;filterPromos(_0x2936ab[_0x202587(0x121)]['value']);});function toggleSidebar(){const _0x196dae=_0x18a76b;if(!sidebarEl)return;sidebarEl[_0x196dae(0xd1)][_0x196dae(0xd6)]('open');}sidebarToggleBtn[_0x18a76b(0xec)](_0x18a76b(0xc8),toggleSidebar);function applyInitialDarkMode(){const _0x4910d7=_0x18a76b,_0x2e6909=localStorage[_0x4910d7(0xeb)](_0x4910d7(0xd3));_0x2e6909===_0x4910d7(0xfc)&&bodyEl[_0x4910d7(0xd1)][_0x4910d7(0x10f)]('dark-mode');}function toggleDarkMode(){const _0x4fdde6=_0x18a76b;bodyEl['classList'][_0x4fdde6(0xef)](_0x4fdde6(0xf5))?(bodyEl[_0x4fdde6(0xd1)]['remove'](_0x4fdde6(0xf5)),localStorage[_0x4fdde6(0x122)](_0x4fdde6(0xd3),_0x4fdde6(0xc6))):(bodyEl[_0x4fdde6(0xd1)][_0x4fdde6(0x10f)](_0x4fdde6(0xf5)),localStorage[_0x4fdde6(0x122)](_0x4fdde6(0xd3),_0x4fdde6(0xfc)));}darkModeToggleBtn[_0x18a76b(0xec)](_0x18a76b(0xc8),toggleDarkMode),document['addEventListener']('DOMContentLoaded',()=>{fetchPromosFromGitHub(),applyInitialDarkMode();});
+  </script>
+</body>
+</html>
