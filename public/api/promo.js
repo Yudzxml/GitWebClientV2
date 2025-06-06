@@ -1,6 +1,4 @@
 // File: api/promo.js
-const fetch = require('node-fetch');
-
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 const OWNER        = 'Yudzxml';
 const REPO         = 'WebClientV1';
