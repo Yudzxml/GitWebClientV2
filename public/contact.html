@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontak Admin – YUDZXML STORE 77</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ===================================
+   VARIABLES & RESET
+=================================== */
+:root {
+  /* Light mode colors */
+  --color-bg: #f5f5f5;
+  --color-text: #333;
+  --color-header-start: #ff5722;
+  --color-header-end: #ff8a50;
+  --color-btn-primary: #ff5722;
+  --color-btn-primary-hover: #e64a19;
+  --color-btn-success: #388e3c;
+  --color-btn-success-hover: #2e7d32;
+  --color-border: #ddd;
+  --color-card-border: #eee;
+  --color-footer-bg: #fff;
+  --color-footer-text: #999;
+  --color-input-bg: #fff;
+  --color-input-border: #ccc;
+
+  /* Sidebar (light) */
+  --color-sidebar-bg: #ffffff;
+  --color-sidebar-border: var(--color-border);
+
+  /* Dark mode colors */
+  --color-dark-bg: #1e1e1e;
+  --color-dark-text: #ddd;
+  --color-dark-header-start: #333;
+  --color-dark-header-end: #555;
+  --color-dark-card-bg: #2a2a2a;
+  --color-dark-card-border: #444;
+  --color-dark-input-bg: #333;
+  --color-dark-input-border: #555;
+
+  /* Override sidebar variables in dark mode context */
+  --color-sidebar-bg-dark: var(--color-dark-card-bg);
+  --color-sidebar-border-dark: var(--color-dark-card-border);
+}
+
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ===================================
+   CONTAINER
+=================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* ===================================
+   TYPOGRAPHY & BUTTONS
+=================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* Table Owner */
+.owner-table {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+.owner-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.owner-table th,
+.owner-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid var(--color-border);
+}
+.owner-table th {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  font-weight: 500;
+}
+.owner-table td {
+  background-color: #fff;
+  color: var(--color-text);
+}
+
+/* List Grup */
+.group-list {
+  margin-bottom: 2rem;
+}
+.group-list h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.group-item .group-name {
+  font-size: 1rem;
+  color: var(--color-text);
+}
+.group-item .btn-join {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.group-item .btn-join:hover {
+  background-color: var(--color-btn-primary-hover);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button base */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.2rem;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  border-color: var(--color-btn-primary);
+}
+.btn-primary:hover {
+  background-color: var(--color-btn-primary-hover);
+  border-color: var(--color-btn-primary-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success {
+  background-color: var(--color-btn-success);
+  color: #fff;
+  border-color: var(--color-btn-success);
+}
+.btn-success:hover {
+  background-color: var(--color-btn-success-hover);
+  border-color: var(--color-btn-success-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===================================
+   SIDEBAR
+=================================== */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-sidebar-border);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  z-index: 1000;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.sidebar-section {
+  padding: 2rem 1rem;
+}
+
+.sidebar-btn {
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  text-align: left;
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.sidebar-btn:hover {
+  background-color: var(--color-btn-primary);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================
+   HEADER
+=================================== */
+.site-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start),
+    var(--color-header-end)
+  );
+  color: #fff;
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.header-center {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.header-center input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+#cartCount {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background: #e53935;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===================================
+   MAIN & CONTACT GRID
+=================================== */
+main.container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+/* ===================================
+   DAFTAR KONTAK ADMIN
+=================================== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-body {
+  padding: 0.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  color: var(--color-text);
+}
+
+.product-desc {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  flex: 1;
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e53935;
+}
+
+.product-actions a.btn {
+  background-color: var(--color-btn-success);
+  border: none;
+  color: #fff;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+}
+
+.product-actions a.btn:hover {
+  background-color: var(--color-btn-success-hover);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product-actions a.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+.site-footer {
+  background-color: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 1rem 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.site-footer p {
+  color: var(--color-footer-text);
+  font-size: 0.9rem;
+}
+
+/* ===================================
+   DARK MODE
+=================================== */
+body.dark-mode {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+
+  /* Override sidebar variables */
+  --color-sidebar-bg: var(--color-sidebar-bg-dark);
+  --color-sidebar-border: var(--color-sidebar-border-dark);
+}
+
+body.dark-mode .site-header {
+  background: linear-gradient(
+    90deg,
+    var(--color-dark-header-start),
+    var(--color-dark-header-end)
+  );
+}
+
+body.dark-mode .product-card {
+  background-color: var(--color-dark-card-bg);
+  border: 1px solid var(--color-dark-card-border);
+}
+
+body.dark-mode .product-title,
+body.dark-mode .product-desc {
+  color: var(--color-dark-text);
+}
+
+body.dark-mode .header-center input {
+  background-color: var(--color-dark-input-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+}
+
+body.dark-mode .site-footer {
+  background-color: var(--color-dark-card-bg);
+  border-top: 1px solid var(--color-dark-card-border);
+}
+
+body.dark-mode .btn {
+  background-color: var(--color-dark-card-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .btn-primary {
+  background-color: #5e35b1;
+  color: #fff;
+  border-color: #5e35b1;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #512da8;
+  border-color: #512da8;
+}
+
+body.dark-mode .btn-success {
+  background-color: #388e3c;
+  color: #fff;
+  border-color: #388e3c;
+}
+
+body.dark-mode .btn-success:hover {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+
+/* ===================================
+   DARK MODE SLIDER ICON
+=================================== */
+.dark-toggle {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  overflow: hidden;
+  background-color: transparent;
+  border: none;
+  border-radius: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.dark-toggle .toggle-track {
+  display: flex;
+  width: 100px;
+  transition: transform 0.3s ease;
+}
+
+.dark-toggle .icon-sun,
+.dark-toggle .icon-moon {
+  width: 50px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  user-select: none;
+}
+
+body.dark-mode .dark-toggle .toggle-track {
+  transform: translateX(-50px);
+}
+
+body.dark-mode .dark-toggle {
+  background-color: #37474f;
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+=================================== */
+@media (max-width: 1024px) {
+  .header-center input {
+    max-width: 300px;
+  }
+  .sidebar-close {
+    top: 8px;
+    right: 10px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .container {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .sidebar-toggle {
+    margin-right: 20rem;
+    margin-bottom: 0.5rem;
+  }
+  .logo {
+    font-size: 1.3rem;
+    text-align: center;
+    flex: 1 1 100%;
+    margin-bottom: 0.5rem;
+  }
+  .header-center {
+    flex: 1 1 100%;
+    margin-bottom: 0.5rem;
+  }
+  .header-right {
+    order: 3;
+    justify-content: center;
+  }
+  #sidebar {
+    width: 240px;
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-close {
+    top: 10px;
+    right: 10px;
+    font-size: 3rem;
+  }
+  .owner-table table,
+  .group-item {
+    font-size: 0.9rem;
+  }
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.8rem;
+    margin: 0.8rem 0 1.5rem;
+  }
+  .product-title {
+    font-size: 0.95rem;
+  }
+  .product-desc {
+    font-size: 0.8rem;
+  }
+  .product-price {
+    font-size: 1rem;
+  }
+  .product-actions a.btn {
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+  }
+  .site-footer p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.1rem;
+  }
+  .header-center input {
+    max-width: 100%;
+    padding: 0.4rem 0.8rem;
+  }
+  .icon-btn {
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+  }
+  #sidebar {
+    width: 200px;
+    transform: translateX(-100%);
+  }
+  #sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-close {
+    top: 8px;
+    right: 8px;
+    font-size: 1rem;
+  }
+  .owner-table table,
+  .group-item {
+    font-size: 0.8rem;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .product-title {
+    font-size: 0.9rem;
+  }
+  .product-desc {
+    font-size: 0.75rem;
+  }
+  .product-price {
+    font-size: 0.95rem;
+  }
+  .product-actions a.btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  .site-footer p {
+    font-size: 0.75rem;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <button id="sidebarClose" class="sidebar-close">×</button>
+      <div class="sidebar-section">
+        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
+          Admin Login
+        </button>
+        <button id="goCartBtn" class="btn btn-primary sidebar-btn">
+          Cek Keranjang
+        </button>
+        <button id="goTestiBtn" class="btn btn-primary sidebar-btn">
+          Testimoni
+        </button>
+        <button id="goPromoBtn" class="btn btn-primary sidebar-btn">
+          Diskon Produk
+        </button>
+        <button id="goCommentBtn" class="btn btn-primary sidebar-btn">
+          Komentar/Ratting
+        </button>
+        <button id="goContactBtn" class="btn btn-primary sidebar-btn">
+          Contact Admin
+        </button>                
+      </div>
+    </aside>
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">オ CONTACT ADMIN</h1>
+        </div>
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+          <button id="goHomeBtn" class="icon-btn" title="Keranjang">🏠</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+     <div class="group-list">
+        <h2>Daftar Admin :</h2>
+            <div class="products-grid">
+        <!-- Admin 1 -->
+        <div class="product-card">
+          <div class="product-body">
+            <h3 class="product-title">YUDZXML STORE</h3>
+            <p class="product-desc">ADMIN HOSTING</p>
+            <div class="product-footer">
+              <span class="product-price">+62 838-7203-1397</span>
+              <div class="product-actions">
+                <a
+                  href="https://wa.me/6283872031397"
+                  target="_blank"
+                  class="btn btn-success"
+                >
+                  CHAT ADMIN
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin 2 -->
+        <div class="product-card">
+          <div class="product-body">
+            <h3 class="product-title">SNAYDERS STORE</h3>
+            <p class="product-desc">ADMIN TUNNELING</p>
+            <div class="product-footer">
+              <span class="product-price">+62 823-7465-0646</span>
+              <div class="product-actions">
+                <a
+                  href="https://wa.me/6282374650646"
+                  target="_blank"
+                  class="btn btn-success"
+                >
+                  CHAT ADMIN
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+      <div class="group-list">
+        <h2>Daftar Grup :</h2>
+
+        <!-- Grup 1 -->
+        <div class="group-item">
+          <span class="group-name">GRUP BOT WA FREE</span>
+          <a
+            href="https://chat.whatsapp.com/BiY2EOldsEK0xXzxJP1Lm9"
+            target="_blank"
+            class="btn-join"
+            >Gabung</a
+          >
+        </div>
+
+        <!-- Grup 2 -->
+        <div class="group-item">
+          <span class="group-name">GRUP SSH/CONFIG FREE</span>
+          <a
+            href="https://chat.whatsapp.com/HhJ9yzovFKs7Jreqva0Jtw"
+            target="_blank"
+            class="btn-join"
+            >Gabung</a
+          >
+        </div>
+
+        <!-- Grup 3 -->
+        <div class="group-item">
+          <span class="group-name">SALURAN ADMIN YUDZXML</span>
+          <a
+            href="https://whatsapp.com/channel/0029VaQfuS74dTnEv0b6hA1g"
+            target="_blank"
+            class="btn-join"
+            >Gabung</a
+          >
+        </div>
+        <!-- Grup 4 -->      
+        <div class="group-item">
+          <span class="group-name">SALURAN SSH FREE</span>
+          <a
+            href="https://whatsapp.com/channel/0029Vb6BwXi0AgWFPCx5IM1x"
+            target="_blank"
+            class="btn-join"
+            >Gabung</a
+          >
+        </div>
+      </div>      
+      </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
+    <script>
+   const goHomeBtn        = document.getElementById('goHomeBtn');
+    openHomeBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+    </script>
+    <script src="main.js"></script>
+  </body>
+</html>

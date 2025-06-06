@@ -19,7 +19,7 @@ const darkModeToggle   = document.getElementById('darkModeToggle');
 const openCartBtn      = document.getElementById('openCartBtn');
 const productsGrid     = document.getElementById('productsGrid');
 const cartCountSpan    = document.getElementById('cartCount');
-
+const goContactBtn        = document.getElementById('goContactBtn');
 // ===========================
 // INITIALIZATION
 // ===========================
@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   goCommentBtn.addEventListener('click', () => {
     window.location.href = 'komentar.html';
+  });
+    goContactBtn.addEventListener('click', () => {
+    window.location.href = 'contact.html';
   });
 
   // Dark Mode
