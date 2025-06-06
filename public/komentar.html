@@ -17,7 +17,7 @@
         justify-content: flex-start;
         font-size: 100rem;
         margin-bottom: 0.5rem;
-        margin-left: -7rem;
+        margin-left: 3.7rem;
         margin-right: 15rem;
       }
       .rating-input input {
@@ -111,9 +111,9 @@
               <span class="icon-moon">🌙</span>
             </div>
           </button>
-          <button id="openCartBtn" class="icon-btn" title="Keranjang">
-            🏠</span>
-          </button>
+<button id="openCartBtn" class="icon-btn" title="Keranjang">
+  🏠
+</button>
         </div>
       </div>
     </header>
@@ -191,6 +191,7 @@
       const sidebar = document.getElementById("sidebar");
       const sidebarToggle = document.getElementById("sidebarToggle");
       const sidebarClose = document.getElementById("sidebarClose");
+      const openCartBtn = document.getElementById("openCartBtn");
       sidebarToggle.addEventListener("click", () => {
         sidebar.classList.add("open");
       });
