@@ -81,8 +81,7 @@ async function deleteProductById(productId) {
   return await updateAllProducts(filtered, sha);
 }
 
-// ✅ Export handler tanpa switch-case
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const method = req.method.toUpperCase();
 
@@ -102,7 +101,7 @@ export default async function handler(req, res) {
 
     if (method === 'PUT') {
       const { id, ...updatedProduct } = req.body;
-      if (!id || !updatedProduct) {
+      if (!id || Object.keys(updatedProduct).length === 0) {
         return res.status(400).json({ error: 'ID produk dan data update wajib diisi.' });
       }
       const result = await editProductById(id, updatedProduct);
