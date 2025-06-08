@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kontak Admin – YUDZXML STORE 77</title>
+    <title>KONTAK BY YUDZXML</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -692,28 +692,40 @@ body.dark-mode .dark-toggle {
   <body>
     <!-- SIDEBAR -->
     <aside id="sidebar">
-      <button id="sidebarClose" class="sidebar-close">×</button>
-      <div class="sidebar-section">
-        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
-          Admin Login
+  <button id="sidebarClose" class="sidebar-close">×</button>
+  <div class="sidebar-section">
+    <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🔒</span> Admin Login
+    </button>
+    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛒</span> Cek Keranjang
+    </button>
+    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">⭐</span> Testimoni
+    </button>
+    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🏷️</span> Diskon Produk
+    </button>
+    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">💬</span> Komentar/Ratting
+    </button>
+    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">✉️</span> Contact Admin
+    </button>   
+    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
+     <span class="icon">📤</span> Upload File
+    </button>
+    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <span class="icon">👥</span> Static Pengunjung
         </button>
-        <button id="goCartBtn" class="btn btn-primary sidebar-btn">
-          Cek Keranjang
-        </button>
-        <button id="goTestiBtn" class="btn btn-primary sidebar-btn">
-          Testimoni
-        </button>
-        <button id="goPromoBtn" class="btn btn-primary sidebar-btn">
-          Diskon Produk
-        </button>
-        <button id="goCommentBtn" class="btn btn-primary sidebar-btn">
-          Komentar/Ratting
-        </button>
-        <button id="goContactBtn" class="btn btn-primary sidebar-btn">
-          Contact Admin
-        </button>                
-      </div>
-    </aside>
+    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <span class="icon">💖</span> Donasi
+        </button>       
+    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">📜</span> Terms of Service
+    </button>        
+  </div>
+</aside>
 
     <!-- HEADER -->
     <header class="site-header">
@@ -741,7 +753,7 @@ body.dark-mode .dark-toggle {
               <span class="icon-moon">🌙</span>
             </div>
           </button>
-          <button id="goHomeBtn" class="icon-btn" title="Keranjang">🏠</button>
+    <button onclick="location.href='index.html'" <span class="icon-btn" title="Keranjang">🏠</button>
         </div>
       </div>
     </header>
@@ -848,12 +860,6 @@ body.dark-mode .dark-toggle {
         <p>© 2025 YUDZXML Allright Reserved</p>
       </div>
     </footer>
-    <script>
-   const goHomeBtn        = document.getElementById('goHomeBtn');
-    openHomeBtn.addEventListener('click', () => {
-    window.location.href = 'index.html';
-  });
-    </script>
     <script src="main.js"></script>
   </body>
 </html>

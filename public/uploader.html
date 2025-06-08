@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UPLOADER BY YUDZXML</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Container & layout fixes */
+      .upload-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .upload-area {
+        position: relative;
+        border: 2px dashed var(--color-btn-primary);
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .upload-area.dragover {
+        background-color: rgba(255, 87, 34, 0.1);
+      }
+      .upload-area p {
+        margin: 0;
+        font-size: 1rem;
+      }
+      #browseBtn {
+        margin-top: 0.75rem;
+      }
+      #fileInput {
+        display: none;
+      }
+      /* Preview card styling */
+      .preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+      }
+      .preview-card {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 100%;
+        position: relative;
+        text-align: center;
+      }
+      .preview-card img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 4px;
+        border: 1px solid var(--color-card-border);
+      }
+      .preview-card p {
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+      }
+      .preview-card .btn-upload,
+      .copy-btn {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: var(--color-btn-primary);
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+      .preview-card .btn-upload:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+      /* Loader animation */
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid var(--color-btn-primary);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      @keyframes spin {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+      .status {
+        font-weight: 500;
+        text-align: center;
+        min-height: 1.5rem;
+      }
+      /* Progress bar container */
+      .progress-container {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 0.75rem 0;
+      }
+      .progress-bar {
+        width: 0%;
+        height: 8px;
+        background-color: var(--color-btn-primary);
+        transition: width 0.2s ease;
+      }
+      /* History list styling */
+      .history-container {
+        margin-top: 2rem;
+      }
+      .history-container h2 {
+        margin-bottom: 0.75rem;
+        font-size: 1.25rem;
+        color: var(--color-text);
+      }
+      .history-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #fff;
+        padding: 0.75rem;
+        border-radius: 6px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        margin-bottom: 0.5rem;
+      }
+      .history-item a {
+        word-break: break-all;
+        color: var(--color-btn-primary);
+        text-decoration: none;
+        flex-grow: 1;
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SIDEBAR & HEADER -->
+    <aside id="sidebar">
+  <button id="sidebarClose" class="sidebar-close">×</button>
+  <div class="sidebar-section">
+    <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🔒</span> Admin Login
+    </button>
+    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛒</span> Cek Keranjang
+    </button>
+    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">⭐</span> Testimoni
+    </button>
+    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🏷️</span> Diskon Produk
+    </button>
+    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">💬</span> Komentar/Ratting
+    </button>
+    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">✉️</span> Contact Admin
+    </button>   
+    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
+     <span class="icon">📤</span> Upload File
+    </button>
+    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <span class="icon">👥</span> Static Pengunjung
+        </button>
+    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <span class="icon">💖</span> Donasi
+        </button>       
+    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">📜</span> Terms of Service
+    </button>        
+  </div>
+</aside>
+    
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">オ UPLOADER CDN</h1>
+        </div>
+        <div class="header-center">
+          <input type="text" id="searchInput" placeholder="Cari produk..." autocomplete="off" />
+        </div>
+        <div class="header-right">
+          <button id="darkModeToggle" class="dark-toggle" title="Toggle Dark Mode">
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+    <button onclick="location.href='index.html'" <span class="icon-btn" title="Keranjang">🏠</button>
+        </div>
+      </div>
+    </header>
+    <!-- MAIN Uploader -->
+    <main class="container upload-container">
+      <div class="upload-area" id="uploadArea">
+        <p>Drag & Drop file di sini</p>
+        <button id="browseBtn" class="btn btn-secondary">Pilih File</button>
+        <input type="file" id="fileInput" />
+      </div>
+      <div class="preview" id="preview"></div>
+      <div class="status" id="status"></div>
+  <div class="history-container">
+    <h2>Riwayat Upload</h2>
+    <div id="historyList"></div>
+  </div>
+    </main>
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2025 YUDZXML Allright Reserved</p>
+      </div>
+    </footer>
+    <!-- dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- uploader logic -->
+<script>
+  const _0x2e917e=_0x2d47;function _0x2d47(_0xc1ee1f,_0x36be46){const _0x31d936=_0x31d9();return _0x2d47=function(_0x2d47bc,_0x16268f){_0x2d47bc=_0x2d47bc-0x197;let _0x1cbe27=_0x31d936[_0x2d47bc];return _0x1cbe27;},_0x2d47(_0xc1ee1f,_0x36be46);}(function(_0x490674,_0x976fd3){const _0x91b22f=_0x2d47,_0x14f2dc=_0x490674();while(!![]){try{const _0x1415ce=-parseInt(_0x91b22f(0x1e6))/0x1*(-parseInt(_0x91b22f(0x1d8))/0x2)+-parseInt(_0x91b22f(0x1de))/0x3*(parseInt(_0x91b22f(0x1bb))/0x4)+-parseInt(_0x91b22f(0x1ab))/0x5+parseInt(_0x91b22f(0x1c2))/0x6+parseInt(_0x91b22f(0x1df))/0x7*(-parseInt(_0x91b22f(0x1af))/0x8)+parseInt(_0x91b22f(0x1aa))/0x9+-parseInt(_0x91b22f(0x1bd))/0xa;if(_0x1415ce===_0x976fd3)break;else _0x14f2dc['push'](_0x14f2dc['shift']());}catch(_0x23ff04){_0x14f2dc['push'](_0x14f2dc['shift']());}}}(_0x31d9,0x240d3));const MAX_SIZE=0x64*0x400*0x400,uploadArea=document[_0x2e917e(0x198)](_0x2e917e(0x197)),fileInput=document[_0x2e917e(0x198)](_0x2e917e(0x1dd)),browseBtn=document[_0x2e917e(0x198)]('browseBtn'),preview=document[_0x2e917e(0x198)](_0x2e917e(0x1a1)),statusEl=document[_0x2e917e(0x198)](_0x2e917e(0x1d7)),historyList=document[_0x2e917e(0x198)]('historyList');document['addEventListener'](_0x2e917e(0x1db),renderHistory),[_0x2e917e(0x1c1),_0x2e917e(0x1b0)][_0x2e917e(0x1e5)](_0xc95bdf=>uploadArea[_0x2e917e(0x1cf)](_0xc95bdf,_0x3e696f=>{const _0x3ed312=_0x2e917e;_0x3e696f[_0x3ed312(0x1b6)](),uploadArea[_0x3ed312(0x1a9)][_0x3ed312(0x1e1)](_0x3ed312(0x1b0));})),[_0x2e917e(0x1c8),_0x2e917e(0x1cd)][_0x2e917e(0x1e5)](_0x22183b=>uploadArea[_0x2e917e(0x1cf)](_0x22183b,_0x3ffdc5=>{const _0x4ffb89=_0x2e917e;_0x3ffdc5['preventDefault'](),uploadArea[_0x4ffb89(0x1a9)][_0x4ffb89(0x19d)]('dragover');})),uploadArea[_0x2e917e(0x1cf)](_0x2e917e(0x1cd),_0x1620cb=>{const _0x2a6f3a=_0x2e917e;handleFile(_0x1620cb[_0x2a6f3a(0x1cb)][_0x2a6f3a(0x1ac)][0x0]);}),browseBtn[_0x2e917e(0x1cf)](_0x2e917e(0x1a6),()=>fileInput[_0x2e917e(0x1a6)]()),fileInput[_0x2e917e(0x1cf)](_0x2e917e(0x1b4),()=>handleFile(fileInput['files'][0x0]));function handleFile(_0x46ac77){const _0x3be50b=_0x2e917e;preview[_0x3be50b(0x1c5)]='',statusEl['textContent']='';if(!_0x46ac77)return;if(_0x46ac77[_0x3be50b(0x1b8)]>MAX_SIZE){statusEl['textContent']=_0x3be50b(0x19a);return;}const _0xc539e8=document[_0x3be50b(0x1a4)](_0x3be50b(0x1d9));_0xc539e8[_0x3be50b(0x1b5)]='preview-card';if(_0x46ac77[_0x3be50b(0x1ae)][_0x3be50b(0x1ca)](_0x3be50b(0x199))){const _0x4fc5fb=document[_0x3be50b(0x1a4)](_0x3be50b(0x19b));_0x4fc5fb[_0x3be50b(0x19e)]=URL[_0x3be50b(0x1c3)](_0x46ac77),_0xc539e8[_0x3be50b(0x1ad)](_0x4fc5fb);}else{const _0x199248=document[_0x3be50b(0x1a4)]('p');_0x199248[_0x3be50b(0x1be)]=_0x3be50b(0x1ba)+_0x46ac77['name'],_0xc539e8[_0x3be50b(0x1ad)](_0x199248);}const _0xa1feb0=document['createElement']('button');_0xa1feb0[_0x3be50b(0x1be)]='Upload',_0xa1feb0[_0x3be50b(0x1b5)]=_0x3be50b(0x1a8),_0xc539e8[_0x3be50b(0x1ad)](_0xa1feb0),preview['appendChild'](_0xc539e8),_0xa1feb0[_0x3be50b(0x1cf)](_0x3be50b(0x1a6),()=>uploadFile(_0x46ac77,_0xa1feb0,_0xc539e8));}async function uploadFile(_0x216e40,_0x2a642f,_0x2a27a5){const _0x2faf9f=_0x2e917e;_0x2a642f[_0x2faf9f(0x1e2)]=!![],statusEl[_0x2faf9f(0x1be)]='';const _0x1b8bcb=document[_0x2faf9f(0x1a4)](_0x2faf9f(0x1d9));_0x1b8bcb['className']=_0x2faf9f(0x1d1);const _0x1f1389=document[_0x2faf9f(0x1a4)](_0x2faf9f(0x1d9));_0x1f1389[_0x2faf9f(0x1b5)]='progress-bar',_0x1b8bcb['appendChild'](_0x1f1389),_0x2a27a5[_0x2faf9f(0x1ad)](_0x1b8bcb);const _0xd9495f=new FormData();_0xd9495f['append'](_0x2faf9f(0x19c),_0x216e40,_0x216e40[_0x2faf9f(0x1a0)]);try{const _0x4b4395=await axios['post'](_0x2faf9f(0x1b7),_0xd9495f,{'onUploadProgress':_0x2067cf=>{const _0xc71cb9=_0x2faf9f;if(_0x2067cf[_0xc71cb9(0x1e9)]){const _0x47fad8=Math[_0xc71cb9(0x1da)](_0x2067cf[_0xc71cb9(0x1a5)]*0x64/_0x2067cf[_0xc71cb9(0x1d0)]);_0x1f1389[_0xc71cb9(0x1d5)][_0xc71cb9(0x1c6)]=_0x47fad8+'%',statusEl[_0xc71cb9(0x1be)]=_0xc71cb9(0x1d6)+_0x47fad8+'%';}}});_0x1b8bcb['remove'](),_0x2a642f[_0x2faf9f(0x1e2)]=![];if(_0x4b4395['data'][_0x2faf9f(0x19f)]){const _0x5c8587=_0x4b4395[_0x2faf9f(0x1ce)][_0x2faf9f(0x1e4)]['url'];statusEl[_0x2faf9f(0x1c5)]='';const _0x5ed816=document[_0x2faf9f(0x1a4)]('p');_0x5ed816[_0x2faf9f(0x1be)]=_0x2faf9f(0x1bc),statusEl[_0x2faf9f(0x1ad)](_0x5ed816);const _0x1d5c2b=document[_0x2faf9f(0x1a4)](_0x2faf9f(0x1c0));_0x1d5c2b[_0x2faf9f(0x1be)]=_0x2faf9f(0x1b3),_0x1d5c2b['className']='copy-btn',statusEl['appendChild'](_0x1d5c2b),_0x1d5c2b[_0x2faf9f(0x1cf)](_0x2faf9f(0x1a6),()=>navigator[_0x2faf9f(0x1e0)][_0x2faf9f(0x1e3)](_0x5c8587)[_0x2faf9f(0x1bf)](()=>{const _0x1c4e23=_0x2faf9f;_0x1d5c2b['textContent']=_0x1c4e23(0x1b1),setTimeout(()=>_0x1d5c2b[_0x1c4e23(0x1be)]='Copy\x20URL',0x7d0);})),saveToHistory(_0x5c8587),renderHistory();}else throw new Error(_0x4b4395[_0x2faf9f(0x1ce)]['message']||_0x2faf9f(0x1b9));}catch(_0x1dddde){_0x1b8bcb[_0x2faf9f(0x19d)](),statusEl['textContent']=_0x2faf9f(0x1dc)+_0x1dddde[_0x2faf9f(0x1cc)],_0x2a642f[_0x2faf9f(0x1e2)]=![];}}function _0x31d9(){const _0xa802ee=['28WydQes','clipboard','add','disabled','writeText','result','forEach','179629FEAVyh','target','unshift','lengthComputable','uploadArea','getElementById','image/','Error:\x20File\x20melebihi\x20ukuran\x20maksimal\x20100MB.','img','file','remove','src','success','name','preview','url','getItem','createElement','loaded','click','stringify','btn-upload','classList','262458xleiyc','452850SxweKj','files','appendChild','type','200936XeLvsF','dragover','Copied!','history-item','Copy\x20URL','change','className','preventDefault','https://api.yudzxyz.x-server.my.id/api/upload','size','Unknown\x20error','File:\x20','24ABFZEq','Upload\x20Berhasil\x20😋','1327750FXlIYQ','textContent','then','button','dragenter','1640250AIXteu','createObjectURL','Copy','innerHTML','width','copy-btn','dragleave','setItem','startsWith','dataTransfer','message','drop','data','addEventListener','total','progress-container','uploadHistory','_blank','parse','style','Uploading:\x20','status','2xRJTaW','div','round','DOMContentLoaded','Upload\x20gagal:\x20','fileInput','5343OtDmMa'];_0x31d9=function(){return _0xa802ee;};return _0x31d9();}function saveToHistory(_0x57df0a){const _0x57d50c=_0x2e917e,_0x44b9e4=JSON[_0x57d50c(0x1d4)](localStorage[_0x57d50c(0x1a3)]('uploadHistory')||'[]');_0x44b9e4[_0x57d50c(0x1e8)]({'url':_0x57df0a,'date':new Date()['toISOString']()}),localStorage[_0x57d50c(0x1c9)](_0x57d50c(0x1d2),JSON[_0x57d50c(0x1a7)](_0x44b9e4));}function renderHistory(){const _0x22e10f=_0x2e917e,_0x318eda=JSON['parse'](localStorage[_0x22e10f(0x1a3)]('uploadHistory')||'[]');historyList[_0x22e10f(0x1c5)]='',_0x318eda['forEach'](_0x424982=>{const _0x11ba1e=_0x22e10f,_0x1a1c8b=document[_0x11ba1e(0x1a4)](_0x11ba1e(0x1d9));_0x1a1c8b[_0x11ba1e(0x1b5)]=_0x11ba1e(0x1b2);const _0xceabd7=document['createElement']('a');_0xceabd7['href']=_0x424982[_0x11ba1e(0x1a2)],_0xceabd7[_0x11ba1e(0x1e7)]=_0x11ba1e(0x1d3),_0xceabd7[_0x11ba1e(0x1be)]=_0x424982['url'];const _0x52cba6=document[_0x11ba1e(0x1a4)](_0x11ba1e(0x1c0));_0x52cba6[_0x11ba1e(0x1be)]=_0x11ba1e(0x1c4),_0x52cba6[_0x11ba1e(0x1b5)]=_0x11ba1e(0x1c7),_0x52cba6[_0x11ba1e(0x1cf)](_0x11ba1e(0x1a6),()=>navigator[_0x11ba1e(0x1e0)]['writeText'](_0x424982[_0x11ba1e(0x1a2)])['then'](()=>{const _0x80ddb=_0x11ba1e;_0x52cba6[_0x80ddb(0x1be)]=_0x80ddb(0x1b1),setTimeout(()=>_0x52cba6[_0x80ddb(0x1be)]=_0x80ddb(0x1c4),0x7d0);})),_0x1a1c8b[_0x11ba1e(0x1ad)](_0xceabd7),_0x1a1c8b['appendChild'](_0x52cba6),historyList[_0x11ba1e(0x1ad)](_0x1a1c8b);});}
+</script>
+    <script src="main.js"></script>
+  </body>
+</html>

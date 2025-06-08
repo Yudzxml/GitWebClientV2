@@ -117,50 +117,72 @@
 </head>
 <body>
   <!-- HEADER -->
-   <aside id="sidebar">
-      <button id="sidebarClose" class="sidebar-close">×</button>
-      <div class="sidebar-section">
-        <button id="goAdminBtn" class="btn btn-primary sidebar-btn">
-          Admin Promo
+    <aside id="sidebar">
+  <button id="sidebarClose" class="sidebar-close">×</button>
+  <div class="sidebar-section">
+    <button onclick="location.href='loginPromo.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🔒</span> Admin Login
+    </button>
+    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛒</span> Cek Keranjang
+    </button>
+    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">⭐</span> Testimoni
+    </button>
+    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🏷️</span> Diskon Produk
+    </button>
+    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">💬</span> Komentar/Ratting
+    </button>
+    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">✉️</span> Contact Admin
+    </button>   
+    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
+     <span class="icon">📤</span> Upload File
+    </button>
+    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <span class="icon">👥</span> Static Pengunjung
         </button>
-      </div>
-    </aside>
-    
-  <header class="site-header">
-    <div class="container">
-      <button id="sidebarToggle" class="sidebar-toggle" type="button">
-        ☰
-      </button>
+    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <span class="icon">💖</span> Donasi
+        </button>       
+    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">📜</span> Terms of Service
+    </button>        
+  </div>
+</aside>
 
-      <div class="header-left">
-        <h1 class="logo">オ INFORMATION</h1>
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">オ INFORMASI PROMO</h1>
+        </div>
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+    <button onclick="location.href='index.html'" <span class="icon-btn" title="Keranjang">🏠</button>
+        </div>
       </div>
-
-      <div class="header-center">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Cari produk..."
-          autocomplete="off"
-        />
-      </div>
-
-      <div class="header-right">
-        <button
-          id="darkModeToggle"
-          class="dark-toggle"
-          title="Toggle Dark Mode"
-          type="button"
-        >
-          <div class="toggle-track">
-            <span class="icon-sun">☀️</span>
-            <span class="icon-moon">🌙</span>
-          </div>
-        </button>
-        <a href="index.html" class="icon-btn" title="Home">🏠</a>
-      </div>
-    </div>
-  </header>
+    </header>
 
   <!-- MAIN CONTENT -->
   <main class="container">
@@ -181,7 +203,7 @@
   </footer>
 
   <script>
-    const _0x169998=_0x4ae6;(function(_0x124f1e,_0x524bd7){const _0x563872=_0x4ae6,_0x166ddb=_0x124f1e();while(!![]){try{const _0x1eb35f=-parseInt(_0x563872(0x8e))/0x1+parseInt(_0x563872(0x7f))/0x2*(parseInt(_0x563872(0x97))/0x3)+parseInt(_0x563872(0x95))/0x4*(-parseInt(_0x563872(0x8b))/0x5)+parseInt(_0x563872(0xab))/0x6*(-parseInt(_0x563872(0xa5))/0x7)+-parseInt(_0x563872(0x8f))/0x8*(parseInt(_0x563872(0xa1))/0x9)+-parseInt(_0x563872(0x73))/0xa+parseInt(_0x563872(0xaf))/0xb;if(_0x1eb35f===_0x524bd7)break;else _0x166ddb['push'](_0x166ddb['shift']());}catch(_0x3337af){_0x166ddb['push'](_0x166ddb['shift']());}}}(_0x29d1,0xed172));const apiUrl=_0x169998(0x96),sidebarToggleBtn=document['getElementById']('sidebarToggle'),darkModeToggleBtn=document[_0x169998(0x84)]('darkModeToggle'),searchInput=document[_0x169998(0x84)](_0x169998(0xaa)),promoListContainer=document[_0x169998(0x84)](_0x169998(0xac)),bodyEl=document[_0x169998(0xa2)],sidebarEl=document[_0x169998(0x84)](_0x169998(0x7d)),goAdminBtn=document['getElementById'](_0x169998(0x75));let allPromos=[];async function fetchPromos(){const _0x4154d5=_0x169998;try{promoListContainer[_0x4154d5(0x8c)]=_0x4154d5(0xb1);const _0x56f3ae=await fetch(apiUrl);if(!_0x56f3ae['ok'])throw new Error(_0x4154d5(0x86));const _0x2c34d0=await _0x56f3ae[_0x4154d5(0x89)](),_0x352384=_0x2c34d0[_0x4154d5(0x9c)],_0x2e89dd=atob(_0x352384),_0x5e3697=JSON[_0x4154d5(0x7c)](_0x2e89dd);allPromos=_0x5e3697,renderPromos(_0x5e3697);}catch(_0x24837d){console[_0x4154d5(0xb5)](_0x24837d),promoListContainer[_0x4154d5(0x8c)]='<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20promo.</p>';}}function formattedDate(_0x5276ef){const _0x547ed7=_0x169998,_0x40e7d4=new Date(_0x5276ef),_0x189fe6={'day':_0x547ed7(0x91),'month':_0x547ed7(0xa3),'year':_0x547ed7(0x91)};return _0x40e7d4['toLocaleDateString'](_0x547ed7(0xb6),_0x189fe6);}function renderPromos(_0x477197){const _0x4ac541=_0x169998;promoListContainer[_0x4ac541(0x8c)]='';const _0x43eaa7=new Date();_0x477197[_0x4ac541(0x77)](_0x843cb8=>{const _0x1fb27b=_0x4ac541,_0x1284f1=new Date(_0x843cb8[_0x1fb27b(0x87)]),_0x522392=_0x1284f1<_0x43eaa7,_0x4fc82d=document[_0x1fb27b(0xa6)](_0x1fb27b(0x90));_0x4fc82d[_0x1fb27b(0x8d)]=_0x1fb27b(0xb4),_0x522392&&(_0x4fc82d[_0x1fb27b(0x98)][_0x1fb27b(0x80)]='0.6'),_0x4fc82d[_0x1fb27b(0x8c)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22promo-name\x22>'+_0x843cb8[_0x1fb27b(0xa9)]+_0x1fb27b(0x94)+_0x843cb8[_0x1fb27b(0xb3)]+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-price\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Rp\x20'+_0x843cb8[_0x1fb27b(0x83)]['toLocaleString']('id-ID')+_0x1fb27b(0x81)+_0x843cb8[_0x1fb27b(0xa8)][_0x1fb27b(0xb2)](_0x1fb27b(0xb6))+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-validity\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(_0x522392?_0x1fb27b(0x76):_0x1fb27b(0xb0)+formattedDate(_0x843cb8[_0x1fb27b(0x87)]))+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(_0x522392?'':'<a\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20href=\x22https://wa.me/'+_0x843cb8[_0x1fb27b(0x99)]+'?text='+encodeURIComponent(_0x1fb27b(0xad)+_0x843cb8[_0x1fb27b(0xa9)]+_0x1fb27b(0x85)+_0x843cb8[_0x1fb27b(0xa8)][_0x1fb27b(0xb2)](_0x1fb27b(0xb6)))+_0x1fb27b(0x9a))+_0x1fb27b(0x88),promoListContainer[_0x1fb27b(0xae)](_0x4fc82d);});}function filterPromos(_0x5c767d){const _0x5f14fe=_0x169998,_0x37f361=_0x5c767d[_0x5f14fe(0x78)]()[_0x5f14fe(0x9d)]();if(!_0x37f361){renderPromos(allPromos);return;}const _0x2d5664=allPromos[_0x5f14fe(0x93)](_0x2ebc56=>{const _0x5fae7f=_0x5f14fe,_0x3dc109=_0x2ebc56[_0x5fae7f(0xa9)][_0x5fae7f(0x9d)](),_0x875afe=_0x2ebc56[_0x5fae7f(0xb3)]['toLowerCase'](),_0x1c703b=_0x2ebc56[_0x5fae7f(0x83)]['toString'](),_0x3f7075=_0x2ebc56['harga_promo'][_0x5fae7f(0x70)](),_0x57e897=_0x2ebc56[_0x5fae7f(0x87)][_0x5fae7f(0x9d)]();return _0x3dc109[_0x5fae7f(0xa4)](_0x37f361)||_0x875afe[_0x5fae7f(0xa4)](_0x37f361)||_0x1c703b[_0x5fae7f(0xa4)](_0x37f361)||_0x3f7075[_0x5fae7f(0xa4)](_0x37f361)||_0x57e897[_0x5fae7f(0xa4)](_0x37f361);});renderPromos(_0x2d5664);}function applyInitialDarkMode(){const _0x8acdb2=_0x169998,_0x14c440=localStorage[_0x8acdb2(0x71)](_0x8acdb2(0x7b));_0x14c440===_0x8acdb2(0x7a)&&bodyEl['classList']['add'](_0x8acdb2(0xa0));}function toggleDarkMode(){const _0x3e417d=_0x169998;bodyEl[_0x3e417d(0x7e)]['contains'](_0x3e417d(0xa0))?(bodyEl[_0x3e417d(0x7e)][_0x3e417d(0xa7)]('dark-mode'),localStorage[_0x3e417d(0x9f)](_0x3e417d(0x7b),'disabled')):(bodyEl[_0x3e417d(0x7e)][_0x3e417d(0x74)]('dark-mode'),localStorage[_0x3e417d(0x9f)](_0x3e417d(0x7b),_0x3e417d(0x7a)));}function toggleSidebar(){const _0x225469=_0x169998;if(!sidebarEl)return;sidebarEl[_0x225469(0x7e)]['toggle'](_0x225469(0x9e));}document[_0x169998(0x8a)](_0x169998(0x79),()=>{fetchPromos(),applyInitialDarkMode();});function _0x4ae6(_0xc10463,_0x1464d4){const _0x29d10c=_0x29d1();return _0x4ae6=function(_0x4ae60b,_0x370d7f){_0x4ae60b=_0x4ae60b-0x70;let _0x456085=_0x29d10c[_0x4ae60b];return _0x456085;},_0x4ae6(_0xc10463,_0x1464d4);}function _0x29d1(){const _0x3d0fa2=['long','includes','77LalOXB','createElement','remove','harga_promo','nama','searchInput','197910bDXUor','promo-list','Halo\x20Admin,\x20saya\x20ingin\x20order\x20produk\x20diskon:\x20','appendChild','69537490pIWJnC','Berlaku\x20hingga:\x20','<p>Loading\x20promo...</p>','toLocaleString','deskripsi','promo-item','error','id-ID','toString','getItem','location','19010900NYOEAZ','add','goAdminBtn','<span\x20style=\x22color:red;\x22>Promo\x20telah\x20berakhir</span>','forEach','trim','DOMContentLoaded','enabled','darkMode','parse','sidebar','classList','488SmYRjC','opacity','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Rp\x20','input','harga_awal','getElementById','\x0aHarga:\x20','Gagal\x20mengambil\x20data\x20promo\x20dari\x20GitHub\x20API','berlaku_sampai','\x0a\x20\x20\x20\x20\x20\x20\x20\x20','json','addEventListener','70765VMUmBi','innerHTML','className','1624498YKMZmf','39944RSTPRi','div','numeric','target','filter','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-desc\x22>','296MTatds','https://api.github.com/repos/Yudzxml/WebClientV1/contents/promo.json','9573ocrUXi','style','wa_nomor','\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22wa-button\x22\x20target=\x22_blank\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20ORDER\x20SEKARANG\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</a>','click','content','toLowerCase','open','setItem','dark-mode','2151Tgwhow','body'];_0x29d1=function(){return _0x3d0fa2;};return _0x29d1();}searchInput&&searchInput['addEventListener'](_0x169998(0x82),_0x41e17e=>{const _0x12f859=_0x169998;filterPromos(_0x41e17e[_0x12f859(0x92)]['value']);});darkModeToggleBtn&&darkModeToggleBtn['addEventListener']('click',()=>{toggleDarkMode();});sidebarToggle[_0x169998(0x8a)]('click',()=>{const _0x1e1231=_0x169998;sidebar['classList']['add'](_0x1e1231(0x9e));}),sidebarClose['addEventListener']('click',()=>{const _0x3712c5=_0x169998;sidebar[_0x3712c5(0x7e)][_0x3712c5(0xa7)](_0x3712c5(0x9e));}),goAdminBtn[_0x169998(0x8a)](_0x169998(0x9b),()=>{const _0x32b299=_0x169998;window[_0x32b299(0x72)]['href']='loginPromo.html';});
+    function _0x562e(_0x467a25,_0x3457b3){const _0x2c85ef=_0x2c85();return _0x562e=function(_0x562e55,_0x5da375){_0x562e55=_0x562e55-0x1d4;let _0x1eadda=_0x2c85ef[_0x562e55];return _0x1eadda;},_0x562e(_0x467a25,_0x3457b3);}const _0x20fa80=_0x562e;(function(_0x349aa9,_0x21f615){const _0x561d92=_0x562e,_0x166a74=_0x349aa9();while(!![]){try{const _0x3f2e73=-parseInt(_0x561d92(0x1e6))/0x1+parseInt(_0x561d92(0x1fa))/0x2*(-parseInt(_0x561d92(0x1df))/0x3)+parseInt(_0x561d92(0x1f6))/0x4*(parseInt(_0x561d92(0x1e8))/0x5)+parseInt(_0x561d92(0x201))/0x6+-parseInt(_0x561d92(0x1ff))/0x7+-parseInt(_0x561d92(0x1f5))/0x8*(parseInt(_0x561d92(0x209))/0x9)+-parseInt(_0x561d92(0x1f4))/0xa*(-parseInt(_0x561d92(0x213))/0xb);if(_0x3f2e73===_0x21f615)break;else _0x166a74['push'](_0x166a74['shift']());}catch(_0x26f884){_0x166a74['push'](_0x166a74['shift']());}}}(_0x2c85,0x7261f));const apiUrl='https://api.github.com/repos/Yudzxml/WebClientV1/contents/promo.json',sidebarToggleBtn=document[_0x20fa80(0x1ef)](_0x20fa80(0x1e3)),darkModeToggleBtn=document['getElementById'](_0x20fa80(0x20a)),searchInput=document['getElementById'](_0x20fa80(0x1e1)),promoListContainer=document[_0x20fa80(0x1ef)]('promo-list'),bodyEl=document[_0x20fa80(0x1f3)],sidebarEl=document[_0x20fa80(0x1ef)]('sidebar'),goAdminBtn=document[_0x20fa80(0x1ef)]('goAdminBtn');let allPromos=[];async function fetchPromos(){const _0x149920=_0x20fa80;try{promoListContainer[_0x149920(0x1ed)]=_0x149920(0x1fc);const _0x49e6eb=await fetch(apiUrl);if(!_0x49e6eb['ok'])throw new Error(_0x149920(0x1ea));const _0x481010=await _0x49e6eb[_0x149920(0x1d4)](),_0x288151=_0x481010[_0x149920(0x20d)],_0xb40f87=atob(_0x288151),_0x401243=JSON[_0x149920(0x20f)](_0xb40f87);allPromos=_0x401243,renderPromos(_0x401243);}catch(_0x45cc07){console[_0x149920(0x20c)](_0x45cc07),promoListContainer[_0x149920(0x1ed)]='<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20promo.</p>';}}function _0x2c85(){const _0x1c5ceb=['error','content','setItem','parse','open','includes','value','209NESxzI','style','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','addEventListener','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-desc\x22>','json','darkMode','remove','?text=','enabled','<a\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20href=\x22https://wa.me/','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22promo-name\x22>','\x0aHarga:\x20','deskripsi','trim','numeric','12942smfCgU','\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22wa-button\x22\x20target=\x22_blank\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20ORDER\x20SEKARANG\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</a>','searchInput','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-price\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Rp\x20','sidebarToggle','\x0a\x20\x20\x20\x20\x20\x20\x20\x20','dark-mode','502716LwRxoP','id-ID','3024520OZKelF','DOMContentLoaded','Gagal\x20mengambil\x20data\x20promo\x20dari\x20GitHub\x20API','nama','div','innerHTML','input','getElementById','click','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-validity\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','getItem','body','401720vOXEJq','132128Wkbsbb','4kjdkKP','contains','toLocaleDateString','harga_awal','24uogcmH','harga_promo','<p>Loading\x20promo...</p>','toLocaleString','toggle','2188725yvdJQp','wa_nomor','4660692SkxzdW','toLowerCase','classList','appendChild','berlaku_sampai','className','add','toString','441uXSTPn','darkModeToggle','promo-item'];_0x2c85=function(){return _0x1c5ceb;};return _0x2c85();}function formattedDate(_0x2ba3d4){const _0x1b6333=_0x20fa80,_0x4939d9=new Date(_0x2ba3d4),_0x45bb44={'day':_0x1b6333(0x1de),'month':'long','year':_0x1b6333(0x1de)};return _0x4939d9[_0x1b6333(0x1f8)]('id-ID',_0x45bb44);}function renderPromos(_0x3d9df0){promoListContainer['innerHTML']='';const _0x122cc2=new Date();_0x3d9df0['forEach'](_0x28e90f=>{const _0x584e30=_0x562e,_0x36e029=new Date(_0x28e90f[_0x584e30(0x205)]),_0x6ca040=_0x36e029<_0x122cc2,_0x3a2d26=document['createElement'](_0x584e30(0x1ec));_0x3a2d26[_0x584e30(0x206)]=_0x584e30(0x20b),_0x6ca040&&(_0x3a2d26[_0x584e30(0x214)]['opacity']='0.6'),_0x3a2d26[_0x584e30(0x1ed)]=_0x584e30(0x1da)+_0x28e90f[_0x584e30(0x1eb)]+_0x584e30(0x217)+_0x28e90f[_0x584e30(0x1dc)]+_0x584e30(0x1e2)+_0x28e90f['harga_awal'][_0x584e30(0x1fd)](_0x584e30(0x1e7))+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Rp\x20'+_0x28e90f[_0x584e30(0x1fb)][_0x584e30(0x1fd)](_0x584e30(0x1e7))+_0x584e30(0x1f1)+(_0x6ca040?'<span\x20style=\x22color:red;\x22>Promo\x20telah\x20berakhir</span>':'Berlaku\x20hingga:\x20'+formattedDate(_0x28e90f['berlaku_sampai']))+_0x584e30(0x215)+(_0x6ca040?'':_0x584e30(0x1d9)+_0x28e90f[_0x584e30(0x200)]+_0x584e30(0x1d7)+encodeURIComponent('Halo\x20Admin,\x20saya\x20ingin\x20order\x20produk\x20diskon:\x20'+_0x28e90f[_0x584e30(0x1eb)]+_0x584e30(0x1db)+_0x28e90f[_0x584e30(0x1fb)][_0x584e30(0x1fd)](_0x584e30(0x1e7)))+_0x584e30(0x1e0))+_0x584e30(0x1e4),promoListContainer[_0x584e30(0x204)](_0x3a2d26);});}function filterPromos(_0xc6fb4c){const _0xde0f91=_0x20fa80,_0x4711d3=_0xc6fb4c[_0xde0f91(0x1dd)]()[_0xde0f91(0x202)]();if(!_0x4711d3){renderPromos(allPromos);return;}const _0x3a7d64=allPromos['filter'](_0x1a605f=>{const _0x2f11d1=_0xde0f91,_0x2cd64e=_0x1a605f[_0x2f11d1(0x1eb)]['toLowerCase'](),_0x13a3f8=_0x1a605f['deskripsi'][_0x2f11d1(0x202)](),_0x522c2e=_0x1a605f[_0x2f11d1(0x1f9)][_0x2f11d1(0x208)](),_0x590b5e=_0x1a605f[_0x2f11d1(0x1fb)][_0x2f11d1(0x208)](),_0x34b7d9=_0x1a605f['berlaku_sampai'][_0x2f11d1(0x202)]();return _0x2cd64e['includes'](_0x4711d3)||_0x13a3f8['includes'](_0x4711d3)||_0x522c2e['includes'](_0x4711d3)||_0x590b5e[_0x2f11d1(0x211)](_0x4711d3)||_0x34b7d9[_0x2f11d1(0x211)](_0x4711d3);});renderPromos(_0x3a7d64);}function applyInitialDarkMode(){const _0x165673=_0x20fa80,_0x545017=localStorage[_0x165673(0x1f2)](_0x165673(0x1d5));_0x545017===_0x165673(0x1d8)&&bodyEl['classList'][_0x165673(0x207)](_0x165673(0x1e5));}function toggleDarkMode(){const _0x55a13e=_0x20fa80;bodyEl[_0x55a13e(0x203)][_0x55a13e(0x1f7)](_0x55a13e(0x1e5))?(bodyEl[_0x55a13e(0x203)][_0x55a13e(0x1d6)](_0x55a13e(0x1e5)),localStorage[_0x55a13e(0x20e)](_0x55a13e(0x1d5),'disabled')):(bodyEl[_0x55a13e(0x203)]['add'](_0x55a13e(0x1e5)),localStorage['setItem'](_0x55a13e(0x1d5),'enabled'));}function toggleSidebar(){const _0x21b2ee=_0x20fa80;if(!sidebarEl)return;sidebarEl['classList'][_0x21b2ee(0x1fe)]('open');}document['addEventListener'](_0x20fa80(0x1e9),()=>{fetchPromos(),applyInitialDarkMode();});searchInput&&searchInput['addEventListener'](_0x20fa80(0x1ee),_0x291ca5=>{const _0x2d762d=_0x20fa80;filterPromos(_0x291ca5['target'][_0x2d762d(0x212)]);});darkModeToggleBtn&&darkModeToggleBtn['addEventListener']('click',()=>{toggleDarkMode();});sidebarToggle[_0x20fa80(0x216)](_0x20fa80(0x1f0),()=>{const _0x489359=_0x20fa80;sidebar[_0x489359(0x203)][_0x489359(0x207)](_0x489359(0x210));}),sidebarClose[_0x20fa80(0x216)](_0x20fa80(0x1f0),()=>{const _0x4975dc=_0x20fa80;sidebar['classList'][_0x4975dc(0x1d6)](_0x4975dc(0x210));});
   </script>
 </body>
 </html>

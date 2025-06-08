@@ -1,342 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Keranjang – YUDZXML STORE</title>
+    <title>KERANJANG BY YUDZXML</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
-      /* ===================================
-         VARIABLES & RESET
-      =================================== */
       :root {
-        --color-bg: #f5f5f5;
-        --color-text: #333;
-        --color-header-start: #ff5722;
-        --color-header-end: #ff8a50;
-        --color-btn-primary: #ff5722;
-        --color-btn-primary-hover: #e64a19;
-        --color-btn-secondary: #777;
-        --color-btn-secondary-hover: #555;
-        --color-btn-success: #388e3c;
-        --color-btn-success-hover: #2e7d32;
-        --color-btn-danger: #e53935;
-        --color-btn-danger-hover: #c62828;
-        --color-border: #ddd;
-        --color-card-bg: #fff;
-        --color-card-border: #eee;
-        --color-footer-bg: #fff;
-        --color-footer-text: #999;
-        --color-input-bg: #fff;
-        --color-input-border: #ccc;
-
-        /* Dark mode vars (jika dibutuhkan) */
-        --color-dark-bg: #1e1e1e;
-        --color-dark-text: #ddd;
-        --color-dark-header-start: #333;
-        --color-dark-header-end: #555;
-        --color-dark-card-bg: #2a2a2a;
-        --color-dark-card-border: #444;
-        --color-dark-footer-bg: #2a2a2a;
-        --color-dark-footer-text: #aaa;
+        --bg: #f5f5f5;
+        --text: #333;
+        --primary: #ff5722;
+        --primary-hover: #e64a19;
+        --danger: #e53935;
+        --danger-hover: #c62828;
+        --success: #388e3c;
+        --success-hover: #2e7d32;
+        --border: #ddd;
+        --card-bg: #fff;
       }
-
-      /* Reset dasar */
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background-color: var(--color-bg);
-        color: var(--color-text);
-        font-family: 'Poppins', sans-serif;
-        transition: background-color 0.3s ease, color 0.3s ease;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      /* ===================================
-         CONTAINER
-      =================================== */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-        width: 100%;
-      }
-
-      /* ===================================
-         TYPOGRAPHY & BUTTONS
-      =================================== */
-      h1,
-      h2 {
-        font-weight: 600;
-        line-height: 1.2;
-        color: var(--color-text);
-      }
-
-      h2 {
-        margin: 2rem 0 1rem;
-        font-size: 1.5rem;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 0.6rem 1rem;
-        text-align: center;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: background-color 0.2s ease;
-        border: 1px solid transparent;
-        text-decoration: none;
-      }
-
-      .btn-secondary {
-        background-color: var(--color-btn-secondary);
-        color: #fff;
-        border-color: var(--color-btn-secondary);
-      }
-      .btn-secondary:hover {
-        background-color: var(--color-btn-secondary-hover);
-        border-color: var(--color-btn-secondary-hover);
-      }
-
-      .btn-success {
-        background-color: var(--color-btn-success);
-        color: #fff;
-        border-color: var(--color-btn-success);
-      }
-      .btn-success:hover {
-        background-color: var(--color-btn-success-hover);
-        border-color: var(--color-btn-success-hover);
-      }
-
-      .btn-danger {
-        background-color: var(--color-btn-danger);
-        color: #fff;
-        border-color: var(--color-btn-danger);
-      }
-      .btn-danger:hover {
-        background-color: var(--color-btn-danger-hover);
-        border-color: var(--color-btn-danger-hover);
-      }
-
-      /* ===================================
-         HEADER
-      =================================== */
-      .site-header {
-        background: linear-gradient(90deg, var(--color-header-start), var(--color-header-end));
-        color: #fff;
-        padding: 0.75rem 0;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 900;
-      }
-      .site-header .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .site-header .logo {
-        font-size: 1.5rem;
-      }
-
-      /* ===================================
-         MAIN CONTENT (KERANJANG)
-      =================================== */
-      main.container {
-        padding: 2rem 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      main.container h2 {
-        width: 100%;
-        text-align: left;
-      }
-
-      /* ===================================
-         DAFTAR ITEM KERANJANG
-      =================================== */
-      .cart-items {
-        list-style: none;
-        width: 100%;
-        background-color: var(--color-card-bg);
-        border: 1px solid var(--color-card-border);
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        overflow: hidden;
-        margin-bottom: 1.5rem;
-      }
-
-      .cart-items li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem;
-        border-bottom: 1px solid var(--color-border);
-        font-size: 0.95rem;
-        color: var(--color-text);
-      }
-
-      .cart-items li:last-child {
-        border-bottom: none;
-      }
-
-      .cart-items li span.item-info {
-        flex: 1;
-        margin-right: 1rem;
-      }
-
-      .cart-items li button.remove-item {
-        background: none;
-        border: none;
-        color: var(--color-btn-danger);
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: color 0.2s ease;
-      }
-      .cart-items li button.remove-item:hover {
-        color: var(--color-btn-danger-hover);
-      }
-
-      /* ===================================
-         TOTAL KERANJANG
-      =================================== */
-      .cart-total {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        background-color: var(--color-card-bg);
-        border: 1px solid var(--color-card-border);
-        border-radius: 8px;
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--color-text);
-        margin-bottom: 1.5rem;
-      }
-
-      .cart-total span:first-child {
-        color: #555;
-      }
-
-      /* ===================================
-         FOOTER
-      =================================== */
-      .site-footer {
-        background-color: var(--color-footer-bg);
-        border-top: 1px solid var(--color-border);
-        padding: 1rem 0;
-        text-align: center;
-        width: 100%;
-      }
-      .site-footer p {
-        color: var(--color-footer-text);
-        font-size: 0.9rem;
-      }
-
-      /* ===================================
-         RESPONSIVE ADJUSTMENTS
-      =================================== */
+      *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 1rem; width: 100%; }
+      h1, h2 { font-weight: 600; color: var(--text); }
+      h1 { font-size: 1.75rem; }
+      h2 { margin-bottom: 1rem; font-size: 1.5rem; }
+      .btn { display: inline-block; padding: 0.6rem 1rem; border-radius: 4px; text-decoration: none; font-size: 0.9rem; cursor: pointer; transition: background-color 0.2s; }
+      /* di dalam <style> Anda */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+}
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+      .btn-secondary { background: var(--border); color: #fff; border: 1px solid var(--border); }
+      .btn-secondary:hover { background: var(--text); border-color: var(--text); }
+      .btn-success { background: var(--success); color: #fff; border: 1px solid var(--success); }
+      .btn-success:hover { background: var(--success-hover); border-color: var(--success-hover); }
+      .btn-danger { background: var(--danger); color: #fff; border: 1px solid var(--danger); }
+      .btn-danger:hover { background: var(--danger-hover); border-color: var(--danger-hover); }
+      .site-header { background: var(--primary); color: #fff; padding: 1rem 0; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); position: sticky; top: 0; z-index: 1000; }
+      .site-header .container { display: flex; justify-content: space-between; align-items: center; }
+      main { flex: 1; padding: 2rem 0; }
+      .cart-items { list-style: none; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+      .cart-items li { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid var(--border); }
+      .cart-items li:last-child { border-bottom: none; }
+      .item-info { flex: 1; font-weight: 500; }
+      .item-price { font-weight: 600; color: var(--primary); margin-right: 1rem; }
+      .remove-item { background: none; border: none; font-size: 1.2rem; color: var(--danger); cursor: pointer; transition: color 0.2s; }
+      .remove-item:hover { color: var(--danger-hover); }
+      .cart-total { display: flex; justify-content: space-between; align-items: center; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; margin: 1rem 0; padding: 1rem; font-size: 1.1rem; font-weight: 600; }
+      #checkoutBtnCart { width: 100%; text-align: center; }
+      .empty-msg { padding: 2rem; text-align: center; color: #777; }
+      .site-footer { background: var(--card-bg); border-top: 1px solid var(--border); text-align: center; padding: 1rem 0; }
+      .site-footer p { color: #777; font-size: 0.9rem; }
       @media (max-width: 768px) {
-        .container {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .site-header .container {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .site-header .logo {
-          margin-bottom: 0.5rem;
-          font-size: 1.3rem;
-        }
-        .cart-items li {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .cart-items li span.item-info {
-          margin-bottom: 0.5rem;
-        }
-        .cart-total {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 0.5rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        h2 {
-          font-size: 1.25rem;
-        }
-        .cart-items li {
-          padding: 0.75rem;
-          font-size: 0.9rem;
-        }
-        .cart-total {
-          padding: 0.75rem 1rem;
-          font-size: 1rem;
-        }
-        .btn {
-          padding: 0.5rem 0.8rem;
-          font-size: 0.85rem;
-        }
-        .site-footer p {
-          font-size: 0.8rem;
-        }
+        .site-header .container { flex-direction: column; }
+        .cart-items li { flex-direction: column; align-items: flex-start; }
+        .item-price { margin: 0.5rem 0; }
       }
     </style>
   </head>
   <body>
     <header class="site-header">
       <div class="container">
-        <h1 class="logo">Keranjang Belanja</h1>
-        <button onclick="window.location.href='index.html'" class="btn btn-secondary">
-          ← Kembali ke Toko
-        </button>
+        <h1>Keranjang Belanja</h1>
+<a href="index.html" class="btn btn-primary">HOME</a>
       </div>
     </header>
-
     <main class="container">
       <h2>Isi Keranjang Anda</h2>
       <ul id="cartItemsList" class="cart-items"></ul>
-
-      <div class="cart-total">
+      <div id="cartTotal" class="cart-total">
         <span>Total:</span>
         <span id="cartTotalPriceCart">Rp 0</span>
       </div>
-
-      <button id="checkoutBtnCart" class="btn btn-success">
-        Checkout via WhatsApp
-      </button>
+      <button id="checkoutBtnCart" class="btn btn-success">Checkout via WhatsApp</button>
     </main>
-
     <footer class="site-footer">
       <div class="container">
-        <p>© 2025 YUDZXML Allright Reserved</p>
+        <p>© 2025 YUDZXML All Rights Reserved</p>
       </div>
     </footer>
-
     <script>
-      function _0x1c77(){const _0x1a97e1=['266763pNVAlu','toString','154NwEzeI','length','open','addEventListener','appendChild','classList','textContent','161256ysYVXg','\x20=\x20Rp\x20','title','createElement','padding','3921670yIUmQD','remove-item','https://wa.me/','Keranjang\x20kosong.','#555','cartItemsList','price','Hapus\x20item','add','style','span','stringify','forEach','name','click','6283872031397','?text=','packageName','item-info','DOMContentLoaded','2032680Arsmdv','1407080rrNTdG','26ipSfpg','9YVSjOx','innerHTML','replace','Rp\x20','splice','quantity','getElementById','567264EsYhEM','checkoutBtnCart',')\x20×','37183rzYILq'];_0x1c77=function(){return _0x1a97e1;};return _0x1c77();}const _0x4cf67d=_0x4889;(function(_0x166e59,_0x2421f4){const _0x2b7a5d=_0x4889,_0x38013a=_0x166e59();while(!![]){try{const _0x19d003=parseInt(_0x2b7a5d(0x19f))/0x1*(-parseInt(_0x2b7a5d(0x1c4))/0x2)+-parseInt(_0x2b7a5d(0x1a0))/0x3+-parseInt(_0x2b7a5d(0x19c))/0x4+parseInt(_0x2b7a5d(0x1c3))/0x5+-parseInt(_0x2b7a5d(0x1a9))/0x6*(-parseInt(_0x2b7a5d(0x1a2))/0x7)+-parseInt(_0x2b7a5d(0x1c2))/0x8+-parseInt(_0x2b7a5d(0x1c5))/0x9*(-parseInt(_0x2b7a5d(0x1ae))/0xa);if(_0x19d003===_0x2421f4)break;else _0x38013a['push'](_0x38013a['shift']());}catch(_0x417db6){_0x38013a['push'](_0x38013a['shift']());}}}(_0x1c77,0x486ce));const CART_STORAGE_KEY='yudzxml1122',whatsappNumber=_0x4cf67d(0x1bd);function _0x4889(_0x23e75b,_0x14eb4e){const _0x1c7748=_0x1c77();return _0x4889=function(_0x488930,_0x263f02){_0x488930=_0x488930-0x196;let _0x3db35a=_0x1c7748[_0x488930];return _0x3db35a;},_0x4889(_0x23e75b,_0x14eb4e);}function loadCartFromStorage(){const _0x2fdb99=localStorage['getItem'](CART_STORAGE_KEY);return _0x2fdb99?JSON['parse'](_0x2fdb99):[];}function saveCartToStorage(_0x960856){const _0x47b62f=_0x4cf67d;localStorage['setItem'](CART_STORAGE_KEY,JSON[_0x47b62f(0x1b9)](_0x960856));}function formatRupiah(_0xa52120){const _0x22cc7e=_0x4cf67d;return _0xa52120[_0x22cc7e(0x1a1)]()[_0x22cc7e(0x197)](/\B(?=(\d{3})+(?!\d))/g,'.');}document['addEventListener'](_0x4cf67d(0x1c1),()=>{const _0x4f4e58=_0x4cf67d;let _0x599e67=loadCartFromStorage();const _0x2cc2ed=document[_0x4f4e58(0x19b)](_0x4f4e58(0x1b3)),_0x2d047c=document[_0x4f4e58(0x19b)]('cartTotalPriceCart'),_0x25a4f6=document[_0x4f4e58(0x19b)](_0x4f4e58(0x19d));function _0x1aef5b(){const _0x245e86=_0x4f4e58;_0x2cc2ed[_0x245e86(0x196)]='';let _0x485217=0x0;if(!_0x599e67[_0x245e86(0x1a3)]){const _0x1e1e23=document['createElement']('li');_0x1e1e23[_0x245e86(0x1a8)]=_0x245e86(0x1b1),_0x1e1e23[_0x245e86(0x1b7)][_0x245e86(0x1ad)]='1rem',_0x1e1e23['style']['color']=_0x245e86(0x1b2),_0x2cc2ed['appendChild'](_0x1e1e23);}else _0x599e67['forEach']((_0x34ff05,_0x38e8b2)=>{const _0x35ae2e=_0x245e86;_0x485217+=_0x34ff05[_0x35ae2e(0x1b4)]*_0x34ff05['quantity'];const _0x309d47=document['createElement']('li'),_0x23d54c=document['createElement'](_0x35ae2e(0x1b8));_0x23d54c['classList'][_0x35ae2e(0x1b6)](_0x35ae2e(0x1c0)),_0x23d54c[_0x35ae2e(0x1a8)]=_0x34ff05[_0x35ae2e(0x1bb)]+'\x20('+_0x34ff05[_0x35ae2e(0x1bf)]+_0x35ae2e(0x19e)+_0x34ff05[_0x35ae2e(0x19a)];const _0x494ba1=document[_0x35ae2e(0x1ac)](_0x35ae2e(0x1b8));_0x494ba1[_0x35ae2e(0x1a8)]=_0x35ae2e(0x198)+formatRupiah(_0x34ff05[_0x35ae2e(0x1b4)]*_0x34ff05[_0x35ae2e(0x19a)]);const _0xa45256=document[_0x35ae2e(0x1ac)]('button');_0xa45256[_0x35ae2e(0x1a7)]['add'](_0x35ae2e(0x1af)),_0xa45256[_0x35ae2e(0x196)]='✕',_0xa45256[_0x35ae2e(0x1ab)]=_0x35ae2e(0x1b5),_0xa45256[_0x35ae2e(0x1a5)](_0x35ae2e(0x1bc),()=>{const _0xd621bd=_0x35ae2e;_0x599e67[_0xd621bd(0x199)](_0x38e8b2,0x1),saveCartToStorage(_0x599e67),_0x1aef5b();}),_0x309d47[_0x35ae2e(0x1a6)](_0x23d54c),_0x309d47[_0x35ae2e(0x1a6)](_0x494ba1),_0x309d47['appendChild'](_0xa45256),_0x2cc2ed['appendChild'](_0x309d47);});_0x2d047c[_0x245e86(0x1a8)]=_0x245e86(0x198)+formatRupiah(_0x485217);}_0x1aef5b(),_0x25a4f6['addEventListener'](_0x4f4e58(0x1bc),()=>{const _0x379d0a=_0x4f4e58;if(!_0x599e67[_0x379d0a(0x1a3)]){alert('Keranjang\x20kosong!');return;}let _0x9dd802='Halo,\x20saya\x20ingin\x20memesan:%0A';_0x599e67[_0x379d0a(0x1ba)](_0x3bac1f=>{const _0x432fe6=_0x379d0a;_0x9dd802+='-\x20'+_0x3bac1f[_0x432fe6(0x1bb)]+'\x20('+_0x3bac1f[_0x432fe6(0x1bf)]+_0x432fe6(0x19e)+_0x3bac1f['quantity']+_0x432fe6(0x1aa)+formatRupiah(_0x3bac1f['price']*_0x3bac1f[_0x432fe6(0x19a)])+'%0A';}),_0x9dd802+='Total:\x20Rp\x20'+formatRupiah(_0x599e67['reduce']((_0x1e1c50,_0xf1ade3)=>_0x1e1c50+_0xf1ade3[_0x379d0a(0x1b4)]*_0xf1ade3[_0x379d0a(0x19a)],0x0));const _0xd9d100=_0x379d0a(0x1b0)+whatsappNumber+_0x379d0a(0x1be)+_0x9dd802;window[_0x379d0a(0x1a4)](_0xd9d100,'_blank');});});
+      function _0x5706(_0x3ca3b3,_0x3ff415){const _0x195cf6=_0x195c();return _0x5706=function(_0x570628,_0x4bf340){_0x570628=_0x570628-0x1dc;let _0x5aa0ef=_0x195cf6[_0x570628];return _0x5aa0ef;},_0x5706(_0x3ca3b3,_0x3ff415);}const _0x3b1a57=_0x5706;(function(_0x5b5dfe,_0x1d661e){const _0x559058=_0x5706,_0x23d65e=_0x5b5dfe();while(!![]){try{const _0x24c053=parseInt(_0x559058(0x1e0))/0x1*(parseInt(_0x559058(0x1f5))/0x2)+-parseInt(_0x559058(0x1e6))/0x3+parseInt(_0x559058(0x203))/0x4*(parseInt(_0x559058(0x202))/0x5)+-parseInt(_0x559058(0x20f))/0x6*(-parseInt(_0x559058(0x20a))/0x7)+-parseInt(_0x559058(0x205))/0x8+-parseInt(_0x559058(0x1f2))/0x9+parseInt(_0x559058(0x1ef))/0xa*(parseInt(_0x559058(0x209))/0xb);if(_0x24c053===_0x1d661e)break;else _0x23d65e['push'](_0x23d65e['shift']());}catch(_0x4d3b9d){_0x23d65e['push'](_0x23d65e['shift']());}}}(_0x195c,0x25a25));function _0x195c(){const _0x45b092=['appendChild','innerHTML','getElementById','cartTotalPriceCart','\x20=\x20Rp\x20','quantity','display','querySelector','117355OBjQGJ','4tLWEya','setItem','1514248ziptRO','createElement','parse','replace','9295cgqswW','238GSQXOO','6283872031397','stringify','none','toString','44532oohyiB','cartItemsList','addEventListener','%0A','flex','cartTotal','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22item-price\x22>Rp\x20','49811hLHnkV','reduce','https://wa.me/','Total:\x20Rp\x20','click','checkoutBtnCart','494169SECCBu','<li\x20class=\x22empty-msg\x22>Keranjang\x20kosong.</li>','Rp\x20','packageName','open','style','price','block','_blank','4490GcTCBs','.remove-item','length','2668536LyeOeS',')\x20×','Halo,\x20saya\x20ingin\x20memesan:%0A','6YqASwx','forEach','name','DOMContentLoaded','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22remove-item\x22\x20title=\x22Hapus\x20item\x22>✕</button>\x0a\x20\x20\x20\x20\x20\x20'];_0x195c=function(){return _0x45b092;};return _0x195c();}const STORAGE_KEY='yudzxml1122',whatsappNumber=_0x3b1a57(0x20b),cartItemsList=document[_0x3b1a57(0x1fc)](_0x3b1a57(0x210)),cartTotalPriceCart=document[_0x3b1a57(0x1fc)](_0x3b1a57(0x1fd)),checkoutBtnCart=document[_0x3b1a57(0x1fc)](_0x3b1a57(0x1e5)),formatRupiah=_0x1637c5=>_0x1637c5[_0x3b1a57(0x20e)]()[_0x3b1a57(0x208)](/\B(?=(\d{3})+(?!\d))/g,'.');function loadCart(){const _0x48de58=_0x3b1a57,_0x427734=localStorage['getItem'](STORAGE_KEY);return _0x427734?JSON[_0x48de58(0x207)](_0x427734):[];}function saveCart(_0x31aa44){const _0x551456=_0x3b1a57;localStorage[_0x551456(0x204)](STORAGE_KEY,JSON[_0x551456(0x20c)](_0x31aa44));}function renderCart(){const _0x5e68f7=_0x3b1a57,_0x395354=loadCart();cartItemsList[_0x5e68f7(0x1fb)]='';if(!_0x395354[_0x5e68f7(0x1f1)]){cartItemsList['innerHTML']=_0x5e68f7(0x1e7),document[_0x5e68f7(0x1fc)](_0x5e68f7(0x1de))[_0x5e68f7(0x1eb)][_0x5e68f7(0x200)]=_0x5e68f7(0x20d),checkoutBtnCart[_0x5e68f7(0x1eb)][_0x5e68f7(0x200)]='none';return;}let _0xd122f6=0x0;_0x395354[_0x5e68f7(0x1f6)]((_0x4ed7c5,_0x1c9b53)=>{const _0x1e4d7b=_0x5e68f7;_0xd122f6+=_0x4ed7c5[_0x1e4d7b(0x1ec)]*_0x4ed7c5['quantity'];const _0xb5d763=document[_0x1e4d7b(0x206)]('li');_0xb5d763[_0x1e4d7b(0x1fb)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<span\x20class=\x22item-info\x22>'+_0x4ed7c5['name']+'\x20('+_0x4ed7c5['packageName']+_0x1e4d7b(0x1f3)+_0x4ed7c5['quantity']+_0x1e4d7b(0x1df)+formatRupiah(_0x4ed7c5[_0x1e4d7b(0x1ec)]*_0x4ed7c5['quantity'])+_0x1e4d7b(0x1f9),_0xb5d763[_0x1e4d7b(0x201)](_0x1e4d7b(0x1f0))[_0x1e4d7b(0x211)](_0x1e4d7b(0x1e4),()=>{_0x395354['splice'](_0x1c9b53,0x1),saveCart(_0x395354),renderCart();}),cartItemsList[_0x1e4d7b(0x1fa)](_0xb5d763);}),cartTotalPriceCart['textContent']=_0x5e68f7(0x1e8)+formatRupiah(_0xd122f6),document[_0x5e68f7(0x1fc)](_0x5e68f7(0x1de))[_0x5e68f7(0x1eb)][_0x5e68f7(0x200)]=_0x5e68f7(0x1dd),checkoutBtnCart[_0x5e68f7(0x1eb)][_0x5e68f7(0x200)]=_0x5e68f7(0x1ed);}checkoutBtnCart['addEventListener'](_0x3b1a57(0x1e4),()=>{const _0x3436a8=_0x3b1a57,_0xb18d02=loadCart();let _0x1397b4=_0x3436a8(0x1f4);_0xb18d02['forEach'](_0x39aee4=>{const _0x391e11=_0x3436a8;_0x1397b4+='-\x20'+_0x39aee4[_0x391e11(0x1f7)]+'\x20('+_0x39aee4[_0x391e11(0x1e9)]+')\x20×'+_0x39aee4[_0x391e11(0x1ff)]+_0x391e11(0x1fe)+formatRupiah(_0x39aee4[_0x391e11(0x1ec)]*_0x39aee4[_0x391e11(0x1ff)])+_0x391e11(0x1dc);});const _0x4e21ac=_0xb18d02[_0x3436a8(0x1e1)]((_0x507694,_0x5d046c)=>_0x507694+_0x5d046c[_0x3436a8(0x1ec)]*_0x5d046c[_0x3436a8(0x1ff)],0x0);_0x1397b4+=_0x3436a8(0x1e3)+formatRupiah(_0x4e21ac),window[_0x3436a8(0x1ea)](_0x3436a8(0x1e2)+whatsappNumber+'?text='+_0x1397b4,_0x3436a8(0x1ee));}),document['addEventListener'](_0x3b1a57(0x1f8),renderCart);
     </script>
+
   </body>
 </html>

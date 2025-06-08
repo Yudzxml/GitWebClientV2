@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DONASI BY YUDZXML</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+/* ===================================
+   PENYESUAIAN COPY BUTTON
+=================================== */
+.copy-group .btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: #fff;
+  border: 1px solid var(--color-btn-secondary);
+  padding: 0.6rem 1rem;
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+.copy-group .btn-secondary:active {
+  transform: translateY(1px);
+}
+.copy-group .btn-secondary:hover {
+  background-color: var(--color-btn-secondary-hover);
+  border-color: var(--color-btn-secondary-hover);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ===================================
+   DARK MODE UNTUK DONATION-CARD & COPY-GROUP
+=================================== */
+body.dark-mode .donation-card {
+  background-color: var(--color-dark-card-bg);
+  border-color: var(--color-dark-card-border);
+}
+body.dark-mode .donation-card .card-title,
+body.dark-mode .donation-card p,
+body.dark-mode .donation-card .section-desc {
+  color: var(--color-dark-text);
+}
+
+/* Input di copy-group */
+.copy-group input {
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+body.dark-mode .copy-group input {
+  background-color: var(--color-dark-input-bg);
+  border: 1px solid var(--color-dark-input-border);
+  color: var(--color-dark-text);
+}
+
+/* Tombol Salin dalam Dark Mode */
+body.dark-mode .copy-group .btn-secondary {
+  background-color: var(--color-dark-input-border);
+  border-color: var(--color-dark-input-border);
+  color: var(--color-dark-text);
+}
+body.dark-mode .copy-group .btn-secondary:hover {
+  background-color: var(--color-btn-primary);
+  border-color: var(--color-btn-primary);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Wrapper utama untuk ruang konten donasi */
+.donation-page {
+  padding: 2rem 0;
+}
+
+/* Judul dan deskripsi di atas */
+.donation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.donation-header .section-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+.donation-header .section-desc {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Grid untuk pilihan metode donasi */
+.donation-options.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Kartu donasi */
+.donation-card {
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.donation-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Ikon besar di kartu */
+.donation-card .card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Judul metode donasi */
+.donation-card .card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+/* Grup input + tombol Salin — revisi ukuran */
+.copy-group {
+  display: flex;
+  align-items: stretch; /* biar tinggi anak sama */
+  margin-top: 0.75rem;
+}
+.copy-group input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid var(--color-input-border);
+  border-right: none;
+}
+.copy-group .btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid var(--color-btn-secondary);
+  background-color: var(--color-btn-secondary);
+  color: #fff;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.copy-group .btn-secondary:hover {
+  background-color: var(--color-btn-secondary-hover);
+  border-color: var(--color-btn-secondary-hover);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Tombol utama pada kartu (Saweria) */
+.donation-card .btn-primary {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .donation-header .section-title {
+    font-size: 1.75rem;
+  }
+  .donation-card {
+    padding: 1rem;
+  }
+  .card-icon {
+    font-size: 2rem;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+  <button id="sidebarClose" class="sidebar-close">×</button>
+  <div class="sidebar-section">
+    <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🔒</span> Admin Login
+    </button>
+    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛒</span> Cek Keranjang
+    </button>
+    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">⭐</span> Testimoni
+    </button>
+    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🏷️</span> Diskon Produk
+    </button>
+    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">💬</span> Komentar/Ratting
+    </button>
+    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">✉️</span> Contact Admin
+    </button>   
+    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
+     <span class="icon">📤</span> Upload File
+    </button>
+    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <span class="icon">👥</span> Static Pengunjung
+        </button>
+    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <span class="icon">💖</span> Donasi
+        </button>       
+    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">📜</span> Terms of Service
+    </button>        
+  </div>
+</aside>
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="container">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <div class="header-left">
+          <h1 class="logo">オ DONASI</h1>
+        </div>
+        <div class="header-center">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari produk..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="header-right">
+          <button
+            id="darkModeToggle"
+            class="dark-toggle"
+            title="Toggle Dark Mode"
+          >
+            <div class="toggle-track">
+              <span class="icon-sun">☀️</span>
+              <span class="icon-moon">🌙</span>
+            </div>
+          </button>
+    <button onclick="location.href='index.html'" <span class="icon-btn" title="Keranjang">🏠</button>
+        </div>
+      </div>
+    </header>
+
+<!-- HALAMAN DONASI -->
+<main class="container donation-page">
+  <section class="donation-header">
+    <h2 class="section-title">Donasi untuk Pengembangan YUDZXML STORE</h2>
+    <p class="section-desc">Terima kasih atas dukungan Anda! Pilih metode donasi di bawah ini:</p>
+  </section>
+
+  <section class="donation-options grid">
+    <!-- Saweria -->
+    <article class="donation-card">
+      <div class="card-icon">💖</div>
+      <h3 class="card-title">Saweria</h3>
+      <p>Donasikan langsung via Saweria dengan sekali klik.</p>
+      <a href="https://saweria.co/Yudzxml" target="_blank" class="btn btn-primary">
+        Donasi via Saweria
+      </a>
+    </article>
+
+    <!-- Dana -->
+    <article class="donation-card">
+      <div class="card-icon">📱</div>
+      <h3 class="card-title">DANA</h3>
+      <p>Salin nomor berikut untuk transfer:</p>
+      <div class="copy-group">
+        <input type="text" id="danaNumber" value="081275673391" readonly />
+        <button class="btn btn-secondary" onclick="copyToClipboard('danaNumber')">Salin</button>
+      </div>
+    </article>
+
+    <!-- Pulsa -->
+    <article class="donation-card">
+      <div class="card-icon">📞</div>
+      <h3 class="card-title">Pulsa</h3>
+      <p>Salin nomor berikut untuk kirim pulsa:</p>
+      <div class="copy-group">
+        <input type="text" id="pulsaNumber" value="081275673391" readonly />
+        <button class="btn btn-secondary" onclick="copyToClipboard('pulsaNumber')">Salin</button>
+      </div>
+    </article>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-container">
+    <p>© 2025 YUDZXML STORE. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  function copyToClipboard(id) {
+    const input = document.getElementById(id);
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    alert(`Nomor ${input.value} berhasil disalin!`);
+  }
+  
+</script>
+<script src="main.js"></script>
+  </body>
+</html>

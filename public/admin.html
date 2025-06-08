@@ -14,6 +14,7 @@
    VARIABLES & RESET
 =================================== */
 :root {
+  /* Light mode colors */
   --color-bg: #f5f5f5;
   --color-text: #333;
   --color-header-start: #ff5722;
@@ -21,8 +22,11 @@
   --color-btn-primary: #ff5722;
   --color-btn-primary-hover: #e64a19;
   --color-btn-secondary: #777;
+  --color-btn-secondary-hover: #5e5e5e;
   --color-btn-success: #388e3c;
+  --color-btn-success-hover: #2e7d32;
   --color-btn-danger: #e53935;
+  --color-btn-danger-hover: #c62828;
   --color-border: #ddd;
   --color-card-border: #eee;
   --color-footer-bg: #fff;
@@ -30,7 +34,11 @@
   --color-input-bg: #fff;
   --color-input-border: #ccc;
 
-  /* Dark mode */
+  /* Sidebar (light) */
+  --color-sidebar-bg: #ffffff;
+  --color-sidebar-border: var(--color-border);
+
+  /* Dark mode colors */
   --color-dark-bg: #1e1e1e;
   --color-dark-text: #ddd;
   --color-dark-header-start: #333;
@@ -39,8 +47,11 @@
   --color-dark-card-border: #444;
   --color-dark-input-bg: #333;
   --color-dark-input-border: #555;
-  --color-dark-footer-bg: #2a2a2a;
-  --color-dark-footer-text: #aaa;
+
+  /* Override sidebar variables in dark mode context */
+  /* These will be applied when .dark-mode is on <body> */
+  --color-sidebar-bg-dark: var(--color-dark-card-bg);
+  --color-sidebar-border-dark: var(--color-dark-card-border);
 }
 
 /* Reset dasar */
@@ -167,13 +178,16 @@ p {
   position: relative;
   width: 50px;
   height: 26px;
-  background-color: transparent;
+  overflow: hidden;
+  background-color: ;
   border: none;
   border-radius: 13px;
   cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
   transition: background-color 0.3s ease;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -192,6 +206,21 @@ p {
   font-size: 1rem;
   user-select: none;
 }
+body.dark-mode .dark-toggle .toggle-track {
+  transform: translateX(-50px);
+}
+body.dark-mode .dark-toggle {
+  background-color: #37474f;
+}
+body.dark-mode {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+
+  /* Override sidebar variables */
+  --color-sidebar-bg: var(--color-sidebar-bg-dark);
+  --color-sidebar-border: var(--color-sidebar-border-dark);
+}
+
 body.dark-mode .site-header {
   background: linear-gradient(
     90deg,
@@ -199,13 +228,71 @@ body.dark-mode .site-header {
     var(--color-dark-header-end)
   );
 }
-body.dark-mode .dark-toggle .toggle-track {
-  transform: translateX(-50px);
+body.dark-mode .product-card {
+  background-color: var(--color-dark-card-bg);
+  border: 1px solid var(--color-dark-card-border);
 }
-body.dark-mode .dark-toggle {
-  background-color: #37474f;
+body.dark-mode .product-title,
+body.dark-mode .product-desc {
+  color: var(--color-dark-text);
 }
-
+body.dark-mode .header-center input,
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background-color: var(--color-dark-input-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+}
+body.dark-mode .site-footer {
+  background-color: var(--color-dark-card-bg);
+  border-top: 1px solid var(--color-dark-card-border);
+}
+body.dark-mode .btn {
+  background-color: var(--color-dark-card-bg);
+  color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-input-border);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+body.dark-mode .btn:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+body.dark-mode .btn-primary {
+  background-color: #5e35b1;
+  color: #fff;
+  border-color: #5e35b1;
+}
+body.dark-mode .btn-primary:hover {
+  background-color: #512da8;
+  border-color: #512da8;
+}
+body.dark-mode .btn-secondary {
+  background-color: #777;
+  color: #fff;
+  border-color: #777;
+}
+body.dark-mode .btn-secondary:hover {
+  background-color: #5e5e5e;
+  border-color: #5e5e5e;
+}
+body.dark-mode .btn-success {
+  background-color: #388e3c;
+  color: #fff;
+  border-color: #388e3c;
+}
+body.dark-mode .btn-success:hover {
+  background-color: #2e7d32;
+  border-color: #2e7d32;
+}
+body.dark-mode .btn-danger {
+  background-color: #c62828;
+  color: #fff;
+  border-color: #c62828;
+}
+body.dark-mode .btn-danger:hover {
+  background-color: #b71c1c;
+  border-color: #b71c1c;
+}
 /* ===================================
    LOADING OVERLAY & SPINNER
 =================================== */
@@ -322,22 +409,33 @@ body.dark-mode .form-group textarea {
   padding: 0.4rem 0.6rem;
   border-radius: 4px;
   font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 #addPackageBtn:hover,
 #editAddPackageBtn:hover {
   border-color: var(--color-btn-primary);
   color: var(--color-btn-primary);
 }
-
 .package-item {
-  display: contain;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  display: flex;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
 .package-item input {
-  flex: 1;
+  flex: 1 1 120px;
+  min-width: 0;
 }
 .remove-package {
+  flex: 0 0 auto;
+  margin-left: auto;
+  line-height: 1;
+  padding: 0 0.25rem;
   background: transparent;
   border: none;
   color: #e74c3c;
@@ -404,6 +502,10 @@ thead th {
   font-size: 0.95rem;
   border-right: 1px solid #fff;
 }
+body.dark-mode thead th {
+  background-color: var(--color-dark-card-bg);
+  border-color: var(--color-dark-card-border);
+}
 thead th:last-child {
   border-right: none;
 }
@@ -425,7 +527,6 @@ body.dark-mode tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Tombol Aksi (Edit, Hapus) */
 .action-buttons {
   display: flex;
   gap: 0.5rem;
@@ -635,6 +736,7 @@ body.dark-mode .btn-danger.btn-sm {
             <span class="icon-moon">🌙</span>
           </div>
         </button>
+        <button onclick="location.href='index.html'" class="dark-toggle"><span class="icon-sun">🏠            </span></button>
       </div>
     </header>
 
@@ -777,282 +879,7 @@ body.dark-mode .btn-danger.btn-sm {
     </footer>
 
     <script>
-      const API_URL = '/api/products';
-      const loadingOverlay = document.getElementById('loadingOverlay');
-      const addProductForm = document.getElementById('addProductForm');
-      const productTableBody = document.getElementById('productTableBody');
-      const editModal = document.getElementById('editModal');
-      const closeEditModalBtn = document.getElementById('closeEditModal');
-      const editProductForm = document.getElementById('editProductForm');
-      const editProductIdInput = document.getElementById('editProductId');
-      const editProductImageUrlInput = document.getElementById('editProductImageUrl');
-      const editProductNameInput = document.getElementById('editProductName');
-      const editProductDescriptionInput = document.getElementById(
-        'editProductDescription'
-      );
-      const editPackageContainer = document.getElementById('editPackageContainer');
-      const editAddPackageBtn = document.getElementById('editAddPackageBtn');
-      const darkToggleBtn = document.getElementById('darkToggle');
-      const packageContainer = document.getElementById('packageContainer');
-      const addPackageBtn = document.getElementById('addPackageBtn');
-
-      function showLoading() {
-        loadingOverlay.classList.add('active');
-      }
-      function hideLoading() {
-        loadingOverlay.classList.remove('active');
-      }
-      function formatRupiah(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-      }
-      function createPackageRow(name = '', price = '') {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('package-item');
-
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.classList.add('package-name');
-        nameInput.name = 'packageName';
-        nameInput.placeholder = 'Nama Paket';
-        nameInput.required = true;
-        nameInput.value = name;
-
-        const priceInput = document.createElement('input');
-        priceInput.type = 'number';
-        priceInput.classList.add('package-price');
-        priceInput.name = 'packagePrice';
-        priceInput.placeholder = 'Harga';
-        priceInput.min = '0';
-        priceInput.required = true;
-        priceInput.value = price;
-
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.classList.add('remove-package');
-        removeBtn.innerHTML = '&times;';
-        removeBtn.addEventListener('click', () => {
-          wrapper.remove();
-        });
-
-        wrapper.appendChild(nameInput);
-        wrapper.appendChild(priceInput);
-        wrapper.appendChild(removeBtn);
-        return wrapper;
-      }
-
-      addPackageBtn.addEventListener('click', () => {
-        const newRow = createPackageRow();
-        packageContainer.appendChild(newRow);
-      });
-
-      editAddPackageBtn.addEventListener('click', () => {
-        const newRow = createPackageRow();
-        editPackageContainer.appendChild(newRow);
-      });
-
-      async function fetchProducts() {
-        showLoading();
-        try {
-          const res = await fetch(API_URL, { method: 'GET' });
-          if (!res.ok) throw new Error(`Status: ${res.status}`);
-          const products = await res.json();
-          return products;
-        } catch (err) {
-          console.error(err);
-          alert('Gagal memuat data produk.');
-          return [];
-        } finally {
-          hideLoading();
-        }
-      }
-
-      async function renderProductTable() {
-        const products = await fetchProducts();
-        productTableBody.innerHTML = '';
-        if (!products.length) {
-          const tr = document.createElement('tr');
-          tr.innerHTML =
-            '<td colspan="5" style="text-align:center; color: var(--color-text);">Belum ada produk.</td>';
-          productTableBody.appendChild(tr);
-          return;
-        }
-        products.forEach((prod, index) => {
-          const tr = document.createElement('tr');
-          let packagesHTML = '';
-          if (Array.isArray(prod.packages) && prod.packages.length) {
-            packagesHTML = prod.packages
-              .map(
-                (p) =>
-                  `<div>${p.name} – Rp ${formatRupiah(p.price)}</div>`
-              )
-              .join('');
-          }
-          tr.innerHTML = `
-            <td style="text-align:center;">${index + 1}</td>
-            <td>${prod.name}</td>
-            <td>${prod.description.replace(/\n/g, '<br>')}</td>
-            <td>${packagesHTML}</td>
-            <td class="action-buttons">
-              <button class="btn btn-warning btn-sm" onclick="openEditModal('${prod.id}')">Edit</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteProduct('${prod.id}')">Hapus</button>
-            </td>
-          `;
-          productTableBody.appendChild(tr);
-        });
-      }
-
-      addProductForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const imageUrl = document.getElementById('productImageUrl').value.trim();
-        const name = document.getElementById('productName').value.trim();
-        const description = document.getElementById('productDescription').value.trim();
-        const packageRows = packageContainer.querySelectorAll('.package-item');
-        if (!imageUrl || !name || !description || !packageRows.length) {
-          alert('Semua field harus diisi dengan benar!');
-          return;
-        }
-        const packages = [];
-        for (let row of packageRows) {
-          const pkgName = row.querySelector('.package-name').value.trim();
-          const pkgPrice = parseInt(row.querySelector('.package-price').value);
-          if (!pkgName || isNaN(pkgPrice)) {
-            alert('Nama paket dan harga harus diisi dengan benar!');
-            return;
-          }
-          packages.push({ name: pkgName, price: pkgPrice });
-        }
-        const newProduct = { imageUrl, name, description, packages };
-        showLoading();
-        try {
-          const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newProduct),
-          });
-          if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.error || `Failed to add (${res.status})`);
-          }
-          addProductForm.reset();
-          packageContainer.innerHTML = '';
-          packageContainer.appendChild(createPackageRow());
-          await renderProductTable();
-        } catch (err) {
-          console.error(err);
-          alert('Gagal menambahkan produk: ' + err.message);
-        } finally {
-          hideLoading();
-        }
-      });
-
-      async function deleteProduct(productId) {
-        const confirmDel = confirm('Yakin ingin menghapus produk ini?');
-        if (!confirmDel) return;
-        showLoading();
-        try {
-          const res = await fetch(API_URL, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: productId }),
-          });
-          if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.error || `Failed to delete (${res.status})`);
-          }
-          await renderProductTable();
-        } catch (err) {
-          console.error(err);
-          alert('Gagal menghapus produk: ' + err.message);
-        } finally {
-          hideLoading();
-        }
-      }
-
-      async function openEditModal(productId) {
-        showLoading();
-        try {
-          const products = await fetchProducts();
-          const prod = products.find((p) => p.id === productId);
-          if (!prod) {
-            alert('Produk tidak ditemukan.');
-            return;
-          }
-          editProductIdInput.value = prod.id;
-          editProductImageUrlInput.value = prod.imageUrl;
-          editProductNameInput.value = prod.name;
-          editProductDescriptionInput.value = prod.description;
-          editPackageContainer.innerHTML = '';
-          if (Array.isArray(prod.packages) && prod.packages.length) {
-            prod.packages.forEach((p) => {
-              const row = createPackageRow(p.name, p.price);
-              editPackageContainer.appendChild(row);
-            });
-          } else {
-            editPackageContainer.appendChild(createPackageRow());
-          }
-          editModal.classList.add('active');
-        } catch (err) {
-          console.error(err);
-        } finally {
-          hideLoading();
-        }
-      }
-
-      closeEditModalBtn.addEventListener('click', () => {
-        editModal.classList.remove('active');
-      });
-
-      editProductForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const id = editProductIdInput.value;
-        const imageUrl = editProductImageUrlInput.value.trim();
-        const name = editProductNameInput.value.trim();
-        const description = editProductDescriptionInput.value.trim();
-        const packageRows = editPackageContainer.querySelectorAll('.package-item');
-        if (!imageUrl || !name || !description || !packageRows.length) {
-          alert('Semua field harus diisi dengan benar!');
-          return;
-        }
-        const packages = [];
-        for (let row of packageRows) {
-          const pkgName = row.querySelector('.package-name').value.trim();
-          const pkgPrice = parseInt(row.querySelector('.package-price').value);
-          if (!pkgName || isNaN(pkgPrice)) {
-            alert('Nama paket dan harga harus diisi dengan benar!');
-            return;
-          }
-          packages.push({ name: pkgName, price: pkgPrice });
-        }
-        const updatedProduct = { id, imageUrl, name, description, packages };
-        showLoading();
-        try {
-          const res = await fetch(API_URL, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(updatedProduct),
-          });
-          if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.error || `Failed to update (${res.status})`);
-          }
-          editModal.classList.remove('active');
-          await renderProductTable();
-        } catch (err) {
-          console.error(err);
-          alert('Gagal mengupdate produk: ' + err.message);
-        } finally {
-          hideLoading();
-        }
-      });
-
-      darkToggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-      });
-
-      document.addEventListener('DOMContentLoaded', () => {
-        packageContainer.appendChild(createPackageRow());
-        renderProductTable();
-      });
+      const _0xbf91f4=_0x55ea;(function(_0x3e6142,_0x22ab6a){const _0x4a36e4=_0x55ea,_0x1a80bb=_0x3e6142();while(!![]){try{const _0x4bc52b=-parseInt(_0x4a36e4(0x12b))/0x1*(parseInt(_0x4a36e4(0x147))/0x2)+-parseInt(_0x4a36e4(0x160))/0x3+-parseInt(_0x4a36e4(0x130))/0x4+-parseInt(_0x4a36e4(0x132))/0x5*(-parseInt(_0x4a36e4(0x150))/0x6)+parseInt(_0x4a36e4(0x18a))/0x7+-parseInt(_0x4a36e4(0x13d))/0x8*(parseInt(_0x4a36e4(0x189))/0x9)+parseInt(_0x4a36e4(0x164))/0xa;if(_0x4bc52b===_0x22ab6a)break;else _0x1a80bb['push'](_0x1a80bb['shift']());}catch(_0x21c97c){_0x1a80bb['push'](_0x1a80bb['shift']());}}}(_0x2627,0xc9bf9));const API_URL=_0xbf91f4(0x187),loadingOverlay=document[_0xbf91f4(0x17b)](_0xbf91f4(0x13e)),addProductForm=document[_0xbf91f4(0x17b)]('addProductForm'),productTableBody=document[_0xbf91f4(0x17b)]('productTableBody'),editModal=document['getElementById'](_0xbf91f4(0x155)),closeEditModalBtn=document[_0xbf91f4(0x17b)](_0xbf91f4(0x188)),editProductForm=document[_0xbf91f4(0x17b)](_0xbf91f4(0x174)),editProductIdInput=document[_0xbf91f4(0x17b)](_0xbf91f4(0x129)),editProductImageUrlInput=document[_0xbf91f4(0x17b)]('editProductImageUrl'),editProductNameInput=document[_0xbf91f4(0x17b)](_0xbf91f4(0x131)),editProductDescriptionInput=document[_0xbf91f4(0x17b)](_0xbf91f4(0x15c)),editPackageContainer=document[_0xbf91f4(0x17b)]('editPackageContainer'),editAddPackageBtn=document[_0xbf91f4(0x17b)](_0xbf91f4(0x172)),darkToggleBtn=document[_0xbf91f4(0x17b)](_0xbf91f4(0x14e)),packageContainer=document[_0xbf91f4(0x17b)](_0xbf91f4(0x18b)),addPackageBtn=document['getElementById'](_0xbf91f4(0x17f));function showLoading(){const _0xb378fd=_0xbf91f4;loadingOverlay['classList'][_0xb378fd(0x169)](_0xb378fd(0x12d));}function hideLoading(){const _0x2589ec=_0xbf91f4;loadingOverlay[_0x2589ec(0x190)]['remove'](_0x2589ec(0x12d));}function formatRupiah(_0x3023d6){const _0x57c711=_0xbf91f4;return _0x3023d6['toString']()[_0x57c711(0x18d)](/\B(?=(\d{3})+(?!\d))/g,'.');}function createPackageRow(_0x32e48b='',_0x399c7f=''){const _0x1cca9b=_0xbf91f4,_0x2c58f3=document[_0x1cca9b(0x156)]('div');_0x2c58f3[_0x1cca9b(0x190)]['add']('package-item');const _0x5189f0=document['createElement'](_0x1cca9b(0x166));_0x5189f0[_0x1cca9b(0x134)]=_0x1cca9b(0x16f),_0x5189f0['classList']['add'](_0x1cca9b(0x144)),_0x5189f0[_0x1cca9b(0x171)]=_0x1cca9b(0x18c),_0x5189f0['placeholder']=_0x1cca9b(0x12c),_0x5189f0['required']=!![],_0x5189f0[_0x1cca9b(0x137)]=_0x32e48b;const _0x94a049=document[_0x1cca9b(0x156)]('input');_0x94a049[_0x1cca9b(0x134)]=_0x1cca9b(0x167),_0x94a049[_0x1cca9b(0x190)][_0x1cca9b(0x169)]('package-price'),_0x94a049[_0x1cca9b(0x171)]=_0x1cca9b(0x16b),_0x94a049[_0x1cca9b(0x15d)]=_0x1cca9b(0x16c),_0x94a049[_0x1cca9b(0x12a)]='0',_0x94a049[_0x1cca9b(0x12e)]=!![],_0x94a049[_0x1cca9b(0x137)]=_0x399c7f;const _0x5e4c78=document[_0x1cca9b(0x156)](_0x1cca9b(0x181));return _0x5e4c78['type']=_0x1cca9b(0x181),_0x5e4c78['classList'][_0x1cca9b(0x169)](_0x1cca9b(0x17e)),_0x5e4c78[_0x1cca9b(0x135)]=_0x1cca9b(0x15a),_0x5e4c78[_0x1cca9b(0x18e)](_0x1cca9b(0x138),()=>{const _0x2c7466=_0x1cca9b;_0x2c58f3[_0x2c7466(0x14c)]();}),_0x2c58f3[_0x1cca9b(0x161)](_0x5189f0),_0x2c58f3[_0x1cca9b(0x161)](_0x94a049),_0x2c58f3[_0x1cca9b(0x161)](_0x5e4c78),_0x2c58f3;}addPackageBtn[_0xbf91f4(0x18e)](_0xbf91f4(0x138),()=>{const _0x3d9a6c=_0xbf91f4,_0x24225f=createPackageRow();packageContainer[_0x3d9a6c(0x161)](_0x24225f);}),editAddPackageBtn[_0xbf91f4(0x18e)](_0xbf91f4(0x138),()=>{const _0x1b636d=_0xbf91f4,_0x3a63fa=createPackageRow();editPackageContainer[_0x1b636d(0x161)](_0x3a63fa);});async function fetchProducts(){const _0x2931e5=_0xbf91f4;showLoading();try{const _0x5ad774=await fetch(API_URL,{'method':_0x2931e5(0x17d)});if(!_0x5ad774['ok'])throw new Error(_0x2931e5(0x145)+_0x5ad774['status']);const _0xf49d91=await _0x5ad774['json']();return _0xf49d91;}catch(_0x5440b5){return console[_0x2931e5(0x140)](_0x5440b5),alert(_0x2931e5(0x158)),[];}finally{hideLoading();}}async function renderProductTable(){const _0x43bba2=_0xbf91f4,_0x516559=await fetchProducts();productTableBody[_0x43bba2(0x135)]='';if(!_0x516559['length']){const _0x188580=document[_0x43bba2(0x156)]('tr');_0x188580['innerHTML']=_0x43bba2(0x13c),productTableBody[_0x43bba2(0x161)](_0x188580);return;}_0x516559[_0x43bba2(0x17a)]((_0x8b56a4,_0x71f6c1)=>{const _0x50ed39=_0x43bba2,_0x2405ba=document[_0x50ed39(0x156)]('tr');let _0xce4177='';Array[_0x50ed39(0x14a)](_0x8b56a4[_0x50ed39(0x148)])&&_0x8b56a4['packages'][_0x50ed39(0x165)]&&(_0xce4177=_0x8b56a4[_0x50ed39(0x148)]['map'](_0x3de222=>_0x50ed39(0x175)+_0x3de222['name']+_0x50ed39(0x13f)+formatRupiah(_0x3de222[_0x50ed39(0x133)])+_0x50ed39(0x142))[_0x50ed39(0x154)]('')),_0x2405ba[_0x50ed39(0x135)]='\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20style=\x22text-align:center;\x22>'+(_0x71f6c1+0x1)+_0x50ed39(0x159)+_0x8b56a4[_0x50ed39(0x171)]+_0x50ed39(0x159)+_0x8b56a4[_0x50ed39(0x15b)][_0x50ed39(0x18d)](/\n/g,'<br>')+_0x50ed39(0x159)+_0xce4177+_0x50ed39(0x14d)+_0x8b56a4['id']+_0x50ed39(0x136)+_0x8b56a4['id']+_0x50ed39(0x16e),productTableBody[_0x50ed39(0x161)](_0x2405ba);});}function _0x2627(){const _0xc20ec1=['addPackageBtn','querySelectorAll','button','DOMContentLoaded','submit','find','message','trim','/api/products','closeEditModal','207369jnmojM','3942239aEjqMf','packageContainer','packageName','replace','addEventListener','status','classList','editProductId','min','6wwkyIX','Nama\x20Paket','active','required','productImageUrl','345840DndBvy','editProductName','7963100YteDoO','price','type','innerHTML','\x27)\x22>Edit</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-danger\x20btn-sm\x22\x20onclick=\x22deleteProduct(\x27','value','click','json','stringify','Yakin\x20ingin\x20menghapus\x20produk\x20ini?','<td\x20colspan=\x225\x22\x20style=\x22text-align:center;\x20color:\x20var(--color-text);\x22>Belum\x20ada\x20produk.</td>','520gCfgrv','loadingOverlay','\x20–\x20Rp\x20','error','PUT','</div>','preventDefault','package-name','Status:\x20','.package-price','533288gBgNAe','packages','Failed\x20to\x20delete\x20(','isArray','Produk\x20tidak\x20ditemukan.','remove','</td>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20class=\x22action-buttons\x22>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x20btn-warning\x20btn-sm\x22\x20onclick=\x22openEditModal(\x27','darkToggle','dark-mode','6VRTngs','Failed\x20to\x20update\x20(','.package-item','productDescription','join','editModal','createElement','application/json','Gagal\x20memuat\x20data\x20produk.','</td>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','&times;','description','editProductDescription','placeholder','imageUrl','Gagal\x20menambahkan\x20produk:\x20','1292880xsJwTQ','appendChild','.package-name','Gagal\x20menghapus\x20produk:\x20','22855130CZJkHr','length','input','number','Failed\x20to\x20add\x20(','add','push','packagePrice','Harga','Gagal\x20mengupdate\x20produk:\x20','\x27)\x22>Hapus</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','text','Nama\x20paket\x20dan\x20harga\x20harus\x20diisi\x20dengan\x20benar!','name','editAddPackageBtn','body','editProductForm','<div>','Semua\x20field\x20harus\x20diisi\x20dengan\x20benar!','DELETE','querySelector','POST','forEach','getElementById','productName','GET','remove-package'];_0x2627=function(){return _0xc20ec1;};return _0x2627();}addProductForm[_0xbf91f4(0x18e)](_0xbf91f4(0x183),async _0x10daa2=>{const _0x8aefb3=_0xbf91f4;_0x10daa2['preventDefault']();const _0x427aae=document[_0x8aefb3(0x17b)](_0x8aefb3(0x12f))[_0x8aefb3(0x137)][_0x8aefb3(0x186)](),_0x1e0417=document['getElementById'](_0x8aefb3(0x17c))[_0x8aefb3(0x137)][_0x8aefb3(0x186)](),_0x42a666=document[_0x8aefb3(0x17b)](_0x8aefb3(0x153))[_0x8aefb3(0x137)]['trim'](),_0x508ef0=packageContainer[_0x8aefb3(0x180)](_0x8aefb3(0x152));if(!_0x427aae||!_0x1e0417||!_0x42a666||!_0x508ef0['length']){alert(_0x8aefb3(0x176));return;}const _0x13f86f=[];for(let _0x2db022 of _0x508ef0){const _0x4f3cc9=_0x2db022[_0x8aefb3(0x178)](_0x8aefb3(0x162))[_0x8aefb3(0x137)][_0x8aefb3(0x186)](),_0x295956=parseInt(_0x2db022[_0x8aefb3(0x178)]('.package-price')[_0x8aefb3(0x137)]);if(!_0x4f3cc9||isNaN(_0x295956)){alert(_0x8aefb3(0x170));return;}_0x13f86f[_0x8aefb3(0x16a)]({'name':_0x4f3cc9,'price':_0x295956});}const _0x47d41d={'imageUrl':_0x427aae,'name':_0x1e0417,'description':_0x42a666,'packages':_0x13f86f};showLoading();try{const _0x4b2283=await fetch(API_URL,{'method':_0x8aefb3(0x179),'headers':{'Content-Type':_0x8aefb3(0x157)},'body':JSON['stringify'](_0x47d41d)});if(!_0x4b2283['ok']){const _0xb7bb21=await _0x4b2283[_0x8aefb3(0x139)]();throw new Error(_0xb7bb21['error']||_0x8aefb3(0x168)+_0x4b2283[_0x8aefb3(0x18f)]+')');}addProductForm['reset'](),packageContainer['innerHTML']='',packageContainer[_0x8aefb3(0x161)](createPackageRow()),await renderProductTable();}catch(_0x1d8a11){console[_0x8aefb3(0x140)](_0x1d8a11),alert(_0x8aefb3(0x15f)+_0x1d8a11['message']);}finally{hideLoading();}});async function deleteProduct(_0x4efdda){const _0x946aac=_0xbf91f4,_0x3f92ae=confirm(_0x946aac(0x13b));if(!_0x3f92ae)return;showLoading();try{const _0x28b707=await fetch(API_URL,{'method':_0x946aac(0x177),'headers':{'Content-Type':'application/json'},'body':JSON['stringify']({'id':_0x4efdda})});if(!_0x28b707['ok']){const _0x213c73=await _0x28b707[_0x946aac(0x139)]();throw new Error(_0x213c73[_0x946aac(0x140)]||_0x946aac(0x149)+_0x28b707['status']+')');}await renderProductTable();}catch(_0x225a3c){console[_0x946aac(0x140)](_0x225a3c),alert(_0x946aac(0x163)+_0x225a3c['message']);}finally{hideLoading();}}async function openEditModal(_0x66a43e){const _0x39ec6a=_0xbf91f4;showLoading();try{const _0x30598a=await fetchProducts(),_0x1f2a6f=_0x30598a[_0x39ec6a(0x184)](_0x4f09e9=>_0x4f09e9['id']===_0x66a43e);if(!_0x1f2a6f){alert(_0x39ec6a(0x14b));return;}editProductIdInput[_0x39ec6a(0x137)]=_0x1f2a6f['id'],editProductImageUrlInput['value']=_0x1f2a6f[_0x39ec6a(0x15e)],editProductNameInput[_0x39ec6a(0x137)]=_0x1f2a6f[_0x39ec6a(0x171)],editProductDescriptionInput[_0x39ec6a(0x137)]=_0x1f2a6f[_0x39ec6a(0x15b)],editPackageContainer[_0x39ec6a(0x135)]='',Array[_0x39ec6a(0x14a)](_0x1f2a6f['packages'])&&_0x1f2a6f[_0x39ec6a(0x148)][_0x39ec6a(0x165)]?_0x1f2a6f[_0x39ec6a(0x148)][_0x39ec6a(0x17a)](_0x5e311b=>{const _0x457596=_0x39ec6a,_0x21f851=createPackageRow(_0x5e311b['name'],_0x5e311b['price']);editPackageContainer[_0x457596(0x161)](_0x21f851);}):editPackageContainer[_0x39ec6a(0x161)](createPackageRow()),editModal[_0x39ec6a(0x190)][_0x39ec6a(0x169)](_0x39ec6a(0x12d));}catch(_0x3c4935){console[_0x39ec6a(0x140)](_0x3c4935);}finally{hideLoading();}}function _0x55ea(_0x3b3c21,_0x408f50){const _0x262789=_0x2627();return _0x55ea=function(_0x55ead1,_0x1e1273){_0x55ead1=_0x55ead1-0x129;let _0x178b09=_0x262789[_0x55ead1];return _0x178b09;},_0x55ea(_0x3b3c21,_0x408f50);}closeEditModalBtn[_0xbf91f4(0x18e)](_0xbf91f4(0x138),()=>{const _0xe05d75=_0xbf91f4;editModal['classList']['remove'](_0xe05d75(0x12d));}),editProductForm['addEventListener']('submit',async _0x4753a6=>{const _0x595c79=_0xbf91f4;_0x4753a6[_0x595c79(0x143)]();const _0x1cd694=editProductIdInput[_0x595c79(0x137)],_0x49f06d=editProductImageUrlInput['value']['trim'](),_0x3ac06e=editProductNameInput['value'][_0x595c79(0x186)](),_0x4e0a76=editProductDescriptionInput[_0x595c79(0x137)]['trim'](),_0x3086e3=editPackageContainer['querySelectorAll'](_0x595c79(0x152));if(!_0x49f06d||!_0x3ac06e||!_0x4e0a76||!_0x3086e3[_0x595c79(0x165)]){alert(_0x595c79(0x176));return;}const _0x297829=[];for(let _0x3fe788 of _0x3086e3){const _0x2087fb=_0x3fe788[_0x595c79(0x178)]('.package-name')[_0x595c79(0x137)]['trim'](),_0x5d74ba=parseInt(_0x3fe788[_0x595c79(0x178)](_0x595c79(0x146))['value']);if(!_0x2087fb||isNaN(_0x5d74ba)){alert('Nama\x20paket\x20dan\x20harga\x20harus\x20diisi\x20dengan\x20benar!');return;}_0x297829[_0x595c79(0x16a)]({'name':_0x2087fb,'price':_0x5d74ba});}const _0x1a2c39={'id':_0x1cd694,'imageUrl':_0x49f06d,'name':_0x3ac06e,'description':_0x4e0a76,'packages':_0x297829};showLoading();try{const _0x7e6266=await fetch(API_URL,{'method':_0x595c79(0x141),'headers':{'Content-Type':_0x595c79(0x157)},'body':JSON[_0x595c79(0x13a)](_0x1a2c39)});if(!_0x7e6266['ok']){const _0x2daa51=await _0x7e6266[_0x595c79(0x139)]();throw new Error(_0x2daa51[_0x595c79(0x140)]||_0x595c79(0x151)+_0x7e6266[_0x595c79(0x18f)]+')');}editModal[_0x595c79(0x190)][_0x595c79(0x14c)](_0x595c79(0x12d)),await renderProductTable();}catch(_0x3faf2a){console[_0x595c79(0x140)](_0x3faf2a),alert(_0x595c79(0x16d)+_0x3faf2a[_0x595c79(0x185)]);}finally{hideLoading();}}),darkToggleBtn[_0xbf91f4(0x18e)](_0xbf91f4(0x138),()=>{const _0x3a81dc=_0xbf91f4;document[_0x3a81dc(0x173)]['classList']['toggle'](_0x3a81dc(0x14f));}),document[_0xbf91f4(0x18e)](_0xbf91f4(0x182),()=>{packageContainer['appendChild'](createPackageRow()),renderProductTable();});
     </script>
         <script src="main.js"></script>
   </body>
