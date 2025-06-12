@@ -10,7 +10,6 @@
       rel="stylesheet"
     />
     <style>
-      /* Styling untuk input rating bintang */
       .rating-input {
         display: flex;
         flex-direction: row-reverse;
@@ -32,7 +31,6 @@
         color: gold;
       }
 
-      /* Styling tampilan rating ketika menampilkan komentar */
       .star-rating {
         display: flex;
         align-items: center;
@@ -42,9 +40,16 @@
         font-size: 1.25rem;
         margin-right: 2px;
       }
-      .star-rating .empty { color: #ccc; }
+      .star-rating span {
+        font-size: 1.25rem;
+        margin-right: 2px;
+        color: gold;
+        
+      }
+      .star-rating .empty {
+        color: #ccc;
+      }
 
-      /* Perbaikan tampilan kartu komentar agar lebih menarik */
       .card-testimoni {
         background: var(--card-bg, #fff);
         border-radius: 8px;
