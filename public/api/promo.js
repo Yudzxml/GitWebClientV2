@@ -9,7 +9,6 @@ const CONTENT_URL = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FI
 const RAW_URL     = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${FILE_PATH}`;
 
 module.exports = async (req, res) => {
-  // Helper: fetch current promo.json and its SHA
   async function fetchCurrentFile() {
     const shaResponse = await fetch(CONTENT_URL, {
       headers: {
