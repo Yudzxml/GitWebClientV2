@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>YUDZXML STORE 77</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="audio.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -33,15 +34,15 @@
     <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
       <span class="icon">✉️</span> Contact Admin
     </button>   
-    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
-     <span class="icon">📤</span> Upload File
-    </button>
     <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
           <span class="icon">👥</span> Static Pengunjung
         </button>
     <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
           <span class="icon">💖</span> Donasi
         </button>       
+    <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛠️</span> Tools
+    </button>        
     <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
       <span class="icon">📜</span> Terms of Service
     </button>        
@@ -87,7 +88,7 @@
     </main>
      
      <!-- TOAST NOTIFICATION -->
-<div id="toast">
+    <div id="toast">
   <strong>🌟 Selamat datang di YUDZXML STORE!</strong><br>
   Cara belanja:
   <ol style="text-align: left; margin: 8px 0; padding-left: 16px;">
@@ -101,11 +102,49 @@
   <button id="toastOk">OK</button>
 </div>
      
+    <!-- FOOTER -->
     <footer class="site-footer">
       <div class="container">
         <p>© 2025 YUDZXML Allright Reserved</p>
       </div>
+      <!-- GREEN SCREEN -->
+      <img
+        src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/a8d49388.png"
+        alt="Green Screen"
+        class="greenscreen"
+      />
     </footer>
+    
+    <!-- Music Floating Widget -->
+    <div id="music-widget">
+  <div id="music-toggle">
+    🎵
+  </div>
+  <div id="music-player">
+  <div id="drag-handle">
+    <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/6aadc292.png" alt="Cover Lagu" id="cover-img" />
+  </div>
+
+  <!-- Judul Lagu -->
+  <div id="track-info">
+    <span id="track-title">Cinta Terlarang ( the virgin )</span>
+  </div>
+
+  <!-- Kontrol Play/Pause & Waktu -->
+  <div id="controls">
+    <button id="play-pause">▶️</button>
+    <span id="current-time">00:00</span>
+    <span>/</span>
+    <span id="total-duration">00:00</span>
+  </div>
+
+  <!-- Slider -->
+  <input type="range" id="seek" value="0" min="0" />
+  <audio id="audio" src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/lagu.mp3"></audio>
+</div>
+</div>
+
+    <script src="audio.js"></script>
     <script src="main.js"></script>
     <script src="visitor.js"></script>
   </body>

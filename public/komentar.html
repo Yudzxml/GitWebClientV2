@@ -105,15 +105,15 @@
     <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
       <span class="icon">✉️</span> Contact Admin
     </button>   
-    <button onclick="location.href='uploader.html'" class="btn btn-primary sidebar-btn">
-     <span class="icon">📤</span> Upload File
-    </button>
     <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
           <span class="icon">👥</span> Static Pengunjung
         </button>
     <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
           <span class="icon">💖</span> Donasi
         </button>       
+    <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
+      <span class="icon">🛠️</span> Tools
+    </button>        
     <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
       <span class="icon">📜</span> Terms of Service
     </button>        
@@ -203,136 +203,7 @@
     </footer>
 
     <script>
-      const sidebar = document.getElementById("sidebar");
-      const sidebarToggle = document.getElementById("sidebarToggle");
-      const sidebarClose = document.getElementById("sidebarClose");
-      const openCartBtn = document.getElementById("openCartBtn");
-      sidebarToggle.addEventListener("click", () => sidebar.classList.add("open"));
-      sidebarClose.addEventListener("click", () => sidebar.classList.remove("open"));
-      document.getElementById("darkModeToggle").addEventListener("click", () => document.body.classList.toggle("dark-mode"));
-      openCartBtn.addEventListener('click', () => window.location.href = 'index.html');
-
-      // API endpoints
-      const BASE_API_URL = "/api";
-      const COMMENTS_ENDPOINT = `${BASE_API_URL}/comments`;
-
-      function createCommentElement({ id, username, text, rating, created_at }) {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("card-testimoni");
-
-        const content = document.createElement("div");
-        content.classList.add("content");
-
-        const infoRow = document.createElement("div");
-        infoRow.classList.add("info-row");
-
-        const nameEl = document.createElement("h4");
-        nameEl.textContent = username;
-
-        const dateEl = document.createElement("span");
-        dateEl.textContent = new Date(created_at).toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
-        dateEl.style.fontStyle = "italic";
-        dateEl.style.color = "#777";
-
-        infoRow.append(nameEl, dateEl);
-
-        const currentUser = localStorage.getItem('currentUser');
-        if (currentUser === username) {
-          const delBtn = document.createElement('button');
-          delBtn.textContent = 'Hapus';
-          delBtn.onclick = async () => {
-            if (!confirm('Yakin hapus komentar ini?')) return;
-            try {
-              const res = await fetch(`${COMMENTS_ENDPOINT}/${id}`, { method: 'DELETE' });
-              if (!res.ok) throw new Error(res.statusText);
-              fetchComments();
-            } catch (err) {
-              alert('Error menghapus: ' + err.message);
-            }
-          };
-          infoRow.appendChild(delBtn);
-        }
-
-        const ratingRow = document.createElement("div");
-        ratingRow.classList.add("star-rating");
-        for (let i = 1; i <= 5; i++) {
-          const star = document.createElement('span');
-          star.textContent = i <= rating ? '★' : '☆';
-          if (i > rating) star.classList.add('empty');
-          ratingRow.appendChild(star);
-        }
-
-        const textEl = document.createElement('p');
-        textEl.textContent = text;
-
-        content.append(infoRow, ratingRow, textEl);
-        wrapper.appendChild(content);
-        return wrapper;
-      }
-
-      // render comments
-      async function fetchComments() {
-        const listContainer = document.getElementById("commentsList");
-        const loadingText = document.getElementById("loadingText");
-        loadingText.textContent = "Memuat komentar…";
-        try {
-          const response = await fetch(COMMENTS_ENDPOINT);
-          if (!response.ok) throw new Error(response.statusText);
-          const comments = await response.json();
-          comments.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-          listContainer.innerHTML = '';
-          if (!comments.length) {
-            listContainer.innerHTML = '<p>Belum ada komentar.</p>';
-            return;
-          }
-          comments.forEach(c => listContainer.appendChild(createCommentElement(c)));
-        } catch (err) {
-          listContainer.innerHTML = `<p style="color:red;">${err.message}</p>`;
-        }
-      }
-
-      async function postComment(event) {
-        event.preventDefault();
-        const usernameInput = document.getElementById("username");
-        const commentInput = document.getElementById("commentText");
-        const ratingInputs = document.getElementsByName("rating");
-        const username = usernameInput.value.trim();
-        const text = commentInput.value.trim();
-        let rating = null;
-        ratingInputs.forEach(r => { if (r.checked) rating = Number(r.value); });
-        if (!username || !text || rating === null) {
-          return alert('Nama, rating, dan komentar harus diisi.');
-        }
-        // Rate limit
-        const now = Date.now();
-        const last = localStorage.getItem(`lastCommentTime_${username}`);
-        if (last && now - Number(last) < 60000) {
-          const sec = Math.ceil((60000 - (now - Number(last))) / 1000);
-          return alert(`Tunggu ${sec} detik sebelum komentar lagi.`);
-        }
-        try {
-          const payload = { username, text, rating };
-          const res = await fetch(COMMENTS_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (!res.ok) throw new Error(res.statusText);
-          localStorage.setItem(`lastCommentTime_${username}`, now);
-          localStorage.setItem('currentUser', username);
-          usernameInput.value = '';
-          commentInput.value = '';
-          ratingInputs.forEach(r => r.checked = false);
-          fetchComments();
-        } catch (err) {
-          alert('Gagal kirim: ' + err.message);
-        }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-        fetchComments();
-        document.getElementById('commentForm').addEventListener('submit', postComment);
-      });
+      function _0x545c(){const _0x5e0012=['button','appendChild','href','1490oGaaSM','remove','#777','italic','4505034ybYhlj','preventDefault','2833735uqivMz','created_at','sidebarToggle','2817395BrOixi','3990474OMxlTH','trim','DELETE','POST','style','span','dark-mode','getElementById','classList','darkModeToggle','createElement','Memuat\x20komentar…','ceil','now','setItem','32URtMAi','lastCommentTime_','813332lDTGFQ','loadingText','card-testimoni','Berhasil\x20Mengirimkan\x20Komentar','application/json','getItem','medium','toLocaleString','textContent','stringify','length','innerHTML','Tunggu\x20','open','commentText','index.html','sidebarClose','onclick','currentUser','addEventListener','<p>Belum\x20ada\x20komentar.</p>','value','sidebar','star-rating','content','add','Yakin\x20hapus\x20komentar\x20ini?','append','body','checked','Gagal\x20kirim:\x20','\x20detik\x20sebelum\x20komentar\x20lagi.','commentsList','id-ID','div','8942013cugavi','location','json','rating','commentForm','statusText','message','click','short','forEach','1579tkHbtl'];_0x545c=function(){return _0x5e0012;};return _0x545c();}const _0x16176e=_0x4f89;(function(_0x8ada74,_0x49ad91){const _0x4ce724=_0x4f89,_0x145ef5=_0x8ada74();while(!![]){try{const _0x40ca84=-parseInt(_0x4ce724(0x7b))/0x1*(parseInt(_0x4ce724(0x7f))/0x2)+-parseInt(_0x4ce724(0x83))/0x3+-parseInt(_0x4ce724(0x9a))/0x4+-parseInt(_0x4ce724(0x85))/0x5+parseInt(_0x4ce724(0x89))/0x6+-parseInt(_0x4ce724(0x88))/0x7+-parseInt(_0x4ce724(0x98))/0x8*(-parseInt(_0x4ce724(0x71))/0x9);if(_0x40ca84===_0x49ad91)break;else _0x145ef5['push'](_0x145ef5['shift']());}catch(_0x32ef68){_0x145ef5['push'](_0x145ef5['shift']());}}}(_0x545c,0xc08e5));const sidebar=document['getElementById'](_0x16176e(0xb0)),sidebarToggle=document[_0x16176e(0x90)](_0x16176e(0x87)),sidebarClose=document[_0x16176e(0x90)](_0x16176e(0xaa)),openCartBtn=document['getElementById']('openCartBtn');sidebarToggle[_0x16176e(0xad)](_0x16176e(0x78),()=>sidebar[_0x16176e(0x91)][_0x16176e(0xb3)](_0x16176e(0xa7))),sidebarClose[_0x16176e(0xad)]('click',()=>sidebar[_0x16176e(0x91)][_0x16176e(0x80)](_0x16176e(0xa7))),document[_0x16176e(0x90)](_0x16176e(0x92))[_0x16176e(0xad)](_0x16176e(0x78),()=>document[_0x16176e(0xb6)]['classList']['toggle'](_0x16176e(0x8f))),openCartBtn[_0x16176e(0xad)]('click',()=>window[_0x16176e(0x72)][_0x16176e(0x7e)]=_0x16176e(0xa9));function _0x4f89(_0x6fcc43,_0x4303ff){const _0x545c12=_0x545c();return _0x4f89=function(_0x4f896b,_0x10df88){_0x4f896b=_0x4f896b-0x6f;let _0x3d5454=_0x545c12[_0x4f896b];return _0x3d5454;},_0x4f89(_0x6fcc43,_0x4303ff);}const BASE_API_URL='/api',COMMENTS_ENDPOINT=BASE_API_URL+'/comments';function createCommentElement({id:_0x569500,username:_0xbb5af1,text:_0x18012a,rating:_0x5b3872,created_at:_0x56b61f}){const _0x4d199f=_0x16176e,_0x5b65a5=document[_0x4d199f(0x93)](_0x4d199f(0x70));_0x5b65a5[_0x4d199f(0x91)][_0x4d199f(0xb3)](_0x4d199f(0x9c));const _0x355731=document[_0x4d199f(0x93)](_0x4d199f(0x70));_0x355731['classList'][_0x4d199f(0xb3)](_0x4d199f(0xb2));const _0x4563ec=document[_0x4d199f(0x93)]('div');_0x4563ec[_0x4d199f(0x91)][_0x4d199f(0xb3)]('info-row');const _0x232eb2=document['createElement']('h4');_0x232eb2['textContent']=_0xbb5af1;const _0x39b653=document[_0x4d199f(0x93)]('span');_0x39b653[_0x4d199f(0xa2)]=new Date(_0x56b61f)[_0x4d199f(0xa1)](_0x4d199f(0x6f),{'dateStyle':_0x4d199f(0xa0),'timeStyle':_0x4d199f(0x79)}),_0x39b653[_0x4d199f(0x8d)]['fontStyle']=_0x4d199f(0x82),_0x39b653[_0x4d199f(0x8d)]['color']=_0x4d199f(0x81),_0x4563ec[_0x4d199f(0xb5)](_0x232eb2,_0x39b653);const _0x2d9dea=localStorage['getItem'](_0x4d199f(0xac));if(_0x2d9dea===_0xbb5af1){const _0x547465=document[_0x4d199f(0x93)](_0x4d199f(0x7c));_0x547465['textContent']='Hapus',_0x547465[_0x4d199f(0xab)]=async()=>{const _0x1b043f=_0x4d199f;if(!confirm(_0x1b043f(0xb4)))return;try{const _0x11055d=await fetch(COMMENTS_ENDPOINT+'/'+_0x569500,{'method':_0x1b043f(0x8b)});if(!_0x11055d['ok'])throw new Error(_0x11055d['statusText']);fetchComments();}catch(_0x287ce7){alert('Error\x20menghapus:\x20'+_0x287ce7[_0x1b043f(0x77)]);}},_0x4563ec['appendChild'](_0x547465);}const _0x4d511f=document[_0x4d199f(0x93)](_0x4d199f(0x70));_0x4d511f[_0x4d199f(0x91)]['add'](_0x4d199f(0xb1));for(let _0x93160f=0x1;_0x93160f<=0x5;_0x93160f++){const _0x161079=document[_0x4d199f(0x93)](_0x4d199f(0x8e));_0x161079[_0x4d199f(0xa2)]=_0x93160f<=_0x5b3872?'★':'☆';if(_0x93160f>_0x5b3872)_0x161079[_0x4d199f(0x91)][_0x4d199f(0xb3)]('empty');_0x4d511f[_0x4d199f(0x7d)](_0x161079);}const _0xc510b4=document[_0x4d199f(0x93)]('p');return _0xc510b4[_0x4d199f(0xa2)]=_0x18012a,_0x355731[_0x4d199f(0xb5)](_0x4563ec,_0x4d511f,_0xc510b4),_0x5b65a5[_0x4d199f(0x7d)](_0x355731),_0x5b65a5;}async function fetchComments(){const _0x128d79=_0x16176e,_0x412387=document[_0x128d79(0x90)](_0x128d79(0xba)),_0x2a5959=document['getElementById'](_0x128d79(0x9b));_0x2a5959['textContent']=_0x128d79(0x94);try{const _0x4a74a0=await fetch(COMMENTS_ENDPOINT);if(!_0x4a74a0['ok'])throw new Error(_0x4a74a0[_0x128d79(0x76)]);const _0x58bdbc=await _0x4a74a0[_0x128d79(0x73)]();_0x58bdbc['sort']((_0x48ca36,_0x235558)=>new Date(_0x235558[_0x128d79(0x86)])-new Date(_0x48ca36[_0x128d79(0x86)])),_0x412387['innerHTML']='';if(!_0x58bdbc[_0x128d79(0xa4)]){_0x412387['innerHTML']=_0x128d79(0xae);return;}_0x58bdbc[_0x128d79(0x7a)](_0x2d2673=>_0x412387[_0x128d79(0x7d)](createCommentElement(_0x2d2673)));}catch(_0x164908){_0x412387[_0x128d79(0xa5)]='<p\x20style=\x22color:red;\x22>'+_0x164908[_0x128d79(0x77)]+'</p>';}}async function postComment(_0x3d0d4f){const _0x50cf03=_0x16176e;_0x3d0d4f[_0x50cf03(0x84)]();const _0x623615=document[_0x50cf03(0x90)]('username'),_0x4e4e63=document[_0x50cf03(0x90)](_0x50cf03(0xa8)),_0x1a4fe4=document['getElementsByName'](_0x50cf03(0x74)),_0x5ce530=_0x623615[_0x50cf03(0xaf)][_0x50cf03(0x8a)](),_0x5c6dd5=_0x4e4e63[_0x50cf03(0xaf)][_0x50cf03(0x8a)]();let _0xda3cb5=null;_0x1a4fe4['forEach'](_0x42bdaf=>{const _0x241a0a=_0x50cf03;if(_0x42bdaf[_0x241a0a(0xb7)])_0xda3cb5=Number(_0x42bdaf[_0x241a0a(0xaf)]);});if(!_0x5ce530||!_0x5c6dd5||_0xda3cb5===null)return alert('Nama,\x20rating,\x20dan\x20komentar\x20harus\x20diisi.');const _0x5277b4=Date[_0x50cf03(0x96)](),_0x3038ff=localStorage[_0x50cf03(0x9f)](_0x50cf03(0x99)+_0x5ce530);if(_0x3038ff&&_0x5277b4-Number(_0x3038ff)<0xea60){const _0x52ff6d=Math[_0x50cf03(0x95)]((0xea60-(_0x5277b4-Number(_0x3038ff)))/0x3e8);return alert(_0x50cf03(0xa6)+_0x52ff6d+_0x50cf03(0xb9));}try{const _0x502a61={'username':_0x5ce530,'text':_0x5c6dd5,'rating':_0xda3cb5},_0x19f9d7=await fetch(COMMENTS_ENDPOINT,{'method':_0x50cf03(0x8c),'headers':{'Content-Type':_0x50cf03(0x9e)},'body':JSON[_0x50cf03(0xa3)](_0x502a61)});if(!_0x19f9d7['ok'])throw new Error(_0x19f9d7[_0x50cf03(0x76)]);localStorage[_0x50cf03(0x97)](_0x50cf03(0x99)+_0x5ce530,_0x5277b4),localStorage['setItem'](_0x50cf03(0xac),_0x5ce530),_0x623615[_0x50cf03(0xaf)]='',_0x4e4e63[_0x50cf03(0xaf)]='',_0x1a4fe4['forEach'](_0x54098a=>_0x54098a[_0x50cf03(0xb7)]=![]),fetchComments(),alert(_0x50cf03(0x9d));}catch(_0x29b1d3){alert(_0x50cf03(0xb8)+_0x29b1d3[_0x50cf03(0x77)]);}}document[_0x16176e(0xad)]('DOMContentLoaded',()=>{const _0xfad5ed=_0x16176e;fetchComments(),document[_0xfad5ed(0x90)](_0xfad5ed(0x75))[_0xfad5ed(0xad)]('submit',postComment);});
     </script>
   </body>
 </html>

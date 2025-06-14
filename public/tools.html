@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Tools</title>
+  <meta name="description" content="Dashboard Tools by Yudzxml - Koleksi alat online serbaguna." />
+  <meta property="og:title" content="Tools by Yudzxml" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ==================== Variables ==================== */
+    :root {
+      --clr-bg: #f4f6f9;
+      --clr-text: #333;
+      --clr-primary: #1e90ff;
+      --clr-primary-hover: #187bcd;
+      --clr-secondary: #ff6347;
+      --clr-secondary-hover: #e5533d;
+      --clr-accent: #32cd32;
+      --clr-surface: #fff;
+      --clr-sidebar: #2c3e50;
+      --clr-sidebar-text: #ecf0f1;
+      --clr-sidebar-hover: #34495e;
+      --clr-shadow: rgba(0,0,0,0.1);
+      --transition: 0.3s ease;
+    }
+
+    /* ==================== Reset & Global ==================== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+    }
+    a { color: var(--clr-primary); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--clr-primary-hover); text-decoration: underline; }
+
+    /* ==================== Dark Mode ==================== */
+    body.dark-mode {
+      --clr-bg: #121212;
+      --clr-text: #e0e0e0;
+      --clr-surface: #1e1e1e;
+      --clr-sidebar: #1b2631;
+      --clr-sidebar-text: #bdc3c7;
+      --clr-sidebar-hover: #273746;
+    }
+
+    /* ==================== Layout ==================== */
+    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary));
+      color: #fff;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 8px var(--clr-shadow);
+    }
+    .logo { font-size: 1.8rem; font-weight: 700; margin: 0; }
+    .header-actions, .header-center { display: flex; align-items: center; gap: 1rem; }
+    .header-center input, .header-center select {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 50px;
+      outline: none;
+      box-shadow: 0 2px 4px var(--clr-shadow);
+      transition: transform var(--transition);
+    }
+    .header-center input:focus, .header-center select:focus { transform: scale(1.05); }
+
+    /* ==================== Buttons & Icons ==================== */
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary {
+      background: var(--clr-primary);
+      color: #fff;
+      box-shadow: 0 4px 6px var(--clr-shadow);
+    }
+    .btn-primary:hover {
+      background: var(--clr-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px var(--clr-shadow);
+    }
+    .btn-secondary {
+      background: var(--clr-secondary);
+      color: #fff;
+      box-shadow: 0 4px 6px var(--clr-shadow);
+    }
+    .btn-secondary:hover {
+      background: var(--clr-secondary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px var(--clr-shadow);
+    }
+    .icon-btn {
+      background: none;
+      font-size: 1.4rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .icon-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+
+/* ==================== Tool Card Header ==================== */
+.tool-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.tool-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+    /* ==================== Sidebar ==================== */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--clr-sidebar);
+      color: var(--clr-sidebar-text);
+      transform: translateX(-100%);
+      transition: transform var(--transition);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    #sidebar.open { transform: translateX(0); }
+    .sidebar-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      margin-left: auto;
+      cursor: pointer;
+      color: var(--clr-sidebar-text);
+    }
+    #searchTools {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      margin-bottom: 1rem;
+    }
+/* ==================== Sidebar Buttons ==================== */
+.sidebar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;  /* teks + ikon dirapatkan ke kiri */
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;         /* padding kiri/kanan ditambah */
+  margin-bottom: 0.5rem;        /* jarak antar tombol */
+  width: 100%;
+  background: transparent;
+  color: var(--clr-sidebar-text);
+  border-radius: 8px;
+  transition: background var(--transition);
+  text-align: left;             /* pastikan teks rata kiri */
+}
+.sidebar-btn:hover {
+  background: var(--clr-sidebar-hover);
+}
+
+    /* ==================== Sections ==================== */
+    .about h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      background: -webkit-linear-gradient(var(--clr-primary), var(--clr-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .quick-access {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    .quick-card {
+      background: var(--clr-surface);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px var(--clr-shadow);
+      transition: transform var(--transition);
+    }
+    .quick-card:hover { transform: translateY(-4px); }
+    .quick-card h3 { display: flex; justify-content: space-between; align-items: center; }
+    .quick-card ul { list-style: none; padding: 0; margin: 0; }
+    .quick-card li { padding: 0.4rem 0; border-bottom: 1px solid #e0e0e0; }
+
+    /* ==================== Tools Grid ==================== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .tool-card {
+      background: var(--clr-surface);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 6px var(--clr-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px var(--clr-shadow);
+    }
+    .tool-card h3 { font-size: 1.2rem; margin: 0; }
+    .tool-card p { flex: 1; margin: 0; }
+    .btn-fav {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: transform var(--transition);
+    }
+    .btn-fav:hover { transform: scale(1.2); }
+    .btn-fav.active { color: var(--clr-accent); }
+
+    /* ==================== Toast ==================== */
+    #toast {
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+    #toast.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ==================== Footer ==================== */
+    .site-footer {
+      background: var(--clr-surface);
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 -2px 6px var(--clr-shadow);
+    }
+    .site-footer p { margin: 0; font-size: 0.9rem; }
+
+    /* ==================== Responsive ==================== */
+    @media (max-width: 768px) {
+      .site-header { flex-direction: column; gap: 1rem; padding: 1rem; }
+      #sidebar { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SIDEBAR -->
+<aside id="sidebar">
+  <button id="sidebarClose" class="sidebar-close" aria-label="Close sidebar">×</button>
+  <input id="searchTools" type="text" placeholder="Search tools..." aria-label="Search tools" />
+  
+<div id="toolsList">
+  <button onclick="location.href='ytdlDownloader.html'" class="sidebar-btn">
+    📥 YouTube Downloader
+  </button>
+  <button onclick="location.href='uploader.html'" class="sidebar-btn">
+    📁 Upload File
+  </button>
+</div>
+
+  <button onclick="clearFilters()" class="btn btn-secondary">Clear Filters</button>
+</aside>
+
+  <!-- LOADING -->
+  <div id="loadingState" style="text-align:center; padding: 2rem;">Memuat tools...</div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-actions">
+      <button id="sidebarToggle" class="icon-btn" aria-label="Open sidebar">☰</button>
+      <h1 class="logo">オ TOOLS</h1>
+    </div>
+    <div class="header-center">
+      <input type="text" id="searchInput" placeholder="Cari Tools..." aria-label="Cari Tools" />
+      <select id="filterCategory" aria-label="Filter kategori">
+        <option value="">Semua Kategori</option>
+        <option value="video">Tools</option>
+        <option value="teks">Teks</option>
+      </select>
+    </div>
+    <div class="header-actions">
+      <button id="darkModeToggle" class="icon-btn" title="Toggle Dark Mode">🌙</button>
+      <button onclick="location.href='index.html'" class="icon-btn" title="Beranda">🏠</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="container">
+<section class="about container">
+  <h2>Selamat Datang di Tools By Yudzxml</h2>
+  <p>
+    Tools By Yudzxml adalah platform komprehensif untuk membantu kebutuhan digital Anda. 
+    Di sini Anda akan menemukan berbagai alat online gratis yang:
+  </p>
+<ul class="features">
+  <li>⚙️ <strong>Beragam Kategori</strong>: Video, Teks, Gambar, File dan banyak lagi.</li>
+  <li>🔒 <strong>Privasi Terjamin</strong>: Semua proses dilakukan di browser, tanpa menyimpan data.</li>
+  <li>🚀 <strong>Performa Cepat</strong>: Hasil instan tanpa perlu registrasi.</li>
+  <li>📱 <strong>Responsif</strong>: Optimal di desktop, tablet, maupun smartphone.</li>
+  <li>⭐ <strong>Update Berkala</strong>: Tools selalu diperbarui sesuai teknologi terbaru.</li>
+  <li>🧪 <strong>Masih Tahap Pengembangan</strong>: Fitur baru terus ditambahkan dan disempurnakan.</li>
+</ul>
+</section>
+
+    <section class="quick-access">
+      <div class="quick-card">
+        <h3>Recently Used <button onclick="clearRecents()" class="btn btn-secondary">Clear</button></h3>
+        <ul id="recentList"></ul>
+      </div>
+      <div class="quick-card">
+        <h3>Favorites <button onclick="clearFavs()" class="btn btn-secondary">Clear</button></h3>
+        <ul id="favoritesList"></ul>
+      </div>
+    </section>
+
+  <section class="tools-grid" aria-live="polite">
+  <!-- YouTube Downloader -->
+  <div class="tool-card" data-title="YouTube Downloader" data-category="video">
+    <div class="tool-header">
+      <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/c300ec56.png" alt="YouTube Icon" class="tool-icon" />
+      <h3>YouTube Downloader</h3>
+    </div>
+    <p class="tool-description">
+      Unduh video atau audio dari YouTube secara cepat dan mudah langsung di browser.  
+      Cukup tempel URL, pilih format, lalu unduh.
+    </p>
+    <ul class="tool-features">
+      <li>🎥 Kualitas sampai 1080p</li>
+      <li>🎶 Ekstrak audio MP3</li>
+      <li>⚡ Proses instan tanpa registrasi</li>
+      <li>🔒 Privasi terjaga — tidak ada watermark</li>
+    </ul>
+<div class="tool-actions">
+  <button
+    type="button"
+    onclick="location.href='ytdlDownloader.html'"
+    class="btn btn-primary"
+  >
+    Buka Tool
+  </button>
+  <button class="btn-fav" data-title="YouTube Downloader" aria-label="Toggle favorite" aria-pressed="false">
+    ★
+  </button>
+</div>
+  </div>
+    <!-- Uploader -->
+  <div class="tool-card" data-title="File Uploader" data-category="utility">
+  <div class="tool-header">
+    <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/e61577f8.png" alt="Uploader Icon" class="tool-icon" />
+    <h3>File to URL Uploader</h3>
+  </div>
+  <p class="tool-description">
+    Unggah file dari perangkatmu dan dapatkan URL langsung untuk dibagikan.  
+    Cocok untuk berbagi dokumen, gambar, atau file lain dengan cepat dan mudah.
+  </p>
+  <ul class="tool-features">
+    <li>📁 Dukungan banyak format file</li>
+    <li>🚀 Proses cepat dan mudah</li>
+    <li>🔗 Link langsung setelah unggah</li>
+    <li>🛡️ Aman dan privasi terjaga</li>
+  </ul>
+  <div class="tool-actions">
+    <button
+      type="button"
+      onclick="location.href='uploader.html'"
+      class="btn btn-primary"
+    >
+      Buka Tool
+    </button>
+    <button class="btn-fav" data-title="File Uploader" aria-label="Toggle favorite" aria-pressed="false">
+      ★
+    </button>
+  </div>
+</div>
+  <!-- CARD BARU -->
+</section>
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" role="status" aria-live="assertive"></div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Yudzxml All Right Reserved | <a href="contact.html">Contact</a> | <a href="service.html">Privacy</a></p>
+    </div>
+  </footer>
+
+<script>
+  const _0x1f9e98=_0x2122;(function(_0x103b8e,_0x4f6cfc){const _0x5bad48=_0x2122,_0xbc95=_0x103b8e();while(!![]){try{const _0x5d9cd7=-parseInt(_0x5bad48(0x17f))/0x1+-parseInt(_0x5bad48(0x1ac))/0x2+-parseInt(_0x5bad48(0x190))/0x3+parseInt(_0x5bad48(0x173))/0x4*(-parseInt(_0x5bad48(0x1a3))/0x5)+parseInt(_0x5bad48(0x1a9))/0x6+parseInt(_0x5bad48(0x167))/0x7*(parseInt(_0x5bad48(0x17e))/0x8)+-parseInt(_0x5bad48(0x1ad))/0x9*(-parseInt(_0x5bad48(0x175))/0xa);if(_0x5d9cd7===_0x4f6cfc)break;else _0xbc95['push'](_0xbc95['shift']());}catch(_0x22d6d5){_0xbc95['push'](_0xbc95['shift']());}}}(_0x1dc8,0x93072));const safeStorage=(_0x592b35,_0x11c5b8='[]')=>{const _0x2c80e6=_0x2122;try{return JSON[_0x2c80e6(0x176)](localStorage['getItem'](_0x592b35)||_0x11c5b8);}catch{return JSON['parse'](_0x11c5b8);}},body=document[_0x1f9e98(0x1af)],sidebar=document[_0x1f9e98(0x1a7)](_0x1f9e98(0x18c)),toast=document[_0x1f9e98(0x1a7)]('toast');document[_0x1f9e98(0x1a7)](_0x1f9e98(0x16c))[_0x1f9e98(0x1a4)]=()=>sidebar[_0x1f9e98(0x182)][_0x1f9e98(0x177)]('open'),document['getElementById'](_0x1f9e98(0x174))[_0x1f9e98(0x1a4)]=()=>sidebar['classList'][_0x1f9e98(0x184)](_0x1f9e98(0x19f));function showToast(_0x263f59){const _0x3a47fa=_0x1f9e98;toast[_0x3a47fa(0x183)]=_0x263f59,toast['classList'][_0x3a47fa(0x177)]('show'),setTimeout(()=>toast[_0x3a47fa(0x182)][_0x3a47fa(0x184)](_0x3a47fa(0x19e)),0x7d0);}document['getElementById']('filterCategory')[_0x1f9e98(0x185)]=filterTools,document[_0x1f9e98(0x1a7)](_0x1f9e98(0x1a6))[_0x1f9e98(0x189)]=filterTools,document[_0x1f9e98(0x1a7)](_0x1f9e98(0x16e))[_0x1f9e98(0x189)]=_0x1aa268=>{const _0x3d236b=_0x1f9e98,_0x211163=_0x1aa268[_0x3d236b(0x178)][_0x3d236b(0x181)][_0x3d236b(0x171)]();document[_0x3d236b(0x19c)](_0x3d236b(0x18e))[_0x3d236b(0x170)](_0x1fd005=>{const _0x3f8182=_0x3d236b;_0x1fd005[_0x3f8182(0x168)][_0x3f8182(0x172)]=_0x1fd005[_0x3f8182(0x183)][_0x3f8182(0x171)]()['includes'](_0x211163)?'':_0x3f8182(0x18a);});};function filterTools(){const _0x73f4e8=_0x1f9e98,_0x528a6b=document[_0x73f4e8(0x1a7)](_0x73f4e8(0x188))[_0x73f4e8(0x181)],_0x55d810=document[_0x73f4e8(0x1a7)]('searchInput')['value'][_0x73f4e8(0x171)]();document[_0x73f4e8(0x19c)](_0x73f4e8(0x180))['forEach'](_0x40a0bf=>{const _0x272022=_0x73f4e8,_0x2797de=_0x40a0bf[_0x272022(0x18b)][_0x272022(0x17a)][_0x272022(0x171)](),_0xa19d10=!_0x528a6b||_0x40a0bf[_0x272022(0x18b)][_0x272022(0x1a1)]===_0x528a6b,_0x2658a4=_0x2797de[_0x272022(0x1ab)](_0x55d810);_0x40a0bf[_0x272022(0x168)][_0x272022(0x172)]=_0xa19d10&&_0x2658a4?'':_0x272022(0x18a);});}document[_0x1f9e98(0x1a7)](_0x1f9e98(0x197))[_0x1f9e98(0x1a4)]=()=>{const _0x4b890c=_0x1f9e98;body['classList'][_0x4b890c(0x16f)]('dark-mode'),localStorage['setItem'](_0x4b890c(0x16b),body[_0x4b890c(0x182)][_0x4b890c(0x17d)](_0x4b890c(0x18f)));},window[_0x1f9e98(0x198)]=()=>{const _0x80ba3c=_0x1f9e98;JSON[_0x80ba3c(0x176)](localStorage['getItem']('darkMode')||_0x80ba3c(0x1ae))&&body['classList'][_0x80ba3c(0x177)](_0x80ba3c(0x18f)),document[_0x80ba3c(0x1a7)](_0x80ba3c(0x18d))['style']['display']=_0x80ba3c(0x18a),renderLists();},document['querySelectorAll'](_0x1f9e98(0x1a8))[_0x1f9e98(0x170)](_0x483e51=>{const _0xdfe8de=_0x1f9e98;_0x483e51[_0xdfe8de(0x1a4)]=()=>{const _0x5e2197=_0xdfe8de,_0x52a49b=_0x483e51[_0x5e2197(0x18b)][_0x5e2197(0x17a)];let _0xd8ea1e=safeStorage(_0x5e2197(0x191));_0xd8ea1e['includes'](_0x52a49b)?_0xd8ea1e=_0xd8ea1e[_0x5e2197(0x196)](_0x17fd0c=>_0x17fd0c!==_0x52a49b):(_0xd8ea1e[_0x5e2197(0x187)](_0x52a49b),showToast(_0x5e2197(0x194))),localStorage[_0x5e2197(0x17c)](_0x5e2197(0x191),JSON['stringify'](_0xd8ea1e)),renderLists();};});function clearFavs(){const _0x38629c=_0x1f9e98;localStorage['removeItem'](_0x38629c(0x191)),renderLists(),showToast(_0x38629c(0x195));}function _0x2122(_0x28440a,_0x401e6c){const _0x1dc8ee=_0x1dc8();return _0x2122=function(_0x2122e9,_0x150b1e){_0x2122e9=_0x2122e9-0x166;let _0x15fc24=_0x1dc8ee[_0x2122e9];return _0x15fc24;},_0x2122(_0x28440a,_0x401e6c);}function _0x1dc8(){const _0xb80866=['.btn-primary','innerHTML','darkMode','sidebarToggle','favoritesList','searchTools','toggle','forEach','toLowerCase','display','388840swyRGW','sidebarClose','7344030IGoIcX','parse','add','target','querySelector','title','location','setItem','contains','4216976polzvk','196994AKutYz','.tool-card','value','classList','textContent','remove','onchange','active','push','filterCategory','oninput','none','dataset','sidebar','loadingState','#toolsList\x20.sidebar-btn','dark-mode','112935xSyFHO','favs','stringify','recent','Ditambahkan\x20ke\x20favorit!','Favorites\x20dibersihkan','filter','darkModeToggle','onload','unshift','removeItem','Recents\x20dibersihkan','querySelectorAll','<li>','show','open','setAttribute','category','</li>','50VOnyBV','onclick','map','searchInput','getElementById','.btn-fav','7221378CvYtjW','getAttribute','includes','1312246GVoJGa','9QIHByK','false','body','length','7lntsMa','style'];_0x1dc8=function(){return _0xb80866;};return _0x1dc8();}function clearRecents(){const _0x3a0e40=_0x1f9e98;localStorage[_0x3a0e40(0x19a)](_0x3a0e40(0x193)),renderLists(),showToast(_0x3a0e40(0x19b));}function clearFilters(){const _0x5af7a2=_0x1f9e98;document[_0x5af7a2(0x1a7)](_0x5af7a2(0x188))[_0x5af7a2(0x181)]='',filterTools();}function renderLists(){const _0x50f6de=_0x1f9e98,_0x4d485c=safeStorage(_0x50f6de(0x193)),_0x374d20=safeStorage(_0x50f6de(0x191));document['getElementById']('recentList')[_0x50f6de(0x16a)]=_0x4d485c[_0x50f6de(0x1a5)](_0x315ade=>_0x50f6de(0x19d)+_0x315ade+'</li>')['join'](''),document[_0x50f6de(0x1a7)](_0x50f6de(0x16d))[_0x50f6de(0x16a)]=_0x374d20[_0x50f6de(0x1a5)](_0x165322=>_0x50f6de(0x19d)+_0x165322+_0x50f6de(0x1a2))['join'](''),document['querySelectorAll'](_0x50f6de(0x1a8))[_0x50f6de(0x170)](_0x1c6ccf=>{const _0x46340a=_0x50f6de,_0x165849=_0x374d20['includes'](_0x1c6ccf['dataset'][_0x46340a(0x17a)]);_0x1c6ccf[_0x46340a(0x182)][_0x46340a(0x16f)](_0x46340a(0x186),_0x165849),_0x1c6ccf[_0x46340a(0x1a0)]('aria-pressed',_0x165849);});}document[_0x1f9e98(0x19c)](_0x1f9e98(0x180))[_0x1f9e98(0x170)](_0x2c983e=>{const _0x3bdd29=_0x1f9e98,_0x10f5cd=_0x2c983e[_0x3bdd29(0x179)](_0x3bdd29(0x169));_0x10f5cd[_0x3bdd29(0x1a4)]=()=>{const _0xc0d318=_0x3bdd29;let _0x4ec31d=safeStorage(_0xc0d318(0x193));const _0xc87ead=_0x2c983e[_0xc0d318(0x18b)][_0xc0d318(0x17a)];_0x4ec31d=_0x4ec31d['filter'](_0x2974f7=>_0x2974f7!==_0xc87ead),_0x4ec31d[_0xc0d318(0x199)](_0xc87ead);if(_0x4ec31d[_0xc0d318(0x166)]>0x5)_0x4ec31d['pop']();localStorage[_0xc0d318(0x17c)](_0xc0d318(0x193),JSON[_0xc0d318(0x192)](_0x4ec31d)),renderLists(),window[_0xc0d318(0x17b)]['href']=_0x10f5cd[_0xc0d318(0x1aa)](_0xc0d318(0x1a4))['match'](/'([^']+)'/)[0x1];};});
+</script>
+</body>
+</html>

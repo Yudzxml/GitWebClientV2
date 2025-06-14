@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube Downloader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --clr-bg: #f4f6f9;
+    --clr-card: #ffffff;
+    --clr-text: #333;
+    --clr-primary: #1e90ff;
+    --clr-primary-hover: #187bcd;
+    --clr-secondary: #ff6347;
+    --clr-secondary-hover: #e5533d;
+    --clr-shadow: rgba(0,0,0,0.1);
+    --clr-muted: #777;
+    --transition: 0.3s ease;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  /* Hero Section */
+  .hero {
+    width: 100%;
+    padding: calc(var(--space-lg) * 2) 0;
+    background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-secondary) 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-sm);
+  }
+  .hero p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 30px;
+    background: var(--clr-primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .btn:disabled { background: #ccc; cursor: not-allowed; }
+  .btn:hover:not(:disabled) { background: var(--clr-primary-hover); transform: translateY(-2px); box-shadow: 0 4px 8px var(--clr-shadow); }
+
+  /* Card */
+  .card {
+    background: var(--clr-card);
+    border-radius: 12px;
+    padding: var(--space-md);
+    box-shadow: 0 2px 8px var(--clr-shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 4px 16px var(--clr-shadow); }
+
+  /* Dividers */
+  .section-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.05);
+  }
+
+  /* Input */
+  input[type="text"] {
+    width: 100%;
+    padding: var(--space-md);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border var(--transition);
+  }
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(30,144,255,0.2);
+  }
+
+/* Progress */
+.progress-container {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+.progress-container progress {
+  width: 100%;
+  appearance: none;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #eee;
+  transition: width var(--transition);
+}
+
+/* Track (Latar) */
+.progress-container progress::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+/* Value: gradient biru→merah + stripes overlay */
+.progress-container progress::-webkit-progress-value {
+  background:
+    /* layer 1: stripes */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.3) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.3) 75%,
+      transparent 75%,
+      transparent
+    ) 0 0 / 1rem 1rem,
+    /* layer 2: gradient biru→merah */
+    linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+  transition: width var(--transition);
+}
+
+/* Firefox */
+.progress-container progress::-moz-progress-bar {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.3) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.3) 75%,
+      transparent 75%,
+      transparent
+    ) 0 0 / 1rem 1rem,
+    linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+  transition: width var(--transition);
+}
+
+@keyframes progress-stripes {
+  from { background-position: 0 0; }
+  to   { background-position: 1rem 1rem; }
+}
+
+.progress-container span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: #333;
+  pointer-events: none;
+}
+
+  /* Preview Section */
+  .preview-section {
+    display: none;
+    padding: var(--space-md);
+    background: var(--clr-card);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--clr-shadow);
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .preview-header {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+  .preview-section img {
+    width: 100%;
+    max-width: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  .preview-info h3 {
+    margin: 0 0 var(--space-sm) 0;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .preview-info p {
+    margin: var(--space-sm) 0;
+    font-size: 0.9rem;
+    color: var(--clr-muted);
+  }
+  .preview-info p i {
+    margin-right: var(--space-sm);
+    color: var(--clr-primary);
+  }
+
+  /* Download Sections */
+  .download-section {
+    display: none;
+    margin-top: var(--space-md);
+  }
+  .download-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  .download-row label {
+    width: 80px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .download-row select { flex: 1; padding: var(--space-sm); border: 1px solid #ccc; border-radius: 8px; font-size: 0.9rem; transition: border var(--transition); }
+  .download-row button { flex-shrink: 0; }
+  .btn-text { font-size: 1rem; font-weight: 500; line-height: 1; }
+
+  /* Back Button */
+  .back-btn {
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--clr-secondary);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background var(--transition);
+    z-index: 100;
+  }
+  .back-btn:hover { background: var(--clr-secondary-hover); }
+
+  /* Footer */
+  .footer { text-align: center; font-size: 0.8rem; color: var(--clr-muted); margin-top: var(--space-lg); }
+  .footer a { color: var(--clr-primary); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  /* Responsive Mobile */
+  @media (max-width: 480px) {
+    .container { padding: var(--space-md); }
+    .hero h1 { font-size: 2rem; }
+    .hero p { font-size: 0.9rem; }
+    .card { padding: var(--space-sm); }
+    .preview-header { grid-template-columns: 1fr; gap: var(--space-md); text-align: center; }
+    .preview-section img { max-width: 100%; margin: 0 auto; }
+    .preview-info h3 { font-size: 1.2rem; }
+    .preview-info p { font-size: 0.85rem; }
+    .download-row { flex-direction: column; align-items: stretch; }
+    .download-row label, .download-row select, .download-row button { width: 100%; }
+    .download-row button { margin-top: var(--space-sm); }
+    .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+  <a href="tools.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+  <header class="hero">
+    <div class="container">
+      <h1><i class="fab fa-youtube"></i> YouTube Downloader</h1>
+      <p>Unduh video dan audio YouTube dengan mudah dalam hitungan detik.</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <input type="text" id="urlInput" placeholder="Tempel URL YouTube di sini" />
+      <button id="fetchPreviewBtn" class="btn" style="margin-top: var(--space-md);">
+        <i class="fas fa-search"></i> Preview
+      </button>
+      <div id="previewProgress" class="progress-container">
+        <progress value="0" max="100"></progress>
+        <span>0%</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div id="previewSection" class="preview-section">
+      <div class="preview-header">
+        <img id="videoThumbnail" src="" alt="Thumbnail" />
+        <div class="preview-info">
+          <h3 id="videoTitle">—</h3>
+          <p><i class="fas fa-clock"></i> Durasi: <strong id="videoDuration">—</strong></p>
+          <p><i class="fas fa-eye"></i> Views: <strong id="videoViews">—</strong></p>
+        </div>
+      </div>
+
+      <div id="videoDownloadSection" class="download-section">
+        <div class="download-row">
+          <label for="videoQuality">Kualitas</label>
+          <select id="videoQuality">
+            <option value="low">360p</option>
+            <option value="medium">480p</option>
+            <option value="hd">720p</option>
+            <option value="fullHd">1080p</option>
+            <option value="hdHigh">1440p</option>
+          </select>
+          <button id="downloadVideoBtn" class="btn" disabled>
+            <i class="fas fa-download"></i>
+            <span class="btn-text">Download</span>
+          </button>          
+        </div>
+      </div>
+
+      <div id="audioDownloadSection" class="download-section">
+  <div class="download-row">
+    <label for="audioFormat">Format</label>
+    <select id="audioFormat">
+      <option value="mp3">MP3</option>
+      <option value="m4a">M4A</option>
+      <option value="webm">WEBM</option>
+      <option value="aac">AAC</option>
+      <option value="flac">FLAC</option>
+      <option value="ogg">OGG</option>
+      <option value="wav">WAV</option>
+    </select>
+    <button id="downloadAudioBtn" class="btn" disabled>
+      <i class="fas fa-download"></i>
+      <span class="btn-text">Download</span>
+    </button>
+  </div>
+</div>
+    </div>
+
+    <footer class="footer container">
+      <p>© 2025 Yudzxml. <a href="contact.html">Contact</a> • <a href="service.html">Terms of Service</a></p>
+    </footer>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const _0x88c68b=_0x3996;function _0x3996(_0x14a766,_0x5e5b17){const _0x26e479=_0x26e4();return _0x3996=function(_0x3996fe,_0x165125){_0x3996fe=_0x3996fe-0x70;let _0x22983a=_0x26e479[_0x3996fe];return _0x22983a;},_0x3996(_0x14a766,_0x5e5b17);}(function(_0x110749,_0x2a6f38){const _0x4976ab=_0x3996,_0x47c366=_0x110749();while(!![]){try{const _0x390ec7=-parseInt(_0x4976ab(0x88))/0x1+-parseInt(_0x4976ab(0xa0))/0x2*(parseInt(_0x4976ab(0x9b))/0x3)+-parseInt(_0x4976ab(0x93))/0x4+parseInt(_0x4976ab(0x8d))/0x5*(-parseInt(_0x4976ab(0x84))/0x6)+-parseInt(_0x4976ab(0x77))/0x7+-parseInt(_0x4976ab(0x99))/0x8*(parseInt(_0x4976ab(0x98))/0x9)+parseInt(_0x4976ab(0xa4))/0xa;if(_0x390ec7===_0x2a6f38)break;else _0x47c366['push'](_0x47c366['shift']());}catch(_0x37033c){_0x47c366['push'](_0x47c366['shift']());}}}(_0x26e4,0x92041));const urlInput=document[_0x88c68b(0xa7)](_0x88c68b(0x97)),fetchBtn=document[_0x88c68b(0xa7)](_0x88c68b(0x94)),previewProgress=document[_0x88c68b(0xa7)]('previewProgress'),progressEl=previewProgress[_0x88c68b(0x7a)]('progress'),progressText=previewProgress[_0x88c68b(0x7a)](_0x88c68b(0x72)),previewSection=document[_0x88c68b(0xa7)](_0x88c68b(0xa8)),videoDownloadSection=document[_0x88c68b(0xa7)](_0x88c68b(0xa2)),audioDownloadSection=document['getElementById']('audioDownloadSection'),downloadVideoBtn=document[_0x88c68b(0xa7)]('downloadVideoBtn'),downloadAudioBtn=document[_0x88c68b(0xa7)](_0x88c68b(0x78));function _0x26e4(){const _0x3eb086=['843256lBsWUO','floor','3167211OKSPHT','click','flex','https://api-yudzxml.koyeb.app/api/ytsearch?url=','json','2MGSDXl','videoViews','videoDownloadSection','https://api-yudzxml.koyeb.app/api/ytdlv2?url=','48310070xVCUFL','duration','trim','getElementById','previewSection','display','Error\x20saat\x20','value','createElement','message','audio','downloadUrl','span','videoThumbnail','disabled','href','Mengunduh\x20audio...\x20','7254961iFsOpM','downloadAudioBtn','src','querySelector','videoTitle','audioFormat','timestamp','get','views','toLocaleString','title','appendChild','data','42roCUrE','100%','&format=&quality=','Masukkan\x20URL\x20YouTube!','459155hbVFLm','&format=','innerText','Memuat...\x20','video','71515jGyNsn','body','download','toLowerCase','style','addEventListener','1688052wfEaDt','fetchPreviewBtn','block','remove','urlInput','99RscPEM'];_0x26e4=function(){return _0x3eb086;};return _0x26e4();}function fakeProgress(_0x44f61a=0x5dc,_0xbefa9b=''){return new Promise(_0x59d340=>{let _0x5f34ab=null;function _0x13e7f0(_0x53cc71){const _0x5a5079=_0x3996;if(!_0x5f34ab)_0x5f34ab=_0x53cc71;const _0x4ac4b7=_0x53cc71-_0x5f34ab,_0x48bc93=Math['min'](0x5a,Math[_0x5a5079(0x9a)](_0x4ac4b7/_0x44f61a*0x64));progressEl['value']=_0x48bc93,progressText[_0x5a5079(0x8a)]=''+_0xbefa9b+_0x48bc93+'%';if(_0x4ac4b7<_0x44f61a)requestAnimationFrame(_0x13e7f0);else _0x59d340();}requestAnimationFrame(_0x13e7f0);});}async function doWithFake(_0x4ebd9e,_0x8364c3,_0x1fb4de,_0x1c1564){const _0x3bfa90=_0x88c68b;progressEl['value']=0x0,progressText[_0x3bfa90(0x8a)]=_0x1fb4de+'0%',previewProgress['style'][_0x3bfa90(0xa9)]=_0x3bfa90(0x9d),await fakeProgress(0x5dc,_0x1fb4de);try{const _0x10685d=await axios[_0x3bfa90(0x7e)](_0x4ebd9e,_0x8364c3);progressEl[_0x3bfa90(0xab)]=0x64,progressText[_0x3bfa90(0x8a)]=_0x1fb4de+_0x3bfa90(0x85),await new Promise(_0x5166eb=>setTimeout(_0x5166eb,0x12c)),await _0x1c1564(_0x10685d);}catch(_0x57944b){alert(_0x3bfa90(0xaa)+_0x1fb4de[_0x3bfa90(0xa6)]()[_0x3bfa90(0x90)]()+':\x20'+_0x57944b[_0x3bfa90(0xad)]);}finally{previewProgress['style'][_0x3bfa90(0xa9)]='none';}}fetchBtn[_0x88c68b(0x92)]('click',()=>{const _0xbab2cf=_0x88c68b;if(!urlInput[_0xbab2cf(0xab)]['trim']())return alert(_0xbab2cf(0x87));doWithFake(_0xbab2cf(0x9e)+encodeURIComponent(urlInput[_0xbab2cf(0xab)]),{},_0xbab2cf(0x8b),_0x3ef92e=>{const _0x561849=_0xbab2cf,_0x421abe=_0x3ef92e[_0x561849(0x83)]['data'];document[_0x561849(0xa7)](_0x561849(0x7b))['innerText']=_0x421abe[_0x561849(0x81)],document[_0x561849(0xa7)](_0x561849(0x73))[_0x561849(0x79)]=_0x421abe['thumbnailUrl'],document[_0x561849(0xa7)]('videoDuration')['innerText']=_0x421abe[_0x561849(0xa5)][_0x561849(0x7d)],document['getElementById'](_0x561849(0xa1))['innerText']=_0x421abe[_0x561849(0x7f)][_0x561849(0x80)](),previewSection[_0x561849(0x91)][_0x561849(0xa9)]='flex',videoDownloadSection[_0x561849(0x91)][_0x561849(0xa9)]=_0x561849(0x95),audioDownloadSection['style'][_0x561849(0xa9)]=_0x561849(0x95),downloadVideoBtn['disabled']=![],downloadAudioBtn[_0x561849(0x74)]=![];});}),downloadVideoBtn['addEventListener'](_0x88c68b(0x9c),()=>{const _0x18aae8=_0x88c68b,_0x5affdf=document[_0x18aae8(0xa7)]('videoQuality')[_0x18aae8(0xab)],_0x39c37f='https://api-yudzxml.koyeb.app/api/ytdlv2?url='+encodeURIComponent(urlInput[_0x18aae8(0xab)])+_0x18aae8(0x86)+_0x5affdf;doWithFake(_0x39c37f,{'responseType':_0x18aae8(0x9f)},'Mengunduh\x20video...\x20',async _0x58d96f=>{const _0x372e11=_0x18aae8,_0x55632d=_0x58d96f['data'][_0x372e11(0x83)][_0x372e11(0x71)],_0x32d3c9=document['createElement']('a');_0x32d3c9[_0x372e11(0x75)]=_0x55632d,_0x32d3c9[_0x372e11(0x8f)]=(document['getElementById'](_0x372e11(0x7b))[_0x372e11(0x8a)]||_0x372e11(0x8c))+'.mp4',document['body'][_0x372e11(0x82)](_0x32d3c9),_0x32d3c9[_0x372e11(0x9c)](),_0x32d3c9['remove']();});}),downloadAudioBtn['addEventListener'](_0x88c68b(0x9c),()=>{const _0x18c427=_0x88c68b,_0x48d5a8=document[_0x18c427(0xa7)](_0x18c427(0x7c))[_0x18c427(0xab)],_0x2cbc2f=_0x18c427(0xa3)+encodeURIComponent(urlInput[_0x18c427(0xab)])+_0x18c427(0x89)+_0x48d5a8+'&quality=';doWithFake(_0x2cbc2f,{'responseType':_0x18c427(0x9f)},_0x18c427(0x76),async _0x20319e=>{const _0xfc0f98=_0x18c427,_0x5723a6=_0x20319e[_0xfc0f98(0x83)][_0xfc0f98(0x83)]['downloadUrl'],_0x3fe548=document[_0xfc0f98(0xac)]('a');_0x3fe548[_0xfc0f98(0x75)]=_0x5723a6,_0x3fe548[_0xfc0f98(0x8f)]=(document['getElementById'](_0xfc0f98(0x7b))[_0xfc0f98(0x8a)]||_0xfc0f98(0x70))+'.'+_0x48d5a8,document[_0xfc0f98(0x8e)][_0xfc0f98(0x82)](_0x3fe548),_0x3fe548[_0xfc0f98(0x9c)](),_0x3fe548[_0xfc0f98(0x96)]();});});
+</script>
+</body>
+</html>
