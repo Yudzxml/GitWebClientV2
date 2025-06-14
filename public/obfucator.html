@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JavaScript Obfuscator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --clr-bg: #f4f6f9;
+      --clr-card: #ffffff;
+      --clr-text: #2e2e2e;
+      --clr-muted: rgba(0, 0, 0, 0.4);
+      --clr-primary: #1e90ff;
+      --clr-primary-hover: #187bcd;
+      --clr-secondary: #ff6347;
+      --clr-secondary-hover: #e5533d;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --transition: 0.3s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .hero {
+      padding: calc(var(--space-lg) * 2);
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h1 {
+      margin-bottom: var(--space-sm);
+      font-size: 2.25rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: var(--clr-card);
+      border-radius: 12px;
+      padding: var(--space-md);
+      box-shadow: 0 2px 8px var(--clr-muted);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .toggle-group {
+      display: flex;
+      background: #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: var(--space-md);
+    }
+
+    .toggle-group button {
+      flex: 1;
+      padding: var(--space-sm) var(--space-md);
+      border: none;
+      background: transparent;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .toggle-group button.active {
+      background: var(--clr-primary);
+      color: #fff;
+    }
+
+    .toggle-group button:not(.active):hover {
+      background: var(--clr-secondary);
+      color: #fff;
+    }
+
+    textarea,
+    .file-wrapper {
+      width: 100%;
+      margin-bottom: var(--space-md);
+    }
+
+    textarea {
+      height: 200px;
+      padding: var(--space-md);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      font-family: monospace;
+      transition: border-color var(--transition);
+    }
+
+    textarea:focus {
+      border-color: var(--clr-secondary);
+      outline: none;
+    }
+
+    .file-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .file-label {
+      flex: 1;
+      padding: var(--space-sm) var(--space-md);
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fafafa;
+      font-family: monospace;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .file-label:hover {
+      border-color: var(--clr-secondary);
+      background: #f0f8ff;
+    }
+
+    .btn,
+    .btn-clear {
+      flex: 1;
+      padding: var(--space-sm) var(--space-md);
+      border: none;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      text-align: center;
+    }
+
+    .btn {
+      background: var(--clr-secondary);
+      color: #fff;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--clr-secondary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-clear {
+      background: #ddd;
+      color: #333;
+    }
+
+    .btn-clear:hover {
+      background: #ccc;
+    }
+.back-btn {
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--clr-secondary);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background var(--transition);
+    z-index: 100;
+  }
+  .back-btn:hover { background: var(--clr-secondary-hover); }
+    .status {
+      min-height: 1.5rem;
+      font-weight: 500;
+      color: var(--clr-muted);
+    }
+
+.result-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Table container scrollable */
+.table-responsive {
+  width: 100%;
+  max-height: 300px; /* Scroll jika terlalu panjang */
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Table style */
+table.obf-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-top: var(--space-md);
+}
+
+table.obf-table th,
+table.obf-table td {
+  padding: var(--space-sm);
+  border: 1px solid #ddd;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  vertical-align: top;
+  font-family: monospace;
+  background: #fff;
+}
+
+/* Tombol-tombol tersusun ke bawah */
+#actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+  margin-top: var(--space-md);
+}
+
+#actions .btn,
+#actions .btn-clear,
+#actions a.btn {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+}
+
+    .footer {
+      text-align: center;
+      padding: var(--space-md) 0;
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+    }
+
+    .footer a {
+      color: var(--clr-primary);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .footer a:hover {
+      color: var(--clr-primary-hover);
+      text-decoration: underline;
+    }
+
+    /* Table Wrapper */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table.obf-table {
+      width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      margin-top: var(--space-md);
+    }
+
+    table.obf-table th,
+    table.obf-table td {
+      padding: var(--space-sm);
+      border: 1px solid #ddd;
+      vertical-align: top;
+      word-break: break-word;
+    }
+
+    .obf-output {
+      max-height: 300px;
+      overflow: auto;
+      font-family: monospace;
+      background: #f0f0f0;
+      border-radius: 4px;
+      padding: var(--space-sm);
+    }
+
+    @media (max-width: 600px) {
+      .toggle-group {
+        flex-direction: column;
+      }
+
+      #actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+    <a href="tools.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+  <div class="container">
+    <header class="hero">
+<h1>🛡️ JavaScript Obfuscator</h1>
+<p>Lindungi kode JavaScript Anda dari pencurian dan modifikasi. Obfuscasi cepat, mudah, dan efisien langsung dari browser Anda.</p>
+    </header>
+
+    <div class="card">
+      <div class="toggle-group">
+        <button id="tabText" class="active">Copy &amp; Paste JavaScript Code</button>
+        <button id="tabFile">Upload JavaScript File</button>
+      </div>
+
+      <div id="textSection">
+        <textarea id="codeInput" placeholder="Tempelkan kode JavaScript di sini..."></textarea>
+        <button id="textObfBtn" class="btn" disabled>Obfuscate</button>
+        <button id="textClearBtn" class="btn btn-clear">Clear</button>
+        <div id="textStatus" class="status"></div>
+      </div>
+
+      <div id="fileSection" style="display:none;">
+        <div class="file-wrapper">
+          <label for="fileInput" class="file-label">Pilih File .js</label>
+          <input type="file" id="fileInput" accept=".js" style="display:none;">
+          <button id="fileObfBtn" class="btn" disabled>Obfuscate File</button>
+        </div>
+        <div id="fileStatus" class="status"></div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="card result-card" id="resultCard" style="display:none;">
+      <div class="table-responsive">
+        <table class="obf-table">
+          <thead>
+            <tr><th>OUTPUT CODE</th></tr>
+          </thead>
+          <tbody id="resultTableBody">
+            <!-- row akan di-inject di sini -->
+          </tbody>
+        </table>
+      </div>
+      <div id="actions">
+        <button id="copyBtn" class="btn">Salin</button>
+        <a id="downloadBtn" class="btn" href="#" download="obfuscated.js">Download</a>
+        <button id="clearBtn" class="btn btn-clear">Clear</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>© 2025 Yudzxml. <a href="contact.html">Contact</a> • <a href="service.html">Terms of Service</a></p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    function _0x1717(){const _0x2cb8b9=['zMLSzuLUChv0','z2v0','B2jMlw91Dhb1Da','AhjLzG','yxbWBgLJyxrPB24VAMf2yxnJCMLWDa','y3jLyxrLt2jQzwn0vvjm','y29WEuj0BG','Dgv4DenVBNrLBNq','zxjYB3i','ntyZmZG1nM9qqK5nAq','zMLSzq','Dgv4DfnLy3rPB24','y2XLyxjcDg4','y29UC29Szq','mtyYnMLyCeT1Cq','twvTChjVC2vZlI4U','BwvZC2fNzq','DhjPBq','ChjVDg90ExbL','z2v0rwXLBwvUDej5swq','odG3nJmWwMPOBhri','CMvTB3zL','mZG0odKXmNzpsNruta','zMXLEa','Aw5WDxq','y2XHC3nmAxn0','BM9Uzq','zMLSzxm','yxbWzw5Kq2HPBgq','mtrPwe96yxC','Cg9ZDa','C3r5Bgu','Dgv4De9IzKj0BG','BgvUz3rO','yxbWBhK','y2HHBMDL','DgfIrMLSzq','zgLZCgXHEq','zMLSzvnLy3rPB24','zgf0yq','re9nq29UDgvUDeXVywrLza','y2XPy2S','Dg9tDhjPBMC','y29Kzq','y2XPCgjVyxjK','y29UC3rYDwn0B3i','y3jLyxrLrwXLBwvUDa','mJuWnZu1z1HIDw51','zMLSzu9IzKj0BG','mZe0mZeXohfrqujyuG','mZCWnfzODuXNCG','ywn0AxzL','Dgv4DenSzwfYqNrU','yMLUza','DhjHy2u','Ahr0Chm6lY9HCgKTExvKENHTBc5RB3LLyI5HChaVyxbPl2vUyW','CMv0DxjUicHMDw5JDgLVBIGPia','zMLSzvn0yxr1CW','ywrKrxzLBNrmAxn0zw5LCG','yxbWzw5K','mti5nZKXmM93D3DKzG','DgfIBgu','CMvZCg9UC2u','zgLZywjSzwq','ywrK','x19WCM90B19F','zxHJzxb0Aw9U','DMfSDwu','y29KzuLUChv0','zMLYC3rdAgLSza','yMXVy2S','Aw5Uzxjive1m','CMvZDwX0q2fYza','rxjYB3i6ia','u3vRC2vZiq'];_0x1717=function(){return _0x2cb8b9;};return _0x1717();}const _0x4c2312=_0x23f8;(function(_0x4b3cf0,_0x3c407f){const _0x4af0ea=_0x23f8,_0x295e29=_0x4b3cf0();while(!![]){try{const _0x4ce088=-parseInt(_0x4af0ea(0x1d5))/0x1+parseInt(_0x4af0ea(0x1e2))/0x2+parseInt(_0x4af0ea(0x1ff))/0x3*(-parseInt(_0x4af0ea(0x1d8))/0x4)+-parseInt(_0x4af0ea(0x205))/0x5+parseInt(_0x4af0ea(0x1d7))/0x6*(parseInt(_0x4af0ea(0x1c3))/0x7)+parseInt(_0x4af0ea(0x207))/0x8+-parseInt(_0x4af0ea(0x1fa))/0x9;if(_0x4ce088===_0x3c407f)break;else _0x295e29['push'](_0x295e29['shift']());}catch(_0xbdd72b){_0x295e29['push'](_0x295e29['shift']());}}}(_0x1717,0x97c33));const _0x4082e2=(function(){let _0x2f85bf=!![];return function(_0x4bed30,_0x12d842){const _0xd4d00=_0x2f85bf?function(){const _0x476528=_0x23f8;if(_0x12d842){const _0x34ce0b=_0x12d842[_0x476528(0x1c8)](_0x4bed30,arguments);return _0x12d842=null,_0x34ce0b;}}:function(){};return _0x2f85bf=![],_0xd4d00;};}()),_0xeda669=_0x4082e2(this,function(){const _0x34b248=_0x23f8,_0x839bb9=function(){const _0x1572cf=_0x23f8;let _0x50c895;try{_0x50c895=Function(_0x1572cf(0x1de)+'{}.constructor(\x22return\x20this\x22)(\x20)'+');')();}catch(_0x460ed7){_0x50c895=window;}return _0x50c895;},_0x541bc7=_0x839bb9(),_0x537aec=_0x541bc7[_0x34b248(0x1fe)]=_0x541bc7[_0x34b248(0x1fe)]||{},_0x8dd922=['log','warn','info',_0x34b248(0x1f9),_0x34b248(0x1e8),_0x34b248(0x1e3),_0x34b248(0x1dc)];for(let _0x5dd1ee=0x0;_0x5dd1ee<_0x8dd922[_0x34b248(0x1c7)];_0x5dd1ee++){const _0x4d202c=_0x4082e2[_0x34b248(0x1d3)][_0x34b248(0x203)][_0x34b248(0x1db)](_0x4082e2),_0x2f16a5=_0x8dd922[_0x5dd1ee],_0x27b29f=_0x537aec[_0x2f16a5]||_0x4d202c;_0x4d202c[_0x34b248(0x1e7)]=_0x4082e2[_0x34b248(0x1db)](_0x4082e2),_0x4d202c[_0x34b248(0x1d0)]=_0x27b29f[_0x34b248(0x1d0)][_0x34b248(0x1db)](_0x27b29f),_0x537aec[_0x2f16a5]=_0x4d202c;}});function _0x23f8(_0xbc10d6,_0x4f62ff){const _0x35c316=_0x1717();return _0x23f8=function(_0xeda669,_0x4082e2){_0xeda669=_0xeda669-0x1c1;let _0x316892=_0x35c316[_0xeda669];if(_0x23f8['LuEMAu']===undefined){var _0x171727=function(_0x2937e3){const _0xcd6d86='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0xf94a08='',_0x15a61c='';for(let _0x2f85bf=0x0,_0x4bed30,_0x12d842,_0xd4d00=0x0;_0x12d842=_0x2937e3['charAt'](_0xd4d00++);~_0x12d842&&(_0x4bed30=_0x2f85bf%0x4?_0x4bed30*0x40+_0x12d842:_0x12d842,_0x2f85bf++%0x4)?_0xf94a08+=String['fromCharCode'](0xff&_0x4bed30>>(-0x2*_0x2f85bf&0x6)):0x0){_0x12d842=_0xcd6d86['indexOf'](_0x12d842);}for(let _0x34ce0b=0x0,_0x839bb9=_0xf94a08['length'];_0x34ce0b<_0x839bb9;_0x34ce0b++){_0x15a61c+='%'+('00'+_0xf94a08['charCodeAt'](_0x34ce0b)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x15a61c);};_0x23f8['mxaJEw']=_0x171727,_0xbc10d6=arguments,_0x23f8['LuEMAu']=!![];}const _0x23f871=_0x35c316[0x0],_0x1380f5=_0xeda669+_0x23f871,_0x44fc90=_0xbc10d6[_0x1380f5];return!_0x44fc90?(_0x316892=_0x23f8['mxaJEw'](_0x316892),_0xbc10d6[_0x1380f5]=_0x316892):_0x316892=_0x44fc90,_0x316892;},_0x23f8(_0xbc10d6,_0x4f62ff);}_0xeda669(),document[_0x4c2312(0x1e0)](_0x4c2312(0x1ce),()=>{const _0x40ff18=_0x4c2312,_0x575aa3=document['getElementById']('tabText'),_0x46ffe4=document[_0x40ff18(0x204)](_0x40ff18(0x1ca)),_0x554b5e=document['getElementById'](_0x40ff18(0x1fc)),_0x58d2bc=document[_0x40ff18(0x204)](_0x40ff18(0x1cc)),_0x3f3528=document[_0x40ff18(0x204)](_0x40ff18(0x1ea)),_0x19e3f0=document[_0x40ff18(0x204)](_0x40ff18(0x1c6)),_0x10925c=document['getElementById'](_0x40ff18(0x1da)),_0x10ad9e=document[_0x40ff18(0x204)]('textStatus'),_0x493da7=document[_0x40ff18(0x204)](_0x40ff18(0x1f1)),_0x291aca=document[_0x40ff18(0x204)](_0x40ff18(0x1d6)),_0x59d5ca=document[_0x40ff18(0x204)](_0x40ff18(0x1df)),_0x45b0aa=document['getElementById'](_0x40ff18(0x1ee)),_0x583c0d=document['getElementById']('resultTableBody'),_0x552d14=document[_0x40ff18(0x204)](_0x40ff18(0x1f7)),_0x201932=document[_0x40ff18(0x204)]('downloadBtn'),_0x567ba6=document[_0x40ff18(0x204)](_0x40ff18(0x1fd));function _0x5d4d1d(_0x5c1ba9){const _0x1194e1=_0x40ff18;_0x575aa3['classList'][_0x1194e1(0x206)]('active'),_0x46ffe4[_0x1194e1(0x20a)]['remove'](_0x1194e1(0x1d9)),_0x5c1ba9['classList'][_0x1194e1(0x1e6)]('active'),_0x554b5e['style'][_0x1194e1(0x1cb)]=_0x5c1ba9===_0x575aa3?_0x1194e1(0x1ec):_0x1194e1(0x20b),_0x58d2bc[_0x1194e1(0x1c5)][_0x1194e1(0x1cb)]=_0x5c1ba9===_0x46ffe4?'block':_0x1194e1(0x20b),_0x5bc855();}_0x575aa3['addEventListener'](_0x40ff18(0x1cf),()=>_0x5d4d1d(_0x575aa3)),_0x46ffe4[_0x40ff18(0x1e0)]('click',()=>_0x5d4d1d(_0x46ffe4)),_0x3f3528['addEventListener'](_0x40ff18(0x209),()=>{const _0x4f6f73=_0x40ff18;_0x19e3f0[_0x4f6f73(0x1e5)]=!_0x3f3528[_0x4f6f73(0x1e9)][_0x4f6f73(0x202)](),_0x10ad9e[_0x4f6f73(0x1f8)]='';}),_0x493da7[_0x40ff18(0x1e0)](_0x40ff18(0x1c9),()=>{const _0x5d043a=_0x40ff18;_0x291aca[_0x5d043a(0x1e5)]=_0x493da7[_0x5d043a(0x1c1)][_0x5d043a(0x1c7)]===0x0,_0x59d5ca[_0x5d043a(0x1f8)]='';}),_0x10925c[_0x40ff18(0x1e0)](_0x40ff18(0x1cf),()=>{const _0x27d0bc=_0x40ff18;_0x3f3528[_0x27d0bc(0x1e9)]='',_0x10ad9e[_0x27d0bc(0x1f8)]='',_0x19e3f0[_0x27d0bc(0x1e5)]=!![];}),_0x19e3f0['addEventListener'](_0x40ff18(0x1cf),async()=>{const _0x4bed83=_0x40ff18;_0x19e3f0[_0x4bed83(0x1e5)]=!![],_0x10ad9e['textContent']=_0x4bed83(0x200);try{const _0x5717e9=await axios[_0x4bed83(0x1f2)](_0x4bed83(0x1dd),{'params':{'code':_0x3f3528[_0x4bed83(0x1e9)]}});_0x4b4c95(_0x5717e9['data']['data'][_0x4bed83(0x1d1)]),_0x10ad9e[_0x4bed83(0x1f8)]='Sukses!';}catch(_0x459dd9){_0x10ad9e[_0x4bed83(0x1f8)]=_0x4bed83(0x1ef)+(_0x459dd9['response']?.['data']?.[_0x4bed83(0x1cd)]?.[_0x4bed83(0x1f9)]||_0x459dd9['message']);}finally{_0x19e3f0[_0x4bed83(0x1e5)]=![];}}),_0x291aca[_0x40ff18(0x1e0)](_0x40ff18(0x1cf),async()=>{const _0x3eb623=_0x40ff18;_0x291aca[_0x3eb623(0x1e5)]=!![],_0x59d5ca[_0x3eb623(0x1f8)]=_0x3eb623(0x200);const _0x3d9fe=new FormData();_0x3d9fe[_0x3eb623(0x1e1)](_0x3eb623(0x1fb),_0x493da7[_0x3eb623(0x1c1)][0x0]);try{const _0x489c11=await axios[_0x3eb623(0x1c4)](_0x3eb623(0x1dd),_0x3d9fe);_0x4b4c95(_0x489c11[_0x3eb623(0x1cd)][_0x3eb623(0x1cd)][_0x3eb623(0x1d1)]),_0x59d5ca[_0x3eb623(0x1f8)]=_0x3eb623(0x1f0);}catch(_0x25ffd1){_0x59d5ca[_0x3eb623(0x1f8)]=_0x3eb623(0x1ef)+(_0x25ffd1[_0x3eb623(0x1e4)]?.[_0x3eb623(0x1cd)]?.[_0x3eb623(0x1cd)]?.[_0x3eb623(0x1f9)]||_0x25ffd1[_0x3eb623(0x201)]);}finally{_0x291aca['disabled']=![];}});function _0x4b4c95(_0xe07fd8){const _0x10e57f=_0x40ff18;_0x583c0d['innerHTML']='';const _0x41085a=document[_0x10e57f(0x1d4)]('tr'),_0x2da105=document[_0x10e57f(0x1d4)]('td');_0x2da105['classList'][_0x10e57f(0x1e6)](_0x10e57f(0x1f3)),_0x2da105[_0x10e57f(0x1f8)]=_0xe07fd8,_0x41085a[_0x10e57f(0x1c2)](_0x2da105),_0x583c0d[_0x10e57f(0x1c2)](_0x41085a),_0x45b0aa[_0x10e57f(0x1c5)][_0x10e57f(0x1cb)]=_0x10e57f(0x208);const _0x5f0dff=new Blob([_0xe07fd8],{'type':_0x10e57f(0x1f5)});_0x201932[_0x10e57f(0x1f4)]=URL[_0x10e57f(0x1f6)](_0x5f0dff);}_0x552d14[_0x40ff18(0x1e0)](_0x40ff18(0x1cf),()=>{const _0x56e4b4=_0x40ff18;_0x583c0d[_0x56e4b4(0x1eb)]&&navigator[_0x56e4b4(0x1d2)]['writeText'](_0x583c0d[_0x56e4b4(0x1eb)][_0x56e4b4(0x1f8)]);});function _0x5bc855(){const _0x4b937d=_0x40ff18;_0x3f3528[_0x4b937d(0x1e9)]='',_0x493da7[_0x4b937d(0x1e9)]='',_0x583c0d[_0x4b937d(0x1ed)]='',_0x45b0aa[_0x4b937d(0x1c5)][_0x4b937d(0x1cb)]=_0x4b937d(0x20b),_0x10ad9e[_0x4b937d(0x1f8)]='',_0x59d5ca[_0x4b937d(0x1f8)]='',_0x19e3f0[_0x4b937d(0x1e5)]=!![],_0x291aca[_0x4b937d(0x1e5)]=!![];}_0x567ba6[_0x40ff18(0x1e0)]('click',_0x5bc855);});
+  </script>
+</body>
+</html>
