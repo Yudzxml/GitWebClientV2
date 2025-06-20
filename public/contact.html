@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +6,10 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
     <style>
       /* ===================================
@@ -692,174 +695,168 @@ body.dark-mode .dark-toggle {
   <body>
     <!-- SIDEBAR -->
     <aside id="sidebar">
-  <button id="sidebarClose" class="sidebar-close">×</button>
-  <div class="sidebar-section">
-    <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🔒</span> Admin Login
-    </button>
-    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🛒</span> Cek Keranjang
-    </button>
-    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">⭐</span> Testimoni
-    </button>
-    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🏷️</span> Diskon Produk
-    </button>
-    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">💬</span> Komentar/Ratting
-    </button>
-    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">✉️</span> Contact Admin
-    </button>   
-    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
-          <span class="icon">👥</span> Static Pengunjung
+      <button id="sidebarClose" class="sidebar-close">&times;</button>
+      <div class="sidebar-section">
+        <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-lock"></i> Admin Login
         </button>
-    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
-          <span class="icon">💖</span> Donasi
-        </button>       
-    <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🛠️</span> Tools
-    </button>        
-    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">📜</span> Terms of Service
-    </button>        
+        <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-shopping-cart"></i> Cek Keranjang
+        </button>
+        <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-star"></i> Testimoni
+        </button>
+        <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-tag"></i> Diskon Produk
+        </button>
+        <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-comment"></i> Komentar/Ratting
+        </button>
+        <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-envelope"></i> Contact Admin
+        </button>
+        <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-users"></i> Static Pengunjung
+        </button>
+        <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <i class="fas fa-heart"></i> Donasi
+        </button>
+        <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-tools"></i> Tools
+        </button>
+        <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-file-alt"></i> Terms of Service
+        </button>
+      </div>
+    </aside><!-- HEADER -->
+<header class="site-header">
+  <div class="container">
+    <button id="sidebarToggle" class="sidebar-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="header-left">
+      <h1 class="logo">オ CONTACT ADMIN</h1>
+    </div>
+    <div class="header-center">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Cari produk..."
+        autocomplete="off"
+      />
+    </div>
+    <div class="header-right">
+      <button
+        id="darkModeToggle"
+        class="dark-toggle"
+        title="Toggle Dark Mode"
+      >
+        <div class="toggle-track">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </div>
+      </button>
+      <button onclick="location.href='index.html'" class="icon-btn" title="Beranda">
+        <i class="fas fa-home"></i>
+      </button>
+    </div>
   </div>
-</aside>
+</header>
 
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="container">
-        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
-        <div class="header-left">
-          <h1 class="logo">オ CONTACT ADMIN</h1>
-        </div>
-        <div class="header-center">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Cari produk..."
-            autocomplete="off"
-          />
-        </div>
-        <div class="header-right">
-          <button
-            id="darkModeToggle"
-            class="dark-toggle"
-            title="Toggle Dark Mode"
-          >
-            <div class="toggle-track">
-              <span class="icon-sun">☀️</span>
-              <span class="icon-moon">🌙</span>
+<!-- MAIN CONTENT -->
+<main class="container">
+  <div class="group-list">
+    <h2>Daftar Admin :</h2>
+    <div class="products-grid">
+      <!-- Admin 1 -->
+      <div class="product-card">
+        <div class="product-body">
+          <h3 class="product-title">YUDZXML STORE</h3>
+          <p class="product-desc">ADMIN HOSTING</p>
+          <div class="product-footer">
+            <span class="product-price">+62 838-7203-1397</span>
+            <div class="product-actions">
+              <a
+                href="https://wa.me/6283872031397"
+                target="_blank"
+                class="btn btn-success"
+              >
+                CHAT ADMIN
+              </a>
             </div>
-          </button>
-    <button onclick="location.href='index.html'" <span class="icon-btn" title="Keranjang">🏠</button>
+          </div>
         </div>
       </div>
-    </header>
-
-    <!-- MAIN CONTENT -->
-    <main class="container">
-     <div class="group-list">
-        <h2>Daftar Admin :</h2>
-            <div class="products-grid">
-        <!-- Admin 1 -->
-        <div class="product-card">
-          <div class="product-body">
-            <h3 class="product-title">YUDZXML STORE</h3>
-            <p class="product-desc">ADMIN HOSTING</p>
-            <div class="product-footer">
-              <span class="product-price">+62 838-7203-1397</span>
-              <div class="product-actions">
-                <a
-                  href="https://wa.me/6283872031397"
-                  target="_blank"
-                  class="btn btn-success"
-                >
-                  CHAT ADMIN
-                </a>
-              </div>
+      <!-- Admin 2 -->
+      <div class="product-card">
+        <div class="product-body">
+          <h3 class="product-title">SNAYDERS STORE</h3>
+          <p class="product-desc">ADMIN TUNNELING</p>
+          <div class="product-footer">
+            <span class="product-price">+62 878-6636-1260</span>
+            <div class="product-actions">
+              <a
+                href="https://wa.me/6287866361260"
+                target="_blank"
+                class="btn btn-success"
+              >
+                CHAT ADMIN
+              </a>
             </div>
           </div>
         </div>
-
-        <!-- Admin 2 -->
-        <div class="product-card">
-          <div class="product-body">
-            <h3 class="product-title">SNAYDERS STORE</h3>
-            <p class="product-desc">ADMIN TUNNELING</p>
-            <div class="product-footer">
-              <span class="product-price">+62 878-6636-1260</span>
-              <div class="product-actions">
-                <a
-                +6287866361260
-                  href="https://wa.me/6287866361260"
-                  target="_blank"
-                  class="btn btn-success"
-                >
-                  CHAT ADMIN
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-      <div class="group-list">
-        <h2>Daftar Grup :</h2>
+  </div>
 
-        <!-- Grup 1 -->
-        <div class="group-item">
-          <span class="group-name">GRUP BOT WA FREE</span>
-          <a
-            href="https://chat.whatsapp.com/BiY2EOldsEK0xXzxJP1Lm9"
-            target="_blank"
-            class="btn-join"
-            >Gabung</a
-          >
-        </div>
+  <div class="group-list">
+    <h2>Daftar Grup :</h2>
+    <!-- Grup 1 -->
+    <div class="group-item">
+      <span class="group-name">GRUP BOT WA FREE</span>
+      <a
+        href="https://chat.whatsapp.com/BiY2EOldsEK0xXzxJP1Lm9"
+        target="_blank"
+        class="btn-join"
+      >Gabung</a>
+    </div>
+    <!-- Grup 2 -->
+    <div class="group-item">
+      <span class="group-name">GRUP SSH/CONFIG FREE</span>
+      <a
+        href="https://chat.whatsapp.com/HhJ9yzovFKs7Jreqva0Jtw"
+        target="_blank"
+        class="btn-join"
+      >Gabung</a>
+    </div>
+    <!-- Grup 3 -->
+    <div class="group-item">
+      <span class="group-name">SALURAN ADMIN YUDZXML</span>
+      <a
+        href="https://whatsapp.com/channel/0029VaQfuS74dTnEv0b6hA1g"
+        target="_blank"
+        class="btn-join"
+      >Gabung</a>
+    </div>
+    <!-- Grup 4 -->      
+    <div class="group-item">
+      <span class="group-name">SALURAN SSH FREE</span>
+      <a
+        href="https://whatsapp.com/channel/0029Vb6BwXi0AgWFPCx5IM1x"
+        target="_blank"
+        class="btn-join"
+      >Gabung</a>
+    </div>
+  </div>
+</main>
 
-        <!-- Grup 2 -->
-        <div class="group-item">
-          <span class="group-name">GRUP SSH/CONFIG FREE</span>
-          <a
-            href="https://chat.whatsapp.com/HhJ9yzovFKs7Jreqva0Jtw"
-            target="_blank"
-            class="btn-join"
-            >Gabung</a
-          >
-        </div>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 YUDZXML Allright Reserved</p>
+  </div>
+</footer>
+<script src="main.js"></script>
 
-        <!-- Grup 3 -->
-        <div class="group-item">
-          <span class="group-name">SALURAN ADMIN YUDZXML</span>
-          <a
-            href="https://whatsapp.com/channel/0029VaQfuS74dTnEv0b6hA1g"
-            target="_blank"
-            class="btn-join"
-            >Gabung</a
-          >
-        </div>
-        <!-- Grup 4 -->      
-        <div class="group-item">
-          <span class="group-name">SALURAN SSH FREE</span>
-          <a
-            href="https://whatsapp.com/channel/0029Vb6BwXi0AgWFPCx5IM1x"
-            target="_blank"
-            class="btn-join"
-            >Gabung</a
-          >
-        </div>
-      </div>      
-      </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container">
-        <p>© 2025 YUDZXML Allright Reserved</p>
-      </div>
-    </footer>
-    <script src="main.js"></script>
   </body>
 </html>

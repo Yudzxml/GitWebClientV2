@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,61 +9,63 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
   </head>
   <body>
     <!-- SIDEBAR -->
     <aside id="sidebar">
-  <button id="sidebarClose" class="sidebar-close">×</button>
-  <div class="sidebar-section">
-    <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🔒</span> Admin Login
-    </button>
-    <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🛒</span> Cek Keranjang
-    </button>
-    <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">⭐</span> Testimoni
-    </button>
-    <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🏷️</span> Diskon Produk
-    </button>
-    <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">💬</span> Komentar/Ratting
-    </button>
-    <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">✉️</span> Contact Admin
-    </button>   
-    <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
-          <span class="icon">👥</span> Static Pengunjung
+      <button id="sidebarClose" class="sidebar-close"><i class="fas fa-times"></i></button>
+      <div class="sidebar-section">
+        <button onclick="location.href='login.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-lock"></i> Admin Login
         </button>
-    <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
-          <span class="icon">💖</span> Donasi
-        </button>       
-    <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">🛠️</span> Tools
-    </button>        
-    <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
-      <span class="icon">📜</span> Terms of Service
-    </button>        
-  </div>
-</aside>
-
-    <!-- HEADER -->
-    <header class="site-header">
-      <div class="container">
-        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+        <button onclick="location.href='cart.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-shopping-cart"></i> Cek Keranjang
+        </button>
+        <button onclick="location.href='testimoni.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-star"></i> Testimoni
+        </button>
+        <button onclick="location.href='promo.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-tags"></i> Diskon Produk
+        </button>
+        <button onclick="location.href='komentar.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-comment"></i> Komentar/Rating
+        </button>
+        <button onclick="location.href='contact.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-envelope"></i> Contact Admin
+        </button>
+        <button onclick="location.href='visitor.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-users"></i> Static Pengunjung
+        </button>
+        <button onclick="location.href='donasi.html'" class="btn btn-primary sidebar-btn active">
+          <i class="fas fa-heart"></i> Donasi
+        </button>
+        <button onclick="location.href='tools.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-tools"></i> Tools
+        </button>
+        <button onclick="location.href='service.html'" class="btn btn-primary sidebar-btn">
+          <i class="fas fa-file-alt"></i> Terms of Service
+        </button>
+      </div>
+    </aside><!-- HEADER -->
+<header class="site-header">
+  <div class="container">
+    <button id="sidebarToggle" class="sidebar-toggle"><i class="fas fa-bars"></i></button>
         <div class="header-left">
           <h1 class="logo">オ YUDZXML STORE</h1>
         </div>
-        <div class="header-center">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Cari produk..."
-            autocomplete="off"
-          />
-        </div>
-        <div class="header-right">
+    <div class="header-center">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Cari produk..."
+        autocomplete="off"
+      />
+    </div>
+    <div class="header-right">
           <button
             id="darkModeToggle"
             class="dark-toggle"
@@ -76,76 +77,77 @@
             </div>
           </button>
           <button id="openCartBtn" class="icon-btn" title="Keranjang">
-            🛒 <span id="cartCount">0</span>
+            <i class="fas fa-shopping-cart"></i> <span id="cartCount">0</span>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- DAFTAR PRODUK -->
-    <main class="container">
-      <div id="productsGrid" class="products-grid"></div>
-    </main>
-     
-     <!-- TOAST NOTIFICATION -->
-    <div id="toast">
-  <strong>🌟 Selamat datang di YUDZXML STORE!</strong><br>
+<!-- DAFTAR PRODUK -->
+<main class="container">
+  <div id="productsGrid" class="products-grid"></div>
+</main>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast">
+  <strong><i class="fas fa-star"></i> Selamat datang di YUDZXML STORE!</strong><br>
   Cara belanja:
   <ol style="text-align: left; margin: 8px 0; padding-left: 16px;">
     <li>Cari produk yang ingin dibeli.</li>
     <li>Pilih paket atau spesifikasi produk.</li>
     <li>Tekan tombol <em>Tambah ke Keranjang</em>.</li>
-    <li>Tap ikon keranjang 🛒 di atas.</li>
+    <li>Tap ikon keranjang <i class="fas fa-shopping-cart"></i> di atas.</li>
     <li>Pada halaman keranjang, pilih <em>Checkout via WhatsApp</em>.</li>
     <li>Anda akan diarahkan ke WhatsApp admin untuk penyelesaian.</li>
   </ol>
   <button id="toastOk">OK</button>
 </div>
-     
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="container">
-        <p>© 2025 YUDZXML Allright Reserved</p>
-      </div>
-      <!-- GREEN SCREEN -->
-      <img
-        src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/a8d49388.png"
-        alt="Green Screen"
-        class="greenscreen"
-      />
-    </footer>
-    
-    <!-- Music Floating Widget -->
-    <div id="music-widget">
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2025 YUDZXML Allright Reserved</p>
+  </div>
+  <!-- GREEN SCREEN -->
+  <img
+    src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/a8d49388.png"
+    alt="Green Screen"
+    class="greenscreen"
+  />
+</footer>
+
+<!-- Music Floating Widget -->
+<div id="music-widget">
   <div id="music-toggle">
-    🎵
+    <i class="fas fa-music"></i>
   </div>
   <div id="music-player">
-  <div id="drag-handle">
-    <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/6aadc292.png" alt="Cover Lagu" id="cover-img" />
-  </div>
+    <div id="drag-handle">
+      <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/6aadc292.png" alt="Cover Lagu" id="cover-img" />
+    </div>
 
-  <!-- Judul Lagu -->
-  <div id="track-info">
-    <span id="track-title">Cinta Terlarang ( the virgin )</span>
-  </div>
+    <!-- Judul Lagu -->
+    <div id="track-info">
+      <span id="track-title">Cinta Terlarang ( the virgin )</span>
+    </div>
 
-  <!-- Kontrol Play/Pause & Waktu -->
-  <div id="controls">
-    <button id="play-pause">▶️</button>
-    <span id="current-time">00:00</span>
-    <span>/</span>
-    <span id="total-duration">00:00</span>
-  </div>
+    <!-- Kontrol Play/Pause & Waktu -->
+    <div id="controls">
+      <button id="play-pause"><i class="fas fa-play"></i></button>
+      <span id="current-time">00:00</span>
+      <span>/</span>
+      <span id="total-duration">00:00</span>
+    </div>
 
-  <!-- Slider -->
-  <input type="range" id="seek" value="0" min="0" />
-  <audio id="audio" src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/lagu.mp3"></audio>
+    <!-- Slider -->
+    <input type="range" id="seek" value="0" min="0" />
+    <audio id="audio" src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/lagu.mp3"></audio>
+  </div>
 </div>
-</div>
 
-    <script src="audio.js"></script>
-    <script src="main.js"></script>
-    <script src="visitor.js"></script>
+<script src="audio.js"></script>
+<script src="main.js"></script>
+<script src="visitor.js"></script>
+
   </body>
 </html>
