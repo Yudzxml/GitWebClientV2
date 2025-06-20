@@ -13,6 +13,34 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <script>
+function setNewUserFlag() {
+    const now = new Date().getTime();
+    const expireAt = now + 3600000;
+    localStorage.setItem('newUser', 'true');
+    localStorage.setItem('newUserExpiresAt', expireAt);
+}
+
+function isNewUser() {
+    const newUser = localStorage.getItem('newUser');
+    const expireAt = localStorage.getItem('newUserExpiresAt');
+    const now = new Date().getTime();
+    if (newUser === 'true' && expireAt && now < parseInt(expireAt)) {
+        return true;
+    } else {
+        localStorage.removeItem('newUser');
+        localStorage.removeItem('newUserExpiresAt');
+        return false;
+    }
+}
+
+if (!localStorage.getItem('newUser')) {
+    setNewUserFlag();
+    window.location.href = 'dashboard.html';
+} else if (isNewUser()) {
+
+}
+</script>
   </head>
   <body>
     <!-- SIDEBAR -->
