@@ -3,300 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dashboard Tools</title>
+  <title>Dashboard Tools</title>
   <meta name="description" content="Dashboard Tools by Yudzxml - Koleksi alat online serbaguna." />
   <meta property="og:title" content="Tools by Yudzxml" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    /* ==================== Variables ==================== */
-    :root {
-      --clr-bg: #f4f6f9;
-      --clr-text: #333;
-      --clr-primary: #1e90ff;
-      --clr-primary-hover: #187bcd;
-      --clr-secondary: #ff6347;
-      --clr-secondary-hover: #e5533d;
-      --clr-accent: #32cd32;
-      --clr-surface: #fff;
-      --clr-sidebar: #2c3e50;
-      --clr-sidebar-text: #ecf0f1;
-      --clr-sidebar-hover: #1e90ff;
-      --clr-shadow: rgba(0,0,0,0.1);
-      --transition: 0.3s ease;
-    }
-
-    /* ==================== Reset & Global ==================== */
-    *, *::before, *::after { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--clr-bg);
-      color: var(--clr-text);
-      transition: background var(--transition), color var(--transition);
-      min-height: 100vh;
-    }
-    a { color: var(--clr-primary); text-decoration: none; transition: color var(--transition); }
-    a:hover { color: var(--clr-primary-hover); text-decoration: underline; }
-
-    /* ==================== Dark Mode ==================== */
-    body.dark-mode {
-      --clr-bg: #121212;
-      --clr-text: #e0e0e0;
-      --clr-surface: #1e1e1e;
-      --clr-sidebar: #1b2631;
-      --clr-sidebar-text: #bdc3c7;
-      --clr-sidebar-hover: #273746;
-    }
-
-    /* ==================== Layout ==================== */
-    .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
-    .site-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary));
-      color: #fff;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 8px var(--clr-shadow);
-    }
-    .logo { font-size: 1.8rem; font-weight: 700; margin: 0; }
-    .header-actions, .header-center { display: flex; align-items: center; gap: 1rem; }
-    .header-center input, .header-center select {
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 50px;
-      outline: none;
-      box-shadow: 0 2px 4px var(--clr-shadow);
-      transition: transform var(--transition);
-    }
-    .header-center input:focus, .header-center select:focus { transform: scale(1.05); }
-
-    /* ==================== Buttons & Icons ==================== */
-    .btn {
-      font-size: 0.9rem;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-    }
-    .btn-primary {
-      background: var(--clr-primary);
-      color: #fff;
-      box-shadow: 0 4px 6px var(--clr-shadow);
-    }
-    .btn-primary:hover {
-      background: var(--clr-primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px var(--clr-shadow);
-    }
-    .btn-secondary {
-      background: var(--clr-secondary);
-      color: #fff;
-      box-shadow: 0 4px 6px var(--clr-shadow);
-    }
-    .btn-secondary:hover {
-      background: var(--clr-secondary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px var(--clr-shadow);
-    }
-    .icon-btn {
-      background: none;
-      font-size: 1.4rem;
-      padding: 0.5rem;
-      border-radius: 50%;
-      transition: background var(--transition), transform var(--transition);
-    }
-    .icon-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-
-/* ==================== Tool Card Header ==================== */
-.tool-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.tool-icon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  display: block;
-}
-
-    /* ==================== Sidebar ==================== */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 260px;
-      height: 100vh;
-      background: var(--clr-sidebar);
-      color: var(--clr-sidebar-text);
-      transform: translateX(-100%);
-      transition: transform var(--transition);
-      z-index: 1100;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-    }
-    #sidebar.open { transform: translateX(0); }
-    .sidebar-close {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      margin-left: auto;
-      cursor: pointer;
-      color: var(--clr-sidebar-text);
-    }
-    #searchTools {
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      border: none;
-      outline: none;
-      margin-bottom: 1rem;
-    }
-/* ==================== Sidebar Buttons ==================== */
-.sidebar-btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;  /* teks + ikon dirapatkan ke kiri */
-  gap: 0.75rem;
-  padding: 0.7rem 1rem;         /* padding kiri/kanan ditambah */
-  margin-bottom: 0.5rem;        /* jarak antar tombol */
-  width: 100%;
-  background: transparent;
-  color: var(--clr-sidebar-text);
-  border-radius: 8px;
-  transition: background var(--transition);
-  text-align: left;             /* pastikan teks rata kiri */
-}
-.sidebar-btn:hover {
-  background: var(--clr-sidebar-hover);
-}
-
-    /* ==================== Sections ==================== */
-    .about h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      background: -webkit-linear-gradient(var(--clr-primary), var(--clr-secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .quick-access {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-    .quick-card {
-      background: var(--clr-surface);
-      border-radius: 12px;
-      padding: 1rem;
-      box-shadow: 0 2px 8px var(--clr-shadow);
-      transition: transform var(--transition);
-    }
-    .quick-card:hover { transform: translateY(-4px); }
-    .quick-card h3 { display: flex; justify-content: space-between; align-items: center; }
-    .quick-card ul { list-style: none; padding: 0; margin: 0; }
-    .quick-card li { padding: 0.4rem 0; border-bottom: 1px solid #e0e0e0; }
-
-    /* ==================== Tools Grid ==================== */
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-    .tool-card {
-      background: var(--clr-surface);
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 6px var(--clr-shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      transition: transform var(--transition), box-shadow var(--transition);
-    }
-    .tool-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 16px var(--clr-shadow);
-    }
-    .tool-card h3 { font-size: 1.2rem; margin: 0; }
-    .tool-card p { flex: 1; margin: 0; }
-    .btn-fav {
-      align-self: flex-end;
-      background: none;
-      border: none;
-      font-size: 1.4rem;
-      cursor: pointer;
-      transition: transform var(--transition);
-    }
-    .btn-fav:hover { transform: scale(1.2); }
-    .btn-fav.active { color: var(--clr-accent); }
-
-    /* ==================== Toast ==================== */
-    #toast {
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 0.8rem 1rem;
-      border-radius: 8px;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity var(--transition), visibility var(--transition);
-    }
-    #toast.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* ==================== Footer ==================== */
-    .site-footer {
-      background: var(--clr-surface);
-      padding: 1.5rem 0;
-      text-align: center;
-      box-shadow: 0 -2px 6px var(--clr-shadow);
-    }
-    .site-footer p { margin: 0; font-size: 0.9rem; }
-
-    /* ==================== Responsive ==================== */
-    @media (max-width: 768px) {
-      .site-header { flex-direction: column; gap: 1rem; padding: 1rem; }
-      #sidebar { width: 100%; }
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="tools.css" />
 </head>
 <body>
   <!-- SIDEBAR -->
-<aside id="sidebar">
-  <button id="sidebarClose" class="sidebar-close" aria-label="Close sidebar">×</button>
-  <input id="searchTools" type="text" placeholder="Search tools..." aria-label="Search tools" />
-  
-<div id="toolsList">
-  <button onclick="location.href='ytdlDownloader.html'" class="sidebar-btn">
-    📥 YouTube Downloader
-  </button>
-  <button onclick="location.href='uploader.html'" class="sidebar-btn">
-    📁 Upload File
-  </button>
-<button onclick="location.href='obfucator.html'" class="sidebar-btn">
-  🛡️ JavaScript Obfuscator
-</button>
-</div>
-
-  <button onclick="clearFilters()" class="btn btn-secondary">Clear Filters</button>
-</aside>
+  <aside id="sidebar">
+    <button id="sidebarClose" class="sidebar-close" aria-label="Close sidebar">×</button>
+    <input id="searchTools" type="text" placeholder="Search tools..." aria-label="Search tools" />
+    <div id="toolsList">
+      <button onclick="location.href='ytdlDownloader.html'" class="sidebar-btn">📥 YouTube Downloader</button>
+      <button onclick="location.href='uploader.html'" class="sidebar-btn">📁 Upload File</button>
+      <button onclick="location.href='tiktok-downloader.html'" class="sidebar-btn">🎵 TikTok Downloader</button>
+    </div>
+    <button onclick="clearFilters()" class="btn btn-secondary">Clear Filters</button>
+  </aside>
 
   <!-- LOADING -->
-  <div id="loadingState" style="text-align:center; padding: 2rem;">Memuat tools...</div>
+  <div id="loadingState" class="loading-state">Memuat tools...</div>
 
   <!-- HEADER -->
   <header class="site-header">
@@ -322,22 +50,38 @@
 
   <!-- MAIN -->
   <main class="container">
-<section class="about container">
-  <h2>Selamat Datang di Tools By Yudzxml</h2>
-  <p>
-    Tools By Yudzxml adalah platform komprehensif untuk membantu kebutuhan digital Anda. 
-    Di sini Anda akan menemukan berbagai alat online gratis yang:
-  </p>
-<ul class="features">
-  <li>⚙️ <strong>Beragam Kategori</strong>: Video, Teks, Gambar, File dan banyak lagi.</li>
-  <li>🔒 <strong>Privasi Terjamin</strong>: Semua proses dilakukan di browser, tanpa menyimpan data.</li>
-  <li>🚀 <strong>Performa Cepat</strong>: Hasil instan tanpa perlu registrasi.</li>
-  <li>📱 <strong>Responsif</strong>: Optimal di desktop, tablet, maupun smartphone.</li>
-  <li>⭐ <strong>Update Berkala</strong>: Tools selalu diperbarui sesuai teknologi terbaru.</li>
-  <li>🧪 <strong>Masih Tahap Pengembangan</strong>: Fitur baru terus ditambahkan dan disempurnakan.</li>
-</ul>
-</section>
+    <!-- ABOUT & STATS -->
+    <section class="about container">
+      <h2>Selamat Datang di Tools By Yudzxml</h2>
+      <p>
+        Tools By Yudzxml adalah platform komprehensif untuk membantu kebutuhan digital Anda.
+        Di sini Anda akan menemukan berbagai alat online gratis yang:
+      </p>
+      <ul class="features">
+        <li>⚙️ <strong>Beragam Kategori</strong>: Video, Teks, Gambar, File, dan banyak lagi.</li>
+        <li>🔒 <strong>Privasi Terjamin</strong>: Semua proses dijalankan di browser tanpa menyimpan data.</li>
+        <li>🚀 <strong>Performa Cepat</strong>: Hasil instan tanpa perlu registrasi.</li>
+        <li>📱 <strong>Responsif</strong>: Optimal di desktop, tablet, maupun smartphone.</li>
+        <li>⭐ <strong>Update Berkala</strong>: Tools selalu diperbarui sesuai teknologi terbaru.</li>
+        <li>🧪 <strong>Masih Tahap Pengembangan</strong>: Fitur baru terus ditambahkan dan disempurnakan.</li>
+      </ul>
+     <div class="stats-column">
+        <div class="stat-circle" id="uptime">
+          <span class="label">Uptime</span>
+          <span class="value" id="uptimeValue">--:--:--</span>
+        </div>
+        <div class="stat-circle" id="runtime">
+          <span class="label">Runtime</span>
+          <span class="value" id="runtimeValue">--:--:--</span>
+        </div>
+        <div class="stat-circle" id="toolCount">
+          <span class="label">Tools</span>
+          <span class="value" id="toolCountValue">0</span>
+        </div>
+      </div>
+    </section>
 
+    <!-- QUICK ACCESS -->
     <section class="quick-access">
       <div class="quick-card">
         <h3>Recently Used <button onclick="clearRecents()" class="btn btn-secondary">Clear</button></h3>
@@ -349,96 +93,84 @@
       </div>
     </section>
 
-  <section class="tools-grid" aria-live="polite">
-  <!-- YouTube Downloader -->
-  <div class="tool-card" data-title="YouTube Downloader" data-category="video">
-    <div class="tool-header">
-      <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/c300ec56.png" alt="YouTube Icon" class="tool-icon" />
-      <h3>YouTube Downloader</h3>
-    </div>
-    <p class="tool-description">
-      Unduh video atau audio dari YouTube secara cepat dan mudah langsung di browser.  
-      Cukup tempel URL, pilih format, lalu unduh.
-    </p>
-    <ul class="tool-features">
-      <li>🎥 Kualitas sampai 1080p</li>
-      <li>🎶 Ekstrak audio MP3</li>
-      <li>⚡ Proses instan tanpa registrasi</li>
-      <li>🔒 Privasi terjaga — tidak ada watermark</li>
-    </ul>
-<div class="tool-actions">
-  <button
-    type="button"
-    onclick="location.href='ytdlDownloader.html'"
-    class="btn btn-primary"
-  >
-    Buka Tool
-  </button>
-  <button class="btn-fav" data-title="YouTube Downloader" aria-label="Toggle favorite" aria-pressed="false">
-    ★
-  </button>
-</div>
-  </div>
-    <!-- Uploader -->
-  <div class="tool-card" data-title="File Uploader" data-category="utility">
-  <div class="tool-header">
-    <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/e61577f8.png" alt="Uploader Icon" class="tool-icon" />
-    <h3>File to URL Uploader</h3>
-  </div>
-  <p class="tool-description">
-    Unggah file dari perangkatmu dan dapatkan URL langsung untuk dibagikan.  
-    Cocok untuk berbagi dokumen, gambar, atau file lain dengan cepat dan mudah.
-  </p>
-  <ul class="tool-features">
-    <li>📁 Dukungan banyak format file</li>
-    <li>🚀 Proses cepat dan mudah</li>
-    <li>🔗 Link langsung setelah unggah</li>
-    <li>🛡️ Aman dan privasi terjaga</li>
-  </ul>
-  <div class="tool-actions">
-    <button
-      type="button"
-      onclick="location.href='uploader.html'"
-      class="btn btn-primary"
-    >
-      Buka Tool
-    </button>
-    <button class="btn-fav" data-title="File Uploader" aria-label="Toggle favorite" aria-pressed="false">
-      ★
-    </button>
-  </div>
-</div>
-  <!-- Obfuscator -->
-  <div class="tool-card" data-title="JavaScript Obfuscator" data-category="developer">
-  <div class="tool-header">
-    <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/74d1812b.png" alt="JS Obfuscator Icon" class="tool-icon" />
-    <h3>JavaScript Obfuscator</h3>
-  </div>
-  <p class="tool-description">
-    Lindungi kode JavaScript milikmu dengan mengacak struktur dan nama variabelnya.
-    Ideal untuk mencegah reverse engineering atau pencurian kode.
-  </p>
-  <ul class="tool-features">
-    <li>🔐 Perlindungan kode tingkat lanjut</li>
-    <li>🌀 Nama variabel diacak otomatis</li>
-    <li>📦 Dukungan untuk banyak file</li>
-    <li>⚙️ Pengaturan tingkat kebingungan</li>
-  </ul>
-  <div class="tool-actions">
-    <button
-      type="button"
-      onclick="location.href='obfucator.html'"
-      class="btn btn-primary"
-    >
-      Buka Tool
-    </button>
-    <button class="btn-fav" data-title="JavaScript Obfuscator" aria-label="Toggle favorite" aria-pressed="false">
-      ★
-    </button>
-  </div>
-</div>
-  <!-- CARD BARU -->
-</section>
+    <!-- TOOLS GRID -->
+    <section class="tools-grid" aria-live="polite">
+      <!-- YouTube Downloader -->
+      <div class="tool-card" data-title="YouTube Downloader" data-category="video">
+        <div class="tool-header">
+          <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/c300ec56.png" alt="YouTube Icon" class="tool-icon" />
+          <h3>YouTube Downloader</h3>
+        </div>
+        <p class="tool-description">Unduh video atau audio dari YouTube secara cepat dan mudah langsung di browser. Cukup tempel URL, pilih format, lalu unduh.</p>
+        <ul class="tool-features">
+          <li>🎥 Kualitas sampai 1080p</li>
+          <li>🎶 Ekstrak audio MP3</li>
+          <li>⚡ Proses instan tanpa registrasi</li>
+          <li>🔒 Privasi terjaga — tidak ada watermark</li>
+        </ul>
+        <div class="tool-actions">
+          <button type="button" onclick="location.href='ytdlDownloader.html'" class="btn btn-primary">Buka Tool</button>
+          <button class="btn-fav" data-title="YouTube Downloader" aria-label="Toggle favorite" aria-pressed="false">★</button>
+        </div>
+      </div>
+
+      <!-- File Uploader -->
+      <div class="tool-card" data-title="File Uploader" data-category="utility">
+        <div class="tool-header">
+          <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/e61577f8.png" alt="Uploader Icon" class="tool-icon" />
+          <h3>File to URL Uploader</h3>
+        </div>
+        <p class="tool-description">Unggah file dari perangkatmu dan dapatkan URL langsung untuk dibagikan. Cocok untuk berbagi dokumen, gambar, atau file lain dengan cepat dan mudah.</p>
+        <ul class="tool-features">
+          <li>📁 Dukungan banyak format file</li>
+          <li>🚀 Proses cepat dan mudah</li>
+          <li>🔗 Link langsung setelah unggah</li>
+          <li>🛡️ Aman dan privasi terjaga</li>
+        </ul>
+        <div class="tool-actions">
+          <button type="button" onclick="location.href='uploader.html'" class="btn btn-primary">Buka Tool</button>
+          <button class="btn-fav" data-title="File Uploader" aria-label="Toggle favorite" aria-pressed="false">★</button>
+        </div>
+      </div>
+
+      <!-- JS Obfuscator -->
+      <div class="tool-card" data-title="JavaScript Obfuscator" data-category="developer">
+        <div class="tool-header">
+          <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/74d1812b.png" alt="JS Obfuscator Icon" class="tool-icon" />
+          <h3>JavaScript Obfuscator</h3>
+        </div>
+        <p class="tool-description">Lindungi kode JavaScript milikmu dengan mengacak struktur dan nama variabelnya. Ideal untuk mencegah reverse engineering atau pencurian kode.</p>
+        <ul class="tool-features">
+          <li>🔐 Perlindungan kode tingkat lanjut</li>
+          <li>🌀 Nama variabel diacak otomatis</li>
+          <li>📦 Dukungan untuk banyak file</li>
+          <li>⚙️ Pengaturan tingkat kebingungan</li>
+        </ul>
+        <div class="tool-actions">
+          <button type="button" onclick="location.href='obfucator.html'" class="btn btn-primary">Buka Tool</button>
+          <button class="btn-fav" data-title="JavaScript Obfuscator" aria-label="Toggle favorite" aria-pressed="false">★</button>
+        </div>
+      </div>
+
+      <!-- TikTok Downloader -->
+      <div class="tool-card" data-title="TikTok Downloader" data-category="utility">
+        <div class="tool-header">
+          <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/141bf2b7.png" alt="TikTok Icon" class="tool-icon" />
+          <h3>TikTok Downloader</h3>
+        </div>
+        <p class="tool-description">Unduh video TikTok langsung ke perangkatmu, tanpa watermark dan dalam kualitas tinggi.</p>
+        <ul class="tool-features">
+          <li>🎬 Unduh video HD tanpa watermark</li>
+          <li>🎵 Ekstrak audio MP3</li>
+          <li>⚡ Proses cepat & mudah</li>
+          <li>🔗 Hanya butuh link TikTok</li>
+        </ul>
+        <div class="tool-actions">
+          <button type="button" onclick="location.href='tiktokdl.html'" class="btn btn-primary">Buka Tool</button>
+          <button class="btn-fav" data-title="TikTok Downloader" aria-label="Toggle favorite" aria-pressed="false">★</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- TOAST -->
@@ -447,12 +179,140 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 Yudzxml All Right Reserved | <a href="contact.html">Contact</a> | <a href="service.html">Privacy</a></p>
+      <p>© 2025 Yudzxml • All Rights Reserved • <a href="contact.html">Contact</a> • <a href="service.html">Privacy</a></p>
     </div>
   </footer>
 
 <script>
-  const _0xf9ead8=_0x5287;(function(_0x13143d,_0xbcf107){const _0x38261c=_0x5287,_0x8e93a6=_0x13143d();while(!![]){try{const _0x20a106=-parseInt(_0x38261c(0xa3))/0x1+parseInt(_0x38261c(0xc9))/0x2+-parseInt(_0x38261c(0x98))/0x3*(parseInt(_0x38261c(0xe3))/0x4)+-parseInt(_0x38261c(0x9a))/0x5+-parseInt(_0x38261c(0xd8))/0x6*(parseInt(_0x38261c(0xc4))/0x7)+parseInt(_0x38261c(0xd0))/0x8+parseInt(_0x38261c(0xde))/0x9*(parseInt(_0x38261c(0xcd))/0xa);if(_0x20a106===_0xbcf107)break;else _0x8e93a6['push'](_0x8e93a6['shift']());}catch(_0x164ebc){_0x8e93a6['push'](_0x8e93a6['shift']());}}}(_0x4a25,0xe0ad6));const _0x1bb472=(function(){let _0x3937a7=!![];return function(_0x48da79,_0x37d52a){const _0x51a0bc=_0x3937a7?function(){const _0x39ed9c=_0x5287;if(_0x37d52a){const _0x5af014=_0x37d52a[_0x39ed9c(0x97)](_0x48da79,arguments);return _0x37d52a=null,_0x5af014;}}:function(){};return _0x3937a7=![],_0x51a0bc;};}()),_0x2c4240=_0x1bb472(this,function(){const _0x458fdf=_0x5287;let _0xe8e8f;try{const _0x495c1d=Function(_0x458fdf(0xa7)+_0x458fdf(0xe0)+');');_0xe8e8f=_0x495c1d();}catch(_0x1b313a){_0xe8e8f=window;}const _0x3436c0=_0xe8e8f[_0x458fdf(0xb1)]=_0xe8e8f[_0x458fdf(0xb1)]||{},_0x55aa6d=[_0x458fdf(0xcf),_0x458fdf(0xe5),_0x458fdf(0xdd),_0x458fdf(0xdf),_0x458fdf(0x9e),_0x458fdf(0xe2),_0x458fdf(0xbc)];for(let _0xcf1aa7=0x0;_0xcf1aa7<_0x55aa6d[_0x458fdf(0xbb)];_0xcf1aa7++){const _0x5d9c08=_0x1bb472[_0x458fdf(0xd1)][_0x458fdf(0xb3)][_0x458fdf(0xdb)](_0x1bb472),_0x40f60b=_0x55aa6d[_0xcf1aa7],_0x5dbc4d=_0x3436c0[_0x40f60b]||_0x5d9c08;_0x5d9c08[_0x458fdf(0xb4)]=_0x1bb472['bind'](_0x1bb472),_0x5d9c08[_0x458fdf(0x92)]=_0x5dbc4d[_0x458fdf(0x92)]['bind'](_0x5dbc4d),_0x3436c0[_0x40f60b]=_0x5d9c08;}});function _0x4a25(){const _0x52ca44=['zMf2CW','zM9YrwfJAa','B25PBNb1Da','zMfSC2u','B25JAgfUz2u','otaWotG5nePOwKHwra','C2HVDW','C2LKzwjHCG','yMLUza','CgfYC2u','Aw5MBW','mZK5odGZmtrNrezYELu','zxjYB3i','E30Uy29UC3rYDwn0B3iOiNjLDhvYBIb0AgLZiIKOicK','CMvTB3zL','DgfIBgu','mZi0nJy3nNDnDfPuCq','zgf0yxnLDa','D2fYBG','zgLZCgXHEq','CMvTB3zLsxrLBq','z2v0rwXLBwvUDej5swq','C2vHCMnOsw5WDxq','zMLSDgvYq2f0zwDVCNK','z2v0sxrLBq','BM9Uzq','CxvLCNLtzwXLy3rVCKfSBa','Dg9tDhjPBMC','Cg9W','Dg9Nz2XL','C2vHCMnOvg9VBhm','Bg9HzgLUz1n0yxrL','yxbWBhK','m0LLsfniuq','zMf2B3jPDgvZtgLZDa','odi1nZq3mhnnAezQEq','DgfYz2v0','AhjLzG','C2v0qxr0CMLIDxrL','zxHJzxb0Aw9U','Dg9HC3q','Bwf0y2G','CMvJzw50','Aw5JBhvKzxm','mte3mtC1mhv6wvPnyG','ywn0AxzL','C3rYAw5NAwz5','B25JBgLJAW','CMv0DxjUicHMDw5JDgLVBIGPia','Dg9mB3DLCKnHC2u','zMLSDgvY','lMj0BI1WCMLTyxj5','ChvZAa','Aw5Uzxjive1m','Dgv4DenVBNrLBNq','Bg9JyxrPB24','B25SB2fK','BwfW','y29UC29Szq','C2LKzwjHCKnSB3nL','ChjVDg90ExbL','x19WCM90B19F','Dw5ZAgLMDa','zgfYAY1TB2rL','DMfSDwu','lMj0BI1Myxy','y2XHC3nmAxn0','B3bLBG','BgvUz3rO','DhjHy2u','rgL0yw1IywHRyw4GA2uGzMf2B3jPDce','yxjPys1WCMvZC2vK','y29UDgfPBNm','ywrK','pc9SAt4','C3r5Bgu','zgfYA01VzgvuB2DNBgu','n2rMtND2zG','DgL0Bgu','C2v0sxrLBq','zgfYA01Vzgu','C2LKzwjHCLrVz2DSzq','otaZnZe0B3vgChLW','rMf2B3jPDgvZigrPyMvYC2LOA2fU','AM9PBG','lNrVB2WTy2fYza','mtbuCfbnzvC','pgXPpG','Bg9N','oti5ndy5nKXtzwfqEa','y29UC3rYDwn0B3i','z2v0qxr0CMLIDxrL'];_0x4a25=function(){return _0x52ca44;};return _0x4a25();}_0x2c4240();const safeStorage=(_0x51a6b4,_0x1cc7ae='[]')=>{const _0x32dc3f=_0x5287;try{return JSON[_0x32dc3f(0xdc)](localStorage[_0x32dc3f(0xeb)](_0x51a6b4)||_0x1cc7ae);}catch{return JSON[_0x32dc3f(0xdc)](_0x1cc7ae);}},body=document['body'],sidebar=document['getElementById'](_0xf9ead8(0xda)),toast=document[_0xf9ead8(0xe8)](_0xf9ead8(0x9f));document[_0xf9ead8(0xe8)](_0xf9ead8(0xc8))['onclick']=()=>sidebar[_0xf9ead8(0xb9)][_0xf9ead8(0xc0)](_0xf9ead8(0xba)),document[_0xf9ead8(0xe8)](_0xf9ead8(0xb2))['onclick']=()=>sidebar['classList'][_0xf9ead8(0xe1)]('open');function showToast(_0x126c6f){const _0x117b3c=_0xf9ead8;toast[_0x117b3c(0xad)]=_0x126c6f,toast[_0x117b3c(0xb9)][_0x117b3c(0xc0)](_0x117b3c(0xd9)),setTimeout(()=>toast[_0x117b3c(0xb9)][_0x117b3c(0xe1)](_0x117b3c(0xd9)),0x7d0);}document[_0xf9ead8(0xe8)](_0xf9ead8(0xea))[_0xf9ead8(0xd7)]=filterTools,document[_0xf9ead8(0xe8)](_0xf9ead8(0xe9))[_0xf9ead8(0xd5)]=filterTools,document['getElementById'](_0xf9ead8(0x95))[_0xf9ead8(0xd5)]=_0x498747=>{const _0x4c07ca=_0xf9ead8,_0x8eb5bf=_0x498747[_0x4c07ca(0x9b)][_0x4c07ca(0xb7)][_0x4c07ca(0xa8)]();document['querySelectorAll']('#toolsList\x20.sidebar-btn')[_0x4c07ca(0xd4)](_0x1fbdca=>{const _0x5f0876=_0x4c07ca;_0x1fbdca[_0x5f0876(0xc2)][_0x5f0876(0xe6)]=_0x1fbdca[_0x5f0876(0xad)][_0x5f0876(0xa8)]()[_0x5f0876(0xa2)](_0x8eb5bf)?'':_0x5f0876(0xec);});};function _0x5287(_0x586219,_0x478058){const _0x8442f2=_0x4a25();return _0x5287=function(_0x2c4240,_0x1bb472){_0x2c4240=_0x2c4240-0x92;let _0x2cd664=_0x8442f2[_0x2c4240];if(_0x5287['gtIjsX']===undefined){var _0x4a25e9=function(_0x3c2b07){const _0xb74e85='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x23e271='',_0x556191='';for(let _0x3937a7=0x0,_0x48da79,_0x37d52a,_0x51a0bc=0x0;_0x37d52a=_0x3c2b07['charAt'](_0x51a0bc++);~_0x37d52a&&(_0x48da79=_0x3937a7%0x4?_0x48da79*0x40+_0x37d52a:_0x37d52a,_0x3937a7++%0x4)?_0x23e271+=String['fromCharCode'](0xff&_0x48da79>>(-0x2*_0x3937a7&0x6)):0x0){_0x37d52a=_0xb74e85['indexOf'](_0x37d52a);}for(let _0x5af014=0x0,_0xe8e8f=_0x23e271['length'];_0x5af014<_0xe8e8f;_0x5af014++){_0x556191+='%'+('00'+_0x23e271['charCodeAt'](_0x5af014)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x556191);};_0x5287['lveRmR']=_0x4a25e9,_0x586219=arguments,_0x5287['gtIjsX']=!![];}const _0x52872b=_0x8442f2[0x0],_0x43134a=_0x2c4240+_0x52872b,_0x2a26c7=_0x586219[_0x43134a];return!_0x2a26c7?(_0x2cd664=_0x5287['lveRmR'](_0x2cd664),_0x586219[_0x43134a]=_0x2cd664):_0x2cd664=_0x2a26c7,_0x2cd664;},_0x5287(_0x586219,_0x478058);}function filterTools(){const _0x290ce4=_0xf9ead8,_0x3125fc=document[_0x290ce4(0xe8)]('filterCategory')[_0x290ce4(0xb7)],_0x24eaa4=document[_0x290ce4(0xe8)](_0x290ce4(0xe9))[_0x290ce4(0xb7)][_0x290ce4(0xa8)]();document[_0x290ce4(0xed)](_0x290ce4(0xcc))[_0x290ce4(0xd4)](_0x25d238=>{const _0x4dbc34=_0x290ce4,_0x5a8caa=_0x25d238[_0x4dbc34(0xe4)]['title']['toLowerCase'](),_0x1a78ca=!_0x3125fc||_0x25d238[_0x4dbc34(0xe4)]['category']===_0x3125fc,_0x2b18cf=_0x5a8caa[_0x4dbc34(0xa2)](_0x24eaa4);_0x25d238[_0x4dbc34(0xc2)][_0x4dbc34(0xe6)]=_0x1a78ca&&_0x2b18cf?'':'none';});}document['getElementById'](_0xf9ead8(0xc3))[_0xf9ead8(0xa6)]=()=>{const _0x410dbd=_0xf9ead8;body['classList'][_0x410dbd(0x94)](_0x410dbd(0xb6)),localStorage[_0x410dbd(0xc6)](_0x410dbd(0xc7),body[_0x410dbd(0xb9)][_0x410dbd(0xbf)](_0x410dbd(0xb6)));},window[_0xf9ead8(0xaf)]=()=>{const _0x4bd81a=_0xf9ead8;JSON['parse'](localStorage['getItem'](_0x4bd81a(0xc7))||_0x4bd81a(0xd6))&&body[_0x4bd81a(0xb9)][_0x4bd81a(0xc0)](_0x4bd81a(0xb6)),document[_0x4bd81a(0xe8)](_0x4bd81a(0x96))['style'][_0x4bd81a(0xe6)]=_0x4bd81a(0xec),renderLists();},document[_0xf9ead8(0xed)](_0xf9ead8(0xb8))[_0xf9ead8(0xd4)](_0x51ae62=>{const _0x2d24e1=_0xf9ead8;_0x51ae62[_0x2d24e1(0xa6)]=()=>{const _0x446408=_0x2d24e1,_0x3ea5cb=_0x51ae62['dataset'][_0x446408(0xc5)];let _0x57aaf3=safeStorage(_0x446408(0xd3));_0x57aaf3[_0x446408(0xa2)](_0x3ea5cb)?_0x57aaf3=_0x57aaf3[_0x446408(0xa9)](_0x1093eb=>_0x1093eb!==_0x3ea5cb):(_0x57aaf3[_0x446408(0xab)](_0x3ea5cb),showToast(_0x446408(0xbd))),localStorage['setItem'](_0x446408(0xd3),JSON[_0x446408(0xa5)](_0x57aaf3)),renderLists();};});function clearFavs(){const _0x24332d=_0xf9ead8;localStorage[_0x24332d(0xe7)](_0x24332d(0xd3)),renderLists(),showToast(_0x24332d(0xca));}function clearRecents(){const _0x422173=_0xf9ead8;localStorage['removeItem'](_0x422173(0xa1)),renderLists(),showToast('Recents\x20dibersihkan');}function clearFilters(){const _0x1d9872=_0xf9ead8;document[_0x1d9872(0xe8)](_0x1d9872(0xea))['value']='',filterTools();}function renderLists(){const _0x360e4b=_0xf9ead8,_0x5e7d7b=safeStorage(_0x360e4b(0xa1)),_0x579e1f=safeStorage(_0x360e4b(0xd3));document['getElementById']('recentList')[_0x360e4b(0xac)]=_0x5e7d7b['map'](_0x4343c4=>_0x360e4b(0xce)+_0x4343c4+_0x360e4b(0xc1))[_0x360e4b(0xcb)](''),document['getElementById'](_0x360e4b(0x99))['innerHTML']=_0x579e1f[_0x360e4b(0xb0)](_0x266875=>_0x360e4b(0xce)+_0x266875+'</li>')[_0x360e4b(0xcb)](''),document[_0x360e4b(0xed)](_0x360e4b(0xb8))[_0x360e4b(0xd4)](_0x515359=>{const _0x3d8ca2=_0x360e4b,_0x29a8bf=_0x579e1f[_0x3d8ca2(0xa2)](_0x515359[_0x3d8ca2(0xe4)][_0x3d8ca2(0xc5)]);_0x515359['classList'][_0x3d8ca2(0x94)](_0x3d8ca2(0xa4),_0x29a8bf),_0x515359[_0x3d8ca2(0x9d)](_0x3d8ca2(0xbe),_0x29a8bf);});}document['querySelectorAll'](_0xf9ead8(0xcc))[_0xf9ead8(0xd4)](_0x1bb44c=>{const _0x6fe227=_0xf9ead8,_0x33d6d1=_0x1bb44c['querySelector'](_0x6fe227(0xaa));_0x33d6d1[_0x6fe227(0xa6)]=()=>{const _0x39de63=_0x6fe227;let _0x481586=safeStorage('recent');const _0x2b3cbd=_0x1bb44c[_0x39de63(0xe4)][_0x39de63(0xc5)];_0x481586=_0x481586['filter'](_0x5783b9=>_0x5783b9!==_0x2b3cbd),_0x481586[_0x39de63(0xb5)](_0x2b3cbd);if(_0x481586['length']>0x5)_0x481586[_0x39de63(0x93)]();localStorage['setItem'](_0x39de63(0xa1),JSON['stringify'](_0x481586)),renderLists(),window[_0x39de63(0xae)][_0x39de63(0x9c)]=_0x33d6d1[_0x39de63(0xd2)](_0x39de63(0xa6))[_0x39de63(0xa0)](/'([^']+)'/)[0x1];};});
+  // Helper & state
+  const safeStorage = (key, def = '[]') => {
+    try { return JSON.parse(localStorage.getItem(key) || def); }
+    catch { return JSON.parse(def); }
+  };
+  const body = document.body;
+  const toast = document.getElementById('toast');
+  const deploymentDate = new Date('2025-06-20T00:00:00').getTime();
+  const getRuntimeStart = () => {
+  const saved = localStorage.getItem('runtimeStart');
+  const now = Date.now();
+  if (saved) return parseInt(saved, 10);
+  localStorage.setItem('runtimeStart', now);
+  return now;
+};
+  const startLoad = getRuntimeStart();
+
+  const pad = n => n < 10 ? '0' + n : n;
+
+  function updateStats() {
+    const upVal = document.getElementById('uptimeValue');
+    const rtVal = document.getElementById('runtimeValue');
+    const tcVal = document.getElementById('toolCountValue');
+    if (!upVal || !rtVal || !tcVal) return;
+
+    const now = Date.now();
+    const upMs = now - deploymentDate;
+    const rtMs = now - startLoad;
+
+    upVal.textContent = 
+      `${pad(Math.floor(upMs / 3600000))}:${pad(Math.floor((upMs % 3600000) / 60000))}:${pad(Math.floor((upMs % 60000) / 1000))}`;
+    rtVal.textContent = 
+      `${pad(Math.floor(rtMs / 3600000))}:${pad(Math.floor((rtMs % 3600000) / 60000))}:${pad(Math.floor((rtMs % 60000) / 1000))}`;
+    tcVal.textContent = document.querySelectorAll('.tool-card').length;
+  }
+
+  // Sidebar toggle
+  document.getElementById('sidebarToggle')?.addEventListener('click', () =>
+    document.getElementById('sidebar')?.classList.add('open')
+  );
+  document.getElementById('sidebarClose')?.addEventListener('click', () =>
+    document.getElementById('sidebar')?.classList.remove('open')
+  );
+
+  // Toast notification
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  // Filter & search tools
+  function filterTools() {
+    const cat = document.getElementById('filterCategory')?.value || '';
+    const q = document.getElementById('searchInput')?.value.toLowerCase() || '';
+    document.querySelectorAll('.tool-card').forEach(card => {
+      const title = card.dataset.title?.toLowerCase() || '';
+      const match = (!cat || card.dataset.category === cat) && title.includes(q);
+      card.style.display = match ? '' : 'none';
+    });
+  }
+  document.getElementById('filterCategory')?.addEventListener('change', filterTools);
+  document.getElementById('searchInput')?.addEventListener('input', filterTools);
+  document.getElementById('searchTools')?.addEventListener('input', e => {
+    const q = e.target.value.toLowerCase();
+    document.querySelectorAll('#toolsList .sidebar-btn').forEach(btn =>
+      btn.style.display = btn.textContent.toLowerCase().includes(q) ? '' : 'none'
+    );
+  });
+
+  // Dark mode toggle
+  document.getElementById('darkModeToggle')?.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+  });
+
+  // Render recents & favorites lists
+  function renderLists() {
+    const rec = safeStorage('recent');
+    const fav = safeStorage('favs');
+    document.getElementById('recentList').innerHTML = rec.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('favoritesList').innerHTML = fav.map(i => `<li>${i}</li>`).join('');
+    document.querySelectorAll('.btn-fav').forEach(b => {
+      const isActive = fav.includes(b.dataset.title);
+      b.classList.toggle('active', isActive);
+      b.setAttribute('aria-pressed', isActive);
+    });
+  }
+
+  // Favorite toggle
+  document.querySelectorAll('.btn-fav').forEach(btn =>
+    btn.addEventListener('click', () => {
+      const title = btn.dataset.title;
+      let favs = safeStorage('favs');
+      favs = favs.includes(title) ? favs.filter(i => i !== title) : [...favs, title];
+      localStorage.setItem('favs', JSON.stringify(favs));
+      showToast(favs.includes(title) ? 'Ditambahkan ke favorit!' : 'Dihapus dari favorit');
+      renderLists();
+    })
+  );
+  function clearFavs()    { localStorage.removeItem('favs');    renderLists(); showToast('Favorites dibersihkan'); }
+  function clearRecents() { localStorage.removeItem('recent'); renderLists(); showToast('Recents dibersihkan'); }
+  
+  document.querySelectorAll('.tool-card').forEach(card => {
+    const btn = card.querySelector('.btn-primary');
+    btn?.addEventListener('click', e => {
+      e.preventDefault();
+      let rec = safeStorage('recent');
+      const title = card.dataset.title;
+      rec = rec.filter(i => i !== title);
+      rec.unshift(title);
+      if (rec.length > 5) rec.pop();
+      localStorage.setItem('recent', JSON.stringify(rec));
+      renderLists();
+      const href = btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+      if (href) window.location.href = href;
+    });
+  });
+
+  window.addEventListener('load', () => {
+    if (JSON.parse(localStorage.getItem('darkMode') || 'false')) {
+      body.classList.add('dark-mode');
+    }
+    document.getElementById('loadingState').style.display = 'none';
+    renderLists();
+    updateStats();
+    setInterval(updateStats, 1000);
+  });
 </script>
+    <script src="visitor.js"></script>
 </body>
 </html>

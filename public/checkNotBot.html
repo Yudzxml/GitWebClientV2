@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Verifikasi CAPTCHA</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      padding: 50px;
+      background: #f4f4f4;
+      position: relative;
+      min-height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #a5d6a7;
+      cursor: not-allowed;
+    }
+    #loadingOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      font-size: 1.2rem;
+      color: #555;
+      user-select: none;
+      flex-direction: column;
+    }
+    .spinner {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #4caf50;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div>Menunggu CAPTCHA selesai...</div>
+  </div>
+
+  <div class="box">
+    <h2>Verifikasi Manusia 🤖</h2>
+    <p>Silakan centang kotak di bawah ini untuk masuk ke website.</p>
+    <form id="captchaForm">
+      <!-- recaptcha div akan disisipkan lewat JavaScript -->
+      <div id="recaptchaContainer"></div>
+      <button type="submit" disabled id="submitBtn">Masuk ke Website</button>
+    </form>
+  </div>
+
+  <script>
+    let widgetId;
+
+    window.onloadCallback = function () {
+      console.log("reCAPTCHA dimuat.");
+
+      // Buat elemen div secara dinamis
+      const recaptchaDiv = document.createElement("div");
+      recaptchaDiv.id = "recaptcha";
+      recaptchaDiv.className = "g-recaptcha";
+      document.getElementById("recaptchaContainer").appendChild(recaptchaDiv);
+
+      widgetId = grecaptcha.render("recaptcha", {
+        sitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI", // test key
+        callback: () => {
+          console.log("CAPTCHA selesai ✔️");
+          document.getElementById("submitBtn").disabled = false;
+          hideLoading();
+        },
+        'expired-callback': () => {
+          console.log("Sesi CAPTCHA expired ❌");
+          document.getElementById("submitBtn").disabled = true;
+          showLoading();
+        }
+      });
+
+      const lastVerified = localStorage.getItem("cf_verified");
+      if (lastVerified) {
+        const now = Date.now();
+        const diff = now - parseInt(lastVerified);
+        const oneDay = 24 * 60 * 60 * 1000;
+        if (diff > oneDay) {
+          console.log("Verifikasi sudah lebih dari 1 hari. CAPTCHA diperlukan ulang.");
+          localStorage.removeItem("cf_verified");
+          showLoading();
+        } else {
+          console.log("Sudah diverifikasi sebelumnya, langsung redirect.");
+          window.location.href = "index.html";
+        }
+      } else {
+        console.log("Belum ada verifikasi sebelumnya.");
+        showLoading();
+      }
+    };
+
+    function showLoading() {
+      document.getElementById("loadingOverlay").style.display = "flex";
+    }
+    function hideLoading() {
+      document.getElementById("loadingOverlay").style.display = "none";
+    }
+
+    document.getElementById("captchaForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const response = grecaptcha.getResponse(widgetId);
+      if (!response) {
+        alert("Silakan centang kotak terlebih dahulu.");
+        console.log("Tombol ditekan tanpa mencentang CAPTCHA.");
+        return;
+      }
+      localStorage.setItem("cf_verified", Date.now());
+      console.log("Verifikasi berhasil. Redirect ke index.html...");
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
+    });
+
+    // Pastikan loading muncul awalnya
+    showLoading();
+  </script>
+
+  <!-- Load reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+</body>
+</html>

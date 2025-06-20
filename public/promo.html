@@ -203,7 +203,180 @@
   </footer>
 
   <script>
-    const _0x4715ca=_0x3594;(function(_0x2ed8eb,_0x577049){const _0x5ebe27=_0x3594,_0x4493bf=_0x2ed8eb();while(!![]){try{const _0x36f0c3=-parseInt(_0x5ebe27(0x148))/0x1*(parseInt(_0x5ebe27(0x149))/0x2)+-parseInt(_0x5ebe27(0x153))/0x3*(-parseInt(_0x5ebe27(0x150))/0x4)+-parseInt(_0x5ebe27(0x141))/0x5*(parseInt(_0x5ebe27(0x162))/0x6)+parseInt(_0x5ebe27(0x152))/0x7*(parseInt(_0x5ebe27(0x130))/0x8)+-parseInt(_0x5ebe27(0x139))/0x9*(-parseInt(_0x5ebe27(0x142))/0xa)+-parseInt(_0x5ebe27(0x16f))/0xb+-parseInt(_0x5ebe27(0x137))/0xc;if(_0x36f0c3===_0x577049)break;else _0x4493bf['push'](_0x4493bf['shift']());}catch(_0x87a7bd){_0x4493bf['push'](_0x4493bf['shift']());}}}(_0x5ef3,0xb3111));const apiUrl=_0x4715ca(0x16c),sidebarToggleBtn=document[_0x4715ca(0x132)](_0x4715ca(0x14f)),darkModeToggleBtn=document[_0x4715ca(0x132)](_0x4715ca(0x134)),searchInput=document[_0x4715ca(0x132)]('searchInput'),promoListContainer=document[_0x4715ca(0x132)](_0x4715ca(0x15c)),bodyEl=document[_0x4715ca(0x128)],sidebarEl=document[_0x4715ca(0x132)](_0x4715ca(0x16b)),goAdminBtn=document[_0x4715ca(0x132)](_0x4715ca(0x13c));let allPromos=[];async function fetchPromos(){const _0x443b10=_0x4715ca;try{promoListContainer[_0x443b10(0x15a)]=_0x443b10(0x154);const _0x4c2060=await fetch(apiUrl);if(!_0x4c2060['ok'])throw new Error(_0x443b10(0x14e));const _0x913a6=await _0x4c2060[_0x443b10(0x160)](),_0x3ef722=_0x913a6['content'],_0x5211db=atob(_0x3ef722),_0x2669ff=JSON['parse'](_0x5211db);allPromos=_0x2669ff,renderPromos(_0x2669ff);}catch(_0xc07744){console[_0x443b10(0x13d)](_0xc07744),promoListContainer[_0x443b10(0x15a)]='<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20promo.</p>';}}function formattedDate(_0x151bbf){const _0x2d90e4=_0x4715ca,_0x90601f=new Date(_0x151bbf),_0x1f44e0={'day':'numeric','month':_0x2d90e4(0x15e),'year':_0x2d90e4(0x15d)};return _0x90601f[_0x2d90e4(0x164)](_0x2d90e4(0x166),_0x1f44e0);}function renderPromos(_0x41561e){const _0x540260=_0x4715ca;promoListContainer[_0x540260(0x15a)]='';const _0x12b447=new Date();_0x41561e[_0x540260(0x146)](_0x3c0918=>{const _0x24dde4=_0x540260,_0x5d1e24=new Date(_0x3c0918[_0x24dde4(0x13f)]),_0x4b74fa=_0x5d1e24<_0x12b447,_0x1d7c15=document[_0x24dde4(0x145)](_0x24dde4(0x163));_0x1d7c15[_0x24dde4(0x15f)]=_0x24dde4(0x165),_0x4b74fa&&(_0x1d7c15[_0x24dde4(0x151)][_0x24dde4(0x144)]=_0x24dde4(0x16e)),_0x1d7c15['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22promo-name\x22>'+_0x3c0918[_0x24dde4(0x159)]+_0x24dde4(0x13e)+_0x3c0918[_0x24dde4(0x138)]+_0x24dde4(0x167)+_0x3c0918['harga_awal'][_0x24dde4(0x140)](_0x24dde4(0x166))+_0x24dde4(0x14a)+_0x3c0918[_0x24dde4(0x129)][_0x24dde4(0x140)]('id-ID')+_0x24dde4(0x170)+(_0x4b74fa?'<span\x20style=\x22color:red;\x22>Promo\x20telah\x20berakhir</span>':_0x24dde4(0x168)+formattedDate(_0x3c0918[_0x24dde4(0x13f)]))+_0x24dde4(0x14d)+(_0x4b74fa?'':_0x24dde4(0x12a)+_0x3c0918['wa_nomor']+_0x24dde4(0x131)+encodeURIComponent(_0x24dde4(0x133)+_0x3c0918['nama']+_0x24dde4(0x16a)+_0x3c0918[_0x24dde4(0x129)]['toLocaleString']('id-ID'))+_0x24dde4(0x156))+_0x24dde4(0x136),promoListContainer[_0x24dde4(0x14c)](_0x1d7c15);});}function filterPromos(_0x8f0341){const _0x4441ba=_0x4715ca,_0x1ff401=_0x8f0341[_0x4441ba(0x127)]()[_0x4441ba(0x135)]();if(!_0x1ff401){renderPromos(allPromos);return;}const _0x3bfff8=allPromos[_0x4441ba(0x169)](_0x320dcf=>{const _0x5b0124=_0x4441ba,_0x321300=_0x320dcf[_0x5b0124(0x159)][_0x5b0124(0x135)](),_0x450169=_0x320dcf[_0x5b0124(0x138)][_0x5b0124(0x135)](),_0x4de1fb=_0x320dcf[_0x5b0124(0x147)][_0x5b0124(0x13b)](),_0x462344=_0x320dcf['harga_promo'][_0x5b0124(0x13b)](),_0x35589e=_0x320dcf[_0x5b0124(0x13f)][_0x5b0124(0x135)]();return _0x321300[_0x5b0124(0x12e)](_0x1ff401)||_0x450169[_0x5b0124(0x12e)](_0x1ff401)||_0x4de1fb[_0x5b0124(0x12e)](_0x1ff401)||_0x462344[_0x5b0124(0x12e)](_0x1ff401)||_0x35589e[_0x5b0124(0x12e)](_0x1ff401);});renderPromos(_0x3bfff8);}function _0x3594(_0x1ded90,_0x2a33e8){const _0x5ef36e=_0x5ef3();return _0x3594=function(_0x359423,_0x257545){_0x359423=_0x359423-0x127;let _0x142a6c=_0x5ef36e[_0x359423];return _0x142a6c;},_0x3594(_0x1ded90,_0x2a33e8);}function applyInitialDarkMode(){const _0x483b2d=_0x4715ca,_0x2bb74c=localStorage[_0x483b2d(0x12b)](_0x483b2d(0x12d));_0x2bb74c===_0x483b2d(0x12f)&&bodyEl[_0x483b2d(0x13a)][_0x483b2d(0x14b)]('dark-mode');}function toggleDarkMode(){const _0x37f280=_0x4715ca;bodyEl[_0x37f280(0x13a)][_0x37f280(0x12c)](_0x37f280(0x158))?(bodyEl[_0x37f280(0x13a)]['remove'](_0x37f280(0x158)),localStorage[_0x37f280(0x15b)](_0x37f280(0x12d),'disabled')):(bodyEl[_0x37f280(0x13a)][_0x37f280(0x14b)](_0x37f280(0x158)),localStorage[_0x37f280(0x15b)](_0x37f280(0x12d),_0x37f280(0x12f)));}function toggleSidebar(){const _0x2364a0=_0x4715ca;if(!sidebarEl)return;sidebarEl[_0x2364a0(0x13a)][_0x2364a0(0x16d)](_0x2364a0(0x155));}document[_0x4715ca(0x143)]('DOMContentLoaded',()=>{fetchPromos(),applyInitialDarkMode();});searchInput&&searchInput[_0x4715ca(0x143)](_0x4715ca(0x157),_0x570c0c=>{filterPromos(_0x570c0c['target']['value']);});function _0x5ef3(){const _0xd57208=['appendChild','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','Gagal\x20mengambil\x20data\x20promo\x20dari\x20GitHub\x20API','sidebarToggle','12WujQtu','style','7WfyiNV','1111347gleyRu','<p>Loading\x20promo...</p>','open','\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20class=\x22wa-button\x22\x20target=\x22_blank\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20ORDER\x20SEKARANG\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</a>','input','dark-mode','nama','innerHTML','setItem','promo-list','numeric','long','className','json','click','1350sMgfEx','div','toLocaleDateString','promo-item','id-ID','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-price\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>Rp\x20','Berlaku\x20hingga:\x20','filter','\x0aHarga:\x20','sidebar','https://api.github.com/repos/Yudzxml/WebClientV1/contents/promo.json','toggle','0.6','5641350FqcLOJ','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-validity\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','trim','body','harga_promo','<a\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20href=\x22https://wa.me/','getItem','contains','darkMode','includes','enabled','9531512lFJAOX','?text=','getElementById','Halo\x20Admin,\x20saya\x20ingin\x20order\x20produk\x20diskon:\x20','darkModeToggle','toLowerCase','\x0a\x20\x20\x20\x20\x20\x20\x20\x20','987888hkeyqR','deskripsi','9BKGjOg','classList','toString','goAdminBtn','error','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22promo-desc\x22>','berlaku_sampai','toLocaleString','8670vXlzkj','5483410GOLfIn','addEventListener','opacity','createElement','forEach','harga_awal','1132346qfJoKb','2nJikvb','</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Rp\x20','add'];_0x5ef3=function(){return _0xd57208;};return _0x5ef3();}darkModeToggleBtn&&darkModeToggleBtn[_0x4715ca(0x143)]('click',()=>{toggleDarkMode();});sidebarToggle['addEventListener'](_0x4715ca(0x161),()=>{const _0x5138f7=_0x4715ca;sidebar[_0x5138f7(0x13a)][_0x5138f7(0x14b)](_0x5138f7(0x155));}),sidebarClose[_0x4715ca(0x143)]('click',()=>{const _0x255e77=_0x4715ca;sidebar['classList']['remove'](_0x255e77(0x155));});
+    // ==========================
+    // CONSTANTS & SELECTORS
+    // ==========================
+    const apiUrl = 'https://api.github.com/repos/Yudzxml/WebClientV1/contents/promo.json';
+
+    const sidebarToggleBtn = document.getElementById('sidebarToggle');
+    const darkModeToggleBtn = document.getElementById('darkModeToggle');
+    const searchInput = document.getElementById('searchInput');
+    const promoListContainer = document.getElementById('promo-list');
+    const bodyEl = document.body;
+    const sidebarEl = document.getElementById('sidebar');
+    const goAdminBtn = document.getElementById('goAdminBtn');
+
+    let allPromos = [];
+
+    // ==========================
+    // FETCH & RENDER PROMO VIA GITHUB API
+    // ==========================
+    async function fetchPromos() {
+      try {
+        // Tampilkan loading sederhana
+        promoListContainer.innerHTML = '<p>Loading promo...</p>';
+
+        const res = await fetch(apiUrl);
+        if (!res.ok) throw new Error('Gagal mengambil data promo dari GitHub API');
+        const data = await res.json();
+
+        // Konten file dalam base64
+        const base64Content = data.content;
+        const decoded = atob(base64Content); // decode dari base64
+        const promos = JSON.parse(decoded);
+
+        allPromos = promos;
+        renderPromos(promos);
+      } catch (err) {
+        console.error(err);
+        promoListContainer.innerHTML = '<p style="color:red;">Gagal memuat promo.</p>';
+      }
+    }
+    function formattedDate(dateStr) {
+      const tanggal = new Date(dateStr);
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      return tanggal.toLocaleDateString('id-ID', options);
+    }
+
+    function renderPromos(promos) {
+      promoListContainer.innerHTML = '';
+
+      const today = new Date();
+      promos.forEach(promo => {
+        const endDate = new Date(promo.berlaku_sampai);
+        const isExpired = endDate < today;
+
+        const div = document.createElement('div');
+        div.className = 'promo-item';
+        if (isExpired) {
+          div.style.opacity = '0.6';
+        }
+
+        div.innerHTML = `
+          <h3 class="promo-name">${promo.nama}</h3>
+          <p class="promo-desc">${promo.deskripsi}</p>
+          <p class="promo-price">
+            <span>Rp ${promo.harga_awal.toLocaleString('id-ID')}</span>
+            Rp ${promo.harga_promo.toLocaleString('id-ID')}
+          </p>
+          <p class="promo-validity">
+            ${
+              isExpired
+                ? '<span style="color:red;">Promo telah berakhir</span>'
+                : 'Berlaku hingga: ' + formattedDate(promo.berlaku_sampai)
+            }
+          </p>
+          ${
+            isExpired
+              ? ''
+              : `<a 
+                  href="https://wa.me/${promo.wa_nomor}?text=${encodeURIComponent(
+                    'Halo Admin, saya ingin order produk diskon: ' + promo.nama + '\nHarga: ' + promo.harga_promo.toLocaleString('id-ID')
+                  )}"
+                  class="wa-button" target="_blank"
+                >
+                  ORDER SEKARANG
+                </a>`
+          }
+        `;
+        promoListContainer.appendChild(div);
+      });
+    }
+
+    // ==========================
+    // FILTER (SEARCH) PROMO
+    // ==========================
+    function filterPromos(query) {
+      const term = query.trim().toLowerCase();
+      // Jika kosong, tampilkan semua
+      if (!term) {
+        renderPromos(allPromos);
+        return;
+      }
+      const filtered = allPromos.filter(promo => {
+        const nama = promo.nama.toLowerCase();
+        const deskripsi = promo.deskripsi.toLowerCase();
+        const hargaAwal = promo.harga_awal.toString();
+        const hargaPromo = promo.harga_promo.toString();
+        const berlaku = promo.berlaku_sampai.toLowerCase();
+
+        return (
+          nama.includes(term) ||
+          deskripsi.includes(term) ||
+          hargaAwal.includes(term) ||
+          hargaPromo.includes(term) ||
+          berlaku.includes(term)
+        );
+      });
+      renderPromos(filtered);
+    }
+
+    // ==========================
+    // DARK MODE TOGGLE
+    // ==========================
+    function applyInitialDarkMode() {
+      const saved = localStorage.getItem('darkMode');
+      if (saved === 'enabled') {
+        bodyEl.classList.add('dark-mode');
+      }
+    }
+
+    function toggleDarkMode() {
+      if (bodyEl.classList.contains('dark-mode')) {
+        bodyEl.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        bodyEl.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    }
+
+    // ==========================
+    // SIDEBAR TOGGLE
+    // ==========================
+    function toggleSidebar() {
+      if (!sidebarEl) return;
+      sidebarEl.classList.toggle('open');
+    }
+    
+    // ==========================
+    // EVENT LISTENERS
+    // ==========================
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchPromos();
+      applyInitialDarkMode();
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', e => {
+        filterPromos(e.target.value);
+      });
+    }
+
+    if (darkModeToggleBtn) {
+      darkModeToggleBtn.addEventListener('click', () => {
+        toggleDarkMode();
+      });
+    }
+
+   sidebarToggle.addEventListener('click', () => {
+    sidebar.classList.add('open');
+  });
+  
+  sidebarClose.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+  });
+    
   </script>
 </body>
 </html>

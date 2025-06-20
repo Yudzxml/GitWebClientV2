@@ -1,1 +1,143 @@
-function _0x3e87(){const _0x524f4c=['textContent','line','toISOString','src','pageviewCount','handleLog','todayPageviews','lastLoggedDate','getContext','batteryStatus','levelchange','5293496YEejAo','round','batteryDetails','userAgent','dischargingTime','todayCount','date','Pengunjung\x20Harian','totalVisits','json','11033577joZNRa','?action=stats_weekly&callback=handleWeekly&ts=','level','Gagal\x20log\x20visitor:','Discharging\x20Time:\x20','appendChild','addEventListener','5409789mUKyLm','todayUnique','count','getItem','1472838uLPhLH','3iBEirc','onload','script','🔋\x20Discharging,\x20Level\x20','remove','uniqueCount','25182aTIMJZ','createElement','\x20|\x20','chargingTime','map','warn','now','?action=stats_summary&callback=handleSummary&ts=','slice','getBattery','https://script.google.com/macros/s/AKfycbxEmESDTSkOCieRrZFaDAP5VVAO7ooElAIdEuq6uS2KljAmrSO6V5jbhhDJg9tzrwL__g/exec','https://api.ipify.org?format=json','⚡\x20Charging,\x20Level\x20','success','monthlyCount','status','visitorCount','charging','body','then','339290izcxQa','Jumlah\x20Pengunjung','Error\x20fetching\x20IP\x20for\x20logVisitor:','log','getElementById','280lSdPxN','9848752saEVOv','toString'];_0x3e87=function(){return _0x524f4c;};return _0x3e87();}const _0x51b45f=_0x1778;(function(_0x58bd80,_0x339e7d){const _0xb65639=_0x1778,_0x28d4a4=_0x58bd80();while(!![]){try{const _0x3e6fba=-parseInt(_0xb65639(0x10f))/0x1+parseInt(_0xb65639(0x12a))/0x2*(parseInt(_0xb65639(0x110))/0x3)+-parseInt(_0xb65639(0x13d))/0x4+parseInt(_0xb65639(0x12f))/0x5*(parseInt(_0xb65639(0x116))/0x6)+parseInt(_0xb65639(0x14e))/0x7+parseInt(_0xb65639(0x130))/0x8+parseInt(_0xb65639(0x147))/0x9;if(_0x3e6fba===_0x339e7d)break;else _0x28d4a4['push'](_0x28d4a4['shift']());}catch(_0x81ae18){_0x28d4a4['push'](_0x28d4a4['shift']());}}}(_0x3e87,0xccac3));const SHEET_URL=_0x51b45f(0x120);async function logVisitor(){const _0x29bb04=_0x51b45f,_0x4882ed=new Date()[_0x29bb04(0x134)]()[_0x29bb04(0x11e)](0x0,0xa),_0x75bce6=_0x29bb04(0x139);if(localStorage[_0x29bb04(0x10e)](_0x75bce6)===_0x4882ed)return;try{const _0x5ec5e7=await fetch(_0x29bb04(0x121)),{ip:_0x163ce1}=await _0x5ec5e7[_0x29bb04(0x146)](),_0x41b481=navigator[_0x29bb04(0x140)];window[_0x29bb04(0x137)]=function(_0x4c1e1d){const _0x25b954=_0x29bb04;_0x4c1e1d[_0x25b954(0x125)]===_0x25b954(0x123)?(localStorage['setItem'](_0x75bce6,_0x4882ed),console[_0x25b954(0x12d)]('Visitor\x20logged\x20for',_0x4882ed)):console[_0x25b954(0x11b)](_0x25b954(0x14a),_0x4c1e1d['message']),delete window[_0x25b954(0x137)];};const _0x4b7250=new URLSearchParams({'action':_0x29bb04(0x12d),'ip':_0x163ce1,'userAgent':_0x41b481,'callback':'handleLog'}),_0x12c152=document[_0x29bb04(0x117)](_0x29bb04(0x112));_0x12c152[_0x29bb04(0x135)]=SHEET_URL+'?'+_0x4b7250[_0x29bb04(0x131)](),document[_0x29bb04(0x128)][_0x29bb04(0x14c)](_0x12c152),_0x12c152[_0x29bb04(0x111)]=()=>_0x12c152[_0x29bb04(0x114)]();}catch(_0x29a3f6){console[_0x29bb04(0x11b)](_0x29bb04(0x12c),_0x29a3f6);}}function handleSummary(_0x1c31aa){const _0x8baee8=_0x51b45f;document[_0x8baee8(0x12e)](_0x8baee8(0x126))[_0x8baee8(0x132)]=_0x1c31aa[_0x8baee8(0x142)]||'0',document[_0x8baee8(0x12e)](_0x8baee8(0x115))[_0x8baee8(0x132)]=_0x1c31aa[_0x8baee8(0x14f)]||'0',document[_0x8baee8(0x12e)](_0x8baee8(0x136))[_0x8baee8(0x132)]=_0x1c31aa[_0x8baee8(0x138)]||'0',document[_0x8baee8(0x12e)](_0x8baee8(0x124))[_0x8baee8(0x132)]=_0x1c31aa['monthlyCount']||'0';}function fetchSummary(){const _0x380b47=_0x51b45f,_0x4f2b04=document['createElement'](_0x380b47(0x112));_0x4f2b04[_0x380b47(0x135)]=SHEET_URL+_0x380b47(0x11d)+Date[_0x380b47(0x11c)](),document[_0x380b47(0x128)][_0x380b47(0x14c)](_0x4f2b04),_0x4f2b04[_0x380b47(0x111)]=()=>_0x4f2b04[_0x380b47(0x114)]();}function _0x1778(_0x1babe3,_0x5bd67d){const _0x3e871b=_0x3e87();return _0x1778=function(_0x177802,_0x4b7d43){_0x177802=_0x177802-0x10e;let _0x187459=_0x3e871b[_0x177802];return _0x187459;},_0x1778(_0x1babe3,_0x5bd67d);}function handleWeekly(_0x5a4d4b){const _0x42179a=_0x51b45f,_0x15fee0=_0x5a4d4b[_0x42179a(0x11a)](_0x1f5a49=>_0x1f5a49[_0x42179a(0x143)]),_0x47dddf=_0x5a4d4b[_0x42179a(0x11a)](_0x19210c=>_0x19210c[_0x42179a(0x150)]),_0x5c4d81=document[_0x42179a(0x12e)]('trafficChart')[_0x42179a(0x13a)]('2d');new Chart(_0x5c4d81,{'type':_0x42179a(0x133),'data':{'labels':_0x15fee0,'datasets':[{'label':_0x42179a(0x144),'data':_0x47dddf,'tension':0.3,'fill':!![]}]},'options':{'scales':{'x':{'title':{'display':!![],'text':'Tanggal'}},'y':{'title':{'display':!![],'text':_0x42179a(0x12b)},'beginAtZero':!![]}}}});}function fetchWeekly(){const _0x40b32f=_0x51b45f,_0x5cdac0=document[_0x40b32f(0x117)](_0x40b32f(0x112));_0x5cdac0[_0x40b32f(0x135)]=SHEET_URL+_0x40b32f(0x148)+Date[_0x40b32f(0x11c)](),document[_0x40b32f(0x128)]['appendChild'](_0x5cdac0),_0x5cdac0[_0x40b32f(0x111)]=()=>_0x5cdac0[_0x40b32f(0x114)]();}function handleCount(_0x16928c){const _0x29772f=_0x51b45f;document[_0x29772f(0x12e)](_0x29772f(0x145))[_0x29772f(0x132)]=_0x16928c[_0x29772f(0x150)]||'0';}function fetchCount(){const _0x4a9376=_0x51b45f,_0x28d03e=document['createElement'](_0x4a9376(0x112));_0x28d03e['src']=SHEET_URL+'?callback=handleCount&ts='+Date[_0x4a9376(0x11c)](),document[_0x4a9376(0x128)][_0x4a9376(0x14c)](_0x28d03e),_0x28d03e['onload']=()=>_0x28d03e[_0x4a9376(0x114)]();}function updateBattery(_0xfaa9c3){const _0x4193d5=_0x51b45f,_0xac230c=document[_0x4193d5(0x12e)](_0x4193d5(0x13b)),_0x273a79=document[_0x4193d5(0x12e)](_0x4193d5(0x13f));function _0xbfdfae(){const _0x2a80c4=_0x4193d5,_0x1a601e=Math[_0x2a80c4(0x13e)](_0xfaa9c3[_0x2a80c4(0x149)]*0x64)+'%',_0x31a9c5=_0xfaa9c3[_0x2a80c4(0x127)]?_0x2a80c4(0x122)+_0x1a601e:_0x2a80c4(0x113)+_0x1a601e;if(_0xac230c)_0xac230c['textContent']=_0x31a9c5;_0x273a79&&(_0x273a79[_0x2a80c4(0x132)]='Charging\x20Time:\x20'+(_0xfaa9c3[_0x2a80c4(0x119)]===Infinity?'∞':_0xfaa9c3[_0x2a80c4(0x119)]+'s')+_0x2a80c4(0x118)+(_0x2a80c4(0x14b)+(_0xfaa9c3['dischargingTime']===Infinity?'∞':_0xfaa9c3[_0x2a80c4(0x141)]+'s')));}_0xbfdfae(),_0xfaa9c3['addEventListener'](_0x4193d5(0x13c),_0xbfdfae),_0xfaa9c3[_0x4193d5(0x14d)]('chargingchange',_0xbfdfae);}window[_0x51b45f(0x14d)]('load',()=>{const _0x40f450=_0x51b45f;logVisitor(),fetchSummary(),fetchWeekly(),fetchCount();if(navigator[_0x40f450(0x11f)])navigator['getBattery']()[_0x40f450(0x129)](updateBattery);else{const _0x8d1f78=document[_0x40f450(0x12e)](_0x40f450(0x13b));if(_0x8d1f78)_0x8d1f78[_0x40f450(0x132)]='API\x20tidak\x20didukung';}});
+// Google Apps Script
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxEmESDTSkOCieRrZFaDAP5VVAO7ooElAIdEuq6uS2KljAmrSO6V5jbhhDJg9tzrwL__g/exec";
+
+// logVisitor
+async function logVisitor() {
+  const today = new Date().toISOString().slice(0, 10);
+  const KEY = 'lastLoggedDate';
+
+  if (localStorage.getItem(KEY) === today) return;
+
+  try {
+    const ipRes = await fetch('https://api.ipify.org?format=json');
+    const { ip } = await ipRes.json();
+    const ua = navigator.userAgent;
+
+    window.handleLog = function(result) {
+      if (result.status === 'success') {
+        localStorage.setItem(KEY, today);
+        console.log('Visitor logged for', today);
+      } else {
+        console.warn('Gagal log visitor:', result.message);
+      }
+      delete window.handleLog;
+    };
+
+    const params = new URLSearchParams({
+      action: 'log',
+      ip,
+      userAgent: ua,
+      callback: 'handleLog'
+    });
+    const script = document.createElement('script');
+    script.src = `${SHEET_URL}?${params.toString()}`;
+    document.body.appendChild(script);
+    script.onload = () => script.remove();
+
+  } catch (e) {
+    console.warn('Error fetching IP for logVisitor:', e);
+  }
+}
+
+// handleSummary
+function handleSummary(data) {
+  document.getElementById('visitorCount').textContent   = data.todayCount    || '0';
+  document.getElementById('uniqueCount').textContent    = data.todayUnique   || '0';
+  document.getElementById('pageviewCount').textContent  = data.todayPageviews || '0';
+  document.getElementById('monthlyCount').textContent   = data.monthlyCount  || '0';
+}
+
+// fetchSummary
+function fetchSummary() {
+  const script = document.createElement('script');
+  script.src = `${SHEET_URL}?action=stats_summary&callback=handleSummary&ts=${Date.now()}`;
+  document.body.appendChild(script);
+  script.onload = () => script.remove();
+}
+
+// handleWeekly
+function handleWeekly(data) {
+  const labels = data.map(item => item.date);
+  const counts = data.map(item => item.count);
+  const ctx = document.getElementById('trafficChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Pengunjung Harian',
+        data: counts,
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      scales: {
+        x: { title: { display: true, text: 'Tanggal' } },
+        y: { title: { display: true, text: 'Jumlah Pengunjung' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+// fetchWeekly
+function fetchWeekly() {
+  const script = document.createElement('script');
+  script.src = `${SHEET_URL}?action=stats_weekly&callback=handleWeekly&ts=${Date.now()}`;
+  document.body.appendChild(script);
+  script.onload = () => script.remove();
+}
+
+// handleCount
+function handleCount(data) {
+  document.getElementById('totalVisits').textContent = data.count || '0';
+}
+
+// fetchCount
+function fetchCount() {
+  const script = document.createElement('script');
+  script.src = `${SHEET_URL}?callback=handleCount&ts=${Date.now()}`;
+  document.body.appendChild(script);
+  script.onload = () => script.remove();
+}
+
+// updateBattery
+function updateBattery(bat) {
+  const statEl = document.getElementById('batteryStatus');
+  const detEl  = document.getElementById('batteryDetails');
+
+  function refresh() {
+    const lvl = Math.round(bat.level * 100) + '%';
+    const msg = bat.charging
+      ? `⚡ Charging, Level ${lvl}`
+      : `🔋 Discharging, Level ${lvl}`;
+
+    if (statEl) statEl.textContent = msg;
+
+    if (detEl) {
+      detEl.textContent =
+        `Charging Time: ${bat.chargingTime === Infinity ? '∞' : bat.chargingTime + 's'} | ` +
+        `Discharging Time: ${bat.dischargingTime === Infinity ? '∞' : bat.dischargingTime + 's'}`;
+    }
+  }
+
+  refresh();
+  bat.addEventListener('levelchange', refresh);
+  bat.addEventListener('chargingchange', refresh);
+}
+
+// init
+window.addEventListener('load', () => {
+  logVisitor();
+  fetchSummary();
+  fetchWeekly();
+  fetchCount();
+
+  if (navigator.getBattery) {
+    navigator.getBattery().then(updateBattery);
+  } else {
+    const statEl = document.getElementById('batteryStatus');
+    if (statEl) statEl.textContent = 'API tidak didukung';
+  }
+});

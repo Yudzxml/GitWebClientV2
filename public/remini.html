@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HD Photo Enhancer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <style>
+    :root {
+  --clr-bg: #f4f6f9;
+  --clr-card: #ffffff;
+  --clr-text: #333;
+  --clr-primary: #1e90ff;
+  --clr-primary-hover: #187bcd;
+  --clr-secondary: #ff6347;
+  --clr-secondary-hover: #e5533d;
+  --clr-shadow: rgba(0,0,0,0.1);
+  --clr-muted: #777;
+  --transition: 0.3s ease;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --border-radius: 8px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.hero {
+  width: 100%;
+  padding: calc(var(--space-lg) * 2) 0;
+  background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+  color: #fff;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.hero p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  max-width: 240px;
+  border: none;
+  border-radius: 30px;
+  background: var(--clr-primary);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--clr-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px var(--clr-shadow);
+}
+
+.card {
+  background: var(--clr-card);
+  border-radius: var(--space-xs);
+  padding: var(--space-md);
+  box-shadow: 0 2px 8px var(--clr-shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px var(--clr-shadow);
+}
+
+.section-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.05);
+}
+
+input[type="file"],
+input[type="text"] {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border var(--transition);
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+  outline: none;
+  border-color: var(--clr-primary);
+  box-shadow: 0 0 0 3px rgba(30,144,255,0.2);
+}
+
+.preview-section {
+  display: none;
+  padding: var(--space-md);
+  background: var(--clr-card);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 8px var(--clr-shadow);
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Image Compare Slider */
+.img-compare-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.img-compare-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+}
+
+.img-compare-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.img-compare-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: var(--clr-primary);
+  cursor: ew-resize;
+  transform: translateX(-1.5px);
+  transition: background var(--transition);
+}
+.img-compare-handle:hover {
+  background: var(--clr-primary-hover);
+}
+
+/* Download Button */
+.download-btn {
+  margin-top: var(--space-md);
+}
+
+/* Navigation Back */
+.back-btn {
+  position: fixed;
+  top: var(--space-md);
+  left: var(--space-md);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--clr-secondary);
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background var(--transition);
+  z-index: 100;
+}
+
+.back-btn:hover {
+  background: var(--clr-secondary-hover);
+}
+
+/* Progress Bar */
+.progress-container {
+  display: none;
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-sm);
+  align-items: center;
+}
+
+progress {
+  width: 100%;
+  appearance: none;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #eee;
+  transition: width var(--transition);
+}
+
+progress::-webkit-progress-bar {
+  background-color: #eee;
+}
+
+progress::-webkit-progress-value {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.3) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.3) 75%,
+      transparent 75%
+    ) 0 0 / 1rem 1rem,
+    linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+  animation: progress-stripes 1s linear infinite;
+  transition: width var(--transition);
+}
+
+progress::-moz-progress-bar {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.3) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255,255,255,0.3) 50%,
+      rgba(255,255,255,0.3) 75%,
+      transparent 75%
+    ) 0 0 / 1rem 1rem,
+    linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+  animation: progress-stripes 1s linear infinite;
+  transition: width var(--transition);
+}
+
+@keyframes progress-stripes {
+  from { background-position: 0 0; }
+  to   { background-position: 1rem 1rem; }
+}
+
+.progress-container span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  color: var(--clr-text);
+  pointer-events: none;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+  margin-top: var(--space-lg);
+}
+
+.footer a {
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .btn {
+    max-width: 100%;
+  }
+  .preview-header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+  </style>
+</head>
+<body>
+  <a href="tools.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+  <header class="hero">
+    <div class="container">
+      <h1><i class="fas fa-image"></i> HD Photo Enhancer</h1>
+      <p>Perbaiki kualitas foto Anda dengan cepat dan mudah.</p>
+    </div>
+  </header>
+  <div class="container">
+    <div class="card">
+      <h1>HD Photo Enhancer</h1>
+      <input type="file" id="fileInput" accept="image/*" />
+       <button id="enhanceBtn" class="btn" style="width: 100%; margin-top: var(--space-md);">
+      <i class="fas fa-upload"></i> Pilih & Enhancing</button>
+      <div id="progressContainer" class="progress-container">
+        <progress value="0" max="100"></progress>
+        <span>0%</span>
+      </div>
+      <div id="previewSection" class="preview-section">
+        <div class="img-compare-container" id="compareContainer">
+          <img id="baseImg" src="" alt="Original Image" />
+          <div class="img-compare-overlay" id="overlay">
+            <img id="overlayImg" src="" alt="Enhanced Image" />
+          </div>
+          <div class="img-compare-handle" id="handle"></div>
+        </div>
+      </div>
+      <a id="downloadLink" class="btn download-btn" download="enhanced.jpg" style="display:none;"><i class="fas fa-download"></i> Unduh</a>
+    </div>
+  </div>
+  <footer class="footer container">
+    <p>© 2025 Yudzxml. <a href="contact.html">Contact</a> • <a href="service.html">Terms of Service</a></p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  // Elements
+  const fileInput = document.getElementById('fileInput');
+  const enhanceBtn = document.getElementById('enhanceBtn');
+  const previewSection = document.getElementById('previewSection');
+  const baseImg = document.getElementById('baseImg');
+  const overlayImg = document.getElementById('overlayImg');
+  const overlay = document.getElementById('overlay');
+  const handle = document.getElementById('handle');
+  const downloadLink = document.getElementById('downloadLink');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressEl = progressContainer.querySelector('progress');
+  const progressText = progressContainer.querySelector('span');
+
+  function fakeProgress(duration = 1000, label = '') {
+    return new Promise(resolve => {
+      let start;
+      function step(ts) {
+        if (!start) start = ts;
+        const pct = Math.min(90, Math.floor(((ts - start) / duration) * 100));
+        progressEl.value = pct;
+        progressText.innerText = `${label} ${pct}%`;
+        if ((ts - start) < duration) requestAnimationFrame(step);
+        else resolve();
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // Initialize slider
+  function initCompare() {
+    console.log('Initializing image comparison slider...');
+    const container = document.getElementById('compareContainer');
+    let dragging = false;
+
+    function slide(x) {
+      const rect = container.getBoundingClientRect();
+      let pos = x - rect.left;
+      pos = Math.max(0, Math.min(pos, rect.width));
+      const pct = (pos / rect.width) * 100;
+      overlay.style.width = pct + '%';
+      handle.style.left = pct + '%';
+    }
+
+    handle.addEventListener('mousedown', () => dragging = true);
+    window.addEventListener('mouseup', () => dragging = false);
+    window.addEventListener('mousemove', e => {
+      if (dragging) slide(e.clientX);
+    });
+
+    handle.addEventListener('touchstart', () => dragging = true);
+    window.addEventListener('touchend', () => dragging = false);
+    window.addEventListener('touchmove', e => {
+      if (dragging) slide(e.touches[0].clientX);
+    });
+  }
+
+  async function processImage() {
+    const file = fileInput.files[0];
+    if (!file) {
+      alert('Silakan pilih foto terlebih dahulu!');
+      console.warn('Tidak ada file yang dipilih.');
+      return;
+    }
+
+    console.log('Proses dimulai untuk file:', file.name);
+    enhanceBtn.disabled = true;
+    progressContainer.style.display = 'flex';
+
+    try {
+      progressEl.value = 0;
+      progressText.innerText = 'Uploading 0%';
+      console.log('Simulasi upload dimulai...');
+      await fakeProgress(1200, 'Uploading');
+
+      const buffer = await file.arrayBuffer();
+      console.log('File dibaca sebagai buffer, mengirim ke API upload...');
+      const uploadRes = await axios.post(
+        'https://api-upload-cyan.vercel.app/api/upload',
+        buffer,
+        {
+          headers: {
+            'Content-Type': 'application/octet-stream',
+            'x-filename': file.name
+          }
+        }
+      );
+
+      const imageUrl = uploadRes.data.url || uploadRes.data.result;
+      console.log('URL gambar hasil upload:', imageUrl);
+
+      baseImg.src = URL.createObjectURL(file);
+      overlayImg.src = '';
+      previewSection.style.display = 'block';
+
+      progressEl.value = 0;
+      progressText.innerText = 'Enhancing 0%';
+      console.log('Simulasi enhancing dimulai...');
+      await fakeProgress(1500, 'Enhancing');
+
+      console.log('Mengirim permintaan ke API enhancer...');
+      const enhanceRes = await axios.get(`https://api-yudzxml.koyeb.app/api/remini?url=${encodeURIComponent(imageUrl)}&tools=enhance`);
+      const enhancedUrl = enhanceRes.data.data.resultImageUrl;
+      console.log('URL hasil enhancement:', enhancedUrl);
+
+      overlayImg.src = enhancedUrl;
+      downloadLink.href = enhancedUrl;
+      downloadLink.style.display = 'inline-flex';
+
+      initCompare();
+    } catch (err) {
+      console.error('Terjadi kesalahan:', err);
+      alert('Error: ' + err.message);
+    } finally {
+      enhanceBtn.disabled = false;
+      setTimeout(() => {
+        progressContainer.style.display = 'none';
+        console.log('Proses selesai.');
+      }, 500);
+    }
+  }
+
+  enhanceBtn.addEventListener('click', processImage);
+</script>
+</body>
+</html>

@@ -124,7 +124,35 @@
   </div>
 
   <script>
-    function _0x4dfc(_0x581bdb,_0x26e330){const _0x2f3e36=_0x2f3e();return _0x4dfc=function(_0x4dfcda,_0x267b54){_0x4dfcda=_0x4dfcda-0x17c;let _0x20a295=_0x2f3e36[_0x4dfcda];return _0x20a295;},_0x4dfc(_0x581bdb,_0x26e330);}const _0x4e88ba=_0x4dfc;(function(_0x9b37f3,_0x5446af){const _0x9a68e5=_0x4dfc,_0x260ce8=_0x9b37f3();while(!![]){try{const _0x50e0b2=parseInt(_0x9a68e5(0x192))/0x1+parseInt(_0x9a68e5(0x185))/0x2+parseInt(_0x9a68e5(0x17f))/0x3+-parseInt(_0x9a68e5(0x18d))/0x4+parseInt(_0x9a68e5(0x18f))/0x5*(parseInt(_0x9a68e5(0x188))/0x6)+-parseInt(_0x9a68e5(0x18c))/0x7*(parseInt(_0x9a68e5(0x17d))/0x8)+parseInt(_0x9a68e5(0x196))/0x9;if(_0x50e0b2===_0x5446af)break;else _0x260ce8['push'](_0x260ce8['shift']());}catch(_0x5e97ad){_0x260ce8['push'](_0x260ce8['shift']());}}}(_0x2f3e,0xc9e05));function _0x2f3e(){const _0x114513=['href','then','Invalid','1589373EXmPVE','trim','submit','json','Unauthorized','value','display','4919496DUxkVP','setItem','592650vupKbk','isAdminLoggedIn','success','addEventListener','style','true','2491254xFHmFy','preventDefault','password','906EQLtjv','block','errorMsg','loginForm','7kpxOoI','6199472JxkRNL','getElementById','13270mxsrbO','admin.html','status','971162rmIlRD'];_0x2f3e=function(){return _0x114513;};return _0x2f3e();}const loginForm=document[_0x4e88ba(0x18e)](_0x4e88ba(0x18b)),errorMsg=document['getElementById'](_0x4e88ba(0x18a));loginForm[_0x4e88ba(0x182)](_0x4e88ba(0x198),function(_0x3db7dd){const _0x10ada8=_0x4e88ba;_0x3db7dd[_0x10ada8(0x186)]();const _0x21dcd5=document['getElementById']('username')['value'][_0x10ada8(0x197)](),_0xffb70c=document['getElementById'](_0x10ada8(0x187))[_0x10ada8(0x19b)][_0x10ada8(0x197)]();fetch('/api/login?username='+encodeURIComponent(_0x21dcd5)+'&password='+encodeURIComponent(_0xffb70c))[_0x10ada8(0x194)](_0x362307=>{const _0x343086=_0x10ada8;if(_0x362307['status']===0xc8)return _0x362307[_0x343086(0x199)]();else{if(_0x362307[_0x343086(0x191)]===0x191)throw new Error(_0x343086(0x19a));else throw new Error('Request\x20failed');}})[_0x10ada8(0x194)](_0xc7bf61=>{const _0x442375=_0x10ada8;if(_0xc7bf61[_0x442375(0x181)])localStorage[_0x442375(0x17e)](_0x442375(0x180),_0x442375(0x184)),window['location'][_0x442375(0x193)]=_0x442375(0x190);else throw new Error(_0x442375(0x195));})['catch'](()=>{const _0x53147d=_0x10ada8;errorMsg[_0x53147d(0x183)][_0x53147d(0x17c)]=_0x53147d(0x189);});});
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      fetch(`/api/login?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`)
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else if (response.status === 401) {
+            throw new Error('Unauthorized');
+          } else {
+            throw new Error('Request failed');
+          }
+        })
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('isAdminLoggedIn', 'true');
+            window.location.href = 'admin.html';
+          } else {
+            throw new Error('Invalid');
+          }
+        })
+        .catch(() => {
+          errorMsg.style.display = 'block';
+        });
+    });
   </script>
 </body>
 </html>

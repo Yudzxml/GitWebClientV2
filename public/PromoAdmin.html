@@ -818,7 +818,285 @@
   </footer>
 
   <script>
-    const _0x57e294=_0x5ad4;(function(_0x574203,_0x84c880){const _0x467c83=_0x5ad4,_0x1889fd=_0x574203();while(!![]){try{const _0x388468=parseInt(_0x467c83(0xcc))/0x1*(parseInt(_0x467c83(0x123))/0x2)+parseInt(_0x467c83(0x121))/0x3*(-parseInt(_0x467c83(0x107))/0x4)+-parseInt(_0x467c83(0xd7))/0x5+-parseInt(_0x467c83(0xf3))/0x6+parseInt(_0x467c83(0xd0))/0x7+parseInt(_0x467c83(0x10a))/0x8+-parseInt(_0x467c83(0x108))/0x9*(-parseInt(_0x467c83(0x10f))/0xa);if(_0x388468===_0x84c880)break;else _0x1889fd['push'](_0x1889fd['shift']());}catch(_0x44565b){_0x1889fd['push'](_0x1889fd['shift']());}}}(_0x2c09,0x52b90));const API_URL='/api/promo';let promos=[],modalMode=_0x57e294(0xff),editId=null;const searchInput=document['getElementById'](_0x57e294(0xd6)),promoContainer=document[_0x57e294(0x112)](_0x57e294(0xf9)),modal=document[_0x57e294(0x112)]('promo-modal'),form=document[_0x57e294(0x112)](_0x57e294(0x11a)),titleModal=document[_0x57e294(0x112)](_0x57e294(0xd2)),btnCancel=document[_0x57e294(0x112)](_0x57e294(0x11b)),btnAdd=document[_0x57e294(0x112)](_0x57e294(0xdd)),darkModeToggle=document[_0x57e294(0x112)](_0x57e294(0xe1)),bodyEl=document[_0x57e294(0xef)];function _0x2c09(){const _0x3af1c4=['Edit\x20Promo','Gagal\x20memperbarui\x20promo.','length','7461IHoxwa','getItem','3044PNxgpA','innerHTML','Gagal\x20menghapus\x20promo.','value','Edit','none','div','?text=','btn-edit','wa_nomor','93OQiTra','POST','id-ID','submit','2426081EDbDie','target','modal-title','DELETE','error','harga_awal','searchInput','2715285BDbZIJ','appendChild','harga_promo','classList','input-nama','DOMContentLoaded','btn-add','edit','addEventListener','Yakin\x20ingin\x20menghapus\x20promo\x20ini?','darkModeToggle','Tambah\x20Promo','promos','reset','product-price','Hapus','_blank','product-desc','Halo,\x20saya\x20ingin\x20order\x20','Gagal\x20menambah\x20promo.','forEach','createElement','find','btn-whatsapp','body','dark-mode','input-harga-promo','Gagal\x20mengambil\x20data\x20promo.','625530RuzWcS','promo-validity','flex','input-wa-nomor','trim','deskripsi','promo-container','berlaku_sampai','preventDefault','click','className','json','add','contains','input-berlaku-sampai','darkMode','application/json','style','setItem','Order\x20via\x20WhatsApp','116biAkwz','4468185hSSuSY','filter','589384ZAJtOc','input','toLowerCase','<span>Rp\x20','display','10hmmIqx','message','input-harga-awal','getElementById','product-card','nama','enabled','PUT','textContent','button','</span>\x20Rp\x20','promo-form','btn-cancel','toLocaleString','href'];_0x2c09=function(){return _0x3af1c4;};return _0x2c09();}async function fetchPromosFromAPI(){const _0x3228a8=_0x57e294;try{const _0xe10b4f=await fetch(API_URL);if(!_0xe10b4f['ok'])throw new Error(_0x3228a8(0xf2));promos=await _0xe10b4f['json'](),renderPromos(searchInput[_0x3228a8(0x126)]);}catch(_0x4e3279){console['error'](_0x4e3279),promoContainer['innerHTML']='<p\x20style=\x22color:red;\x22>Gagal\x20memuat\x20data\x20promo.</p>';}}function renderPromos(_0x13b25b=''){const _0x4cbcf7=_0x57e294;promoContainer[_0x4cbcf7(0x124)]='';const _0x3ae3ad=promos[_0x4cbcf7(0x109)](_0x4adcef=>_0x4adcef[_0x4cbcf7(0x114)][_0x4cbcf7(0x10c)]()['includes'](_0x13b25b[_0x4cbcf7(0x10c)]()));if(_0x3ae3ad[_0x4cbcf7(0x120)]===0x0){promoContainer['innerHTML']='<p>Tidak\x20ada\x20promo\x20yang\x20cocok.</p>';return;}_0x3ae3ad[_0x4cbcf7(0xeb)](_0x4b3799=>{const _0x137c6b=_0x4cbcf7,_0x3a5ea9=document['createElement'](_0x137c6b(0x129));_0x3a5ea9[_0x137c6b(0xfd)]=_0x137c6b(0x113);const _0x120462=document[_0x137c6b(0xec)](_0x137c6b(0x129));_0x120462[_0x137c6b(0xfd)]='product-body';const _0x451ea7=document[_0x137c6b(0xec)]('h3');_0x451ea7[_0x137c6b(0xfd)]='product-title',_0x451ea7[_0x137c6b(0x117)]=_0x4b3799['nama'],_0x120462[_0x137c6b(0xd8)](_0x451ea7);const _0x3100f2=document[_0x137c6b(0xec)]('p');_0x3100f2[_0x137c6b(0xfd)]=_0x137c6b(0xe8),_0x3100f2[_0x137c6b(0x117)]=_0x4b3799[_0x137c6b(0xf8)],_0x120462[_0x137c6b(0xd8)](_0x3100f2);const _0x3906b9=document[_0x137c6b(0xec)]('p');_0x3906b9[_0x137c6b(0xfd)]=_0x137c6b(0xe5),_0x3906b9['innerHTML']=_0x137c6b(0x10d)+Number(_0x4b3799[_0x137c6b(0xd5)])[_0x137c6b(0x11c)](_0x137c6b(0xce))+_0x137c6b(0x119)+Number(_0x4b3799[_0x137c6b(0xd9)])[_0x137c6b(0x11c)](_0x137c6b(0xce)),_0x120462['appendChild'](_0x3906b9);const _0x566827=document[_0x137c6b(0xec)]('p');_0x566827['className']=_0x137c6b(0xf4),_0x566827[_0x137c6b(0x117)]='Berlaku\x20hingga:\x20'+_0x4b3799[_0x137c6b(0xfa)],_0x120462[_0x137c6b(0xd8)](_0x566827);const _0x2e0d98=document['createElement'](_0x137c6b(0x129));_0x2e0d98['className']='product-actions';const _0x19c2de=document[_0x137c6b(0xec)]('a');_0x19c2de[_0x137c6b(0xfd)]=_0x137c6b(0xee),_0x19c2de[_0x137c6b(0x11d)]='https://wa.me/'+_0x4b3799[_0x137c6b(0xcb)]+_0x137c6b(0x12a)+encodeURIComponent(_0x137c6b(0xe9)+_0x4b3799[_0x137c6b(0x114)]),_0x19c2de['target']=_0x137c6b(0xe7),_0x19c2de[_0x137c6b(0x117)]=_0x137c6b(0x106),_0x2e0d98[_0x137c6b(0xd8)](_0x19c2de);const _0x4488d3=document[_0x137c6b(0xec)](_0x137c6b(0x118));_0x4488d3[_0x137c6b(0xfd)]=_0x137c6b(0x12b),_0x4488d3[_0x137c6b(0x117)]=_0x137c6b(0x127),_0x4488d3['onclick']=()=>openModal(_0x137c6b(0xde),_0x4b3799['id']),_0x2e0d98[_0x137c6b(0xd8)](_0x4488d3);const _0x36d66e=document[_0x137c6b(0xec)]('button');_0x36d66e[_0x137c6b(0xfd)]='btn-delete',_0x36d66e[_0x137c6b(0x117)]=_0x137c6b(0xe6),_0x36d66e['onclick']=()=>deletePromo(_0x4b3799['id']),_0x2e0d98['appendChild'](_0x36d66e),_0x120462['appendChild'](_0x2e0d98),_0x3a5ea9[_0x137c6b(0xd8)](_0x120462),promoContainer['appendChild'](_0x3a5ea9);});}function openModal(_0x2273f3,_0x53c251=null){const _0x288e30=_0x57e294;modalMode=_0x2273f3,editId=_0x53c251,form[_0x288e30(0xe4)]();if(_0x2273f3==='add')titleModal['textContent']=_0x288e30(0xe2);else{titleModal[_0x288e30(0x117)]=_0x288e30(0x11e);const _0x155ad2=promos[_0x288e30(0xed)](_0x38517a=>_0x38517a['id']===_0x53c251);document['getElementById'](_0x288e30(0xdb))['value']=_0x155ad2['nama'],document[_0x288e30(0x112)]('input-deskripsi')[_0x288e30(0x126)]=_0x155ad2[_0x288e30(0xf8)],document[_0x288e30(0x112)](_0x288e30(0x111))['value']=_0x155ad2[_0x288e30(0xd5)],document['getElementById'](_0x288e30(0xf1))['value']=_0x155ad2[_0x288e30(0xd9)],document[_0x288e30(0x112)](_0x288e30(0x101))[_0x288e30(0x126)]=_0x155ad2[_0x288e30(0xfa)],document['getElementById'](_0x288e30(0xf6))['value']=_0x155ad2[_0x288e30(0xcb)];}modal['style'][_0x288e30(0x10e)]=_0x288e30(0xf5);}function closeModal(){const _0x38fa90=_0x57e294;modal[_0x38fa90(0x104)]['display']=_0x38fa90(0x128),editId=null;}async function addPromo(_0xfe023){const _0x248afe=_0x57e294;try{const _0x441381=await fetch(API_URL,{'method':_0x248afe(0xcd),'headers':{'Content-Type':'application/json'},'body':JSON['stringify'](_0xfe023)});if(!_0x441381['ok']){const _0x2fd7b3=await _0x441381[_0x248afe(0xfe)]();throw new Error(_0x2fd7b3[_0x248afe(0xd4)]||_0x248afe(0xea));}const _0x144121=await _0x441381[_0x248afe(0xfe)]();promos=_0x144121[_0x248afe(0xe3)],renderPromos(searchInput[_0x248afe(0x126)]);}catch(_0x399c5d){alert(_0x399c5d[_0x248afe(0x110)]),console['error'](_0x399c5d);}}async function editPromo(_0xb03ed8){const _0x2ea193=_0x57e294;try{const _0x2b3625=await fetch(API_URL,{'method':_0x2ea193(0x116),'headers':{'Content-Type':_0x2ea193(0x103)},'body':JSON['stringify'](_0xb03ed8)});if(!_0x2b3625['ok']){const _0x5f1606=await _0x2b3625[_0x2ea193(0xfe)]();throw new Error(_0x5f1606[_0x2ea193(0xd4)]||_0x2ea193(0x11f));}const _0x395ca1=await _0x2b3625[_0x2ea193(0xfe)]();promos=_0x395ca1[_0x2ea193(0xe3)],renderPromos(searchInput[_0x2ea193(0x126)]);}catch(_0x5d85ae){alert(_0x5d85ae[_0x2ea193(0x110)]),console[_0x2ea193(0xd4)](_0x5d85ae);}}async function deletePromo(_0x5599d8){const _0x384d0a=_0x57e294;if(!confirm(_0x384d0a(0xe0)))return;try{const _0x4d4ca5=await fetch(API_URL+'?id='+_0x5599d8,{'method':_0x384d0a(0xd3)});if(!_0x4d4ca5['ok']){const _0x260e2a=await _0x4d4ca5[_0x384d0a(0xfe)]();throw new Error(_0x260e2a['error']||_0x384d0a(0x125));}const _0x3ecefd=await _0x4d4ca5[_0x384d0a(0xfe)]();promos=_0x3ecefd[_0x384d0a(0xe3)],renderPromos(searchInput[_0x384d0a(0x126)]);}catch(_0xba12b9){alert(_0xba12b9[_0x384d0a(0x110)]),console['error'](_0xba12b9);}}form['addEventListener'](_0x57e294(0xcf),async _0x116228=>{const _0x208bb0=_0x57e294;_0x116228[_0x208bb0(0xfb)]();const _0x4d00ea={'nama':document[_0x208bb0(0x112)]('input-nama')[_0x208bb0(0x126)][_0x208bb0(0xf7)](),'deskripsi':document[_0x208bb0(0x112)]('input-deskripsi')[_0x208bb0(0x126)][_0x208bb0(0xf7)](),'harga_awal':document[_0x208bb0(0x112)](_0x208bb0(0x111))['value'][_0x208bb0(0xf7)](),'harga_promo':document[_0x208bb0(0x112)](_0x208bb0(0xf1))[_0x208bb0(0x126)]['trim'](),'berlaku_sampai':document[_0x208bb0(0x112)](_0x208bb0(0x101))[_0x208bb0(0x126)],'wa_nomor':document[_0x208bb0(0x112)]('input-wa-nomor')['value'][_0x208bb0(0xf7)]()};modalMode===_0x208bb0(0xff)?await addPromo(_0x4d00ea):await editPromo({'id':editId,..._0x4d00ea}),closeModal();}),btnCancel[_0x57e294(0xdf)](_0x57e294(0xfc),()=>{closeModal();}),btnAdd[_0x57e294(0xdf)](_0x57e294(0xfc),()=>{const _0x37914a=_0x57e294;openModal(_0x37914a(0xff));}),window[_0x57e294(0xdf)]('click',_0x5c7cf3=>{if(_0x5c7cf3['target']===modal)closeModal();});function filterPromos(_0x485073){renderPromos(_0x485073);}searchInput[_0x57e294(0xdf)](_0x57e294(0x10b),_0x3d7d49=>{const _0x4ac294=_0x57e294;filterPromos(_0x3d7d49[_0x4ac294(0xd1)][_0x4ac294(0x126)]);});function applyInitialDarkMode(){const _0x4657f6=_0x57e294,_0x146795=localStorage[_0x4657f6(0x122)](_0x4657f6(0x102));_0x146795===_0x4657f6(0x115)&&bodyEl['classList']['add'](_0x4657f6(0xf0));}function _0x5ad4(_0x3d9919,_0x2c6410){const _0x2c09bc=_0x2c09();return _0x5ad4=function(_0x5ad428,_0x372264){_0x5ad428=_0x5ad428-0xcb;let _0x473ba1=_0x2c09bc[_0x5ad428];return _0x473ba1;},_0x5ad4(_0x3d9919,_0x2c6410);}function toggleDarkMode(){const _0x171a66=_0x57e294;bodyEl[_0x171a66(0xda)][_0x171a66(0x100)]('dark-mode')?(bodyEl[_0x171a66(0xda)]['remove'](_0x171a66(0xf0)),localStorage[_0x171a66(0x105)](_0x171a66(0x102),'disabled')):(bodyEl[_0x171a66(0xda)][_0x171a66(0xff)](_0x171a66(0xf0)),localStorage[_0x171a66(0x105)]('darkMode',_0x171a66(0x115)));}darkModeToggle[_0x57e294(0xdf)](_0x57e294(0xfc),toggleDarkMode),document['addEventListener'](_0x57e294(0xdc),()=>{fetchPromosFromAPI(),applyInitialDarkMode();});
+    // <============================
+    //   KONFIGURASI API
+    // ============================>
+    const API_URL = '/api/promo';
+    let promos = [];
+    let modalMode = 'add'; // "add" atau "edit"
+    let editId = null;     // saat edit, simpan id yg diedit
+
+    // Elemen-elemen utama
+    const searchInput    = document.getElementById('searchInput');
+    const promoContainer = document.getElementById('promo-container');
+    const modal          = document.getElementById('promo-modal');
+    const form           = document.getElementById('promo-form');
+    const titleModal     = document.getElementById('modal-title');
+    const btnCancel      = document.getElementById('btn-cancel');
+    const btnAdd         = document.getElementById('btn-add');
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const bodyEl         = document.body;
+
+    // -----------------------------
+    // Ambil semua promo dari server (/api/promo)
+    // -----------------------------
+    async function fetchPromosFromAPI() {
+      try {
+        const res = await fetch(API_URL);
+        if (!res.ok) throw new Error('Gagal mengambil data promo.');
+        promos = await res.json();
+        renderPromos(searchInput.value);
+      } catch (err) {
+        console.error(err);
+        promoContainer.innerHTML = '<p style="color:red;">Gagal memuat data promo.</p>';
+      }
+    }
+
+    // -----------------------------
+    // Render daftar promo (filter + grid)
+    // -----------------------------
+    function renderPromos(filterText = '') {
+      promoContainer.innerHTML = '';
+      const filtered = promos.filter(p =>
+        p.nama.toLowerCase().includes(filterText.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        promoContainer.innerHTML = '<p>Tidak ada promo yang cocok.</p>';
+        return;
+      }
+
+      filtered.forEach((promo) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+
+        const body = document.createElement('div');
+        body.className = 'product-body';
+
+        // Judul
+        const title = document.createElement('h3');
+        title.className = 'product-title';
+        title.textContent = promo.nama;
+        body.appendChild(title);
+
+        // Deskripsi
+        const desc = document.createElement('p');
+        desc.className = 'product-desc';
+        desc.textContent = promo.deskripsi;
+        body.appendChild(desc);
+
+        // Harga: normal + promo
+        const price = document.createElement('p');
+        price.className = 'product-price';
+        price.innerHTML = `<span>Rp ${Number(promo.harga_awal).toLocaleString('id-ID')}</span> Rp ${Number(promo.harga_promo).toLocaleString('id-ID')}`;
+        body.appendChild(price);
+
+        // Validitas
+        const validity = document.createElement('p');
+        validity.className = 'promo-validity';
+        validity.textContent = `Berlaku hingga: ${promo.berlaku_sampai}`;
+        body.appendChild(validity);
+
+        // Tombol aksi
+        const actions = document.createElement('div');
+        actions.className = 'product-actions';
+
+        // Order via WhatsApp
+        const waBtn = document.createElement('a');
+        waBtn.className = 'btn-whatsapp';
+        waBtn.href = `https://wa.me/${promo.wa_nomor}?text=${encodeURIComponent('Halo, saya ingin order ' + promo.nama)}`;
+        waBtn.target = '_blank';
+        waBtn.textContent = 'Order via WhatsApp';
+        actions.appendChild(waBtn);
+
+        // Edit
+        const editBtn = document.createElement('button');
+        editBtn.className = 'btn-edit';
+        editBtn.textContent = 'Edit';
+        editBtn.onclick = () => openModal('edit', promo.id);
+        actions.appendChild(editBtn);
+
+        // Hapus
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'btn-delete';
+        deleteBtn.textContent = 'Hapus';
+        deleteBtn.onclick = () => deletePromo(promo.id);
+        actions.appendChild(deleteBtn);
+
+        body.appendChild(actions);
+        card.appendChild(body);
+        promoContainer.appendChild(card);
+      });
+    }
+
+    // -----------------------------
+    // Buka modal (add / edit)
+    // -----------------------------
+    function openModal(mode, id = null) {
+      modalMode = mode;
+      editId = id;
+      form.reset();
+
+      if (mode === 'add') {
+        titleModal.textContent = 'Tambah Promo';
+      } else {
+        titleModal.textContent = 'Edit Promo';
+        const p = promos.find((x) => x.id === id);
+        document.getElementById('input-nama').value = p.nama;
+        document.getElementById('input-deskripsi').value = p.deskripsi;
+        document.getElementById('input-harga-awal').value = p.harga_awal;
+        document.getElementById('input-harga-promo').value = p.harga_promo;
+        document.getElementById('input-berlaku-sampai').value = p.berlaku_sampai;
+        document.getElementById('input-wa-nomor').value = p.wa_nomor;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      editId = null;
+    }
+
+    // -----------------------------
+    // Tambah promo (POST /api/promo)
+    // -----------------------------
+    async function addPromo(data) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Gagal menambah promo.');
+        }
+        const resData = await res.json();
+        promos = resData.promos;
+        renderPromos(searchInput.value);
+      } catch (err) {
+        alert(err.message);
+        console.error(err);
+      }
+    }
+
+    // -----------------------------
+    // Edit promo (PUT /api/promo)
+    // -----------------------------
+    async function editPromo(data) {
+      try {
+        const res = await fetch(API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Gagal memperbarui promo.');
+        }
+        const resData = await res.json();
+        promos = resData.promos;
+        renderPromos(searchInput.value);
+      } catch (err) {
+        alert(err.message);
+        console.error(err);
+      }
+    }
+
+    // -----------------------------
+    // Hapus promo (DELETE /api/promo?id=<id>)
+    // -----------------------------
+    async function deletePromo(id) {
+      if (!confirm('Yakin ingin menghapus promo ini?')) return;
+      try {
+        const res = await fetch(`${API_URL}?id=${id}`, {
+          method: 'DELETE'
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Gagal menghapus promo.');
+        }
+        const resData = await res.json();
+        promos = resData.promos;
+        renderPromos(searchInput.value);
+      } catch (err) {
+        alert(err.message);
+        console.error(err);
+      }
+    }
+
+    // -----------------------------
+    // Event Listener: Form Submit
+    // -----------------------------
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        nama: document.getElementById('input-nama').value.trim(),
+        deskripsi: document.getElementById('input-deskripsi').value.trim(),
+        harga_awal: document.getElementById('input-harga-awal').value.trim(),
+        harga_promo: document.getElementById('input-harga-promo').value.trim(),
+        berlaku_sampai: document.getElementById('input-berlaku-sampai').value,
+        wa_nomor: document.getElementById('input-wa-nomor').value.trim()
+      };
+
+      if (modalMode === 'add') {
+        await addPromo(formData);
+      } else {
+        await editPromo({ id: editId, ...formData });
+      }
+      closeModal();
+    });
+
+    btnCancel.addEventListener('click', () => {
+      closeModal();
+    });
+
+    btnAdd.addEventListener('click', () => {
+      openModal('add');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // -----------------------------
+    // Filter (search)
+    // -----------------------------
+    function filterPromos(term) {
+      renderPromos(term);
+    }
+    searchInput.addEventListener('input', (e) => {
+      filterPromos(e.target.value);
+    });
+
+    // -----------------------------
+    // Dark Mode Toggle
+    // -----------------------------
+    function applyInitialDarkMode() {
+      const saved = localStorage.getItem('darkMode');
+      if (saved === 'enabled') {
+        bodyEl.classList.add('dark-mode');
+      }
+    }
+    function toggleDarkMode() {
+      if (bodyEl.classList.contains('dark-mode')) {
+        bodyEl.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      } else {
+        bodyEl.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      }
+    }
+    darkModeToggle.addEventListener('click', toggleDarkMode);
+
+    // -----------------------------
+    // Inisialisasi saat halaman dibuka
+    // -----------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchPromosFromAPI();
+      applyInitialDarkMode();
+    });
   </script>
 </body>
 </html>

@@ -124,7 +124,35 @@
   </div>
 
   <script>
-    const _0xc4eb3b=_0x4017;(function(_0x1111d4,_0x2d1ed1){const _0x1e9c1a=_0x4017,_0x369890=_0x1111d4();while(!![]){try{const _0x25ef08=parseInt(_0x1e9c1a(0x7f))/0x1+parseInt(_0x1e9c1a(0x90))/0x2*(-parseInt(_0x1e9c1a(0x93))/0x3)+-parseInt(_0x1e9c1a(0x88))/0x4*(-parseInt(_0x1e9c1a(0x83))/0x5)+-parseInt(_0x1e9c1a(0x9a))/0x6*(parseInt(_0x1e9c1a(0x84))/0x7)+parseInt(_0x1e9c1a(0x94))/0x8+-parseInt(_0x1e9c1a(0x82))/0x9+parseInt(_0x1e9c1a(0x87))/0xa;if(_0x25ef08===_0x2d1ed1)break;else _0x369890['push'](_0x369890['shift']());}catch(_0x2f4034){_0x369890['push'](_0x369890['shift']());}}}(_0x51d0,0xdc4f3));function _0x4017(_0x47b0ce,_0x15fd52){const _0x51d04b=_0x51d0();return _0x4017=function(_0x401793,_0x52c5ab){_0x401793=_0x401793-0x7f;let _0x5a8546=_0x51d04b[_0x401793];return _0x5a8546;},_0x4017(_0x47b0ce,_0x15fd52);}const loginForm=document[_0xc4eb3b(0x97)](_0xc4eb3b(0x80)),errorMsg=document[_0xc4eb3b(0x97)](_0xc4eb3b(0x81));function _0x51d0(){const _0x31a24a=['json','then','getElementById','PromoAdmin.html','Request\x20failed','4283592WIcBaI','display','password','location','/api/login?username=','trim','1764829NESSvq','loginForm','errorMsg','12004308GgPNzE','222895ODCYfB','14CgLDVr','username','true','1114890UaHUmH','124ctAtnw','isAdminLoggedIn','Unauthorized','Invalid','href','status','block','catch','189752jdiaeX','&password=','value','36fRsHBy','12354464JYYVqU'];_0x51d0=function(){return _0x31a24a;};return _0x51d0();}loginForm['addEventListener']('submit',function(_0x423e42){const _0x195fb9=_0xc4eb3b;_0x423e42['preventDefault']();const _0x34e2fb=document[_0x195fb9(0x97)](_0x195fb9(0x85))[_0x195fb9(0x92)][_0x195fb9(0x9f)](),_0x278ad3=document['getElementById'](_0x195fb9(0x9c))[_0x195fb9(0x92)][_0x195fb9(0x9f)]();fetch(_0x195fb9(0x9e)+encodeURIComponent(_0x34e2fb)+_0x195fb9(0x91)+encodeURIComponent(_0x278ad3))['then'](_0x10351d=>{const _0x3c9238=_0x195fb9;if(_0x10351d['status']===0xc8)return _0x10351d[_0x3c9238(0x95)]();else{if(_0x10351d[_0x3c9238(0x8d)]===0x191)throw new Error(_0x3c9238(0x8a));else throw new Error(_0x3c9238(0x99));}})[_0x195fb9(0x96)](_0x3767f4=>{const _0x137b5b=_0x195fb9;if(_0x3767f4['success'])localStorage['setItem'](_0x137b5b(0x89),_0x137b5b(0x86)),window[_0x137b5b(0x9d)][_0x137b5b(0x8c)]=_0x137b5b(0x98);else throw new Error(_0x137b5b(0x8b));})[_0x195fb9(0x8f)](()=>{const _0x238ac9=_0x195fb9;errorMsg['style'][_0x238ac9(0x9b)]=_0x238ac9(0x8e);});});
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('errorMsg');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+      fetch(`/api/login?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`)
+        .then(response => {
+          if (response.status === 200) {
+            return response.json();
+          } else if (response.status === 401) {
+            throw new Error('Unauthorized');
+          } else {
+            throw new Error('Request failed');
+          }
+        })
+        .then(data => {
+          if (data.success) {
+            localStorage.setItem('isAdminLoggedIn', 'true');
+            window.location.href = 'PromoAdmin.html';
+          } else {
+            throw new Error('Invalid');
+          }
+        })
+        .catch(() => {
+          errorMsg.style.display = 'block';
+        });
+    });
   </script>
 </body>
 </html>
