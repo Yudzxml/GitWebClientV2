@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Downloader</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+  :root {
+    --clr-bg: #f4f6f9;
+    --clr-card: #ffffff;
+    --clr-text: #333;
+    --clr-primary: #1e90ff;
+    --clr-primary-hover: #187bcd;
+    --clr-secondary: #ff6347;
+    --clr-secondary-hover: #e5533d;
+    --clr-shadow: rgba(0,0,0,0.1);
+    --clr-muted: #777;
+    --transition: 0.3s ease;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --border-radius: 8px;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .hero {
+    width: 100%;
+    padding: calc(var(--space-lg) * 2) 0;
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary));
+    color: #fff;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+  }
+  .hero p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    padding: var(--space-sm) var(--space-md);
+    width: 100%;
+    max-width: 240px;
+    border: none;
+    border-radius: 30px;
+    background: var(--clr-primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  .btn:hover:not(:disabled) {
+    background: var(--clr-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--clr-shadow);
+  }
+
+  .card {
+    background: var(--clr-card);
+    border-radius: var(--space-xs);
+    padding: var(--space-md);
+    box-shadow: 0 2px 8px var(--clr-shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px var(--clr-shadow);
+  }
+
+  .section-divider {
+    height: 1px;
+    background: rgba(0,0,0,0.05);
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: var(--space-md);
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: border var(--transition);
+  }
+  input[type="text"]:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(30,144,255,0.2);
+  }
+
+  .preview-section {
+    display: none;
+    padding: var(--space-md);
+    background: var(--clr-card);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px var(--clr-shadow);
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+  .preview-header {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+    justify-content: center; /* CENTER IMAGE AND INFO */
+    flex-wrap: wrap;
+  }
+  .preview-header img {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+  }
+  .preview-info h3 {
+    margin: 0 0 var(--space-xs);
+    font-size: 1.2rem;
+  }
+
+.download-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  justify-items: center;
+  align-items: start;
+}
+
+.download-list .btn {
+  width: auto;
+  max-width: 220px;
+}
+
+@media (min-width: 768px) {
+  .download-list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+  .download-list .btn {
+    max-width: 240px;
+  }
+}
+
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+  .carousel table {
+    border-collapse: collapse;
+  }
+  .carousel img {
+    max-width: 300px;
+    border-radius: var(--border-radius);
+  }
+  .carousel-btn {
+    background: var(--clr-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .carousel-btn:hover {
+    background: var(--clr-primary-hover);
+  }
+
+  .back-btn {
+    position: fixed;
+    top: var(--space-md);
+    left: var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+    background: var(--clr-secondary);
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background var(--transition);
+    z-index: 100;
+  }
+  .back-btn:hover {
+    background: var(--clr-secondary-hover);
+  }
+
+  .footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--clr-muted);
+    margin-top: var(--space-lg);
+  }
+  .footer a {
+    color: var(--clr-primary);
+    text-decoration: none;
+  }
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  .progress-container {
+    display: none;
+    position: relative;
+    width: 100%;
+    margin-top: var(--space-sm);
+    align-items: center;
+  }
+  .progress-container progress {
+    width: 100%;
+    appearance: none;
+    height: 24px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #eee;
+    transition: width var(--transition);
+  }
+  .progress-container progress::-webkit-progress-bar {
+    background-color: #eee;
+  }
+  .progress-container progress::-webkit-progress-value {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.3) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0.3) 75%,
+        transparent 75%,
+        transparent
+      ) 0 0 / 1rem 1rem,
+      linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+    animation: progress-stripes 1s linear infinite;
+    transition: width var(--transition);
+  }
+  .progress-container progress::-moz-progress-bar {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.3) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255,255,255,0.3) 50%,
+        rgba(255,255,255,0.3) 75%,
+        transparent 75%,
+        transparent
+      ) 0 0 / 1rem 1rem,
+      linear-gradient(to right, var(--clr-primary), var(--clr-secondary));
+    animation: progress-stripes 1s linear infinite;
+    transition: width var(--transition);
+  }
+  @keyframes progress-stripes {
+    from { background-position: 0 0; }
+    to   { background-position: 1rem 1rem; }
+  }
+  .progress-container span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: var(--clr-text);
+    pointer-events: none;
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: 1.8rem;
+    }
+    .btn {
+      max-width: 100%;
+    }
+    .preview-header {
+      flex-direction: column;
+      align-items: center;
+    }
+    .carousel img {
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <a href="tools.html" class="back-btn">
+    <i class="fas fa-arrow-left"></i> Kembali
+  </a>
+  <header class="hero">
+<div class="container">
+  <h1><i class="fab fa-instagram"></i> Instagram Downloader</h1>
+  <p>Unduh video, foto, dan reel Instagram secara instan tanpa watermark.</p>
+</div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <input type="text" id="urlInput" placeholder="Tempel URL Instagram di sini" />
+      <button id="fetchPreviewBtn" class="btn" style="margin-top: var(--space-md);">
+        <i class="fas fa-search"></i> Preview
+      </button>
+      <div id="previewProgress" class="progress-container">
+        <progress value="0" max="100"></progress>
+        <span>0%</span>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div id="previewSection" class="preview-section">
+      <div class="preview-header">
+        <img id="videoThumbnail" src="" alt="Thumbnail" />
+        <div class="preview-info">
+          <h3 id="videoId">—</h3>
+          <p><i class="fas fa-user"></i> <strong id="videoAuthor">—</strong></p>
+        </div>
+      </div>
+
+      <div id="videoList" class="download-list"></div>
+      <div id="audioList" class="download-list"></div>
+
+      <div id="imageCarouselContainer">
+        <div id="imageCarousel" class="carousel" style="display: none;">
+          <button id="prevImage" class="carousel-btn">&lt;</button>
+          <table><tr><td>
+            <img id="currentImage" src="" alt="TikTok Image" />
+          </td></tr></table>
+          <button id="nextImage" class="carousel-btn">&gt;</button>
+        </div>
+        <button id="downloadImage" class="btn" style="display: none; margin-top: var(--space-sm);">
+          <i class="fas fa-download"></i> Download Gambar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer container">
+    <p>© 2025 Yudzxml. <a href="contact.html">Contact</a> • <a href="service.html">Terms of Service</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const urlInput = document.getElementById('urlInput');
+    const fetchBtn = document.getElementById('fetchPreviewBtn');
+    const previewProgress = document.getElementById('previewProgress');
+    const progressEl = previewProgress.querySelector('progress');
+    const progressText = previewProgress.querySelector('span');
+    const previewSection = document.getElementById('previewSection');
+    const videoThumbnail = document.getElementById('videoThumbnail');
+    const videoIdEl = document.getElementById('videoId');
+    const videoAuthorEl = document.getElementById('videoAuthor');
+    const videoList = document.getElementById('videoList');
+    const audioList = document.getElementById('audioList');
+    const imageCarousel = document.getElementById('imageCarousel');
+    const currentImage = document.getElementById('currentImage');
+    const downloadImage = document.getElementById('downloadImage');
+
+    let imageList = [];
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      const { thumbnail } = imageList[currentIndex];
+      currentImage.src = thumbnail;
+    }
+
+    function fakeProgress(duration = 1500, text = '') {
+      return new Promise(resolve => {
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const elapsed = ts - start;
+          const pct = Math.min(90, Math.floor((elapsed / duration) * 100));
+          progressEl.value = pct;
+          progressText.innerText = `${text}${pct}%`;
+          if (elapsed < duration) requestAnimationFrame(step);
+          else resolve();
+        }
+        requestAnimationFrame(step);
+      });
+    }
+
+    async function doWithFake(url, stageText, onSuccess) {
+      progressEl.value = 0;
+      progressText.innerText = `${stageText}0%`;
+      previewProgress.style.display = 'flex';
+      await fakeProgress(1500, stageText);
+      try {
+        const res = await axios.get(url);
+        progressEl.value = 100;
+        progressText.innerText = `${stageText}100%`;
+        await new Promise(r => setTimeout(r, 300));
+        onSuccess(res);
+      } catch (err) {
+        alert(`Error saat ${stageText.trim().toLowerCase()}: ${err.message}`);
+      } finally {
+        previewProgress.style.display = 'none';
+      }
+    }
+
+    fetchBtn.addEventListener('click', () => {
+      const url = urlInput.value.trim();
+      if (!url) return alert('Masukkan URL TikTok!');
+      const apiUrl = `https://api-yudzxzy.vercel.app/api/download/aiov2?url=${encodeURIComponent(url)}`;
+      doWithFake(apiUrl, 'Memuat... ', res => {
+        const { result, author } = res.data;
+        const { platform, data } = result;
+        // header preview
+        videoThumbnail.src = data[0]?.thumbnail || '';
+        videoIdEl.innerText = platform || '—';
+        videoAuthorEl.innerText = data[0]?.developer || '—';
+        // reset lists & carousel
+        videoList.innerHTML = '';
+        audioList.innerHTML = '';
+        imageList = [];
+        imageCarousel.style.display = 'none';
+        downloadImage.style.display = 'none';
+
+        // populate
+        data.forEach(item => {
+          if (item.type === 'image') {
+            imageList.push({ url: item.url, thumbnail: item.thumbnail });
+          }
+          else if (item.type === 'audio') {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerHTML = `<i class="fas fa-music"></i> Download Audio`;
+            btn.onclick = () => window.open(item.url, '_blank');
+            audioList.appendChild(btn);
+          }
+          else {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerHTML = `<i class="fas fa-video"></i> Download Video`;
+            btn.onclick = () => window.open(item.url, '_blank');
+            videoList.appendChild(btn);
+          }
+        });
+
+        // show carousel jika ada gambar
+        if (imageList.length) {
+          currentIndex = 0;
+          updateCarousel();
+          imageCarousel.style.display = 'flex';
+          downloadImage.style.display = 'block';
+
+          document.getElementById('prevImage').onclick = () => {
+            currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+            updateCarousel();
+          };
+          document.getElementById('nextImage').onclick = () => {
+            currentIndex = (currentIndex + 1) % imageList.length;
+            updateCarousel();
+          };
+          downloadImage.onclick = () => {
+            const { url } = imageList[currentIndex];
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `tiktok-image-${Date.now()}.jpg`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          };
+        }
+
+        previewSection.style.display = 'flex';
+      });
+    });
+  </script>
+</body>
+</html>
