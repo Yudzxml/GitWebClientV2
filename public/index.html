@@ -13,6 +13,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#111111" />
     <script>
 function setNewUserFlag() {
     const now = new Date().getTime();
@@ -172,7 +174,15 @@ if (!localStorage.getItem('newUser')) {
     <audio id="audio" src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/refs/heads/main/tmp/lagu.mp3"></audio>
   </div>
 </div>
-
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker Registered!', reg))
+        .catch(err => console.error('Service Worker Failed:', err));
+    });
+  }
+</script>
 <script src="audio.js"></script>
 <script src="main.js"></script>
 <script src="visitor.js"></script>
