@@ -1,79 +1,62 @@
-const https = require('https');
-
 const OWNER = 'Yudzxml';
 const REPO = 'WebClientV1';
 const FILE_PATH = 'testimonials.json';
 const BRANCH = 'main';
 const TOKEN = process.env.GITHUB_TOKEN;
 
-const getFileSha = () => new Promise((resolve, reject) => {
-  const options = {
-    hostname: 'api.github.com',
-    path: `/repos/${OWNER}/${REPO}/contents/${FILE_PATH}?ref=${BRANCH}`,
+const GITHUB_API = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`;
+
+const getFileSha = async () => {
+  const url = `${GITHUB_API}?ref=${BRANCH}`;
+  const res = await fetch(url, {
     method: 'GET',
     headers: {
       'User-Agent': 'Node.js',
-      Authorization: `Bearer ${TOKEN}`,
-      Accept: 'application/vnd.github.v3+json',
+      'Authorization': `Bearer ${TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json'
     }
-  };
-
-  https.get(options, res => {
-    let data = '';
-    res.on('data', chunk => data += chunk);
-    res.on('end', () => {
-      if (res.statusCode === 200) {
-        const parsed = JSON.parse(data);
-        resolve({ sha: parsed.sha, content: Buffer.from(parsed.content, 'base64').toString('utf8') });
-      } else {
-        reject(new Error(`GitHub API Error: ${res.statusCode}`));
-      }
-    });
-  }).on('error', reject);
-});
-
-const updateFile = (newContent, sha) => new Promise((resolve, reject) => {
-  const data = JSON.stringify({
-    message: 'update testimonials',
-    content: Buffer.from(newContent).toString('base64'),
-    sha,
-    branch: BRANCH
   });
 
-  const options = {
-    hostname: 'api.github.com',
-    path: `/repos/${OWNER}/${REPO}/contents/${FILE_PATH}`,
+  if (!res.ok) {
+    throw new Error(`GitHub API Error: ${res.status}`);
+  }
+
+  const data = await res.json();
+  return {
+    sha: data.sha,
+    content: Buffer.from(data.content, 'base64').toString('utf8')
+  };
+};
+
+const updateFile = async (newContent, sha) => {
+  const res = await fetch(GITHUB_API, {
     method: 'PUT',
     headers: {
       'User-Agent': 'Node.js',
-      Authorization: `Bearer ${TOKEN}`,
-      Accept: 'application/vnd.github.v3+json',
-      'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(data)
-    }
-  };
-
-  const req = https.request(options, res => {
-    let d = '';
-    res.on('data', chunk => d += chunk);
-    res.on('end', () => {
-      if (res.statusCode === 200 || res.statusCode === 201) resolve(true);
-      else reject(new Error(`GitHub update failed: ${res.statusCode}`));
-    });
+      'Authorization': `Bearer ${TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: 'update testimonials',
+      content: Buffer.from(newContent).toString('base64'),
+      sha,
+      branch: BRANCH
+    })
   });
 
-  req.on('error', reject);
-  req.write(data);
-  req.end();
-});
+  if (!res.ok) {
+    throw new Error(`GitHub update failed: ${res.status}`);
+  }
+
+  return true;
+};
 
 module.exports = async (req, res) => {
-  // Tambahkan header CORS untuk semua request
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  // Tangani preflight request dari browser
   if (req.method === 'OPTIONS') {
     return res.writeHead(200).end();
   }
