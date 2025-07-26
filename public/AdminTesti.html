@@ -382,7 +382,7 @@ div.innerHTML = `
           };
         }
 
-        await fetch("https://testimoniyudzxml.vercel.app/api/github", {
+        await fetch("/api/testimoni", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(testimonials)
@@ -416,7 +416,7 @@ div.innerHTML = `
       e.stopPropagation();
       if (confirm("Yakin ingin menghapus testimoni ini?")) {
         testimonials.splice(i, 1);
-        fetch("https://testimoniyudzxml.vercel.app/api/github", {
+        fetch("/api/testimoni", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(testimonials)
@@ -428,7 +428,7 @@ div.innerHTML = `
     }
 
     function loadTestimonials() {
-      fetch("https://testimoniyudzxml.vercel.app/api/github")
+      fetch("/api/testimoni")
         .then(res => res.json())
         .then(data => {
           testimonials = Array.isArray(data) ? data : [];
