@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yudzxml BioLink</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+  html, body { height: 100%; background: #0d0d0d; color: #fff; }
+
+  /* Loading Screen */
+  #loadingScreen {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    flex-direction: column;
+    background: #0d0d0d;
+    z-index: 9999;
+    padding: 20px;
+    text-align: center;
+  }
+  #welcomeMessage {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(22px, 5vw, 36px);
+    background: linear-gradient(90deg, #ec4899, #a855f7, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    min-height: 50px;
+    text-shadow: 0 0 8px rgba(236,72,153,0.7), 0 0 12px rgba(168,85,247,0.5);
+  }
+  #progressContainer {
+    width: 80%; height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px; overflow: hidden;
+  }
+  #progressBar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #ec4899, #a855f7, #06b6d4);
+    border-radius: 3px;
+    transition: width 0.3s linear;
+  }
+
+  /* Main Content */
+  #mainContent {
+  display: none;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: #111;
+  font-size: 24px;
+  flex-direction: column;
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+  canvas#bgOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+
+  /* Bio Card */
+  .card {
+    width: 100%; max-width: 420px;
+    background: linear-gradient(180deg, rgba(25,25,25,0.95), rgba(15,15,15,0.95));
+    border-radius: 20px; padding: 25px; text-align: center;
+    box-shadow: 0 0 40px rgba(236, 72, 153, 0.2);
+    position: relative; z-index: 1;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .avatar {
+    width: 110px; height: 110px; border-radius: 50%;
+    border: 4px solid #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+    object-fit: cover; transition: transform .4s ease;
+  }
+  .avatar:hover { transform: scale(1.08); }
+  .online { position: absolute; top: 90px; right: calc(50% - 55px); width: 18px; height: 18px; background: #22c55e; border: 2px solid #111; border-radius: 50%; }
+  h1 { margin-top: 15px; font-size: clamp(22px,5vw,28px); font-weight:700; background: linear-gradient(90deg,#ec4899,#a855f7,#06b6d4); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  p.username { color:#9ca3af; font-size: clamp(12px,3.5vw,14px); }
+  .skills { margin-top:20px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .skills span { padding:6px 12px; border-radius:8px; font-size:clamp(11px,3vw,13px); background: linear-gradient(90deg, rgba(34,211,238,0.25), rgba(236,72,153,0.25)); transition: transform 0.3s; }
+  .skills span:hover { transform: scale(1.1); }
+  .desc { margin-top:20px; font-size:clamp(12px,3.5vw,14px); color:#d1d5db; font-style:italic; }
+  h2 { margin-top:25px; margin-bottom:12px; font-size:clamp(14px,4vw,16px); font-weight:600; background:linear-gradient(90deg,#22d3ee,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .link { display:flex; justify-content:space-between; align-items:center; background: rgba(55,65,81,0.7); padding:14px 18px; border-radius:14px; text-decoration:none; color:#fff; transition:0.3s; font-size:clamp(13px,3.5vw,15px); margin-bottom:16px; backdrop-filter: blur(4px); }
+  .link:last-child { margin-bottom:0; }
+  .link:hover { background: linear-gradient(90deg, rgba(236,72,153,0.25), rgba(34,211,238,0.25)); transform: translateY(-2px); }
+  .link-left { display:flex; align-items:center; gap:12px; }
+  .icon { width:22px; height:22px; flex-shrink:0; border-radius:6px; filter: brightness(0.7) drop-shadow(0 0 2px rgba(0,0,0,0.5)); transition: transform 0.3s, filter 0.3s; }
+  .link:hover .icon { transform: scale(1.15) rotate(-5deg); filter: brightness(1) drop-shadow(0 0 6px #ec4899); }
+  .arrow { font-weight:bold; font-size:16px; transition: transform 0.3s; }
+  .link:hover .arrow { transform: translateX(5px); }
+</style>
+</head>
+<body>
+
+<canvas id="bgOverlay"></canvas>
+
+<!-- Loading Screen -->
+<div id="loadingScreen">
+  <div id="welcomeMessage"></div>
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+</div>
+
+<!-- Main BioLink Content -->
+<div id="mainContent">
+  <div class="card">
+    <div class="relative">
+      <img src="https://raw.githubusercontent.com/Yudzxml/UploaderV2/main/tmp/e53304b6.jpg" alt="avatar" class="avatar">
+      <span class="online"></span>
+    </div>
+    <h1>Yudzxml</h1>
+    <p class="username">@Yudzxml.ofc</p>
+    <div class="skills">
+      <span>React</span><span>NextJS</span><span>Vite</span><span>TailwindCSS</span><span>Django</span><span>Laravel</span><span>TypeScript</span><span>JavaScript</span><span>PHP</span><span>Java</span><span>Kotlin</span><span>Go-Lang</span><span>Python</span><span>C/C++</span><span>Rust</span>
+    </div>
+    <p class="desc">“Full-Stack Developer” <br> “Learn Hard, Build, And Sharing ✨”</p>
+    <h2>Connect With Me</h2>
+    <a href="https://github.com/Yudzxml" target="_blank" class="link">
+      <div class="link-left"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="icon"><span>GitHub</span></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="https://chat.whatsapp.com/GX4hALwfNXjIMG7V3OGPFI" target="_blank" class="link">
+      <div class="link-left"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" class="icon"><span>WhatsApp Group</span></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="https://www.tiktok.com/@yudzxml.store?_t=ZS-8zYLchCRH9Q&_r=1" target="_blank" class="link">
+      <div class="link-left"><img src="https://cdn-icons-png.flaticon.com/512/3116/3116491.png" alt="TikTok" class="icon"><span>TikTok</span></div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="mailto:yudaaryaardhana1122@email.com" class="link">
+      <div class="link-left"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968534.png" alt="Email" class="icon"><span>Email</span></div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Typing Effect
+  const text = "Welcome to my Personal Account";
+  const messageEl = document.getElementById('welcomeMessage');
+  const progressBar = document.getElementById('progressBar');
+  let index = 0;
+
+  function typeWriter() {
+    if(index < text.length){
+      messageEl.textContent += text.charAt(index);
+      index++;
+      progressBar.style.width = ((index / text.length) * 100) + "%";
+      setTimeout(typeWriter, 100); // Kecepatan ketik
+    } else {
+      setTimeout(() => {
+        document.getElementById('loadingScreen').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'flex';
+        document.body.style.overflow = 'auto';
+      }, 600); // Delay sebelum tampilkan konten utama
+    }
+  }
+
+  window.addEventListener('load', typeWriter);
+
+  // Particle Background
+  const canvas = document.getElementById("bgOverlay");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particles = [];
+  const colors = ["#ec4899", "#06b6d4", "#a855f7"];
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 3 + 1;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.speedX = (Math.random() - 0.5) * 1.5;
+      this.speedY = (Math.random() - 0.5) * 1.5;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+      if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    for (let i = 0; i < 100; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+
+  initParticles();
+  animate();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>
